@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://5qhll35a853i"]
+
+[ext_resource type="Script" uid="uid://byn0u3sflxku" path="res://addons/TaTerminal/TagButton.cs" id="1_aq4wk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xh2m"]
+bg_color = Color(0.12549, 0.156863, 0.196078, 1)
+border_width_bottom = 4
+border_color = Color(0.45098, 0.752941, 1, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_su114"]
+bg_color = Color(0.298039, 0.321569, 0.368627, 1)
+
+[node name="Button" type="Button"]
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 234.0
+offset_bottom = 44.0
+theme_type_variation = &"FlatButton"
+theme_override_constants/outline_size = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_4xh2m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_su114")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4xh2m")
+toggle_mode = true
+script = ExtResource("1_aq4wk")
