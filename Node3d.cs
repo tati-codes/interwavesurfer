@@ -10,6 +10,8 @@ public partial class Node3d : Node3D
     GD.Print(bus);
     bus.Log("hellso");
     bus.Warn("hello");
+    bus.Error("boo");
+    bus.Count("pollo");
 	}
 
 }

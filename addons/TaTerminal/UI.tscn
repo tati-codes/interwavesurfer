@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://dfif62ykwkwl3"]
+[gd_scene load_steps=22 format=3 uid="uid://dfif62ykwkwl3"]
 
 [ext_resource type="Script" uid="uid://cbytypc6c8ivm" path="res://addons/TaTerminal/Output.cs" id="2_0s7up"]
 [ext_resource type="Script" uid="uid://d1geiba1g0msc" path="res://addons/TaTerminal/Listener.cs" id="2_uvuxs"]
 [ext_resource type="Script" uid="uid://cedbuuskhbavo" path="res://addons/TaTerminal/ClearBtn.cs" id="2_vdbos"]
 [ext_resource type="Script" uid="uid://b7bdnc58g3u28" path="res://addons/TaTerminal/TagHolder.cs" id="4_ewua2"]
-[ext_resource type="Script" uid="uid://ddkpvtohrucxq" path="res://addons/TaTerminal/ButtonCreator.cs" id="4_tvq6w"]
 [ext_resource type="FontFile" uid="uid://t7ekl77lrbkm" path="res://addons/TaTerminal/FiraCode-Retina.ttf" id="4_ud57i"]
 [ext_resource type="Script" uid="uid://blkq3m2x0ubh0" path="res://addons/TaTerminal/Buffer.cs" id="5_7p4th"]
 [ext_resource type="PackedScene" uid="uid://5qhll35a853i" path="res://addons/TaTerminal/thingbutton.tscn" id="5_okjyg"]
@@ -12,7 +11,6 @@
 [ext_resource type="Script" uid="uid://6nhs71r868ir" path="res://addons/TaTerminal/OptionButton.cs" id="7_ahcdy"]
 [ext_resource type="Texture2D" uid="uid://dnto27a3a5f2h" path="res://addons/TaTerminal/indicator.png" id="13_g3sh8"]
 [ext_resource type="Script" uid="uid://npvkratvcbbu" path="res://addons/TaTerminal/FilterBar.cs" id="13_i4pdt"]
-[ext_resource type="Script" uid="uid://wdwhpnvycqf7" path="res://addons/TaTerminal/TestButton.cs" id="14_415i5"]
 [ext_resource type="Script" uid="uid://rv4w224nrm0d" path="res://addons/TaTerminal/ConnectionIndicator.cs" id="14_dav3e"]
 [ext_resource type="Script" uid="uid://ca62216yi6kq1" path="res://addons/TaTerminal/DeDup.cs" id="14_poowo"]
 
@@ -28,6 +26,41 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_su114"]
 bg_color = Color(0.298039, 0.321569, 0.368627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81gde"]
+bg_color = Color(0.12549, 0.156863, 0.196078, 1)
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxdc2"]
+bg_color = Color(0.12549, 0.156863, 0.196078, 1)
+border_width_bottom = 4
+border_color = Color(1, 1, 0, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8jve"]
+bg_color = Color(0.12549, 0.156863, 0.196078, 1)
+border_width_bottom = 4
+border_color = Color(1, 0.498039, 0.443137, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11e0f"]
+bg_color = Color(0.12549, 0.156863, 0.196078, 1)
+border_width_bottom = 4
+border_color = Color(0.431373, 0.443137, 0.466667, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_415i5"]
+bg_color = Color(0.12549, 0.156863, 0.196078, 1)
+border_width_bottom = 4
+border_color = Color(0, 0, 1, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Control" type="GridContainer"]
 anchors_preset = 15
@@ -47,13 +80,12 @@ columns = 2
 [node name="Listener" type="Node" parent="." node_paths=PackedStringArray("indi", "buffer")]
 script = ExtResource("2_uvuxs")
 indi = NodePath("../HBoxContainer/ConnectionIndicator")
-port = 2118
+port = 2116
 buffer = NodePath("../Buffer")
 
-[node name="TagHolder" type="Node" parent="." node_paths=PackedStringArray("buffer", "buttonCreator")]
+[node name="TagHolder" type="Node" parent="." node_paths=PackedStringArray("buffer")]
 script = ExtResource("4_ewua2")
 buffer = NodePath("../Buffer")
-buttonCreator = NodePath("../ButtonCreator")
 
 [node name="Buffer" type="Node" parent="." node_paths=PackedStringArray("tagHolder", "label")]
 script = ExtResource("5_7p4th")
@@ -88,13 +120,10 @@ threaded = true
 selection_enabled = true
 script = ExtResource("2_0s7up")
 
-[node name="ButtonCreator" type="VBoxContainer" parent="." node_paths=PackedStringArray("tagHolder")]
+[node name="ButtonCreator" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 5
-script = ExtResource("4_tvq6w")
-tagHolder = NodePath("../TagHolder")
-pathToThingButton = ExtResource("5_okjyg")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="ButtonCreator"]
 layout_mode = 2
@@ -142,12 +171,6 @@ text = "deduplicate"
 script = ExtResource("14_poowo")
 buffer = NodePath("../../../Buffer")
 
-[node name="Button" type="Button" parent="ButtonCreator/HBoxContainer"]
-visible = false
-layout_mode = 2
-text = "test"
-script = ExtResource("14_415i5")
-
 [node name="HSeparator2" type="HSeparator" parent="ButtonCreator/HBoxContainer"]
 layout_mode = 2
 
@@ -155,6 +178,40 @@ layout_mode = 2
 layout_mode = 2
 text = "Tags:"
 horizontal_alignment = 1
+
+[node name="info" parent="ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_81gde")
+text = "info"
+tagHolder = NodePath("../../TagHolder")
+
+[node name="warn" parent="ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fxdc2")
+text = "warn"
+Tag = 1
+tagHolder = NodePath("../../TagHolder")
+
+[node name="error" parent="ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8jve")
+text = "error"
+Tag = 2
+tagHolder = NodePath("../../TagHolder")
+
+[node name="evnt" parent="ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_11e0f")
+text = "event"
+Tag = 3
+tagHolder = NodePath("../../TagHolder")
+
+[node name="count" parent="ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_415i5")
+text = "count"
+Tag = 4
+tagHolder = NodePath("../../TagHolder")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

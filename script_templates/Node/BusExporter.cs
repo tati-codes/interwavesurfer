@@ -4,7 +4,7 @@
 // meta-space-indent: 2
 using Godot;
 using System;
-using Taterminal;
+using OBus;
 public partial class _CLASS_ : _BASE_ {
   [Export]
   public Bus bus;

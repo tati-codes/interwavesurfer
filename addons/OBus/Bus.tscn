@@ -6,8 +6,7 @@
 [node name="Node" type="Node" node_paths=PackedStringArray("busClient")]
 script = ExtResource("1_7rf61")
 busClient = NodePath("Node")
-productionMode = true
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("2_fqxep")
-Url = "ws://127.0.0.1:2118"
+Url = "ws://127.0.0.1:2116"
