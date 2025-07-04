@@ -25,6 +25,7 @@ omni_range = 789.716
 omni_attenuation = 0.775
 
 [node name="Water" parent="." instance=ExtResource("2_lnf8e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29583, 1.48124, 4.10534)
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
