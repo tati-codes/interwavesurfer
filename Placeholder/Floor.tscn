@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dppr2cyw0baaa"]
+
+[ext_resource type="MeshLibrary" uid="uid://h45v47h2ohf4" path="res://MeshLibrary.tres" id="1_h8vea"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8foqs"]
+size = Vector3(9.70044, 1, 8.01964)
+
+[node name="StaticBody3D" type="StaticBody3D"]
+
+[node name="Node3D" type="GridMap" parent="."]
+mesh_library = ExtResource("1_h8vea")
+data = {
+"cells": PackedInt32Array(65534, 12, 1, 65535, 12, 1, 0, 12, 1, 65535, 13, 1, 65534, 13, 1, 0, 13, 1, 65533, 13, 1, 65532, 13, 1, 65532, 12, 1, 65533, 12, 1, 65532, 14, 1, 65533, 14, 1, 65534, 14, 1, 65535, 14, 1, 0, 14, 1, 65535, 15, 1, 65534, 15, 1, 65533, 15, 1, 65532, 15, 1, 0, 15, 1)
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.93982, 0, 27.8449)
+shape = SubResource("BoxShape3D_8foqs")

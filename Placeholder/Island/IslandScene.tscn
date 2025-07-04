@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://h670wpe8q1ul"]
+
+[ext_resource type="PackedScene" uid="uid://djrp3ivdsfre5" path="res://Placeholder/Island/TatislandNoChest.fbx" id="1_j7kw8"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="TatislandNoChest" parent="." instance=ExtResource("1_j7kw8")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)

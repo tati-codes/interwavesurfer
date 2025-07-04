@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c85o5frv5fghe"]
+
+[ext_resource type="Script" uid="uid://bskylnnhbq1sm" path="res://Placeholder/Node3d.cs" id="1_ytqi1"]
+[ext_resource type="PackedScene" uid="uid://66007evysds2" path="res://addons/OBus/Bus.tscn" id="2_uxj08"]
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("bus")]
+script = ExtResource("1_ytqi1")
+bus = NodePath("Node")
+
+[node name="Node" parent="." instance=ExtResource("2_uxj08")]
+productionMode = false

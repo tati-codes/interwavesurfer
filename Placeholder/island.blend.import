@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbx2dw15etyc"
-path="res://.godot/imported/TownTiles_002.blend-17fa061efda2366789ae04824eccadfb.scn"
+uid="uid://dbewes75ss6a0"
+path="res://.godot/imported/island.blend-3cc4027726d07552526866b1547b6c72.scn"
 
 [deps]
 
-source_file="res://TownTileSet/TownTiles_002.blend"
-dest_files=["res://.godot/imported/TownTiles_002.blend-17fa061efda2366789ae04824eccadfb.scn"]
+source_file="res://Placeholder/island.blend"
+dest_files=["res://.godot/imported/island.blend-3cc4027726d07552526866b1547b6c72.scn"]
 
 [params]
 

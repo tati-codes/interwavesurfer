@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://blgxfnjv42daj"
-path="res://.godot/imported/TownTiles_002.glb-cdc588f2ff08ac0c1fa6882565e48bb8.scn"
+uid="uid://rat7h6g60iy7"
+path="res://.godot/imported/TownTiles_003.glb-b174bb572cb3c5f2f87f383b50a2e3c0.scn"
 
 [deps]
 
-source_file="res://TownTileSet/TownTiles_002.glb"
-dest_files=["res://.godot/imported/TownTiles_002.glb-cdc588f2ff08ac0c1fa6882565e48bb8.scn"]
+source_file="res://Placeholder/TownTileSet/TownTiles_003.glb"
+dest_files=["res://.godot/imported/TownTiles_003.glb-b174bb572cb3c5f2f87f383b50a2e3c0.scn"]
 
 [params]
 
@@ -27,7 +27,7 @@ meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
-animation/fps=30
+animation/fps=30.0
 animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
