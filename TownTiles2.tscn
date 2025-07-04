@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmmy85spn8w6k"]
-
-[ext_resource type="PackedScene" uid="uid://blgxfnjv42daj" path="res://TownTileSet/TownTiles_002.glb" id="1_otyep"]
-
-[node name="TownTiles_002" instance=ExtResource("1_otyep")]

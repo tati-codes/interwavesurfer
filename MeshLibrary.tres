@@ -1,6 +1,6 @@
 [gd_resource type="MeshLibrary" load_steps=136 format=4 uid="uid://h45v47h2ohf4"]
 
-[ext_resource type="Texture2D" uid="uid://cvfeorfndv7ak" path="res://TownTileSet/TownTiles_002_tex_Town_Night.png" id="1_vh5hs"]
+[ext_resource type="Texture2D" uid="uid://cvfeorfndv7ak" path="res://Placeholder/TownTileSet/TownTiles_002_tex_Town_Night.png" id="1_vh5hs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynlww"]
 resource_name = "town"

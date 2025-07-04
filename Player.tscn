@@ -4639,9 +4639,10 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xhfnw"]
 
-[node name="Guy" type="CharacterBody3D" node_paths=PackedStringArray("meshLook", "mesh", "animations", "cameraHolder", "camera_raycast", "cam")]
+[node name="Guy" type="CharacterBody3D" node_paths=PackedStringArray("meshLook", "skly", "mesh", "animations", "cameraHolder", "camera_raycast", "cam")]
 script = ExtResource("1_kpjcp")
 meshLook = NodePath("Mesh Look")
+skly = NodePath("RobotArmature/Skeleton3D")
 mesh = [NodePath("RobotArmature/Skeleton3D/Bottom"), NodePath("RobotArmature/Skeleton3D/Chest"), NodePath("RobotArmature/Skeleton3D/Face"), NodePath("RobotArmature/Skeleton3D/Llimbs and head")]
 animations = NodePath("AnimationPlayer")
 cameraHolder = NodePath("Node3D")

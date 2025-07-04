@@ -23,21 +23,21 @@ public partial class Guy : CharacterBody3D {
   [Export]
   public float walk_speed {get; set;} = 1.0f;
   [Export]
-  public float rot_speed {get; set;} = 1.0f;
+  public float run_speed {get; set;} = 3.0f;
+  [Export]
+  public float jump_velocity {get; set;} = 5.0f;
   [Export]
   public float look_sens {get; set;} = 0.01f;
   [Export]
-  public Label debug {get; set;}
-  public float gravity = 9.8F;
+  public Label name {get; set;}
+  public Variant gravity;
   public float rotation = 0F;
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
     GD.Print(bus);
-    // gravity = ProjectSettings.GetSetting("physics/3d/default_gravity"); variant is annoying
+    gravity = ProjectSettings.GetSetting("physics/3d/default_gravity");
     Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
-
-  //TODO SEPARATE CAMERA STUFF FROM MOVEMENT STUFF
   public override void _Input(InputEvent @event) {
     if (@event.IsActionPressed("ui_cancel")){
         Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -53,40 +53,38 @@ public partial class Guy : CharacterBody3D {
       bus.Log(skly.GlobalRotationDegrees.ToString());
     }
   }
-  void receiveMoveInput(double delta) {
-    float preserve_Y = Velocity.Y;
-    Velocity = Godot.Vector3.Zero;
-    float movement =Input.GetAxis("move_backwards", "move_forwards");
-    float rotation = Input.GetAxis("move_right", "move_left");
-    Velocity += cameraHolder.Transform.Basis.Z * movement * speed;
-    RotateY(rot_speed * rotation * (float)delta);
-    Velocity = new(Velocity.X, preserve_Y, Velocity.Z);
-  }
 
   public override void _Process(double delta) {
-    Velocity = new(Velocity.X, Velocity.Y - gravity * (float)delta, Velocity.Z);
-    receiveMoveInput(delta);
-    debug.Text = $"Velocity: {Velocity.ToString()}"; 
-    if (Math.Abs(Velocity.Y) > 1){
-      animations.Play("Fall");
-    } else if (Velocity.X == 0 && Velocity.Z == 0) {
-      animations.Play("Idle");
-    } else if (Velocity.X != 0 || Velocity.Z != 0) {
+    var input = Input.GetVector("move_left", "move_right", "move_forward", "move_backwards").Normalized() * (speed * speed) ;
+    Velocity = new Godot.Vector3(input.X , 0,input.Y);
+    var radians = Math.Abs(rotation) * Mathf.Pi/180F;
+    var rotatedVelocity = new Godot.Vector3(
+    Velocity.X * Mathf.Cos(radians) - Velocity.Z * Mathf.Sin(radians),
+    Velocity.Y, // Keep Y unchanged if it's your vertical aXis
+    Velocity.X * Mathf.Sin(radians) + Velocity.Z * Mathf.Cos(radians)
+);
+    name.Text = $"Rotation: {rotation}\nRadians: {radians}\nVelocity: {Velocity.ToString()}\n r = {rotatedVelocity.ToString()}";
+    Velocity = rotatedVelocity;
+    if (Velocity.Y == 0 && (Velocity.X != 0 || Velocity.Z != 0)) {
       animations.Play("Sprint");
+    } else if (Velocity.Y > 0) {
+      animations.Play("Fall");
+    } else if (Velocity.IsZeroApprox()) {
+      animations.Play("Idle");
     }
     if (IsOnFloor()) {
       animations.PlaybackDefaultBlendTime = 1;
       animations.SpeedScale = 1;
     }
     MoveAndSlide();
-    // if (camera_raycast.IsColliding()) {
-    //   cam.GlobalPosition = camera_raycast.GetCollisionPoint();
-    // } else { 
-    //   cam.Position = new Godot.Vector3(0,0,-2);
-    //   foreach (MeshInstance3D item in mesh) {
-    //     item.Position = Position - new Godot.Vector3(0,0.05f, 0);
-    //   }
-    // }
+    if (camera_raycast.IsColliding()) {
+      cam.GlobalPosition = camera_raycast.GetCollisionPoint();
+    } else { 
+      cam.Position = new Godot.Vector3(0,0,-2);
+      foreach (MeshInstance3D item in mesh) {
+        item.Position = Position - new Godot.Vector3(0,0.05f, 0);
+      }
+    }
   }
 }
 
