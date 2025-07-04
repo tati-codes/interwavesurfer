@@ -8,4 +8,5 @@
     <Compile Remove="script_templates\**" />
     <EmbeddedResource Remove="script_templates\**" />
   </ItemGroup>
+  <Import Project="addons\GodotInk\GodotInk.props" />
 </Project>
