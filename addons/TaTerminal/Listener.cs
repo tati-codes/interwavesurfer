@@ -139,6 +139,12 @@ public partial class Listener : Node
 			return;
 		}
 	}
+
+  //FIXME merge this upstream
+  public override void _ExitTree()
+  {
+    stop();
+  }
 }
 namespace Taterminal
 {

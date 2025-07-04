@@ -9,4 +9,4 @@ busClient = NodePath("Node")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("2_fqxep")
-Url = "ws://127.0.0.1:2116"
+Url = "ws://127.0.0.1:2114"
