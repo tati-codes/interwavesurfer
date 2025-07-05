@@ -4862,5 +4862,6 @@ target_position = Vector3(0, 0, -2)
 
 [node name="Camera3D" type="Camera3D" parent="Node3D/RayCast3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -2)
+current = true
 
 [node name="Mesh Look" type="Node3D" parent="."]

@@ -66,7 +66,7 @@ public partial class Guy : CharacterBody3D {
   public override void _Process(double delta) {
     Velocity = new(Velocity.X, Velocity.Y - gravity * (float)delta, Velocity.Z);
     receiveMoveInput(delta);
-    debug.Text = $"Velocity: {Velocity.ToString()}"; 
+    // debug.Text = $"Velocity: {Velocity.ToString()}"; 
     if (Math.Abs(Velocity.Y) > 1){
       animations.Play("Fall");
     } else if (Velocity.X == 0 && Velocity.Z == 0) {
