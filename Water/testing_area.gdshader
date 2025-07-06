@@ -1,5 +1,4 @@
 shader_type spatial;
-#include "debug_number.gdshaderinc"
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
 uniform sampler2D tex_vtx_5;
 uniform vec4 ColorParameter : source_color = vec4(0.231373, 0.768627, 0.870588, 1.000000);
