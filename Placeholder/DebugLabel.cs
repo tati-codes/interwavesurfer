@@ -3,21 +3,19 @@ using System;
 using OBus;
 using System.Collections.Generic;
 using System.Linq;
+using TatiDebug;
 public partial class DebugLabel : Label {
 	public Bus bus;
 
   public Dictionary<string, string> tracking = new();
 	public override void _Ready() {
     bus = GetNode<Bus>("/root/bus");
-    bus.Subscribe<TatiDebug.Debug, TatiDebug.DebugVar>(processDebugVars); 
+    bus.Subscribe<Debug, DebugVar>(processDebugVars); 
 	}
-  void processDebugVars(TatiDebug.DebugVar args) {
+  void processDebugVars(DebugVar args) {
     var (name, details) = args;
-    if (tracking.ContainsKey(name)) {
-      tracking[name] = details;
-    } else {
-      tracking.Add(name, details);
-    }
+    if (tracking.ContainsKey(name)) tracking[name] = details;
+    else tracking.Add(name, details);
     update();
   }
 

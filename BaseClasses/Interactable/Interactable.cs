@@ -14,11 +14,16 @@ public partial class Interactable : Node {
 	public override void _Ready() {
     Bus bus = GetNode<Bus>("/root/bus");
     bus.Subscribe<LookingAt, NodeRef>(args => handleGaze(args.reference));
+    bus.Subscribe<StoppedLookingAt, NodeRef>(args => unhandleGaze(args.reference));
 	}
   bool refersToMe(Rid rid) => rid == collider.GetRid(); 
   void handleGaze(Rid rid) {
     if (!refersToMe(rid)) return; 
     mesh.MaterialOverlay = highlighter;
+  }
+  void unhandleGaze(Rid rid) {
+    if (!refersToMe(rid)) return; 
+    mesh.MaterialOverlay = null;
   }
 }
 
