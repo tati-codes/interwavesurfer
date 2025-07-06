@@ -1,0 +1,14 @@
+[gd_resource type="PlaneMesh" load_steps=3 format=3 uid="uid://b16g2fm8oxrav"]
+
+[ext_resource type="Shader" uid="uid://vcit2yi1jg85" path="res://Water/waterwithtextures.tres" id="1_dswat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m4xso"]
+render_priority = 0
+shader = ExtResource("1_dswat")
+shader_parameter/ColorParameter = Color(0.231373, 0.619608, 0.917647, 0.698039)
+
+[resource]
+material = SubResource("ShaderMaterial_m4xso")
+size = Vector2(100, 100)
+subdivide_width = 20
+subdivide_depth = 20

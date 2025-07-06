@@ -1,0 +1,27 @@
+[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://b3enf3dur2iyy"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_hspqk"]
+input_name = "binormal"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+
+
+
+void fragment() {
+// Input:2
+	vec3 n_out2p0 = BINORMAL;
+
+
+// Output:0
+	ALBEDO = n_out2p0;
+
+
+}
+"
+graph_offset = Vector2(-232.33, -181.617)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_hspqk")
+nodes/fragment/2/position = Vector2(-380, 60)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)

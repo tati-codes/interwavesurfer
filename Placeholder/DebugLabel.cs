@@ -9,7 +9,7 @@ public partial class DebugLabel : Label {
   public Dictionary<string, string> tracking = new();
 	public override void _Ready() {
     bus = GetNode<Bus>("/root/bus");
-    bus.Subscribe<TatiDebug.DisplayDebugScreen, TatiDebug.DebugVar>(processDebugVars); 
+    bus.Subscribe<TatiDebug.Debug, TatiDebug.DebugVar>(processDebugVars); 
 	}
   void processDebugVars(TatiDebug.DebugVar args) {
     var (name, details) = args;
@@ -33,7 +33,7 @@ public partial class DebugLabel : Label {
 }
 
 namespace TatiDebug {
-  public class DisplayDebugScreen : TEvent<DebugVar> {}
+  public class Debug : TEvent<DebugVar> {}
   public class DebugVar : Args {
     public string Name {get; set;}
     public string Details {get; set;}

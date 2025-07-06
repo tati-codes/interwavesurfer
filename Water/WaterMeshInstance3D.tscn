@@ -1,18 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://capd6abh571h4"]
+[gd_scene load_steps=2 format=3 uid="uid://capd6abh571h4"]
 
-[ext_resource type="Shader" uid="uid://vcit2yi1jg85" path="res://Water/waterwithtextures.tres" id="1_ihg8x"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m4xso"]
-render_priority = 0
-shader = ExtResource("1_ihg8x")
-shader_parameter/ColorParameter = Color(0.231373, 0.619608, 0.917647, 0.698039)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_3y1y6"]
-material = SubResource("ShaderMaterial_m4xso")
-size = Vector2(100, 100)
-subdivide_width = 20
-subdivide_depth = 20
+[ext_resource type="PlaneMesh" uid="uid://b16g2fm8oxrav" path="res://Water/WaterMeshWorking.tres" id="1_ihg8x"]
 
 [node name="MeshInstance3D" type="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
-mesh = SubResource("PlaneMesh_3y1y6")
+transform = Transform3D(0.999985, 0.00276692, 0.00473886, -0.00278091, 0.999992, 0.00294472, -0.00473066, -0.00295787, 0.999984, 1, -1, 0)
+mesh = ExtResource("1_ihg8x")
