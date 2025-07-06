@@ -38,16 +38,18 @@ public partial class Bus : Node {
     var presEvent = GetEvent<T, TArgs>();
     return presEvent.Subscribe(action);
   }
-  public void Publish<T, TArgs>(TArgs args) where T : TEvent<TArgs>, new()
+  public void Publish<T, TArgs>(TArgs args, bool propagate = true) where T : TEvent<TArgs>, new()
     where TArgs : Args
   {
     var presEvent = GetEvent<T, TArgs>();
     presEvent.Publish(args);
-    InternalLogger<T, TArgs>(args);
+    if (propagate) {
+      ExternalLogger<T, TArgs>(args);
+    }
   }
 
 
-  private void InternalLogger<T, TArgs>(TArgs args)
+  private void ExternalLogger<T, TArgs>(TArgs args)
     where T : TEvent<TArgs>, new()
     where TArgs : Args
   {

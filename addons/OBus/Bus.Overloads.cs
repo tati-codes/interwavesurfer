@@ -21,6 +21,12 @@ public partial class Bus : Node {
   public void Warn(params string[] strings) => this.Publish<Warn, Text>(Text.warn(String.Join(" ", strings)));
   public void Error(params string[] strings) => this.Publish<OBus.Error, Text>(Text.error(string.Join(" ", strings)));
   public void Count(string label) => Publish<Count, Text>(Text.count(label));
+
+  /// <summary>
+  /// For internal, high-frequency events that don't need to be logged.
+  /// </summary>
+  public void IPub<T, TArgs>(TArgs args) where T : TEvent<TArgs>, new() 
+    where TArgs : Args => Publish<T, TArgs>(args, false);
   public Subscription Count<T, TArgs>()
       where T : TEvent<TArgs>, new()
       where TArgs : Args {
