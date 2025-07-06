@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://7srwpqnyp2ck"]
+
+[ext_resource type="Script" uid="uid://djsg68486h1mo" path="res://BaseClasses/Player/InteractingBeam.cs" id="1_mf37p"]
+[ext_resource type="Shader" uid="uid://cuf17gxb3xjrb" path="res://Placeholder/Wiframe.tres" id="2_8khbt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_87x7f"]
+height = 15.673
+radius = 0.86
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f1ar5"]
+render_priority = 0
+shader = ExtResource("2_8khbt")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_87x7f"]
+material = SubResource("ShaderMaterial_f1ar5")
+top_radius = 0.85
+bottom_radius = 0.85
+height = 15.673
+radial_segments = 12
+
+[node name="RayCast3D" type="ShapeCast3D" node_paths=PackedStringArray("visibleBeam")]
+transform = Transform3D(1.72869, 0, 0, 0, -7.55635e-08, 1.72869, 0, -1.72869, -7.55635e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_87x7f")
+max_results = 5
+debug_shape_custom_color = Color(0.85, 0, 1, 1)
+script = ExtResource("1_mf37p")
+debug = true
+visibleBeam = NodePath("VisibilityBeam")
+
+[node name="VisibilityBeam" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.96046e-08)
+mesh = SubResource("CylinderMesh_87x7f")
