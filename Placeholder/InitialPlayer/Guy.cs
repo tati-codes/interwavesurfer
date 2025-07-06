@@ -33,11 +33,9 @@ public partial class Guy : CharacterBody3D {
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
     GD.Print(bus);
-    // gravity = ProjectSettings.GetSetting("physics/3d/default_gravity"); variant is annoying
     Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
-  //TODO SEPARATE CAMERA STUFF FROM MOVEMENT STUFF
   public override void _Input(InputEvent @event) {
     if (@event.IsActionPressed("ui_cancel")){
         Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -62,6 +60,17 @@ public partial class Guy : CharacterBody3D {
     RotateY(rot_speed * rotation * (float)delta);
     Velocity = new(Velocity.X, preserve_Y, Velocity.Z);
   }
+
+  void receiveMoveInput2(double delta) {
+    float preserve_Y = Velocity.Y;
+    Velocity = Godot.Vector3.Zero;
+    float movement =Input.GetAxis("move_backwards", "move_forwards");
+    float rotation = Input.GetAxis("move_right", "move_left");
+    Velocity += cameraHolder.Transform.Basis.Z * movement * speed;
+    RotateY(rot_speed * rotation * (float)delta);
+    Velocity = new(Velocity.X, preserve_Y, Velocity.Z);
+  }
+
 
   public override void _Process(double delta) {
     Velocity = new(Velocity.X, Velocity.Y - gravity * (float)delta, Velocity.Z);
