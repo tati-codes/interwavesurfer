@@ -8,22 +8,24 @@ public partial class Interactable : Node {
   [Export]
   public CollisionObject3D collider {get; set;} 
   [Export]
-  public MeshInstance3D mesh {get; set;}
-  [Export]
-  public Material highlighter {get; set;} 
+  public GeometryInstance3D mesh {get; set;} //there's a geometry3dinstance and geometryinstance3d
+  public Material black = GD.Load<Material>("res://BaseClasses/Interactable/BlackOutlinerMaterial.tres");
+  public Material combined = GD.Load<Material>("res://BaseClasses/Interactable/Combined.tres");
+
 	public override void _Ready() {
     Bus bus = GetNode<Bus>("/root/bus");
     bus.Subscribe<LookingAt, NodeRef>(args => handleGaze(args.reference));
     bus.Subscribe<StoppedLookingAt, NodeRef>(args => unhandleGaze(args.reference));
+    mesh.MaterialOverlay = black;
 	}
   bool refersToMe(Rid rid) => rid == collider.GetRid(); 
   void handleGaze(Rid rid) {
     if (!refersToMe(rid)) return; 
-    mesh.MaterialOverlay = highlighter;
+    mesh.MaterialOverlay = combined;
   }
   void unhandleGaze(Rid rid) {
     if (!refersToMe(rid)) return; 
-    mesh.MaterialOverlay = null;
+    mesh.MaterialOverlay = black;
   }
 }
 

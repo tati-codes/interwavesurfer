@@ -1,37 +1,33 @@
-[gd_scene load_steps=14 format=3 uid="uid://w00y2i7ee6j8"]
+[gd_scene load_steps=12 format=3 uid="uid://w00y2i7ee6j8"]
 
 [ext_resource type="PackedScene" uid="uid://capd6abh571h4" path="res://Water/WaterMeshInstance3D.tscn" id="2_lnf8e"]
 [ext_resource type="PackedScene" uid="uid://1h4ndhncf6wa" path="res://BaseClasses/Player/Player.tscn" id="2_mnhj8"]
 [ext_resource type="PackedScene" uid="uid://h670wpe8q1ul" path="res://Placeholder/Island/IslandScene.tscn" id="2_vtx68"]
 [ext_resource type="Script" uid="uid://bufcjjxrclfjs" path="res://Placeholder/DebugLabel.cs" id="4_mnhj8"]
 [ext_resource type="Script" uid="uid://bvw8fvn8ovlbk" path="res://BaseClasses/Interactable/Interactable.cs" id="5_nx6et"]
-[ext_resource type="Material" uid="uid://ckqbf3v6h17cw" path="res://BaseClasses/Interactable/Hilighted.tres" id="5_puagl"]
-[ext_resource type="Shader" uid="uid://b3enf3dur2iyy" path="res://Placeholder/DefaultDebugSolid.tres" id="6_puagl"]
-[ext_resource type="Shader" uid="uid://yuj1jjmskv6u" path="res://BaseClasses/Interactable/Outliner.gdshader" id="7_n0837"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k7qyu"]
-render_priority = 0
-shader = ExtResource("7_n0837")
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
+[sub_resource type="Gradient" id="Gradient_nx6et"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n0837"]
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_k7qyu")
-shader = ExtResource("6_puagl")
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w6uuh"]
+noise_type = 2
+frequency = 0.031
+fractal_type = 2
 
-[sub_resource type="BoxMesh" id="BoxMesh_w6uuh"]
-material = SubResource("ShaderMaterial_n0837")
-size = Vector3(2, 2, 2)
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n0837"]
+color_ramp = SubResource("Gradient_nx6et")
+noise = SubResource("FastNoiseLite_w6uuh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_puagl"]
+albedo_color = Color(1, 0.04, 0.04, 1)
+metallic = 1.0
+metallic_specular = 0.24
+metallic_texture = SubResource("NoiseTexture2D_n0837")
+
+[sub_resource type="TorusMesh" id="TorusMesh_n0837"]
+material = SubResource("StandardMaterial3D_puagl")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n0837"]
 data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_puagl"]
-render_priority = 0
-shader = ExtResource("7_n0837")
-shader_parameter/outline_color = Color(1, 1, 1, 1)
-shader_parameter/outline_width = 2.0
 
 [node name="TestingArea" type="Node3D"]
 
@@ -40,7 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57428, 10.0759, 0.0744709)
 cam = NodePath("../Fixed")
 
 [node name="Island" parent="." instance=ExtResource("2_vtx68")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.86067, -0.029089, 0.195548)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.88529, 0.0112934, 0.247008)
 
 [node name="OmniLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.619056, 0.174187, -0.765787, 0.408764, 0.761137, 0.50357, 0.670583, -0.624764, 0.399985, 19.1304, 65.1046, 10.2807)
@@ -57,7 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29583, 1.48124, 4.10534)
 transform = Transform3D(-0.0609715, -0.611811, 0.78865, 0.0357952, 0.788272, 0.614285, -0.997497, 0.0656838, -0.0261622, 20.7411, 27.3804, -1.07431)
 keep_aspect = 0
 current = true
-fov = 68.6
+fov = 49.6
 
 [node name="Label" type="Label" parent="Fixed"]
 offset_right = 40.0
@@ -65,9 +61,9 @@ offset_bottom = 23.0
 script = ExtResource("4_mnhj8")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87181, 10.9715, -4.83513)
-material_overlay = ExtResource("5_puagl")
-mesh = SubResource("BoxMesh_w6uuh")
+transform = Transform3D(0.980095, -0.094546, -0.17457, 0.0629215, 0.981919, -0.178538, 0.188294, 0.164, 0.968323, -2.48281, 10.3553, -3.88896)
+mesh = SubResource("TorusMesh_n0837")
+skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube"]
 
@@ -79,7 +75,6 @@ shape = SubResource("ConcavePolygonShape3D_n0837")
 script = ExtResource("5_nx6et")
 collider = NodePath("../StaticBody3D")
 mesh = NodePath("..")
-highlighter = SubResource("ShaderMaterial_puagl")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true

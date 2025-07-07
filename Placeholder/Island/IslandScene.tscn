@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://h670wpe8q1ul"]
+[gd_scene load_steps=10 format=4 uid="uid://h670wpe8q1ul"]
 
 [ext_resource type="Script" uid="uid://bc002dd1rg7mw" path="res://BaseClasses/Interactable/NonInteractable.cs" id="1_j7kw8"]
+[ext_resource type="Material" uid="uid://chx7xkmvxnjhn" path="res://BaseClasses/Interactable/MadnessOutliner.tres" id="1_m7fyd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6uso"]
 resource_name = "coco"
@@ -149,7 +150,8 @@ near = 0.1
 far = 100.0
 
 [node name="island" type="MeshInstance3D" parent="TatislandNoChest"]
-transform = Transform3D(-9.00041, 5.53594, 0, 0, 0, 10.5666, 5.53594, 9.00041, 0, 1.67638e-08, 0, -5.96046e-08)
+transform = Transform3D(-8.99492, 5.54482, 0.0201368, 0.0173125, -0.0102898, 10.5666, 5.54483, 8.99494, -0.000325552, 1.67638e-08, 0, -5.96046e-08)
+material_overlay = ExtResource("1_m7fyd")
 gi_mode = 0
 mesh = SubResource("ArrayMesh_pfbgh")
 skeleton = NodePath("")
