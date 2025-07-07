@@ -1,4 +1,6 @@
-[gd_resource type="VisualShader" format=3 uid="uid://cm01305gtk3y7"]
+[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://cm01305gtk3y7"]
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_hspqk"]
 
 [resource]
 code = "shader_type spatial;
@@ -7,3 +9,5 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 
 
 "
+nodes/fragment/2/node = SubResource("VisualShaderNodeFloatFunc_hspqk")
+nodes/fragment/2/position = Vector2(123, 135)

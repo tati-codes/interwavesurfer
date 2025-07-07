@@ -1,9 +1,19 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dnnq58dovw6lr"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dnnq58dovw6lr"]
 
 [ext_resource type="Shader" uid="uid://yuj1jjmskv6u" path="res://BaseClasses/Interactable/Outliner.gdshader" id="1_5paf6"]
+[ext_resource type="Shader" uid="uid://d16d4r6fplw3q" path="res://BaseClasses/Interactable/Highlighter.gdshader" id="1_36s4k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mc3l2"]
+render_priority = 0
+shader = ExtResource("1_36s4k")
+shader_parameter/shine_color = Color(0.830489, 0.826151, 0.822438, 1)
+shader_parameter/cycle_interval = 1.0
+shader_parameter/shine_speed = 1.5
+shader_parameter/shine_width = 50.0
 
 [resource]
 render_priority = 0
+next_pass = SubResource("ShaderMaterial_mc3l2")
 shader = ExtResource("1_5paf6")
 shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 3.0
+shader_parameter/outline_width = 2.0
