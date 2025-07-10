@@ -4829,6 +4829,7 @@ bones/24/scale = Vector3(1, 1, 1)
 
 [node name="InteractingBeam" parent="RobotArmature/Skeleton3D" instance=ExtResource("2_87x7f")]
 transform = Transform3D(1.72869, 0, 0, 0, -7.55635e-08, 1.72869, 0, -1.72869, -7.55635e-08, 0, 1.72869, 12.1008)
+debug = false
 
 [node name="Bottom" type="MeshInstance3D" parent="RobotArmature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_1c3x1")

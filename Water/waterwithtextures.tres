@@ -29,7 +29,7 @@ linked_parent_graph_frame = 26
 function = 31
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_vddc8"]
-size = Vector2(1744, 865)
+size = Vector2(1744, 921)
 title = "Water"
 attached_nodes = PackedInt32Array(6, 2, 13, 12, 11, 9, 8, 7, 5, 3, 34)
 
@@ -76,7 +76,7 @@ expanded_output_ports = [0]
 op_type = 3
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_8up8y"]
-size = Vector2(1684, 545)
+size = Vector2(1684, 590)
 title = "Mask"
 attached_nodes = PackedInt32Array(18, 14, 23, 19, 15, 22, 20, 24, 21, 17)
 
@@ -316,6 +316,7 @@ void light() {
 
 }
 "
+graph_offset = Vector2(-1304.29, -864.69)
 nodes/vertex/0/position = Vector2(760, 500)
 nodes/vertex/2/node = SubResource("VisualShaderNodeMultiplyAdd_lwplk")
 nodes/vertex/2/position = Vector2(160, 480)

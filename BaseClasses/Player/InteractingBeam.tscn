@@ -24,6 +24,7 @@ shape = SubResource("CylinderShape3D_87x7f")
 max_results = 1
 debug_shape_custom_color = Color(0.85, 0, 1, 1)
 script = ExtResource("1_mf37p")
+debug = true
 visibleBeam = NodePath("VisibilityBeam")
 
 [node name="VisibilityBeam" type="MeshInstance3D" parent="."]

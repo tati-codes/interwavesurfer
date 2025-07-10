@@ -60,5 +60,7 @@ public partial class Player : CharacterBody3D {
       animations.SpeedScale = 1;
     }
     MoveAndSlide();
+    RenderingServer.GlobalShaderParameterSet("player_position", Position);    // ProjectSettings.
+    // player_position 
   }
 }

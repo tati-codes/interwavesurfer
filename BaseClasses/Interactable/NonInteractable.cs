@@ -9,6 +9,7 @@ public partial class NonInteractable : Node {
 	public override void _Ready()	{
 		Bus bus = GetNode<Bus>("/root/bus");
     bus.Publish<RegisterNonInteractable, NodeRef>(new() { reference = NonInteractableItem.GetRid() });
+	    //
 	}
 }
 

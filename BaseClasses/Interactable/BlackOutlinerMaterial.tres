@@ -15,5 +15,3 @@ shader_parameter/shine_width = 50.0
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_mc3l2")
 shader = ExtResource("1_5paf6")
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 2.0

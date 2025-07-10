@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ct8gkfr41qvbr"]
+
+[ext_resource type="Shader" uid="uid://cvddk0a3nrgo4" path="res://Placeholder/teasting.gdshader" id="1_qicic"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_qicic")
+shader_parameter/height_scale = 7.0
+shader_parameter/wave_speed = 3.0
+shader_parameter/upper_transparency = 0.5
+shader_parameter/global_transparency = 0.2
+shader_parameter/time_factor = Vector2(3, 2)
+shader_parameter/uv1_scale = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/color1 = Color(1, 1, 1, 1)
+shader_parameter/color2 = Color(0.4, 0.68, 1, 0.988235)
