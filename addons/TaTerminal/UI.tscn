@@ -80,7 +80,6 @@ columns = 2
 [node name="Listener" type="Node" parent="." node_paths=PackedStringArray("indi", "buffer")]
 script = ExtResource("2_uvuxs")
 indi = NodePath("../HBoxContainer/ConnectionIndicator")
-port = 2114
 buffer = NodePath("../Buffer")
 
 [node name="TagHolder" type="Node" parent="." node_paths=PackedStringArray("buffer")]

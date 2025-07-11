@@ -1,5 +1,4 @@
-#if TOOLS
-
+//TODO remove if tools preprocessor for OBus
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using OBus;
 public partial class Bus : Node {
   public void Log(string msg) => this.Publish<Log, Text>(new Text(msg)); 
   public void Warn(string msg) => this.Publish<Warn, Text>(Text.warn(msg));
-  public void Log(string msg, string tag) => this.Publish<TLog, DbgString>(new DbgString() { name = "", text = msg, tag = tag});
+  public void LogAsTag(string msg, string tag) => this.Publish<TLog, DbgString>(new DbgString() { name = "", text = msg, tag = tag});
   public void Error(string msg) => this.Publish<OBus.Error, Text>(Text.error(msg));
   public void Subscribe<T>(Action<NArgs> action)
       where T : TEvent<NArgs>, new() => Subscribe<T, NArgs>(action);
@@ -36,4 +35,3 @@ public partial class Bus : Node {
   public Subscription Count<T>()
     where T : TEvent<NArgs>, new() => Count<T, NArgs>();
 }
-#endif
