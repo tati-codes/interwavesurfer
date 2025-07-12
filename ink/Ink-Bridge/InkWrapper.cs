@@ -18,7 +18,9 @@ public partial class InkWrapper : Node {
 			bus.Publish<StoryUpdated, StoryText>(new(story.CurrentText));
 			if (!story.CanContinue) bus.Publish<Choices, InkChoices>(new(story.CurrentChoices) {level = LOG_LEVEL.DETAILED});
 		};
-		story.MadeChoice += (InkChoice choice) => bus.Publish<>(choice.Text);
+		//TODO "reset quiz" event 
+		//TODO reset quiz implementation
+		// story.MadeChoice += (InkChoice choice) => bus.Publish<>(choice.Text);
 		story.ContinueMaximally();
 		story.ChooseChoiceIndex(0);
 	}
