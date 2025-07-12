@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7ey10tinyfab"]
+
+[ext_resource type="Script" uid="uid://cuvhwxb0ar761" path="res://Scenes/QuizSpace/ChoiceScene.cs" id="1_wksli"]
+[ext_resource type="Texture2D" uid="uid://bpcuxg0x4dud1" path="res://Water/waetr.webp" id="1_x5t1y"]
+[ext_resource type="Material" uid="uid://cwf4k5tny6plm" path="res://Water/Swirl.tres" id="2_wksli"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ao0h8"]
+backlight_enabled = true
+backlight = Color(0.92, 0.92, 0.92, 1)
+backlight_texture = ExtResource("1_x5t1y")
+
+[sub_resource type="TextMesh" id="TextMesh_yq77u"]
+material = SubResource("StandardMaterial3D_ao0h8")
+text = "Choice 2
+
+"
+font_size = 127
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8xi5x"]
+material = ExtResource("2_wksli")
+size = Vector2(10, 10)
+
+[node name="Left" type="Node3D" node_paths=PackedStringArray("Text", "Portal")]
+script = ExtResource("1_wksli")
+Text = NodePath("LeftText")
+Portal = NodePath("LeftPortal")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.000120038, -0.725891, 0.68781, 0.000126684, 0.68781, 0.725891, -1, 0, 0.000174522, 3.9963, 15.4023, -13.5594)
+light_color = Color(0, 1, 1, 1)
+light_energy = 1.608
+shadow_enabled = true
+shadow_blur = 1.52
+spot_range = 23.937
+spot_attenuation = -1.53
+
+[node name="LeftText" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 0.409746, 9.9204, -13.3031)
+mesh = SubResource("TextMesh_yq77u")
+skeleton = NodePath("../../..")
+
+[node name="LeftPortal" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.107228, -0.953874, -0.280406, -0.894593, -0.215628, 0.391419, -0.433828, 0.208878, -0.876449, 0.2717, 4.58, -12.948)
+mesh = SubResource("PlaneMesh_8xi5x")
+skeleton = NodePath("../../..")
