@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://deyyjuai65cu8"]
+
+[ext_resource type="Shader" uid="uid://6iokinpege0g" path="res://Placeholder/QuizArea2.gdshader" id="1_e2l56"]
+[ext_resource type="Texture2D" uid="uid://bc6dsir8ndyrw" path="res://Placeholder/Island/tex1_64x64_m_c33801a9425c7b7b_14_arb.png" id="2_qkkva"]
+
+[resource]
+render_priority = 2
+shader = ExtResource("1_e2l56")
+shader_parameter/portal_texture = ExtResource("2_qkkva")
+shader_parameter/portal_tint = Color(0.563, 1, 0.31, 0.854902)
+shader_parameter/vortex_effect_radius = 0.5
+shader_parameter/twist_strength = 8.0
+shader_parameter/pulsation_speed = 2.59
+shader_parameter/breath_magnitude = 0.3
+shader_parameter/overall_rotation_speed = 2.0
+shader_parameter/texture_scroll_speed_x = 0.62
+shader_parameter/texture_scroll_speed_y = 0.32
+shader_parameter/edge_softness = 0.5
