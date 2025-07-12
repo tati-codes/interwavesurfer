@@ -1,7 +1,4 @@
-extends Node
-
-# TODO: this is a TODO
-# HACK: this is a HACK
-# FIXME: this is a FIXME
-#      TODO          this works too
-#Hack any format will do
+#TODO OBELISK
+#TODO 3D TEXT
+#TODO NAVIGABLE SHIP
+#TODO shadows

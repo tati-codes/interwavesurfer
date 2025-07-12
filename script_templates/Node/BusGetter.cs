@@ -8,7 +8,7 @@ using OBus;
 public partial class _CLASS_ : _BASE_ {
   public Bus bus;
 	public override void _Ready()	{
-    Bus bus = GetNode<Bus>("/root/bus");
+    bus = GetNode<Bus>("/root/bus");
 	}
 
 }
