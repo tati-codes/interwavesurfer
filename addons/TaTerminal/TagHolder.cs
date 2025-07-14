@@ -11,8 +11,7 @@ public partial class TagHolder : Node {
   [Export]
 	public ButtonCreator buttonCreator { get; set; }
 
-  public Dictionary<tag, bool> registeredTags = new Dictionary<tag, bool>()
-  {
+  public Dictionary<tag, bool> registeredTags = new Dictionary<tag, bool>() {
       [tag.info] = true,
       [tag.warning] = true,
       [tag.error] = true,
