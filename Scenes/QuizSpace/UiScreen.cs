@@ -19,11 +19,9 @@ public partial class UiScreen : MeshInstance3D {
 
 	public void handleStateTransition(QuizStateTransitionArgs args) {
 		if (args.from == QuizState.SHOW_QUIZ_QUESTION && args.to == QuizState.AWAIT_PLAYER_CHOICE) {
-			bus.Log("disappearing");
 			this.Hide();
 			textContainer.Hide();
 		} else if (args.from == QuizState.AWAIT_PLAYER_CHOICE && args.to == QuizState.SHOW_QUIZ_QUESTION) {
-			bus.Log("appearing");
 			this.Show();
 			textContainer.Show();
 		}
