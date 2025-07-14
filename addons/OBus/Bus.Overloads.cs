@@ -6,9 +6,11 @@ using System.Reflection;
 using OBus;
 
 public partial class Bus : Node {
-  public void Log(string msg) => this.Publish<Log, Text>(new Text(msg)); 
+  public void Log(string msg) => this.Publish<Log, Text>(new Text(msg));
   public void Warn(string msg) => this.Publish<Warn, Text>(Text.warn(msg));
-  public void LogAsTag(string msg, string tag) => this.Publish<TLog, DbgString>(new DbgString() { name = "", text = msg, tag = tag});
+  //FIXME this is not working; privated until fixed
+  private void LogAsTag(string msg, string tag) => this.Publish<TLog, DbgString>(new DbgString() { name = "", text = msg, tag = tag});
+  public void Inspect(Object o) => this.Log(DbgString.InspectObject(o));
   public void Error(string msg) => this.Publish<OBus.Error, Text>(Text.error(msg));
   public void Subscribe<T>(Action<NArgs> action)
       where T : TEvent<NArgs>, new() => Subscribe<T, NArgs>(action);
@@ -19,6 +21,9 @@ public partial class Bus : Node {
   public void Log(params string[] strings) => this.Publish<Log, Text>(new Text(String.Join(" ", strings))); 
   public void Warn(params string[] strings) => this.Publish<Warn, Text>(Text.warn(String.Join(" ", strings)));
   public void Error(params string[] strings) => this.Publish<OBus.Error, Text>(Text.error(string.Join(" ", strings)));
+  /// <summary>
+  /// Count any invocation of Bus.Count() with the same labell'
+  /// </summary>
   public void Count(string label) => Publish<Count, Text>(Text.count(label));
 
   /// <summary>
@@ -26,11 +31,14 @@ public partial class Bus : Node {
   /// </summary>
   public void IPub<T, TArgs>(TArgs args) where T : TEvent<TArgs>, new() 
     where TArgs : Args => Publish<T, TArgs>(args, false);
+  /// <summary>
+  /// Counts events by name.
+  /// </summary>
   public Subscription Count<T, TArgs>()
       where T : TEvent<TArgs>, new()
       where TArgs : Args {
-  if (typeof(T) == typeof(Count)) throw new InvalidOperationException("Cannot count Count events");
-  else return Subscribe<T, TArgs>(args => Count(new($"❮{typeof(T).Name}❯")));
+          if (typeof(T) == typeof(Count)) throw new InvalidOperationException("Cannot count Count events");
+          else return Subscribe<T, TArgs>(args => Count(new($"❮{typeof(T).Name}❯")));
   }
   public Subscription Count<T>()
     where T : TEvent<NArgs>, new() => Count<T, NArgs>();

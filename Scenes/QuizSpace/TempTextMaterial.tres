@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c7cxw58mxqj0b"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x5t1y"]
+load_path = "res://.godot/imported/waetr.webp-27c782fe0a2b1f9dc56bb353b0f68b57.s3tc.ctex"
+
+[resource]
+backlight_enabled = true
+backlight = Color(0.92, 0.92, 0.92, 1)
+backlight_texture = SubResource("CompressedTexture2D_x5t1y")

@@ -13,20 +13,37 @@ public partial class InkWrapper : Node {
 	private Bus bus;
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
-		story.ResetState();
+		bus.Subscribe<SelectChoice, IChoice>(args => {
+			story.ChooseChoiceIndex(args.choice.Index);
+			bus.Log("After choice select: ", story.CurrentText);
+			bus.Log("Can continue", story.CanContinue.ToString());
+			story.Continue();
+		});
 		story.Continued += () => {
-			bus.Publish<StoryUpdated, StoryText>(new(story.CurrentText));
 			if (!story.CanContinue) bus.Publish<Choices, InkChoices>(new(story.CurrentChoices) {level = LOG_LEVEL.DETAILED});
+			if (story.CurrentText.Length < 2) {
+				story.Continue();
+			} else {
+				bus.Publish<StoryUpdated, StoryText>(new(story.CurrentText));
+			}
 		};
 		//TODO "reset quiz" event 
 		//TODO reset quiz implementation
-		// story.MadeChoice += (InkChoice choice) => bus.Publish<>(choice.Text);
-		story.ContinueMaximally();
-		story.ChooseChoiceIndex(0);
+		story.MadeChoice += (InkChoice choice) => {
+			bus.Log("current ", currentText);
+			bus.Publish<ChoiceSelected>();
+		};
 	}
+	
+	public string currentText => story.CurrentText;
+	public bool canContinue => story.CanContinue;
+	public IReadOnlyList<InkChoice> CurrentChoices => story.CurrentChoices;
+	public void Continue() => story.Continue();
+	
 }
 
 namespace InkBridge {
+	public class ChoiceSelected : TEvent<NArgs> { }
 	public class PlayerContinued : TEvent<NArgs> {}
 	public class StoryUpdated : TEvent<StoryText> {}
 	public class SelectChoice : TEvent<IChoice> {}

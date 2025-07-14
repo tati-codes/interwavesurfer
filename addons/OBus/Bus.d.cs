@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 using System.Reflection;
 
 namespace OBus {
@@ -91,6 +92,43 @@ namespace OBus {
         else if (isMessage<T>(@event) && @event is Count && args is Text countargs) return createFromCount(countargs);
         else return createFromEvent<T, TArgs>(args);
       }
+      public static string InspectObject(object obj) {
+        string InspectIEnumerable (IEnumerable obj) {
+          string result = "";
+          int index = 0; 
+          foreach (object item in obj)  {
+            string itemStr = item?.ToString() ?? "null";
+            result += $"    [{index}]: {itemStr}\n";
+            index++;
+          }
+          result += $"  ]\n";
+          return result;
+        };
+        if (obj == null) return "null";
+        Type objType = obj.GetType();
+        if (objType.IsPrimitive || objType == typeof(string) || objType == typeof(DateTime) || objType == typeof(decimal)) {
+          return obj.ToString();
+        }
+        PropertyInfo[] properties = objType.GetProperties();
+        string result = $"{objType.Name}:\n";
+        foreach (PropertyInfo property in properties)
+        {
+          try  {
+            object value = property.GetValue(obj, null);
+            if (value is IEnumerable enumerable && !(value is string)) {
+              result += $"  {property.Name}: [\n";
+              result += InspectIEnumerable(enumerable);
+            } else {
+              string valueStr = value?.ToString() ?? "null";
+              result += $"  {property.Name}: {valueStr}\n";
+            }
+          } catch (Exception ex) {
+              result += $"  {property.Name}: [Error: {ex.Message}]\n";
+          }
+        }
+        return result;
+      }
+      
       public static DbgString createFromMessage(Text textargs) => new DbgString() {
         name = "",
         text = textargs.text,
