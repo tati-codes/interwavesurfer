@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://iocic5fv05q0"]
+[gd_scene load_steps=17 format=4 uid="uid://iocic5fv05q0"]
 
 [ext_resource type="Script" uid="uid://mifurmy5ds83" path="res://Scenes/QuizSpace/Boat.cs" id="1_3q5go"]
 [ext_resource type="Material" uid="uid://ct8gkfr41qvbr" path="res://Placeholder/Testing Waves.tres" id="3_52n4j"]
@@ -229,18 +229,60 @@ subdivide_width = 20
 subdivide_height = 20
 subdivide_depth = 20
 
+[sub_resource type="Animation" id="Animation_hqefw"]
+resource_name = "Sway"
+loop_mode = 2
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.035, 0, 0, 0.999, 0.6, 1, -0.035, 0, 0, 0.999, 1, 1, 0.044, 0, 0, 0.999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.001, 0, -0.087, 0.996, 0.6, 1, 0, 0, 0.087, 0.996, 1, 1, 0.001, 0, 0.087, 0.996)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath(".")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(-0.0333333, 1, 0, 2, 0, 0.5, 1, 0, -2, 0)
+
+[sub_resource type="Animation" id="Animation_3q5go"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kxse0"]
+_data = {
+&"RESET": SubResource("Animation_3q5go"),
+&"Sway": SubResource("Animation_hqefw")
+}
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4b54o"]
 points = PackedVector3Array(-0.00206947, 0, -17.7132, -4.7116, 0, -9.25862, -10.3202, 13.4121, -23.0695, -1.05873, 20.4655, -48.5323, -0.149558, 20.4655, -49.0514, 0.757597, 20.4655, -48.5323, 3.43865, 19.3398, -42.8464, 10.3201, 13.4121, -23.0695, 4.70948, 0, -9.25862, -4.7116, 0, 3.71174, -3.44077, 19.3398, -42.8464, -10.3202, 13.4121, 19.5909, -0.299067, 61.1689, -3.32554, -1.03247, 21.1002, -48.5075, -0.149558, 21.1002, -49.0184, 0.735373, 21.1002, -48.5075, 0.0140934, 61.1689, -3.32554, 0.0140934, 61.1689, -3.1525, 10.3181, 13.4121, 19.5909, 4.70948, 0, 3.71174, -2.16389, 0, 8.85373, -3.44077, 13.4121, 26.175, -0.143497, 23.9622, 35.1323, -0.915285, 23.9622, 34.2506, -0.907204, 24.6448, 34.2506, -0.299067, 61.1689, -3.1525, -0.143497, 61.1689, -3.41619, -0.143497, 61.1689, -3.06185, -0.143497, 24.6448, 35.1158, 0.622231, 24.6448, 34.2506, 0.630313, 23.9622, 34.2506, 3.43865, 13.4121, 26.175, 2.16177, 0, 8.85373)
 
-[node name="boat" type="CharacterBody3D" node_paths=PackedStringArray("Foam", "navAgen", "BoatMesh")]
-transform = Transform3D(0.0982545, 0.00132421, 0.0185553, -0.00167693, 0.0999707, 0.00174524, -0.0185268, -0.00202594, 0.0982479, 0, 0, 0)
+[node name="boat" type="CharacterBody3D" node_paths=PackedStringArray("Foam", "navAgen", "BoatMesh", "anim")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("1_3q5go")
 Foam = NodePath("Boat/Foam")
 navAgen = NodePath("NavigationAgent3D")
 BoatMesh = NodePath("Boat")
+anim = NodePath("Boat/AnimationPlayer")
 
 [node name="Boat" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.18325, -0.0302234, -0.982602, -0.0265754, 0.999314, -0.0257813, 0.982707, 0.0213886, -0.183928, -61.3622, -4.87397, -22.4696)
+transform = Transform3D(0.98515, 0.1717, -0.000171268, -0.171278, 0.98266, -0.0710154, -0.012025, 0.06999, 0.997476, 0, 0, 0)
 mesh = SubResource("ArrayMesh_4b54o")
 skeleton = NodePath("")
 
@@ -261,12 +303,18 @@ transform = Transform3D(0.255455, -0.224716, 0.940348, 0.472274, 0.877688, 0.081
 mesh = SubResource("PrismMesh_qd3p1")
 skeleton = NodePath("../..")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Boat"]
+libraries = {
+&"": SubResource("AnimationLibrary_kxse0")
+}
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-0.18325, -0.0302234, -0.982602, -0.0265754, 0.999314, -0.0257813, 0.982707, 0.0213886, -0.183928, -61.3622, -4.87397, -22.4696)
+transform = Transform3D(0.984065, -0.161224, 0.0749889, 0.162544, 0.986631, -0.0118068, -0.0720832, 0.0238076, 0.997115, 3.5889, 0.480849, 4.90957)
 shape = SubResource("ConvexPolygonShape3D_4b54o")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_height_offset = 1.0
+debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_point_size = 10.4

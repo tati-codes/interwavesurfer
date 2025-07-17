@@ -38,12 +38,8 @@ public partial class InteractingBeam : ShapeCast3D {
     bus.Publish<StoppedLookingAt, NodeRef>(new() { reference = id});
   } 
   public override void _Process(double delta) {
-    Godot.Collections.Array<Rid> result = new();
     if (IsColliding()) target = GetColliderRid(0);
     else if (!IsColliding() && target != default) target = default;
-  }
-  public void dbg(string n, Object o) {
-    if (debug) bus.IPub<Debug, DebugVar>(new(n,o)); 
   }
 }
 

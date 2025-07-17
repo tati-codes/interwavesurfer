@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=36 format=3 uid="uid://37urp870oxee"]
 
-[ext_resource type="Texture2D" uid="uid://csqdfovsxctsv" path="res://Water/waternoise2.tres" id="1_benog"]
+[ext_resource type="Texture2D" uid="uid://csqdfovsxctsv" path="res://Scenes/Water/waternoise2.tres" id="1_benog"]
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_ancgw"]
 output_port_for_preview = 4

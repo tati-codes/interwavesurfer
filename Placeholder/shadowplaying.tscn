@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://djwpp3ib6545r"]
 
-[ext_resource type="PackedScene" uid="uid://capd6abh571h4" path="res://Water/WaterMeshInstance3D.tscn" id="1_sbb1u"]
+[ext_resource type="PackedScene" uid="uid://capd6abh571h4" path="res://Scenes/Water/WaterMeshInstance3D.tscn" id="1_sbb1u"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1kk3b"]
 size = Vector3(10, 10, 10)

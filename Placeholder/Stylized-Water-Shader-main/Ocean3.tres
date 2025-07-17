@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://c7e3olp7ir8yo"]
 
 [ext_resource type="Shader" uid="uid://dbyscplsawyoq" path="res://Placeholder/Stylized-Water-Shader-main/ocean.gdshader" id="1_7v0lh"]
-[ext_resource type="Texture2D" uid="uid://csqdfovsxctsv" path="res://Water/waternoise2.tres" id="2_7v0lh"]
+[ext_resource type="Texture2D" uid="uid://csqdfovsxctsv" path="res://Scenes/Water/waternoise2.tres" id="2_7v0lh"]
 
 [sub_resource type="Gradient" id="Gradient_klnmk"]
 offsets = PackedFloat32Array(0, 0.08)

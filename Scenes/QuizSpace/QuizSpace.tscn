@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://devummifrju2u"]
 
-[ext_resource type="PackedScene" uid="uid://ch57q0ft7dimq" path="res://Water/WaterNode.tscn" id="1_753vt"]
+[ext_resource type="PackedScene" uid="uid://ch57q0ft7dimq" path="res://Scenes/Water/WaterNode.tscn" id="1_753vt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t388j"]
 resource_name = "Barco"

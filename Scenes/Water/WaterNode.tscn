@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ch57q0ft7dimq"]
 
-[ext_resource type="Shader" uid="uid://dctjpk1ynli63" path="res://Water/WaterWithTextures2.tres" id="1_hy6ga"]
+[ext_resource type="Shader" uid="uid://dctjpk1ynli63" path="res://Scenes/Water/WaterWithTextures2.tres" id="1_hy6ga"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vw6jr"]
 render_priority = 0

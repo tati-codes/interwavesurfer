@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://mafmadcf4ctp"]
 
-[ext_resource type="Shader" uid="uid://cwayvdnv6javk" path="res://Water/OceanShader.tres" id="1_apx3v"]
+[ext_resource type="Shader" uid="uid://cwayvdnv6javk" path="res://Scenes/Water/OceanShader.tres" id="1_apx3v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_apx3v"]
 render_priority = 0

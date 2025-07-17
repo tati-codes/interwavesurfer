@@ -14,8 +14,8 @@ public partial class Interactable : Node {
 
 	public override void _Ready() {
     Bus bus = GetNode<Bus>("/root/bus");
-    bus.Subscribe<LookingAt, NodeRef>(args => handleGaze(args.reference));
     bus.Subscribe<StoppedLookingAt, NodeRef>(args => unhandleGaze(args.reference));
+    bus.Subscribe<LookingAt, NodeRef>(args => handleGaze(args.reference));
     mesh.MaterialOverlay = black;
 	}
   bool refersToMe(Rid rid) => rid == collider.GetRid(); 

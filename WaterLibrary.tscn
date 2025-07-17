@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c6ymu6mq0alve"]
 
-[ext_resource type="PackedScene" uid="uid://ch57q0ft7dimq" path="res://Water/WaterNode.tscn" id="1_uln2l"]
-[ext_resource type="Shader" uid="uid://dctjpk1ynli63" path="res://Water/WaterWithTextures2.tres" id="1_vw6jr"]
+[ext_resource type="PackedScene" uid="uid://ch57q0ft7dimq" path="res://Scenes/Water/WaterNode.tscn" id="1_uln2l"]
+[ext_resource type="Shader" uid="uid://dctjpk1ynli63" path="res://Scenes/Water/WaterWithTextures2.tres" id="1_vw6jr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vw6jr"]
 render_priority = 0

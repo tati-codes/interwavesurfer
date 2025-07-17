@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=39 format=3 uid="uid://cwayvdnv6javk"]
 
-[ext_resource type="Texture2D" uid="uid://b2xoo1p2jxqs" path="res://Water/waternoise3.tres" id="1_vhx62"]
+[ext_resource type="Texture2D" uid="uid://b2xoo1p2jxqs" path="res://Scenes/Water/waternoise3.tres" id="1_y52wx"]
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_4ki55"]
 output_port_for_preview = 4
@@ -82,7 +82,7 @@ attached_nodes = PackedInt32Array(18, 14, 23, 19, 15, 22, 20, 24, 21, 17)
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_1kcu4"]
 linked_parent_graph_frame = 16
-texture = ExtResource("1_vhx62")
+texture = ExtResource("1_y52wx")
 
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_mp4jv"]
 default_input_values = [1, Vector2(0.005, 0.005), 2, Vector2(0.1, 0.1)]
@@ -103,7 +103,7 @@ linked_parent_graph_frame = 16
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3jj6j"]
 expanded_output_ports = [0]
 linked_parent_graph_frame = 16
-texture = ExtResource("1_vhx62")
+texture = ExtResource("1_y52wx")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_yfjdu"]
 input_name = "albedo"

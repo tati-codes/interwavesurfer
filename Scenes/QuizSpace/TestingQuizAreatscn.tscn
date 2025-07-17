@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://demfv7rbt1ak4"]
 
-[ext_resource type="Texture2D" uid="uid://b4ov5yw4rgo1o" path="res://Water/3DTexture_CheckerPride.png" id="1_6c1f8"]
+[ext_resource type="Texture2D" uid="uid://b4ov5yw4rgo1o" path="res://Scenes/Water/3DTexture_CheckerPride.png" id="1_6c1f8"]
 [ext_resource type="Script" uid="uid://dgr0om4ui375k" path="res://Scenes/QuizSpace/TestingQuizAreatscn.cs" id="1_k5xq3"]
 [ext_resource type="PackedScene" uid="uid://iocic5fv05q0" path="res://Scenes/QuizSpace/QuizBoat.tscn" id="4_j517i"]
 [ext_resource type="Script" uid="uid://ckv85en18uucd" path="res://ink/Ink-Bridge/InkWrapper.cs" id="5_j517i"]
@@ -68,7 +68,8 @@ story = ExtResource("6_4b54o")
 metadata/_custom_type_script = "uid://ckv85en18uucd"
 
 [node name="PlayerBoat" parent="." instance=ExtResource("4_j517i")]
-transform = Transform3D(0.0982545, 0.00132422, 0.0185553, -0.00167693, 0.0999707, 0.00174524, -0.0185268, -0.00202594, 0.0982479, -13.726, 0.312709, 4.00424)
+transform = Transform3D(0.00273294, 0.00179066, -0.0999466, -0.00167693, 0.0999707, 0.00174524, 0.0999486, 0.00162835, 0.00276213, -19.9022, 0.312709, 4.00424)
+motion_mode = 1
 
 [node name="Choices" type="Node3D" parent="."]
 
