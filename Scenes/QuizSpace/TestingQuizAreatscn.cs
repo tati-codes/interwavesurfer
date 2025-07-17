@@ -22,7 +22,7 @@ public partial class TestingQuizAreatscn : Node3D {
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
 		bus.Publish<Debug, DebugVar>(new("state", currentState));
-		bus.Subscribe<ChoiceSelected>(onChoiceSelected);
+		bus.Subscribe<ChoiceSelected>(playerChoiceReceived);
 		bus.Subscribe<BoatReachedPortal>(args => {
 				bus.Log("CurrentSelection: ", UISelectedIndex.ToString());
 				bus.Publish<SelectChoice, IChoice>(new(story.CurrentChoices[UISelectedIndex]));
@@ -33,15 +33,14 @@ public partial class TestingQuizAreatscn : Node3D {
 		transitionTo(QuizState.SHOW_QUIZ_QUESTION);
 	}
 
-	void onChoiceSelected(NArgs args) {
+	void playerChoiceReceived(NArgs args) {
 		animation_lock = false;
 		UISelectedIndex = -1;
 		if (!story.canContinue) {
-			bus.Error("can't continue");
+			bus.Error("player choice received; can't continue");
 			foreach (var storyCurrentChoice in story.CurrentChoices) {
 				bus.Inspect(storyCurrentChoice);
 			}
-
 		} else {
 			story.Continue();
 		}
@@ -81,9 +80,7 @@ public partial class TestingQuizAreatscn : Node3D {
 		}
 		switch (currentState) {
 			case QuizState.START: break;
-			case QuizState.SHOW_QUIZ_QUESTION: {
-				break;
-			}
+			case QuizState.SHOW_QUIZ_QUESTION: break;
 			case QuizState.AWAIT_PLAYER_CHOICE: {
 				if (eventIsLeft) handleUISelect(next: false);
 				else if (eventIsRight) handleUISelect(next: true);
@@ -95,7 +92,7 @@ public partial class TestingQuizAreatscn : Node3D {
 		if (animation_lock) return;
 		if (UISelectedIndex == -1) {
 			UISelectedIndex = 0;
-		} else if (!next) { //dont ask
+		} else if (!next) { //we do it this way because visually the array is laid as 021. dont worry about it
 			UISelectedIndex++;
 			if (UISelectedIndex > UIMaxIdx) UISelectedIndex = 0;
 		} else {
