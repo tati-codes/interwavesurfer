@@ -10,9 +10,14 @@ public partial class Boat : CharacterBody3D {
 
 	[Export] public NavigationAgent3D navAgen { get; set; }
 	[Export] public MeshInstance3D BoatMesh { get; set; }
+	[Export]
+	public AnimationPlayer anim {get; set;} 
+	 
+  
 	public Vector3 initialPosition { get; set; }
 	bool reached = true;
-	//TODO sway and bob	 
+	//DONE sway and bob
+	//TODO on select look at choices;
 	private Bus bus;
 
 	public override void _Ready() {
@@ -24,6 +29,7 @@ public partial class Boat : CharacterBody3D {
 		bus.Subscribe<QuizStateTransition, QuizStateTransitionArgs>(handleQuizStateTransition);
 		navAgen.NavigationFinished += targetReached;
 		initialPosition = this.Position;
+		anim?.Play("Sway");
 	}
 
 	public override void _PhysicsProcess(double delta) {
