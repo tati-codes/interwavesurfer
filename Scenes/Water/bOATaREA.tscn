@@ -1,12 +1,14 @@
-[gd_scene load_steps=24 format=4 uid="uid://cf5qvyy0k3am1"]
+[gd_scene load_steps=26 format=4 uid="uid://cf5qvyy0k3am1"]
 
 [ext_resource type="PackedScene" uid="uid://1h4ndhncf6wa" path="res://BaseClasses/Player/Player.tscn" id="1_yxmo4"]
 [ext_resource type="Script" uid="uid://bufcjjxrclfjs" path="res://Placeholder/Debug/DebugLabel.cs" id="2_j7enm"]
-[ext_resource type="PackedScene" uid="uid://h670wpe8q1ul" path="res://Placeholder/Island/IslandScene.tscn" id="3_ih3sa"]
+[ext_resource type="PackedScene" uid="uid://h670wpe8q1ul" path="res://IslandScene.tscn" id="3_ih3sa"]
 [ext_resource type="PackedScene" uid="uid://capd6abh571h4" path="res://Scenes/Water/WaterMeshInstance3D.tscn" id="4_72ih2"]
 [ext_resource type="Script" uid="uid://bvw8fvn8ovlbk" path="res://BaseClasses/Interactable/Interactable.cs" id="5_xei1m"]
+[ext_resource type="Material" uid="uid://dnnq58dovw6lr" path="res://Assets/Shaders/BlackOutlinerMaterial.tres" id="6_cdxgk"]
 [ext_resource type="Script" uid="uid://bpggnfwe4thpy" path="res://Scenes/Water/move.gd" id="6_ih3sa"]
 [ext_resource type="Material" uid="uid://ct8gkfr41qvbr" path="res://Placeholder/WavesAndFoam/Testing Waves.tres" id="6_j7enm"]
+[ext_resource type="Material" uid="uid://dm3hjahmi35ih" path="res://Assets/Shaders/White.tres" id="7_yq2mk"]
 
 [sub_resource type="Gradient" id="Gradient_nx6et"]
 
@@ -303,9 +305,13 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111286, -9.53674e-07, -0.0354042)
 shape = SubResource("ConcavePolygonShape3D_n0837")
 
-[node name="Interactable" type="Node" parent="Cube" node_paths=PackedStringArray("collider")]
+[node name="Interactable" type="Node" parent="Cube" node_paths=PackedStringArray("collider", "overlaySetter", "meshHolder")]
 script = ExtResource("5_xei1m")
 collider = NodePath("../StaticBody3D")
+overlaySetter = NodePath("..")
+meshHolder = NodePath("..")
+black = ExtResource("6_cdxgk")
+white = ExtResource("7_yq2mk")
 
 [node name="boat" type="Node3D" parent="."]
 transform = Transform3D(0.999243, 0, 0.0388936, 0, 1, 0, -0.0388936, 0, 0.999243, 39.1705, 7.24551, 19.3545)

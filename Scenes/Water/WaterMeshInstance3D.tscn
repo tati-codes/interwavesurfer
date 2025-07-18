@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://capd6abh571h4"]
-
-[ext_resource type="PlaneMesh" uid="uid://b16g2fm8oxrav" path="res://Scenes/Water/WaterMeshWorking.tres" id="1_ihg8x"]
-
-[node name="MeshInstance3D" type="MeshInstance3D"]
-transform = Transform3D(0.999985, 0.00276692, 0.00473886, -0.00278091, 0.999992, 0.00294472, -0.00473066, -0.00295787, 0.999984, 1, -1, 0)
-mesh = ExtResource("1_ihg8x")
