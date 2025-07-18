@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://5iaw1a4datjs"]
+
+[ext_resource type="Shader" uid="uid://37urp870oxee" path="res://Scenes/Water/WaterSmall.tres" id="1_jopxb"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jopxb")
+shader_parameter/ColorParameter = Color(0.231373, 0.619608, 0.917647, 0.698039)

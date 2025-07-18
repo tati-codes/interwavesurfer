@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=4 uid="uid://iocic5fv05q0"]
 
 [ext_resource type="Script" uid="uid://mifurmy5ds83" path="res://Scenes/QuizSpace/Boat.cs" id="1_3q5go"]
-[ext_resource type="Material" uid="uid://ct8gkfr41qvbr" path="res://Placeholder/Testing Waves.tres" id="3_52n4j"]
+[ext_resource type="Material" uid="uid://ct8gkfr41qvbr" path="res://Placeholder/WavesAndFoam/Testing Waves.tres" id="3_52n4j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t388j"]
 resource_name = "Barco"

@@ -1,6 +1,6 @@
 [gd_resource type="PlaneMesh" load_steps=2 format=3 uid="uid://b16g2fm8oxrav"]
 
-[ext_resource type="Material" uid="uid://5iaw1a4datjs" path="res://SmallWater.tres" id="1_dswat"]
+[ext_resource type="Material" uid="uid://5iaw1a4datjs" path="res://Scenes/Water/SmallWater.tres" id="1_dswat"]
 
 [resource]
 material = ExtResource("1_dswat")

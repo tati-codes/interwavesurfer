@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://capd6abh571h4" path="res://Scenes/Water/WaterMeshInstance3D.tscn" id="2_lnf8e"]
 [ext_resource type="PackedScene" uid="uid://1h4ndhncf6wa" path="res://BaseClasses/Player/Player.tscn" id="2_mnhj8"]
 [ext_resource type="PackedScene" uid="uid://h670wpe8q1ul" path="res://Placeholder/Island/IslandScene.tscn" id="2_vtx68"]
-[ext_resource type="Script" uid="uid://bufcjjxrclfjs" path="res://Placeholder/DebugLabel.cs" id="4_mnhj8"]
+[ext_resource type="Script" uid="uid://bufcjjxrclfjs" path="res://Placeholder/Debug/DebugLabel.cs" id="4_mnhj8"]
 [ext_resource type="Script" uid="uid://bvw8fvn8ovlbk" path="res://BaseClasses/Interactable/Interactable.cs" id="5_nx6et"]
 
 [sub_resource type="Gradient" id="Gradient_jbeuh"]
@@ -164,10 +164,9 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111286, -9.53674e-07, -0.0354042)
 shape = SubResource("ConcavePolygonShape3D_n0837")
 
-[node name="Interactable" type="Node" parent="Cube" node_paths=PackedStringArray("collider", "mesh")]
+[node name="Interactable" type="Node" parent="Cube" node_paths=PackedStringArray("collider")]
 script = ExtResource("5_nx6et")
 collider = NodePath("../StaticBody3D")
-mesh = NodePath("..")
 
 [node name="boat" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.9319, 3.05645, 19.47)

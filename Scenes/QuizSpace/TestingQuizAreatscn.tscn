@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dgr0om4ui375k" path="res://Scenes/QuizSpace/TestingQuizAreatscn.cs" id="1_k5xq3"]
 [ext_resource type="PackedScene" uid="uid://iocic5fv05q0" path="res://Scenes/QuizSpace/QuizBoat.tscn" id="4_j517i"]
 [ext_resource type="Script" uid="uid://ckv85en18uucd" path="res://ink/Ink-Bridge/InkWrapper.cs" id="5_j517i"]
-[ext_resource type="Script" uid="uid://bufcjjxrclfjs" path="res://Placeholder/DebugLabel.cs" id="6_2vqxb"]
+[ext_resource type="Script" uid="uid://bufcjjxrclfjs" path="res://Placeholder/Debug/DebugLabel.cs" id="6_2vqxb"]
 [ext_resource type="Resource" uid="uid://db1seqv8d6tcj" path="res://ink/personality_quiz.ink" id="6_4b54o"]
 [ext_resource type="Shader" uid="uid://c2kbx1fpfwgs" path="res://Scenes/QuizSpace/ArrowMotion.gdshader" id="8_2vqxb"]
 [ext_resource type="Texture2D" uid="uid://ba70q5a7u75jq" path="res://Scenes/QuizSpace/triangle.png" id="8_4b54o"]

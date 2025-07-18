@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://7srwpqnyp2ck"]
 
 [ext_resource type="Script" uid="uid://djsg68486h1mo" path="res://BaseClasses/Player/InteractingBeam.cs" id="1_mf37p"]
-[ext_resource type="Shader" uid="uid://cuf17gxb3xjrb" path="res://Placeholder/Wiframe.tres" id="2_8khbt"]
+[ext_resource type="Shader" uid="uid://cuf17gxb3xjrb" path="res://Placeholder/Wireframe.tres" id="2_8khbt"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_87x7f"]
 height = 15.673

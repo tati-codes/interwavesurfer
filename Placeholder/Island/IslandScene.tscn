@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=4 uid="uid://h670wpe8q1ul"]
 
 [ext_resource type="Script" uid="uid://bc002dd1rg7mw" path="res://BaseClasses/Interactable/NonInteractable.cs" id="1_j7kw8"]
-[ext_resource type="Material" uid="uid://chx7xkmvxnjhn" path="res://BaseClasses/Interactable/MadnessOutliner.tres" id="1_m7fyd"]
+[ext_resource type="Material" uid="uid://chx7xkmvxnjhn" path="res://Assets/Shaders/MadnessOutliner.tres" id="1_m7fyd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6uso"]
 resource_name = "coco"

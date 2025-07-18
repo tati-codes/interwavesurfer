@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cuvhwxb0ar761" path="res://Scenes/QuizSpace/ChoiceScene.cs" id="1_wksli"]
 [ext_resource type="Material" uid="uid://c7cxw58mxqj0b" path="res://Scenes/QuizSpace/TempTextMaterial.tres" id="2_uf212"]
-[ext_resource type="Material" uid="uid://cwf4k5tny6plm" path="res://Scenes/Water/Swirl.tres" id="2_wksli"]
+[ext_resource type="Material" uid="uid://cwf4k5tny6plm" path="res://Placeholder/Portals/Swirl.tres" id="2_wksli"]
 
 [sub_resource type="TextMesh" id="TextMesh_uf212"]
 material = ExtResource("2_uf212")

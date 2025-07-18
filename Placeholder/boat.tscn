@@ -13,8 +13,7 @@ data = PackedVector3Array(2.162, 0, -6.6593, 4.7102, 0, -9.254, -0.0002, 0, -17.
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Boat/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_wg8xv")
 
-[node name="Interactable" type="Node" parent="Boat" index="1" node_paths=PackedStringArray("collider", "mesh")]
+[node name="Interactable" type="Node" parent="Boat" index="1" node_paths=PackedStringArray("collider")]
 script = ExtResource("2_i8o2f")
 collider = NodePath("../StaticBody3D")
-mesh = NodePath("..")
 metadata/_custom_type_script = "uid://bvw8fvn8ovlbk"

@@ -13,7 +13,6 @@ config_version=5
 config/name="InterWaveSurfer"
 run/main_scene="uid://w00y2i7ee6j8"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 
