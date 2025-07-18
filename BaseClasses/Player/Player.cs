@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Numerics;
 using TatiDebug;
 public partial class Player : CharacterBody3D {
 	public Bus bus = null;
@@ -23,7 +22,7 @@ public partial class Player : CharacterBody3D {
   public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").As<float>();
   public float rotation = 0F;
   public void dbg(string n, Object o) => bus.IPub<Debug, DebugVar>(new(n,o)); 
-  public Godot.Vector3 lastDirection;
+  public Vector3 lastDirection;
   public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
     skly.Rotation = new(skly.Rotation.X, -cam.Rotation.Y, skly.Rotation.Z); 
@@ -31,9 +30,9 @@ public partial class Player : CharacterBody3D {
 	}
   void processMoveInput(double delta) {
     float preserve_Y = Velocity.Y;
-    Velocity = Godot.Vector3.Zero;
+    Velocity = Vector3.Zero;
     var i = Input.GetVector("move_backwards", "move_forwards","move_right", "move_left") * speed;
-    Velocity = i.X * -cam.Basis.Z + i.Y * -cam.Basis.X + new Godot.Vector3(0, preserve_Y, 0);
+    Velocity = i.X * -cam.Basis.Z + i.Y * -cam.Basis.X + new Vector3(0, preserve_Y, 0);
     Velocity = new(Velocity.X, preserve_Y, Velocity.Z);
   }
   void faceMotionwards(double delta) {

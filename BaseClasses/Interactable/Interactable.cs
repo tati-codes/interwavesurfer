@@ -8,27 +8,34 @@ public partial class Interactable : Node {
   [Export]
   public CollisionObject3D collider {get; set;} 
   [Export]
-  public GeometryInstance3D mesh {get; set;} //there's a geometry3dinstance and geometryinstance3d
-  public Material black = GD.Load<Material>("res://BaseClasses/Interactable/BlackOutlinerMaterial.tres");
-  public Material combined = GD.Load<Material>("res://BaseClasses/Interactable/Combined.tres");
+  public GeometryInstance3D overlaySetter {get; set;} //there's a geometry3dinstance and geometryinstance3d
 
+  [Export] public MeshInstance3D meshHolder { get; set; }
+  [Export]
+  public Material black {get; set;} 
+  [Export]
+  public Material white {get; set;} 
 	public override void _Ready() {
-    Bus bus = GetNode<Bus>("/root/bus");
-    bus.Subscribe<StoppedLookingAt, NodeRef>(args => unhandleGaze(args.reference));
-    bus.Subscribe<LookingAt, NodeRef>(args => handleGaze(args.reference));
-    mesh.MaterialOverlay = black;
+    bus = GetNode<Bus>("/root/bus");
+    bus.Subscribe<StoppedLookingAt, NodeRef>(args => refersToMe(args.reference, unhandleGaze));
+    bus.Subscribe<LookingAt, NodeRef>(args => refersToMe(args.reference, handleGaze));
+    bus.Subscribe<PickupItem, NodeRef>(args => refersToMe(args.reference, handlePickup));
+    bus.Subscribe<DropItem, DropItemArgs>(args => refersToMe(args.reference, () => handleDrop(args.position)));
+    overlaySetter.MaterialOverlay = black;
 	}
-  bool refersToMe(Rid rid) => rid == collider.GetRid(); 
-  void handleGaze(Rid rid) {
-    if (!refersToMe(rid)) return; 
-    mesh.MaterialOverlay = combined;
+  void handleDrop(Vector3 pos) {
+    meshHolder.Position = pos;
+    meshHolder.Show();
   }
-  void unhandleGaze(Rid rid) {
-    if (!refersToMe(rid)) return; 
-    mesh.MaterialOverlay = black;
+  void handlePickup() {
+    bus.Publish<CopyMeshToCube, ItemMesh>(new(meshHolder.Mesh));
+    meshHolder.Hide();
   }
-}
-
-namespace Interactables {
-
+  void refersToMe(Rid rid, Action callback) {
+    if (rid == collider.GetRid()) {
+      callback();
+    }
+  }
+  void handleGaze() => overlaySetter.MaterialOverlay = white;
+  void unhandleGaze() => overlaySetter.MaterialOverlay = black;
 }
