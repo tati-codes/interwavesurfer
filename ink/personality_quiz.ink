@@ -68,7 +68,7 @@ That will do well enough for now.
 - true: ~ portside = 450
 - false: ~ starboard = 450
 }
-<- stat_panel
+//<- stat_panel
 - -> DONE
 = answered_q //empty so we can count how many qs we get
 - ->->
