@@ -73,6 +73,11 @@ That will do well enough for now.
 = answered_q //empty so we can count how many qs we get
 - ->->
 = navigation_qs
+{ RANDOM(1, 3):
+- 1: -> lie_1
+- 2: -> someone_else
+- 3: -> lonely
+}
 - (lie_1)
 Do you often lie  when there's no good reason to?
 + [\(sail_left\): CONSTANTLY]
@@ -93,10 +98,32 @@ Your father suspects you're lying and threatens to punish you! What do you do?
 ~ alter(navigation, 50)
 ~ alter(starboard, 50)
 + [\(sail_right\): BLAME A SERVANT!]
-~ alter(salt, 100)
+~ alter(rudderwork, 50)
+~ alter(salt, 50)
 - -> answered_q ->
 ->->
-TODO 2 more navigation qs
+- (someone_else)
+Do you often imagine events in your life as if they were happening to someone else?
++ [\(sail_left\): YES]
+~ alter(navigation, 50)
+~ alter(doldrums, 50)
+~ alter(portside, 50)
++ [\(sail_right\): NO]
+~ alter(rudderwork, 50)
+~ alter(starboard, 50)
+- -> answered_q ->
+->->
+- (lonely)
+Can you spend all day on your own, without becoming bored or lonely?
++ [\(sail_left\): WHEN I'M HAPPY]
+~ alter(navigation, 100)
++ [sail_straight: NOT AT ALL]
+~ alter(rudderwork, 50)
+~ alter(seaworthy, 50)
++ [\(sail_right\): WHEN I'M SAD]
+~ alter(doldrums, 50)
+- -> answered_q ->
+->->
 = seaworthy_qs
 { RANDOM(1, 3):
 - 1: -> sick
@@ -116,12 +143,12 @@ Have you ever been sick for so long you thought you might never recover?
 - (omens)
 Do you believe in signs and lucky omens?
 + [\(sail_left\): NO]
-~ alter(navigation, 50)
 ~ alter(salt, 50)
 + [sail_straight: YES]
 ~ alter(seaworthy, 100)
 + [\(sail_right\): ONLY WHEN THEY'RE SCARY!]
 ~ alter(doldrums, 50)
+~ alter(seaworthy, 50)
 - -> answered_q ->
 ->->
 - (eye)
@@ -134,11 +161,22 @@ When you have to read something close to your face, which eye do you close?
 ~ alter(seaworthy, 50)
 - -> answered_q ->
 ->->
-TODO 1 more seaworthy q
+- (help_fran2) //followup to (bluff) from help_fran1
+You get started on Fran's problem and have no idea what you're doing. What's your plan?
++ [\(sail_left\): ASK TRISKIE]
+~ alter(rudderwork, 50)
++ [\[sail_straight\): PRETEND TO FORGET]
+~ alter(seaworthy, 50)
+~ alter(doldrums, 50)
++ [\(sail_right\): MAYBE I SHOULD FESS UP...]
+~ alter(seaworthy, 100)
+- -> answered_q ->
+->->
 = rudderwork_qs
-{ RANDOM(1, 2):
+{ RANDOM(1, 3):
 - 1: -> accomplishment
 - 2: -> orders
+- 3: -> help_fran1
 }
 - (accomplishment)
 Can you generally accomplish anything you decide to do?
@@ -156,17 +194,42 @@ Do you rudely order your father's servants and chancellors about?
 + [\(sail_left\): IF I NEED SOMETHING]
 ~ alter(rudderwork, 50)
 + [\(sail_straight\): JUST FOR FUN]
-~ alter(salt, 100)
+~ alter(salt, 50)
 + [\(sail_right\): I WOULDN'T SAY RUDELY...]
-~ alter(rudderwork, 50)
+~ alter(rudderwork, 100)
 ~ alter(navigation, 50)
 - -> answered_q ->
 ->->
-TODO 2 more rudderwork qs
+- (help_fran1)
+Fran is asking for your help when you suddenly realize you weren't paying attention! What do you say?
++ (bluff)[\(sail_left\): LEAVE IT TO ME!]
+~ alter(seaworthy, 50)
++ [\[sail_straight\): YOU'VE GOT THIS!]
+~ alter(rudderwork, 50)
++ [\(sail_right\): UHH...SAY AGAIN?]
+~ alter(navigation, 50)
+~ alter(salt, 50)
+- -> answered_q ->
+{ answered_q < 6 && bluff: -> help_fran2 ->}
+{ answered_q < 6: -> good_side -> }
+->->
+- (good_side) //followup to 2/3 of help_fran1
+When a friend is angry with you, how do you get back on their good side?
++ [\(sail_left\): WRITE AN APOLOGY]
+~ alter(rudderwork, 50)
++ [\[(sail_straight\): GIVE THEM A PRESENT]
+~ alter(rudderwork, 100)
++ [(\sail_right\): THIS FRIEND IS FRAN HUH]
+~ alter(doldrums, 50)
+~ alter(navigation, 50)
+- -> answered_q ->
+->->
 = doldrums_qs
-{ RANDOM(1, 2):
+{ RANDOM(1, 4):
 - 1: -> hard_on_self
 - 2: -> doorway
+- 3: -> monologue
+- 4: -> accomplishments
 }
 - (hard_on_self)
 Do you tend to be quite hard on yourself, as if you can't do anything right?
@@ -189,20 +252,77 @@ When passing someone in a crowded doorway, do you turn toward them or away from 
 ~ alter(navigation, 50)
 - -> answered_q ->
 ->->
-TODO 2 more doldrums qs
-= salt_qs
-- (servants)
-You overhear the servants laughing at you behind your back! What do you do?
-+ [\(sail_left\): CONFRONT THEM]
-~ alter(salt, 100)
-+ [\(sail_straight\): INFORM YOUR FATHER]
-~ alter(rudderwork, 50)
-+ [\(sail_right\): PLAY A PRANK ON THEM]
+- (monologue)
+When you talk to yourself, are you more likely to call yourself "I", "you", or "we"?
++ ["I"]
+~ alter(salt, 50)
++ ["YOU"]
+~ alter(doldrums, 100)
++ ["WE"]
+~ alter(doldrums, 50)
 ~ alter(navigation, 50)
+- -> answered_q ->
+->->
+- (accomplishments)
+Do you have a difficult time hearing about the accomplishments of someone else? Whose?
++ [\(sail_left\): THOSE I LIKE]
+~ alter(doldrums, 100)
++ [sail_straight: THOSE I DISLIKE]
+~ alter(rudderwork, 50)
++ [\(sail_right\): THERE'S ONE PERSON...]
+~ alter(doldrums, 50)
 ~ alter(salt, 50)
 - -> answered_q ->
 ->->
-TODO 3 more salt qs. 1 of these should be smth like "what is ur favorite food" (BIG OMINOUS LETTERS) PEANUT BUTTER as discussed w gary. i feel like salt is the appropriate category for that
+= salt_qs
+{ RANDOM(1, 4):
+- 1: -> servants
+- 2: -> scolding
+- 3: -> lodestone
+- 4: -> favorite_food
+}
+- (servants)
+You overhear the servants laughing at you behind your back! What do you do?
++ [\(sail_left\): CONFRONT THEM]
+~ alter(salt, 50)
++ [\(sail_straight\): INFORM YOUR FATHER]
+~ alter(rudderwork, 50)
++ [\(sail_right\): PLAY A PRANK ON THEM]
+~ alter(navigation, 100)
+~ alter(salt, 50)
+- -> answered_q ->
+->->
+- (scolding)
+What do you think about when someone more important scolds you?
++ [\(sail_left\): CORRECTING MYSELF]
+~ alter(navigation, 50)
++ [\(sail_straight\): LOOKING SORRY ENOUGH]
+~ alter(salt, 50)
+~ alter(rudderwork, 50)
++ [\(sail_right\): GETTING EVEN LATER]
+~ alter(salt, 100)
+- -> answered_q ->
+->->
+- (lodestone)
+Have you ever lost your lodestone?
++ [\(sail_left\): OF COURSE NOT!]
+~ alter(navigation, 50)
++ [\(sail_right\): WHAT, AM I IN TROUBLE?]
+~ alter(salt, 50)
+~ alter(doldrums, 50)
+- -> answered_q ->
+->->
+- (favorite_food)
+What's your favorite food?
++ [\(sail_left\): ORANGES]
+~ alter(seaworthy, 50)
++ [\(sail_straight\): PEANUT BUTTER]
+~ alter(salt, 50)
++ [\(sail_right\): BRISKET NOODLE SOUP]
+~ alter(rudderwork, 50)
+~ alter(salt, 50)
+- -> answered_q ->
+->->
 === quiz_results
 { portside >= starboard: //first set handedness
 - true: ~ starboard = 0
