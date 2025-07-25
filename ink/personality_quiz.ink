@@ -9,6 +9,8 @@
 199-100 = D
 99-50 = E
 49-1 = F
+- gary */
+VAR progress = 0 //
 - stephen */
 VAR navigation = 50 //navigation
 VAR seaworthy = 50 //seaworthy
@@ -31,7 +33,13 @@ VAR saturnine = 0 //saturnine
 - -> DONE
 === intro_quiz
 LIST quizCategories = (navQ), (swthQ), (rdwkQ), (dolQ), (saltQ)
-TODO write an actual introduction
+From a Land of Sunken Ash.
+Only a mailed fist as firm as Duke Montelroy's could elevate the Digal house.
+From obscurity to infamy. Destitution to decadence. Despair to Digal.
+A transformation already becoming legend.
+Your father's legacy is unassailable.
++ [So he says.]
+
 But never mind that for now.
 Before I can let you depart, I need to ask you a few questions.
 I'd like you to answer earnestly.
@@ -59,6 +67,7 @@ Are you left- or right-handed?
 - I see...in that case...
 -> quiz_results ->
 That will do well enough for now.
++ [This seems pointless.]
 ~ navigation = 300
 ~ seaworthy = 200
 ~ rudderwork = 50
@@ -68,10 +77,59 @@ That will do well enough for now.
 - true: ~ portside = 450
 - false: ~ starboard = 450
 }
+
+Ahhh, but let us not forget
+The instigator. [X]. Renounced. Disowned. Excommunicated. Exiled. Struck.
+And yet, alive? Or so you hope.
+
+Oh yes. You. Not cast out, leaping of your own volition.
+Shorn of rotten ties. To seize the one bond that holds fast.
+What legacy awaits the crest of your wave?
+
+
 //<- stat_panel
 - -> DONE
 = answered_q //empty so we can count how many qs we get
+
 - ->->
+= laur_talk
+~ alter(progress, 1)
+{ progress == 1: -> laur1 }
+{ progress == 2: -> laur2 }
+{ progress == 3: -> laur3 }
+{ progress == 4: -> laur4 }
+{ progress == 5: -> laur5 }
+- (laur1)
+The lies of a child are shallow squabbles.
+A lie is merely an untruth. Lady Esselie is an artisan.
+She spins fabrications so intricate any truth pales in comparison. 
+Her unshakeable faith is a bulwark against untangling what was ever true.
++ [What was ever true?] -> answered_q
+- (laur2)
+Wings to turn wind. Breath to end battle. Belly to demand rubs.
+Triscuit Digal never returned.
+His mission so secret, even the lady truly knows it not.
+It must be of great import to leave the land devoid of dragon.
++ [Still wake up lonely.] -> answered_q
+- (laur3)
+The land has its share of ministers.
+Miniscule men with petty affairs puppeted by the chancellor atop.
+Some claim that the whole capital dances for his grand machinations.
+Such claimants spend their last breath carelessly.
++ [Or carefully.] -> answered_q
+- (laur4)
+There once was the lodestar. Descended to us in pieces. Every part a treasure.
+To be of the stone itself is a sacred duty an unquestionable designation above reproach.
+True good transcends kind words and comforting gestures.
+It must be seized with stained hands.
++ [Don't seize, do.] -> answered_q
+- (laur5)
+Beware the nameless.
+It is said that to be named is to anchor yourself to a home.
+The most fearsome of foes freely forsakes a name, without crime, without disgrace.
+What does it leave them with?
++ [Unmatched skill.] -> answered_q
+->->
 = navigation_qs
 { RANDOM(1, 3):
 - 1: -> lie_1
@@ -87,7 +145,7 @@ Do you often lie  when there's no good reason to?
 ~ alter(navigation, 100)
 + [\(sail_right\): I'M LYING RIGHT NOW]
 ~ alter(seaworthy, 100)
-- -> answered_q ->
+- -> laur_talk ->
 { answered_q < 6: -> lie_2 }
 ->->
 - (lie_2) //followup to lie_1
@@ -100,7 +158,7 @@ Your father suspects you're lying and threatens to punish you! What do you do?
 + [\(sail_right\): BLAME A SERVANT!]
 ~ alter(rudderwork, 50)
 ~ alter(salt, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (someone_else)
 Do you often imagine events in your life as if they were happening to someone else?
@@ -111,7 +169,7 @@ Do you often imagine events in your life as if they were happening to someone el
 + [\(sail_right\): NO]
 ~ alter(rudderwork, 50)
 ~ alter(starboard, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (lonely)
 Can you spend all day on your own, without becoming bored or lonely?
@@ -122,7 +180,7 @@ Can you spend all day on your own, without becoming bored or lonely?
 ~ alter(seaworthy, 50)
 + [\(sail_right\): WHEN I'M SAD]
 ~ alter(doldrums, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 = seaworthy_qs
 { RANDOM(1, 3):
@@ -138,7 +196,7 @@ Have you ever been sick for so long you thought you might never recover?
 ~ alter(doldrums, 100)
 + [\(sail_right\): NEVER]
 ~ alter(seaworthy, 100)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (omens)
 Do you believe in signs and lucky omens?
@@ -149,7 +207,7 @@ Do you believe in signs and lucky omens?
 + [\(sail_right\): ONLY WHEN THEY'RE SCARY!]
 ~ alter(doldrums, 50)
 ~ alter(seaworthy, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (eye)
 When you have to read something close to your face, which eye do you close?
@@ -159,7 +217,7 @@ When you have to read something close to your face, which eye do you close?
 ~ alter(portside, 50)
 + [\(sail_right\): NEITHER...?]
 ~ alter(seaworthy, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (help_fran2) //followup to (bluff) from help_fran1
 You get started on Fran's problem and have no idea what you're doing. What's your plan?
@@ -170,7 +228,7 @@ You get started on Fran's problem and have no idea what you're doing. What's you
 ~ alter(doldrums, 50)
 + [\(sail_right\): MAYBE I SHOULD FESS UP...]
 ~ alter(seaworthy, 100)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 = rudderwork_qs
 { RANDOM(1, 3):
@@ -187,7 +245,7 @@ Can you generally accomplish anything you decide to do?
 ~ alter(doldrums, 100)
 + [\(sail_right\): IF IT'S EASY]
 ~ alter(rudderwork, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (orders)
 Do you rudely order your father's servants and chancellors about?
@@ -198,7 +256,7 @@ Do you rudely order your father's servants and chancellors about?
 + [\(sail_right\): I WOULDN'T SAY RUDELY...]
 ~ alter(rudderwork, 100)
 ~ alter(navigation, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (help_fran1)
 Fran is asking for your help when you suddenly realize you weren't paying attention! What do you say?
@@ -209,7 +267,7 @@ Fran is asking for your help when you suddenly realize you weren't paying attent
 + [\(sail_right\): UHH...SAY AGAIN?]
 ~ alter(navigation, 50)
 ~ alter(salt, 50)
-- -> answered_q ->
+- -> laur_talk ->
 { answered_q < 6 && bluff: -> help_fran2 ->}
 { answered_q < 6: -> good_side -> }
 ->->
@@ -222,7 +280,7 @@ When a friend is angry with you, how do you get back on their good side?
 + [(\sail_right\): THIS FRIEND IS FRAN HUH]
 ~ alter(doldrums, 50)
 ~ alter(navigation, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 = doldrums_qs
 { RANDOM(1, 4):
@@ -238,7 +296,7 @@ Do you tend to be quite hard on yourself, as if you can't do anything right?
 + [\(sail_right\): NO]
 ~ alter(salt, 50)
 ~ alter(seaworthy, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (doorway)
 When passing someone in a crowded doorway, do you turn toward them or away from them?
@@ -250,7 +308,7 @@ When passing someone in a crowded doorway, do you turn toward them or away from 
 + [\(sail_right\): WAIT FOR THEM TO GO FIRST]
 ~ alter(doldrums, 50)
 ~ alter(navigation, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (monologue)
 When you talk to yourself, are you more likely to call yourself "I", "you", or "we"?
@@ -261,7 +319,7 @@ When you talk to yourself, are you more likely to call yourself "I", "you", or "
 + ["WE"]
 ~ alter(doldrums, 50)
 ~ alter(navigation, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (accomplishments)
 Do you have a difficult time hearing about the accomplishments of someone else? Whose?
@@ -272,7 +330,7 @@ Do you have a difficult time hearing about the accomplishments of someone else? 
 + [\(sail_right\): THERE'S ONE PERSON...]
 ~ alter(doldrums, 50)
 ~ alter(salt, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 = salt_qs
 { RANDOM(1, 4):
@@ -290,7 +348,7 @@ You overhear the servants laughing at you behind your back! What do you do?
 + [\(sail_right\): PLAY A PRANK ON THEM]
 ~ alter(navigation, 100)
 ~ alter(salt, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (scolding)
 What do you think about when someone more important scolds you?
@@ -301,7 +359,7 @@ What do you think about when someone more important scolds you?
 ~ alter(rudderwork, 50)
 + [\(sail_right\): GETTING EVEN LATER]
 ~ alter(salt, 100)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (lodestone)
 Have you ever lost your lodestone?
@@ -310,7 +368,7 @@ Have you ever lost your lodestone?
 + [\(sail_right\): WHAT, AM I IN TROUBLE?]
 ~ alter(salt, 50)
 ~ alter(doldrums, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 - (favorite_food)
 What's your favorite food?
@@ -321,7 +379,7 @@ What's your favorite food?
 + [\(sail_right\): BRISKET NOODLE SOUP]
 ~ alter(rudderwork, 50)
 ~ alter(salt, 50)
-- -> answered_q ->
+- -> laur_talk ->
 ->->
 === quiz_results
 { portside >= starboard: //first set handedness
