@@ -10,26 +10,26 @@
 99-50 = E
 49-1 = F
 - gary */
-VAR progress = 0 //
-- stephen */
-VAR navigation = 50 //navigation
-VAR seaworthy = 50 //seaworthy
-VAR rudderwork = 50 //rudderwork
-VAR doldrums = 50 //doldrums
-VAR portside = 100 //portside--exclusive w/starboard
-VAR starboard = 100 //starboard--exclusive w/portside
-VAR salt = 50 //salt
+VAR progress = 0 
+//stephen:
+VAR navigation = 50
+VAR seaworthy = 50
+VAR rudderwork = 50
+VAR doldrums = 50
+VAR portside = 100
+VAR starboard = 100
+VAR salt = 50
 //potential "special" stats, 1 of the below
-VAR albatross = 0  //albatross
-VAR honor = 0 //honor
-VAR impish = 0 //impish
-VAR magnetism = 0 //magnetism
-VAR tar = 0 //tar
-VAR joviaL = 0 //jovial
-VAR normal = 0 //normal
-VAR mojo = 0 //mojo
-VAR firebug = 0 //firebug
-VAR saturnine = 0 //saturnine
+VAR albatross = 0
+VAR honor = 0
+VAR impish = 0
+VAR magnetism = 0
+VAR tar = 0
+VAR joviaL = 0
+VAR normal = 0
+VAR groove = 0
+VAR iconoclast = 0
+VAR saturnine = 0
 - -> DONE
 === intro_quiz
 LIST quizCategories = (navQ), (swthQ), (rdwkQ), (dolQ), (saltQ)
@@ -39,24 +39,27 @@ From obscurity to infamy. Destitution to decadence. Despair to Digal.
 A transformation already becoming legend.
 Your father's legacy is unassailable.
 + [So he says.]
-
-But never mind that for now.
+- But never mind that for now.
 Before I can let you depart, I need to ask you a few questions.
 I'd like you to answer earnestly.
 Ready? Let's begin.
-- (opts)
+- (quiz_opts)
 //<- stat_panel //this is just for debugging / balancing stat increases from questions - stephen
-~ temp next_category = pop_random(quizCategories)
 ~ temp category_questions = -> answered_q
+{ LIST_COUNT(quizCategories) == 0 && answered_q <= 5: //if you didn't get a followup q to any of the first 5 questions, get us a 6th Q by duplicating a random category
+~ quizCategories = LIST_ALL(quizCategories)
+}
+~ temp next_category = pop_random(quizCategories)
 { next_category:
 - navQ: ~ category_questions = -> navigation_qs
 - swthQ: ~ category_questions = -> seaworthy_qs
 - rdwkQ: ~ category_questions = -> rudderwork_qs
 - dolQ: ~ category_questions = -> doldrums_qs
 - saltQ: ~ category_questions = -> salt_qs
+- else: -> handedness_q //extra fallback
 }
 -> category_questions ->
-{ answered_q < 6: -> opts }
+{ answered_q < 6: -> quiz_opts }
 - (handedness_q)
 //<- stat_panel //just for debugging
 Are you left- or right-handed?
@@ -64,11 +67,13 @@ Are you left- or right-handed?
 ~ alter(portside, 150)
 + [sail_right: RIGHT]
 ~ alter(starboard, 150)
-- I see...in that case...
+-
+- (ending_quiz)
+I see...in that case...
 -> quiz_results ->
 That will do well enough for now.
 + [This seems pointless.]
-~ navigation = 300
+- ~ navigation = 300
 ~ seaworthy = 200
 ~ rudderwork = 50
 ~ doldrums = 200
@@ -77,28 +82,21 @@ That will do well enough for now.
 - true: ~ portside = 450
 - false: ~ starboard = 450
 }
-
-Ahhh, but let us not forget
-The instigator. [X]. Renounced. Disowned. Excommunicated. Exiled. Struck.
-And yet, alive? Or so you hope.
-
 Oh yes. You. Not cast out, leaping of your own volition.
 Shorn of rotten ties. To seize the one bond that holds fast.
 What legacy awaits the crest of your wave?
-
-
 //<- stat_panel
 - -> DONE
 = answered_q //empty so we can count how many qs we get
-
 - ->->
 = laur_talk
 ~ alter(progress, 1)
-{ progress == 1: -> laur1 }
+//wrapping progress == 1 into the implicit/no conditions met dropdown!
 { progress == 2: -> laur2 }
 { progress == 3: -> laur3 }
 { progress == 4: -> laur4 }
 { progress == 5: -> laur5 }
+{progress == 6: -> laur6 }
 - (laur1)
 The lies of a child are shallow squabbles.
 A lie is merely an untruth. Lady Esselie is an artisan.
@@ -129,6 +127,11 @@ It is said that to be named is to anchor yourself to a home.
 The most fearsome of foes freely forsakes a name, without crime, without disgrace.
 What does it leave them with?
 + [Unmatched skill.] -> answered_q
+- (laur6)
+Ahhh, but let us not forget...
+The instigator. [X]. Renounced. Disowned. Excommunicated. Exiled. Struck.
+And yet, alive?
++ [Or so you hope.] -> answered_q
 ->->
 = navigation_qs
 { RANDOM(1, 3):
@@ -137,7 +140,7 @@ What does it leave them with?
 - 3: -> lonely
 }
 - (lie_1)
-Do you often lie  when there's no good reason to?
+Do you often lie when there's no good reason to?
 + [\(sail_left\): CONSTANTLY]
 ~ alter(navigation, 50)
 ~ alter(seaworthy, 50)
@@ -408,9 +411,9 @@ VAR lowest_stat = ""
 - (highest_stat == "seaworthy" && lowest_stat == "doldrums") || (highest_stat == "rudderwork" && lowest_stat == "salt"):
 ~ resulting_stat = -> normal_result
 - (highest_stat == "rudderwork" && lowest_stat == "navigation") || (highest_stat == "doldrums" && lowest_stat == "salt"):
-~ resulting_stat = -> mojo_result
+~ resulting_stat = -> groove_result
 - (highest_stat == "doldrums" && lowest_stat == "navigation") || (highest_stat == "salt" && lowest_stat == "seaworthy"):
-~ resulting_stat = -> firebug_result
+~ resulting_stat = -> iconoclast_result
 - (highest_stat == "doldrums" && lowest_stat == "rudderwork") || (highest_stat == "salt" && lowest_stat == "navigation"):
 ~ resulting_stat = -> saturnine_result
 }
@@ -419,51 +422,69 @@ TODO might need to write more fleshed out descriptions?
 ->->
 = albatross_result //+nav -seaworthy || +rudder -doldrums
 You're a bit of an ALBATROSS, it seems.
+One wind blows you this way, another blows you that way.
+You weren't meant for your old life--when you're not moving, you feel low.
 ~ albatross = 1000
 ->->
 = honor_result //+nav -rudder || +seaworthy -salt
 You seem to possess a strong sense of HONOR.
+Not self-serving compliance, like the others, but real conviction.
+Dangerous, isn't it?
 ~ honor = 1000
 ->->
 = impish_result //+nav -doldrums || +salt -rudder
-You seem a rather IMPISH character.
+I imagine you're quite an IMPISH character!
+You like to laugh, and you like to shock others. No wonder you weren't the favorite.
+You have a powerful weapon--so try not to cut yourself.
 ~ impish = 1000
 ->->
 = magnetism_result //+nav -salt || +doldrums -seaworthy
 You show a certain personal MAGNETISM.
+Without liking it, without being to able to describe it, you have a strong personality.
+Have we met before? You seem so familiar.
 ~ magnetism = 1000
 ->->
 = tar_result //+seaworth -nav || +rudder -seaworth
 { seaworthy >= rudderwork:
-- true: You've a fair amount of TAR to you already.
+- true: You've a fair amount of TAR on you already.
 ~ tar = 1000
-- else: You'd do well to pick up a bit more TAR on this voyage.
+- else: You'd do well to up some TAR on this voyage.
 ~ tar = 100
 }
+A bit of toughness to help you along when few others will.
+Are you ready? Are you certain?
 ->->
 = jovial_result //+seaworth -rudder || +salt -doldrum
 You seem a fairly JOVIAL character.
+They're not sure where you get it from.
+Maybe you haven't suffered, but you're not as naive as those around you raised you to be.
 ~ joviaL = 1000
 ->->
 = normal_result //+seaworth -doldrum || +rudder -salt
-Your disposition seems NORMAL enough.
+Your disposition seems NORMAL.
 ~ normal = 450
 ->->
-= mojo_result //+rudder -nav || +doldrum -salt
+= groove_result //+rudder -nav || +doldrum -salt
 { doldrums >= rudderwork:
-- true: ~ mojo = 100
-Perhaps this voyage will provide you with a bit
-- else: ~ mojo = 1000
-You possess a great deal
+- true: ~ groove = 100
+Perhaps you need to search harder for
+- false: ~ groove = 450
+Perhaps you're about to find
 }
-<> of...I believe it's termed "MOJO".
+<>...let's call it a "GROOVE".
+Momentum. Top form. The current your ship was made to sail.
+Of course, it may not take you where you need to go.
 ->->
-= firebug_result //+doldrum -nav || +salt -seaworthy
-You may not look it, but you're a bit of a FIREBUG, aren't you?
-~ firebug = 1000
+= iconoclast_result //+doldrum -nav || +salt -seaworthy
+You may not look it, but you're a bit of an ICONOCLAST, aren't you?
+When someone stacks blocks, you knock them over--whether or not you meant to.
+You don't mind destroying yourself to find the truth.
+~ iconoclast = 1000
 ->->
 = saturnine_result //+doldrum -rudder || +salt -nav
 You have a rather SATURNINE disposition, don't you?
+As did those who came before. It's a wonder you weren't favored in your own House.
+But you're not concerned with the same things they are, are you?
 ~ saturnine = 1000
 ->->
 === stat_panel
@@ -484,8 +505,8 @@ SALT {printRank(salt)} //(\= {salt})
 {tar >0:TAR\: {printRank(tar)}|}
 {joviaL > 0:JOVIAL\: {printRank(joviaL)}|}
 {normal > 0:NORMAL\: {printRank(normal)}|}
-{mojo > 0:MOJO\: {printRank(mojo)}|}
-{firebug > 0:FIREBUG\: {printRank(firebug)}|}
+{groove > 0:GROOVE\: {printRank(groove)}|}
+{iconoclast > 0:ICONOCLAST\: {printRank(iconoclast)}|}
 {saturnine >0:SATURNINE\: {printRank(saturnine)}|}
 - -> DONE
 === thread_tunnel(-> link, -> backto)
