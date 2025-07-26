@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bawrq47k7m2lq"]
 
 [ext_resource type="Script" uid="uid://ckv85en18uucd" path="res://ink/Ink-Bridge/InkWrapper.cs" id="1_5r5qf"]
-[ext_resource type="Resource" uid="uid://db1seqv8d6tcj" path="res://ink/personality_quiz.ink" id="2_8st8m"]
+[ext_resource type="Resource" uid="uid://db1seqv8d6tcj" path="res://ink/personality_quiz2.ink" id="2_8st8m"]
 
 [node name="InkWrapper" type="Node"]
 script = ExtResource("1_5r5qf")

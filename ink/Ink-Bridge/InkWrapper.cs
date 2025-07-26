@@ -15,8 +15,6 @@ public partial class InkWrapper : Node {
 		bus = GetNode<Bus>("/root/bus");
 		bus.Subscribe<SelectChoice, IChoice>(args => {
 			story.ChooseChoiceIndex(args.choice.Index);
-			bus.Log("After choice select: ", story.CurrentText);
-			bus.Log("Can continue", story.CanContinue.ToString());
 			story.Continue();
 		});
 		story.Continued += () => {
@@ -29,12 +27,8 @@ public partial class InkWrapper : Node {
 		};
 		//TODO "reset quiz" event 
 		//TODO reset quiz implementation
-		story.MadeChoice += (InkChoice choice) => {
-			bus.Log("current ", currentText);
-			bus.Publish<ChoiceSelected>();
-		};
+		story.MadeChoice += (InkChoice choice) => bus.Publish<ChoiceSelected>();
 	}
-	
 	public string currentText => story.CurrentText;
 	public bool canContinue => story.CanContinue;
 	public IReadOnlyList<InkChoice> CurrentChoices => story.CurrentChoices;
