@@ -1,8 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://chmn22trwecxs"]
+[gd_scene load_steps=8 format=3 uid="uid://chmn22trwecxs"]
 
-[ext_resource type="Script" uid="uid://bvw8fvn8ovlbk" path="res://BaseClasses/Interactable/Interactable.cs" id="1_dl7d8"]
-[ext_resource type="Material" uid="uid://dnnq58dovw6lr" path="res://Assets/Shaders/BlackOutlinerMaterial.tres" id="2_xrufg"]
-[ext_resource type="Material" uid="uid://dm3hjahmi35ih" path="res://Assets/Shaders/White.tres" id="3_6mrvk"]
+[ext_resource type="Script" uid="uid://dkwhoxdcglj7f" path="res://BaseClasses/Interactable/Pickupable.cs" id="1_o3j5j"]
 
 [sub_resource type="Gradient" id="Gradient_nx6et"]
 
@@ -38,10 +36,9 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111286, -9.53674e-07, -0.0354042)
 shape = SubResource("ConcavePolygonShape3D_lsngu")
 
-[node name="Interactable" type="Node" parent="." node_paths=PackedStringArray("collider", "overlaySetter", "meshHolder")]
-script = ExtResource("1_dl7d8")
+[node name="Pickupable" type="Node" parent="." node_paths=PackedStringArray("collider", "overlaySetter", "meshHolder")]
+script = ExtResource("1_o3j5j")
 collider = NodePath("../StaticBody3D")
 overlaySetter = NodePath("..")
 meshHolder = NodePath("..")
-black = ExtResource("2_xrufg")
-white = ExtResource("3_6mrvk")
+metadata/_custom_type_script = "uid://dkwhoxdcglj7f"

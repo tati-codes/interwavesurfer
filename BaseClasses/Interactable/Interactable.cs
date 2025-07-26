@@ -4,38 +4,26 @@ using OBus;
 using Interactables;
 [GlobalClass]
 public partial class Interactable : Node {
-	public Bus bus;
+	Bus bus;
   [Export]
   public CollisionObject3D collider {get; set;} 
   [Export]
   public GeometryInstance3D overlaySetter {get; set;} //there's a geometry3dinstance and geometryinstance3d
-
   [Export] public MeshInstance3D meshHolder { get; set; }
-  [Export]
-  public Material black {get; set;} 
-  [Export]
-  public Material white {get; set;} 
+  public Material black;
+  public Material white;
 	public override void _Ready() {
+    white = GD.Load<Material>("res://Assets/Shaders/White.tres");
+    black = GD.Load<Material>("res://Assets/Shaders/BlackOutlinerMaterial.tres");
     bus = GetNode<Bus>("/root/bus");
     bus.Subscribe<StoppedLookingAt, NodeRef>(args => refersToMe(args.reference, unhandleGaze));
-    bus.Subscribe<LookingAt, NodeRef>(args => refersToMe(args.reference, handleGaze));
-    bus.Subscribe<PickupItem, NodeRef>(args => refersToMe(args.reference, handlePickup));
-    bus.Subscribe<DropItem, DropItemArgs>(args => refersToMe(args.reference, () => handleDrop(args.position)));
+    bus.Subscribe<LookingAt<NodeRef>, NodeRef>(args => refersToMe(args.reference, handleGaze));
     overlaySetter.MaterialOverlay = black;
 	}
-  void handleDrop(Vector3 pos) {
-    meshHolder.Position = pos;
-    meshHolder.Show();
+  protected void refersToMe(Rid rid, Action callback) {
+	  if (rid == collider.GetRid()) callback();
   }
-  void handlePickup() {
-    bus.Publish<CopyMeshToCube, ItemMesh>(new(meshHolder.Mesh));
-    meshHolder.Hide();
-  }
-  void refersToMe(Rid rid, Action callback) {
-    if (rid == collider.GetRid()) {
-      callback();
-    }
-  }
+  protected bool refersToMe(Rid rid) => rid == collider.GetRid();
   void handleGaze() => overlaySetter.MaterialOverlay = white;
   void unhandleGaze() => overlaySetter.MaterialOverlay = black;
 }

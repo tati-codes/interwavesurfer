@@ -1,62 +1,51 @@
-using System;
 using Godot;
-using OBus;
 using Interactables;
+using OBus;
+using static PlayerInput;
 public partial class InteractingBeam : ShapeCast3D {
 	Bus bus;
+  public GlobalState global;
+
   [Export]
   bool debug {get; set;}
   [Export]
   MeshInstance3D visibleBeam;
-  [Export]
-  CubeOfHolding holdingZone;
-  
-  bool PlayerIsHoldingItem = false;
+
   Rid _target;
-  Rid target {get => _target; set {
+  public Rid target {get => _target; private set {
     if (_target != value) {
       stoppedLookingAt(_target);
       _target = value;
       lookingAt(value);
     }
   }}
-	public override void _Ready() {
+  public override void _Ready() {
     bus = GetNode<Bus>("/root/bus");
+    global = GetNode<GlobalState>("/root/Global");
     bus.Subscribe<RegisterNonInteractable, NodeRef>(args => AddExceptionRid(args.reference));
-    if (!debug) {
-      Hide();
-      foreach (Node item in GetChildren()) {
-        item.QueueFree();
-      }
-    }
-  } 
+    bus.Subscribe<DropItem, DropItemArgs>(args => {
+      if (target == args.reference) target = default;
+    });
+    if (!debug) Hide();
+  }
   void lookingAt(Rid id) {
     if (id == default) return;
-    bus.Publish<LookingAt, NodeRef>(new() { reference = id});
+    bus.Publish<LookingAt<NodeRef>, NodeRef>(new(id));
   } 
   void stoppedLookingAt(Rid id) {
     if (id == default) return;
-    bus.Publish<StoppedLookingAt, NodeRef>(new() { reference = id});
+    bus.Publish<StoppedLookingAt, NodeRef>(new(id));
   } 
   public override void _Process(double delta) {
-    if (PlayerIsHoldingItem) return;
+    if (global.PlayerIsHoldingItem) return;
     if (IsColliding()) target = GetColliderRid(0);
     else if (!IsColliding() && target != default) target = default;
   }
-  public override void _UnhandledInput(InputEvent @event) {
-    if (@event.IsActionReleased("primary")) handlePrimary();
-  }
 
-  private void handlePrimary() {
-    if (target == default) return;
-    if (PlayerIsHoldingItem) {
-      //FIXME check that the item is placeable
-      bus.Publish<DropItem, DropItemArgs>(new(target, holdingZone.GlobalPosition));
-      target = default;
-      PlayerIsHoldingItem = false;
-    } else {
-      bus.Publish<PickupItem, NodeRef>(new() { reference = target });
-      PlayerIsHoldingItem = true;
-    }
-  }
+}
+
+namespace Interactables {
+  public class LookingAt<T>: TEvent<T> where T: NodeRef { };
+  public class StoppedLookingAt: TEvent<NodeRef> { };
+  public class RegisterNonInteractable: TEvent<NodeRef> { }
 }
