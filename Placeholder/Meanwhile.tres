@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b4jjeeeq2oixa"]
+
+[ext_resource type="Shader" uid="uid://btwinc3mgsw5d" path="res://Scenes/UI/Fisheye.gdshader" id="1_u1p2u"]
+
+[resource]
+shader = ExtResource("1_u1p2u")
+shader_parameter/new = Color(0.598117, 0.618422, 5.77569e-07, 1)

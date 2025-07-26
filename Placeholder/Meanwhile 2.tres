@@ -1,0 +1,36 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://gm6c3k420ume"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_7gwfk"]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_d5yf7"]
+default_input_values = [1, Vector2(0.01, 0.01), 2, Vector2(0, 0)]
+function = 1
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_ddowr"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0.001, 0.002)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_v4hst"]
+input_name = "time"
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+"
+mode = 1
+flags/light_only = false
+nodes/vertex/0/position = Vector2(400, 40)
+nodes/vertex/2/node = SubResource("VisualShaderNodeInput_7gwfk")
+nodes/vertex/2/position = Vector2(-160, 260)
+nodes/vertex/3/node = SubResource("VisualShaderNodeUVFunc_d5yf7")
+nodes/vertex/3/position = Vector2(-420, -80)
+nodes/vertex/4/node = SubResource("VisualShaderNodeVectorOp_ddowr")
+nodes/vertex/4/position = Vector2(160, 100)
+nodes/vertex/5/node = SubResource("VisualShaderNodeInput_v4hst")
+nodes/vertex/5/position = Vector2(-180, 120)
+nodes/vertex/connections = PackedInt32Array(2, 0, 4, 0)

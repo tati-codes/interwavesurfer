@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://42yp8pb3eoog"]
+
+[ext_resource type="Script" uid="uid://gvcy00orqlh0" path="res://Scenes/UI/UiRoot.cs" id="1_in2mm"]
+[ext_resource type="PackedScene" uid="uid://biicr2207ihtt" path="res://Scenes/UI/button_zone.tscn" id="2_4ftcj"]
+[ext_resource type="Script" uid="uid://iv7gmuifv33p" path="res://Scenes/UI/ButtonHintGroup.cs" id="2_ccb8m"]
+[ext_resource type="PackedScene" uid="uid://hv5hrknnjqi6" path="res://Scenes/UI/FaceButtonZone.tscn" id="3_porug"]
+[ext_resource type="PackedScene" uid="uid://cta0lhtnp7lle" path="res://Scenes/UI/Dialog.tscn" id="5_qknim"]
+
+[node name="UI Root" type="Control" node_paths=PackedStringArray("DialogZone", "ToastZone", "ButtonGroup")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_in2mm")
+DialogZone = NodePath("Panel")
+ToastZone = NodePath("Toast")
+ButtonGroup = NodePath("Buttons")
+
+[node name="Toast" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 164.0
+offset_right = 1024.0
+offset_bottom = 56.0
+
+[node name="Buttons" type="Control" parent="." node_paths=PackedStringArray("primaryZone")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_ccb8m")
+primaryZone = NodePath("ButtonZone")
+
+[node name="ButtonZone" parent="Buttons" instance=ExtResource("3_porug")]
+offset_left = 1025.0
+offset_top = 481.0
+offset_right = 1071.0
+offset_bottom = 525.0
+
+[node name="Secondary" parent="Buttons" instance=ExtResource("2_4ftcj")]
+visible = false
+
+[node name="Tertiary" parent="Buttons" instance=ExtResource("2_4ftcj")]
+visible = false
+offset_left = 1065.0
+offset_top = 510.0
+offset_right = 1111.0
+offset_bottom = 554.0
+
+[node name="Quarternary" parent="Buttons" instance=ExtResource("2_4ftcj")]
+visible = false
+offset_left = 1074.0
+offset_right = 1120.0
+
+[node name="Panel" parent="." instance=ExtResource("5_qknim")]
+visible = false
+layout_mode = 0
+offset_left = 226.0
+offset_top = 398.0
+offset_right = 876.0
+offset_bottom = 632.0

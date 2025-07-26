@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7ey10tinyfab"]
+
+[ext_resource type="Script" uid="uid://cuvhwxb0ar761" path="res://Scenes/QuizSpace/Draft/ChoiceScene.cs" id="1_wksli"]
+[ext_resource type="Material" uid="uid://c7cxw58mxqj0b" path="res://Scenes/QuizSpace/Draft/TempTextMaterial.tres" id="2_uf212"]
+[ext_resource type="Material" uid="uid://cwf4k5tny6plm" path="res://Placeholder/Portals/Swirl.tres" id="2_wksli"]
+
+[sub_resource type="TextMesh" id="TextMesh_uf212"]
+material = ExtResource("2_uf212")
+text = "Choice 2
+
+"
+font_size = 127
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8xi5x"]
+material = ExtResource("2_wksli")
+size = Vector2(10, 10)
+
+[node name="ChoiceScene" type="Node3D" node_paths=PackedStringArray("Text", "Portal", "spotlight")]
+script = ExtResource("1_wksli")
+Text = NodePath("Text")
+Portal = NodePath("Portal")
+textMaterial = ExtResource("2_uf212")
+spotlight = NodePath("SpotLight3D")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.000120038, -0.725891, 0.68781, 0.000126684, 0.68781, 0.725891, -1, 0, 0.000174522, 3.9963, 15.4023, -13.5594)
+light_color = Color(0, 1, 1, 1)
+light_energy = 1.608
+shadow_enabled = true
+shadow_blur = 1.52
+spot_range = 23.937
+spot_attenuation = -1.53
+
+[node name="Text" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 0.409746, 9.9204, -13.3031)
+mesh = SubResource("TextMesh_uf212")
+
+[node name="Portal" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.107228, -0.953874, -0.280406, -0.894593, -0.215628, 0.391419, -0.433828, 0.208878, -0.876449, 0.2717, 4.58, -12.948)
+mesh = SubResource("PlaneMesh_8xi5x")
