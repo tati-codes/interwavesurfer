@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://dp33yplwcvhkr"]
+
+[ext_resource type="Material" uid="uid://dyir248a2g1bc" path="res://Scenes/UI/BlockTransition.tres" id="1_s48wr"]
+[ext_resource type="Script" uid="uid://bhny6ieaq1gxd" path="res://Scenes/UI/FaceButton.cs" id="2_md6ni"]
+[ext_resource type="Texture2D" uid="uid://fxjco0wo1h8t" path="res://Assets/UI/abutton.png" id="3_ff3n6"]
+[ext_resource type="Texture2D" uid="uid://dhnbwrdfu8l61" path="res://Assets/UI/bbutton.png" id="4_enegk"]
+[ext_resource type="Texture2D" uid="uid://bodot1ms6tapo" path="res://Assets/UI/xbutton.png" id="5_v0gix"]
+[ext_resource type="Texture2D" uid="uid://bnnqplp72h00c" path="res://Assets/UI/ybutton.png" id="6_av6j7"]
+
+[node name="FaceButton" type="TextureRect"]
+material = ExtResource("1_s48wr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1065.0
+offset_bottom = -561.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.00211437
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_ff3n6")
+script = ExtResource("2_md6ni")
+A = ExtResource("3_ff3n6")
+B = ExtResource("4_enegk")
+X = ExtResource("5_v0gix")
+Y = ExtResource("6_av6j7")

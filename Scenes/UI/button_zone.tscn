@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://biicr2207ihtt"]
+
+[ext_resource type="Script" uid="uid://c755fg5b4ebt0" path="res://Scenes/UI/ButtonZone.cs" id="1_4ta2h"]
+[ext_resource type="PackedScene" uid="uid://bsapx5qrv1f7b" path="res://Scenes/UI/ButtonDisplay.tscn" id="2_3aj84"]
+
+[node name="ButtonZone" type="Control" node_paths=PackedStringArray("image", "label")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1011.0
+offset_top = 570.0
+offset_right = 1057.0
+offset_bottom = 614.0
+script = ExtResource("1_4ta2h")
+image = NodePath("Hint")
+label = NodePath("Label")
+
+[node name="Hint" parent="." instance=ExtResource("2_3aj84")]
+layout_mode = 0
+offset_left = -100.0
+offset_top = -43.0
+offset_right = -100.0
+offset_bottom = -43.0
+currentButton = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = -5.0
+offset_right = 90.0
+offset_bottom = 18.0

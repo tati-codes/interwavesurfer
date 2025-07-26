@@ -1,0 +1,387 @@
+[gd_scene load_steps=15 format=3 uid="uid://hv5hrknnjqi6"]
+
+[ext_resource type="Script" uid="uid://cxf4pyqsnd8nb" path="res://Scenes/UI/FaceButtonZone.cs" id="1_qkq2t"]
+[ext_resource type="PackedScene" uid="uid://dp33yplwcvhkr" path="res://Scenes/UI/FaceButton.tscn" id="2_qsggt"]
+[ext_resource type="Shader" uid="uid://oc4v374mpq6l" path="res://Scenes/UI/UniversalTrasitionShade.gdshader" id="3_i5hra"]
+[ext_resource type="Texture2D" uid="uid://c68d4l4v2hhfv" path="res://Assets/UI/button-frame-2.svg" id="3_oxotc"]
+[ext_resource type="Material" uid="uid://dyir248a2g1bc" path="res://Scenes/UI/BlockTransition.tres" id="3_qsggt"]
+[ext_resource type="Texture2D" uid="uid://1j4ex2chp377" path="res://Assets/UI/BUTTON-UNDER.svg" id="5_qkq2t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_imcbq"]
+shader = ExtResource("3_i5hra")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 0
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/invert = true
+shader_parameter/grid_size = Vector2(25, 24)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/stagger = Vector2(0, 20)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 3.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(10, 10)
+shader_parameter/edges = 6
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 2.0
+shader_parameter/progress_bias = Vector2(-1, -2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_10hmv"]
+shader = ExtResource("3_i5hra")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 0
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/invert = true
+shader_parameter/grid_size = Vector2(25, 24)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/stagger = Vector2(0, 20)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 3.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(10, 10)
+shader_parameter/edges = 6
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 2.0
+shader_parameter/progress_bias = Vector2(-1, -2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qsggt"]
+font_size = 25
+font_color = Color(1, 1, 1, 0.537255)
+outline_size = 4
+outline_color = Color(0, 0.742, 0.84, 0.717647)
+shadow_color = Color(0, 0, 0, 0.588235)
+shadow_offset = Vector2(3, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qsggt"]
+shader = ExtResource("3_i5hra")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 0
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/invert = false
+shader_parameter/grid_size = Vector2(25, 24)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/stagger = Vector2(0, 20)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 3.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 6
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 2.65
+shader_parameter/progress_bias = Vector2(0, 0.7)
+
+[sub_resource type="Animation" id="Animation_6r04e"]
+resource_name = "GoAway"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frame:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, -7.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Frame/Mask:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4.65, 2.65]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Frame/Mask:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.766667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.278431), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Frame:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label:material:shader_parameter/progress")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, -2.6]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FaceButton:material:shader_parameter/progress")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, -7.0]
+}
+
+[sub_resource type="Animation" id="Animation_imcbq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frame:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Frame/Mask:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Frame/Mask:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Frame:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label:material:shader_parameter/progress")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FaceButton:material:shader_parameter/progress")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_10hmv"]
+resource_name = "ShowUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frame:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-7.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Frame/Mask:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4.65, 2.65]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Frame/Mask:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.766667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.278431), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Frame:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.993782),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label:material:shader_parameter/progress")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.6, 2.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FaceButton:material:shader_parameter/progress")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.7, 2.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6r04e"]
+_data = {
+&"GoAway": SubResource("Animation_6r04e"),
+&"RESET": SubResource("Animation_imcbq"),
+&"ShowUp": SubResource("Animation_10hmv")
+}
+
+[node name="ButtonZone" type="Control" node_paths=PackedStringArray("image", "label", "Frame", "anim")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 981.0
+offset_top = 504.0
+offset_right = 1027.0
+offset_bottom = 548.0
+script = ExtResource("1_qkq2t")
+image = NodePath("FaceButton")
+label = NodePath("Label")
+Frame = NodePath("Frame")
+anim = NodePath("AnimationPlayer")
+
+[node name="FaceButton" parent="." instance=ExtResource("2_qsggt")]
+material = SubResource("ShaderMaterial_imcbq")
+layout_mode = 1
+offset_left = -111.0
+offset_top = -56.0
+offset_right = -71.0
+offset_bottom = -14.0
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("ShaderMaterial_10hmv")
+layout_mode = 0
+offset_left = -71.0
+offset_top = -58.0
+offset_right = 89.0
+offset_bottom = -19.0
+text = "Placeholder"
+label_settings = SubResource("LabelSettings_qsggt")
+
+[node name="Frame" type="TextureRect" parent="."]
+material = ExtResource("3_qsggt")
+layout_mode = 0
+offset_left = 122.0
+offset_top = -107.0
+offset_right = 482.0
+offset_bottom = 533.0
+rotation = 1.57079
+scale = Vector2(0.418958, 0.418958)
+texture = ExtResource("3_oxotc")
+
+[node name="Mask" type="TextureRect" parent="Frame"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = -4
+material = SubResource("ShaderMaterial_qsggt")
+layout_mode = 0
+offset_left = -2.38689
+offset_top = 2.38686
+offset_right = 357.613
+offset_bottom = 642.387
+texture = ExtResource("5_qkq2t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_6r04e")
+}
+autoplay = "RESET"
+speed_scale = 2.043

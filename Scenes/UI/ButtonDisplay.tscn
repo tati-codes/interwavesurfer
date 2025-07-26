@@ -1,0 +1,37 @@
+[gd_scene load_steps=17 format=3 uid="uid://bsapx5qrv1f7b"]
+
+[ext_resource type="Script" uid="uid://i17y3xew4cbe" path="res://Scenes/UI/ButtonHint.cs" id="1_w4k77"]
+[ext_resource type="Texture2D" uid="uid://cnq2p4pcrfyft" path="res://Assets/UI/Separate/a.png" id="2_kd5xa"]
+[ext_resource type="Texture2D" uid="uid://d4aijr3mugn2r" path="res://Assets/UI/Separate/x.png" id="3_r3jmu"]
+[ext_resource type="Texture2D" uid="uid://daa106d0is8tm" path="res://Assets/UI/Separate/c.png" id="4_gjlwf"]
+[ext_resource type="Texture2D" uid="uid://dvcmlqidd1bj2" path="res://Assets/UI/Separate/b.png" id="5_hvt3i"]
+[ext_resource type="Texture2D" uid="uid://cbiu2wxbevwxd" path="res://Assets/UI/Separate/dpadright.png" id="6_v1dqm"]
+[ext_resource type="Texture2D" uid="uid://bb7o76il2nwoa" path="res://Assets/UI/Separate/dpadleft.png" id="7_ugbpb"]
+[ext_resource type="Texture2D" uid="uid://dpfnbkgrdxwtk" path="res://Assets/UI/Separate/dpadup.png" id="8_8f8lw"]
+[ext_resource type="Texture2D" uid="uid://5v3odipaboyf" path="res://Assets/UI/Separate/dpaddown.png" id="9_kpct4"]
+[ext_resource type="Texture2D" uid="uid://dcg5nfkepcpfc" path="res://Assets/UI/Separate/left.png" id="10_jnqjq"]
+[ext_resource type="Texture2D" uid="uid://sq0ujgc0kk42" path="res://Assets/UI/Separate/right.png" id="11_hdxi8"]
+[ext_resource type="Texture2D" uid="uid://c7j1fgyswu4j5" path="res://Assets/UI/Separate/up.png" id="12_daute"]
+[ext_resource type="Texture2D" uid="uid://j4my55542gtk" path="res://Assets/UI/Separate/down.png" id="13_dp8pg"]
+[ext_resource type="Texture2D" uid="uid://dse6ohqgyndvs" path="res://Assets/UI/Separate/ltrigger.png" id="14_w6gv7"]
+[ext_resource type="Texture2D" uid="uid://cwneltxnnem4k" path="res://Assets/UI/Separate/rtrigger.png" id="15_b1slg"]
+[ext_resource type="Texture2D" uid="uid://mjnobba141x6" path="res://Assets/UI/Separate/triangle.png" id="16_a6b0s"]
+
+[node name="ButtonHint" type="TextureRect"]
+script = ExtResource("1_w4k77")
+currentButton = 4
+a_button = ExtResource("2_kd5xa")
+x_button = ExtResource("3_r3jmu")
+y_button = ExtResource("4_gjlwf")
+b_button = ExtResource("5_hvt3i")
+dpad_right = ExtResource("6_v1dqm")
+dpad_left = ExtResource("7_ugbpb")
+dpad_up = ExtResource("8_8f8lw")
+dpad_down = ExtResource("9_kpct4")
+joystick_left = ExtResource("10_jnqjq")
+joystick_right = ExtResource("11_hdxi8")
+joystick_up = ExtResource("12_daute")
+joystick_down = ExtResource("13_dp8pg")
+l_trigger = ExtResource("14_w6gv7")
+r_trigger = ExtResource("15_b1slg")
+triangle = ExtResource("16_a6b0s")
