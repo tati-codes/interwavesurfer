@@ -435,7 +435,7 @@ Dangerous, isn't it?
 = impish_result //+nav -doldrums || +salt -rudder
 I imagine you're quite an IMPISH character!
 You like to laugh, and you like to shock others. No wonder you weren't the favorite.
-You have a powerful weapon--so try not to cut yourself.
+You have a powerful weapon, so try not to cut yourself.
 ~ impish = 1000
 ->->
 = magnetism_result //+nav -salt || +doldrums -seaworthy
@@ -448,7 +448,7 @@ Have we met before? You seem so familiar.
 { seaworthy >= rudderwork:
 - true: You've a fair amount of TAR on you already.
 ~ tar = 1000
-- else: You'd do well to up some TAR on this voyage.
+- else: You'd do well to build up some TAR on this voyage.
 ~ tar = 100
 }
 A bit of toughness to help you along when few others will.
