@@ -4,7 +4,7 @@ using TatiDebug;
 public partial class Player : CharacterBody3D {
 	public Bus bus = null;
   [Export]
-  public Skeleton3D skly {get; set;}
+  public Node3D rotationContainer {get; set;}
   [Export]
   public AnimationPlayer animations {get; set;}
   [Export]
@@ -25,7 +25,7 @@ public partial class Player : CharacterBody3D {
   public Vector3 lastDirection;
   public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
-    skly.Rotation = new(skly.Rotation.X, -cam.Rotation.Y, skly.Rotation.Z); 
+    rotationContainer.RotateY(-cam.Rotation.Y); 
     // beam.Rotation = new(beam.Rotation.X, -cam.Rotation.Y, beam.Rotation.Z);
 	}
   void processMoveInput(double delta) {
@@ -48,11 +48,12 @@ public partial class Player : CharacterBody3D {
     processMoveInput(delta);
     faceMotionwards(delta);
     if (Math.Abs(Velocity.Y) > 1){
-      animations.Play("Fall");
+      //I'm falling!
+      //animations.Play("Fall");
     } else if (Velocity.X == 0 && Velocity.Z == 0) {
-      animations.Play("Idle");
+      animations.Play("Player|Idle");
     } else if (Velocity.X != 0 || Velocity.Z != 0) {
-      animations.Play("Sprint");
+      animations.Play("Player|Run");
     }
     if (IsOnFloor()) {
       animations.PlaybackDefaultBlendTime = 1;
