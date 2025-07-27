@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dy3gb5dyjen4r"]
+
+[ext_resource type="Shader" uid="uid://dcqeok85pe4vb" path="res://Scenes/UI/BouncingShader.tres" id="1_7d154"]
+[ext_resource type="Script" uid="uid://cfrg8xv3h1m5e" path="res://Scenes/UI/DialogChoiceItem.cs" id="1_murfr"]
+[ext_resource type="Texture2D" uid="uid://cd3ar2iew7p13" path="res://Assets/UI/downArrow.png" id="2_murfr"]
+
+[sub_resource type="Theme" id="Theme_2t21p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlocf"]
+shader = ExtResource("1_7d154")
+shader_parameter/Bouncing = false
+
+[node name="ChoiceItem" type="Control" node_paths=PackedStringArray("Arrow", "ChoiceText")]
+custom_minimum_size = Vector2(231, 50)
+layout_mode = 3
+anchors_preset = 0
+theme = SubResource("Theme_2t21p")
+script = ExtResource("1_murfr")
+Arrow = NodePath("TextureRect")
+ChoiceText = NodePath("Label")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_nlocf")
+layout_mode = 2
+offset_left = 5.0
+offset_top = 52.0
+offset_right = 232.0
+offset_bottom = 221.0
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_murfr")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 279.0
+offset_bottom = 55.0
