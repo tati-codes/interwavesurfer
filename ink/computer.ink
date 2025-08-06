@@ -12,25 +12,27 @@ What would you like today?
     Oh dear o_o
     No IslaNodes™ appear to exist. ;_; 
     Try again later! ^_^
-+ Rumours and Mysteries
++ More options...
++ + Rumours and Mysteries
     Would you like a rumour or mystery?
-    + + Rumour
+    + + + Rumour
         Rumour has it that "{~Beautiful Sword|Bootiful Sword|JIM'S E|mycat.pic|What do I put h|Title|my name is Steven|Wok}" could be found on [NO IslaNodes™ - IMPOSSIBLE]
-    + + Mystery
+    + + + Mystery
         You don't know
         what you don't know. ?_? 
- + Check Mail
+ + + Check Mail
     No mail. ;_;
     Maybe you need to make some friends? c_c
- + Find a Friend
+ + + More options...
+ + + + Find a Friend
     No friends. -_-
     Let's find you a brand new random pen pal~
     No pen pals found!"
     You must have made friends with everyone who exists.
     So popular~
- + Return Home
-    No.
- + Shut Down
+ + + + Return Home
+    Not yet.
+ + + + Shut Down
     It's healthy to go outdoors.
     Breathe some sea air! o_o7
     -> DONE
