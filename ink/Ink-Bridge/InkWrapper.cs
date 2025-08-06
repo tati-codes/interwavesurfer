@@ -7,7 +7,7 @@ using Ink.Runtime;
 using InkBridge;
 using OBus;
 [GlobalClass]
-public partial class InkWrapper : Node {
+public partial class     InkWrapper : Node {
 	[Export]
 	public InkStory story;
 	private Bus bus;
@@ -18,8 +18,8 @@ public partial class InkWrapper : Node {
 			story.Continue();
 		});
 		story.Continued += () => {
-			if (!story.CanContinue) bus.Publish<Choices, InkChoices>(new(story.CurrentChoices) {level = LOG_LEVEL.DETAILED});
-			if (story.CurrentText.Length < 2) {
+			if (!story.CanContinue) bus.Publish<ChoiceRequired, InkChoices>(new(story.CurrentChoices, story.CurrentText) {level = LOG_LEVEL.DETAILED});
+			else if (story.CurrentText.Length < 2) {
 				story.Continue();
 			} else {
 				bus.Publish<StoryUpdated, StoryText>(new(story.CurrentText));
@@ -27,7 +27,7 @@ public partial class InkWrapper : Node {
 		};
 		//TODO "reset quiz" event 
 		//TODO reset quiz implementation
-		story.MadeChoice += (InkChoice choice) => bus.Publish<ChoiceSelected>();
+		story.MadeChoice += (InkChoice choice) => bus.Publish<ChoiceSelected, IChoice>( new(choice));
 	}
 	public string currentText => story.CurrentText;
 	public bool canContinue => story.CanContinue;
@@ -37,19 +37,44 @@ public partial class InkWrapper : Node {
 }
 
 namespace InkBridge {
-	public class ChoiceSelected : TEvent<NArgs> { }
+	public class ChoiceSelected : TEvent<IChoice> { }
 	public class PlayerContinued : TEvent<NArgs> {}
 	public class StoryUpdated : TEvent<StoryText> {}
 	public class SelectChoice : TEvent<IChoice> {}
 	public class StoryText(string text) : Args {
 		public string Text { get; init; } = text;
 	}
-	public class InkChoices(List<InkChoice> choices) : Args {
+	public class InkChoices(List<InkChoice> choices, string _line) : Args {
+		public string line { get; init; } = _line;
 		public List<InkChoice> choices { get; init; } = choices;
-		public InkChoices(IReadOnlyList<InkChoice> choices) : this(choices.ToList()) { }
+		public InkChoices(IReadOnlyList<InkChoice> choices, string _line) : this(choices.ToList(), _line) { }
 	}
+
 	public class IChoice(InkChoice choice) : Args {
 		public InkChoice choice { get; init; } = choice;
+		public bool hasDirective => choice.Text.Contains(':');
+
+		public string directive {
+			get {
+				if (choice.Text.Contains(':')) {
+					var processed = choice.Text.Split(":");
+					return processed[0] ?? "ERROR";
+				} else {
+					return choice.Text;
+				}
+			}
+		}
+
+		public string escapedText {
+			get {
+				if (choice.Text.Contains(':')) {
+					var processed = choice.Text.Split(":");
+					return processed[1] ?? "ERROR";
+				} else {
+					return choice.Text;
+				}
+			}
+		}
 	}
-	public class Choices: TEvent<InkChoices> {} //I chose this name because Subscribe<Choices... and its inverse seem really explicit
+	public class ChoiceRequired: TEvent<InkChoices> {} //I chose this name because Subscribe<Choices... and its inverse seem really explicit
 }
