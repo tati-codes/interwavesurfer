@@ -31,8 +31,13 @@ public partial class DebugLabel : Label {
 }
 
 namespace TatiDebug {
+  public static class DebugData {
+    public static tag debug_tag = new tag() {name = "debug", bbcolor = "5f4abc"};
+  }
   public class Debug : TEvent<DebugVar> {}
+  public class DebugText: TEvent<Text> {}
   public class DebugVar : Args {
+
     public string Name {get; set;}
     public string Details {get; set;}
     public DebugVar(string _n, string _d) {
