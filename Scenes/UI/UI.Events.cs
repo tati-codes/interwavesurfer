@@ -13,5 +13,17 @@ namespace UIEvents {
     //CAN_INTERACT
     IS_HOLDING,
     DIALOG,
+    FULLSCREEN_DIALOG,
+    CHOICE_DIALOG,
+  }
+  /// <summary>
+  /// Internal event for imperatively invoking the Dialog UI state.
+  /// </summary>
+  public class IShowDialog : TEvent<DialogText> {}
+  public class FullscreenIShowDialog : TEvent<DialogText> {}
+  public class DialogText(string content, string name, bool isLast = false) : Args {
+    public string name { get; init; } = name;
+    public string content { get; init; } = content;
+    public bool isLast { get; init; } = isLast;
   }
 }
