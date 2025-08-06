@@ -6,6 +6,7 @@ using OBus;
 public partial class Pickupable : Interactable {
   Bus bus;
   public PickupableItem contextRef => new(collider.GetRid());
+  public string interactionTag { get; set; } = "Pick Up";
   public override void _Ready() {
     base._Ready();
     bus = GetNode<Bus>("/root/bus");

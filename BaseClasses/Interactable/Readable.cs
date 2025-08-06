@@ -7,7 +7,9 @@ public partial class Readable : Interactable {
    Bus bus;
   public ReadableItem contextRef => new(collider.GetRid(), object_id);
   [Export]
-  public string object_id {get; set;} 
+  public string object_id {get; set;}
+
+  [Export] public string interactionTag { get; set; } = "Read";
   public override void _Ready() {
     base._Ready();
     bus = GetNode<Bus>("/root/bus");
