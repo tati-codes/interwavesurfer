@@ -22,7 +22,7 @@ public partial class TestingQuizAreatscn : Node3D {
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
 		bus.Publish<Debug, DebugVar>(new("state", currentState));
-		bus.Subscribe<ChoiceSelected>(playerChoiceReceived);
+		// bus.Subscribe<ChoiceSelected>(playerChoiceReceived);
 		bus.Subscribe<BoatReachedPortal>(args => {
 				bus.Log("CurrentSelection: ", UISelectedIndex.ToString());
 				bus.Publish<SelectChoice, IChoice>(new(story.CurrentChoices[UISelectedIndex]));
@@ -110,7 +110,7 @@ public partial class TestingQuizAreatscn : Node3D {
 	}
 }
 namespace QuizSpace {
-	public enum QuizState {
+	public enum  QuizState {
 		START,
 		SHOW_QUIZ_QUESTION,
 		AWAIT_PLAYER_CHOICE,

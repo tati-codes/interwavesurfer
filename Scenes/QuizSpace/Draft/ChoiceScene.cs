@@ -30,7 +30,7 @@ public partial class ChoiceScene : Node3D {
   private Color selectedSpot = new("bd1e49");
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
-		bus.Subscribe<Choices, InkChoices>(onChoicesEvent);
+		bus.Subscribe<ChoiceRequired, InkChoices>(onChoicesEvent);
 		bus.Subscribe<QuizStateTransition, QuizStateTransitionArgs>(handleStateTransition);
 		bus.Subscribe<UIItemHighlighted, SelectionIdx>(handleHighlight);
 		bus.Subscribe<UIChoiceSelected, SelectionIdx>(handleSelect);
