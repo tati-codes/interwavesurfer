@@ -1,12 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cta0lhtnp7lle"]
 
-[ext_resource type="Script" uid="uid://ghjy8y5iesqk" path="res://Scenes/UI/D.cs" id="2_7ia2c"]
+[ext_resource type="Material" uid="uid://bdn0qj32pvhyc" path="res://Scenes/UI/BlockTransition2.tres" id="1_y7w4a"]
+[ext_resource type="Script" uid="uid://dkuurqruratau" path="res://Scenes/UI/DialogRoot.cs" id="2_7ia2c"]
 [ext_resource type="StyleBox" uid="uid://rotcv1hk41cb" path="res://Scenes/UI/DialogWithHeader.tres" id="2_y7w4a"]
 [ext_resource type="Shader" uid="uid://dcqeok85pe4vb" path="res://Scenes/UI/BouncingShader.tres" id="3_7ia2c"]
 [ext_resource type="Texture2D" uid="uid://cd3ar2iew7p13" path="res://Assets/UI/downArrow.png" id="3_d1mbi"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ia2c"]
-shader = ExtResource("3_7ia2c")
 
 [sub_resource type="LabelSettings" id="LabelSettings_pyyx4"]
 line_spacing = -23.0
@@ -17,6 +15,7 @@ shadow_offset = Vector2(3, 3)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d1mbi"]
 shader = ExtResource("3_7ia2c")
+shader_parameter/Bouncing = false
 
 [sub_resource type="Animation" id="Animation_kmfli"]
 resource_name = "Arrow-Bounce"
@@ -27,6 +26,7 @@ _data = {
 }
 
 [node name="Panel" type="PanelContainer" node_paths=PackedStringArray("Name", "Content", "Arrow", "anim")]
+material = ExtResource("1_y7w4a")
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 651.0
@@ -38,7 +38,6 @@ Name = NodePath("Container/Name")
 Content = NodePath("Container/Content")
 Arrow = NodePath("Dialog/Arrow")
 anim = NodePath("Dialog/AnimationPlayer")
-Bouncer = SubResource("ShaderMaterial_7ia2c")
 
 [node name="Container" type="VBoxContainer" parent="."]
 layout_mode = 2

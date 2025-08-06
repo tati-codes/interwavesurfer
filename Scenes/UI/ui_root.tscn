@@ -14,7 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_in2mm")
-DialogZone = NodePath("Panel")
+DialogZone = NodePath("Dialog")
 ToastZone = NodePath("Toast")
 ButtonGroup = NodePath("Buttons")
 
@@ -52,7 +52,7 @@ visible = false
 offset_left = 1074.0
 offset_right = 1120.0
 
-[node name="Panel" parent="." instance=ExtResource("5_qknim")]
+[node name="Dialog" parent="." instance=ExtResource("5_qknim")]
 visible = false
 layout_mode = 0
 offset_left = 226.0

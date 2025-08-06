@@ -41,7 +41,6 @@ render_mode blend_mix;
 
 
 "
-graph_offset = Vector2(-449.509, -120.985)
 mode = 1
 flags/light_only = false
 nodes/vertex/2/node = SubResource("VisualShaderNodeVectorCompose_ry4cv")

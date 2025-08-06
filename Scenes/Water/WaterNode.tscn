@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://ch57q0ft7dimq"]
 
-[ext_resource type="Shader" uid="uid://dctjpk1ynli63" path="res://Scenes/Water/WaterWithTextures2.tres" id="1_hy6ga"]
+[ext_resource type="Shader" uid="uid://b0jsfolgopp" path="res://Scenes/Water/WaterWithTexture3.tres" id="1_eaxl5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vw6jr"]
 render_priority = 0
-shader = ExtResource("1_hy6ga")
+shader = ExtResource("1_eaxl5")
 shader_parameter/ColorParameter = Color(0.231373, 0.768627, 0.870588, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_uln2l"]

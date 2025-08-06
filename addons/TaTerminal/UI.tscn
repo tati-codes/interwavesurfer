@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dfif62ykwkwl3"]
+[gd_scene load_steps=24 format=3 uid="uid://dfif62ykwkwl3"]
 
 [ext_resource type="Script" uid="uid://cbytypc6c8ivm" path="res://addons/TaTerminal/Output.cs" id="2_0s7up"]
 [ext_resource type="Script" uid="uid://d1geiba1g0msc" path="res://addons/TaTerminal/Listener.cs" id="2_uvuxs"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://5qhll35a853i" path="res://addons/TaTerminal/thingbutton.tscn" id="5_okjyg"]
 [ext_resource type="FontFile" uid="uid://dmte4ilwfcrca" path="res://addons/TaTerminal/FiraCode-Bold.ttf" id="6_7jgv1"]
 [ext_resource type="Script" uid="uid://6nhs71r868ir" path="res://addons/TaTerminal/OptionButton.cs" id="7_ahcdy"]
+[ext_resource type="PackedScene" uid="uid://4draoejdjsj4" path="res://addons/TaTerminal/Hider.tscn" id="10_a8jve"]
+[ext_resource type="Script" uid="uid://ddkpvtohrucxq" path="res://addons/TaTerminal/ButtonCreator.cs" id="10_fxdc2"]
 [ext_resource type="Texture2D" uid="uid://dnto27a3a5f2h" path="res://addons/TaTerminal/indicator.png" id="13_g3sh8"]
 [ext_resource type="Script" uid="uid://npvkratvcbbu" path="res://addons/TaTerminal/FilterBar.cs" id="13_i4pdt"]
 [ext_resource type="Script" uid="uid://rv4w224nrm0d" path="res://addons/TaTerminal/ConnectionIndicator.cs" id="14_dav3e"]
@@ -79,17 +81,18 @@ columns = 2
 
 [node name="Listener" type="Node" parent="." node_paths=PackedStringArray("indi", "buffer")]
 script = ExtResource("2_uvuxs")
-indi = NodePath("../HBoxContainer/ConnectionIndicator")
+indi = NodePath("../FilterBar/ConnectionIndicator")
 buffer = NodePath("../Buffer")
 
-[node name="TagHolder" type="Node" parent="." node_paths=PackedStringArray("buffer")]
+[node name="TagHolder" type="Node" parent="." node_paths=PackedStringArray("buffer", "buttonCreator")]
 script = ExtResource("4_ewua2")
 buffer = NodePath("../Buffer")
+buttonCreator = NodePath("../SideBar/Hider/ButtonCreator")
 
 [node name="Buffer" type="Node" parent="." node_paths=PackedStringArray("tagHolder", "label")]
 script = ExtResource("5_7p4th")
 tagHolder = NodePath("../TagHolder")
-label = NodePath("../Scrollbar/VBoxContainer/Output")
+label = NodePath("../Scrollbar/OutputContainer/Output")
 
 [node name="Scrollbar" type="ScrollContainer" parent="."]
 clip_contents = false
@@ -99,12 +102,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_12wq1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Scrollbar"]
+[node name="OutputContainer" type="VBoxContainer" parent="Scrollbar"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Output" type="RichTextLabel" parent="Scrollbar/VBoxContainer"]
+[node name="Output" type="RichTextLabel" parent="Scrollbar/OutputContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
@@ -119,29 +122,29 @@ threaded = true
 selection_enabled = true
 script = ExtResource("2_0s7up")
 
-[node name="ButtonCreator" type="VBoxContainer" parent="."]
+[node name="SideBar" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 5
 
-[node name="HBoxContainer" type="VBoxContainer" parent="ButtonCreator"]
+[node name="HBoxContainer" type="VBoxContainer" parent="SideBar"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Clear" type="Button" parent="ButtonCreator/HBoxContainer" node_paths=PackedStringArray("buffer")]
+[node name="Clear" type="Button" parent="SideBar/HBoxContainer" node_paths=PackedStringArray("buffer")]
 layout_mode = 2
 text = "CLEAR"
 script = ExtResource("2_vdbos")
 buffer = NodePath("../../../Buffer")
 
-[node name="HSeparator" type="HSeparator" parent="ButtonCreator/HBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="SideBar/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ButtonCreator/HBoxContainer"]
+[node name="Label" type="Label" parent="SideBar/HBoxContainer"]
 layout_mode = 2
 text = "Show Events:"
 
-[node name="OptionButton" type="OptionButton" parent="ButtonCreator/HBoxContainer" node_paths=PackedStringArray("holder")]
+[node name="OptionButton" type="OptionButton" parent="SideBar/HBoxContainer" node_paths=PackedStringArray("holder")]
 layout_mode = 2
 selected = 1
 item_count = 3
@@ -154,10 +157,10 @@ popup/item_2/id = 2
 script = ExtResource("7_ahcdy")
 holder = NodePath("../../../Buffer")
 
-[node name="HSeparator3" type="HSeparator" parent="ButtonCreator/HBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="SideBar/HBoxContainer"]
 layout_mode = 2
 
-[node name="dedup" type="Button" parent="ButtonCreator/HBoxContainer" node_paths=PackedStringArray("buffer")]
+[node name="dedup" type="Button" parent="SideBar/HBoxContainer" node_paths=PackedStringArray("buffer")]
 layout_mode = 2
 theme_type_variation = &"FlatButton"
 theme_override_constants/outline_size = 2
@@ -170,52 +173,62 @@ text = "deduplicate"
 script = ExtResource("14_poowo")
 buffer = NodePath("../../../Buffer")
 
-[node name="HSeparator2" type="HSeparator" parent="ButtonCreator/HBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="SideBar/HBoxContainer"]
 layout_mode = 2
 
-[node name="Tags" type="Label" parent="ButtonCreator/HBoxContainer"]
+[node name="Hider" parent="SideBar" instance=ExtResource("10_a8jve")]
 layout_mode = 2
-text = "Tags:"
-horizontal_alignment = 1
+Title = "   Tags:"
 
-[node name="info" parent="ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+[node name="ButtonCreator" type="VBoxContainer" parent="SideBar/Hider" node_paths=PackedStringArray("tagHolder")]
+layout_mode = 2
+size_flags_vertical = 2
+size_flags_stretch_ratio = 2.72
+alignment = 2
+script = ExtResource("10_fxdc2")
+tagHolder = NodePath("../../../TagHolder")
+tagButtonScene = ExtResource("5_okjyg")
+
+[node name="info" parent="SideBar/Hider/ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_81gde")
 text = "info"
-tagHolder = NodePath("../../TagHolder")
+tagName = "info"
+tagHolder = NodePath("../../../../TagHolder")
 
-[node name="warn" parent="ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+[node name="warn" parent="SideBar/Hider/ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_fxdc2")
 text = "warn"
-Tag = 1
-tagHolder = NodePath("../../TagHolder")
+tagName = "warn"
+tagHolder = NodePath("../../../../TagHolder")
 
-[node name="error" parent="ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+[node name="error" parent="SideBar/Hider/ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8jve")
 text = "error"
-Tag = 2
-tagHolder = NodePath("../../TagHolder")
+tagName = "error"
+tagHolder = NodePath("../../../../TagHolder")
 
-[node name="evnt" parent="ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+[node name="evnt" parent="SideBar/Hider/ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_11e0f")
 text = "event"
-Tag = 3
-tagHolder = NodePath("../../TagHolder")
+tagName = "event"
+tagHolder = NodePath("../../../../TagHolder")
 
-[node name="count" parent="ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+[node name="count" parent="SideBar/Hider/ButtonCreator" node_paths=PackedStringArray("tagHolder") instance=ExtResource("5_okjyg")]
+visible = false
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_415i5")
 text = "count"
-Tag = 4
-tagHolder = NodePath("../../TagHolder")
+tagName = "count"
+tagHolder = NodePath("../../../../TagHolder")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="FilterBar" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="ConnectionIndicator" type="TextureButton" parent="HBoxContainer" node_paths=PackedStringArray("buffer", "listener")]
+[node name="ConnectionIndicator" type="TextureButton" parent="FilterBar" node_paths=PackedStringArray("buffer", "listener")]
 layout_mode = 2
 texture_normal = ExtResource("13_g3sh8")
 stretch_mode = 0
@@ -223,7 +236,7 @@ script = ExtResource("14_dav3e")
 buffer = NodePath("../../Buffer")
 listener = NodePath("../../Listener")
 
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer" node_paths=PackedStringArray("buffer")]
+[node name="LineEdit" type="LineEdit" parent="FilterBar" node_paths=PackedStringArray("buffer")]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 3

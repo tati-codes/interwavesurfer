@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://pmemxht8ul" path="res://Placeholder/Island/tex1_128x128_m_111a13269ddadf83_14_mip3.png" id="2_01l4c"]
 
 [resource]
+resource_local_to_scene = true
 render_priority = 1
 next_pass = ExtResource("1_01l4c")
 shader = ExtResource("1_uf848")

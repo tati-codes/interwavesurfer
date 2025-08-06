@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://demfv7rbt1ak4"]
+[gd_scene load_steps=25 format=3 uid="uid://demfv7rbt1ak4"]
 
 [ext_resource type="Texture2D" uid="uid://b4ov5yw4rgo1o" path="res://Scenes/Water/3DTexture_CheckerPride.png" id="1_6c1f8"]
 [ext_resource type="Script" uid="uid://dgr0om4ui375k" path="res://Scenes/QuizSpace/Draft/TestingQuizAreatscn.cs" id="1_k5xq3"]
@@ -8,8 +8,9 @@
 [ext_resource type="Resource" uid="uid://db1seqv8d6tcj" path="res://ink/personality_quiz2.ink" id="6_4b54o"]
 [ext_resource type="Shader" uid="uid://c2kbx1fpfwgs" path="res://Scenes/QuizSpace/Draft/ArrowMotion.gdshader" id="8_2vqxb"]
 [ext_resource type="Texture2D" uid="uid://ba70q5a7u75jq" path="res://Scenes/QuizSpace/Draft/triangle.png" id="8_4b54o"]
-[ext_resource type="PackedScene" uid="uid://b7ey10tinyfab" path="res://Scenes/QuizSpace/Draft/QuizChoiceItem.tscn" id="8_ao0h8"]
 [ext_resource type="Script" uid="uid://dhq0c0fcwuudv" path="res://Scenes/QuizSpace/Draft/UiScreen.cs" id="8_yq77u"]
+[ext_resource type="PackedScene" uid="uid://dal0jex81647y" path="res://Placeholder/Portals/Obelisk.tscn" id="10_tejgs"]
+[ext_resource type="Material" uid="uid://lwqlb8d40qqg" path="res://Scenes/QuizSpace/Draft/ParallelRain.tres" id="11_a5w47"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2vqxb"]
 sky_top_color = Color(0.214285, 0.0890333, 0.438674, 1)
@@ -57,6 +58,10 @@ shader_parameter/wave_frequency = 140.0
 shader_parameter/movement_speed = 2.0
 shader_parameter/movement_amplitude = 5.0
 
+[sub_resource type="BoxMesh" id="BoxMesh_dgf63"]
+material = ExtResource("11_a5w47")
+size = Vector3(31.1, 19.1, 0.1)
+
 [node name="Quiz" type="Node3D" node_paths=PackedStringArray("story", "boat")]
 script = ExtResource("1_k5xq3")
 story = NodePath("InkWrapper")
@@ -70,21 +75,6 @@ metadata/_custom_type_script = "uid://ckv85en18uucd"
 [node name="PlayerBoat" parent="." instance=ExtResource("4_j517i")]
 transform = Transform3D(0.00273294, 0.00179066, -0.0999466, -0.00167693, 0.0999707, 0.00174524, 0.0999486, 0.00162835, 0.00276213, -19.9022, 0.312709, 4.00424)
 motion_mode = 1
-
-[node name="Choices" type="Node3D" parent="."]
-
-[node name="Left" parent="Choices" instance=ExtResource("8_ao0h8")]
-placeholder = "LeftChoice"
-
-[node name="Mid" parent="Choices" instance=ExtResource("8_ao0h8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.0914)
-storyIndex = 2
-placeholder = "Mid"
-
-[node name="Right" parent="Choices" instance=ExtResource("8_ao0h8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 27.5863)
-storyIndex = 1
-placeholder = "Right Scene"
 
 [node name="Environment" type="Node" parent="."]
 
@@ -101,6 +91,7 @@ environment = SubResource("Environment_yq77u")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.866025, -0.263478, 0.424946, 0, 0.849893, 0.526956, -0.5, 0.456357, -0.736029, 0, 0, 0)
+visible = false
 light_color = Color(0.462745, 1, 1, 1)
 light_energy = 0.685
 shadow_enabled = true
@@ -120,6 +111,7 @@ shape = SubResource("ConcavePolygonShape3D_2vqxb")
 
 [node name="UI Screen" type="MeshInstance3D" parent="." node_paths=PackedStringArray("QuestionText", "textContainer")]
 transform = Transform3D(-4.37114e-08, -0.999868, 0.0162658, 1, -4.37056e-08, 7.10999e-10, 0, 0.0162658, 0.999868, -26.2966, 6.33217, 3.02682)
+visible = false
 mesh = SubResource("PlaneMesh_4b54o")
 script = ExtResource("8_yq77u")
 QuestionText = NodePath("textbox/TextEdit")
@@ -159,3 +151,19 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("8_4b54o")
 expand_mode = 1
+
+[node name="Node3D" parent="." instance=ExtResource("10_tejgs")]
+transform = Transform3D(0.0118679, 0, -0.99993, 0, 1, 0, 0.99993, 0, 0.0118679, 0, 0, 0)
+visible = false
+
+[node name="wow" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.950804, 0.309655, -0.00903519, -0.309642, 0.950848, 0.00286501, 0.00947829, 7.36099e-05, 0.999954, 0.121747, 8.99243, 27.5826)
+visible = false
+transparency = 1.0
+mesh = SubResource("BoxMesh_dgf63")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.964366, -0.264507, -0.00574561, 0.264529, 0.964371, 0.00361219, 0.00458546, -0.00500336, 0.999976, -0.0297187, 6.71858, 19.488)
+visible = false
+mesh = SubResource("BoxMesh_dgf63")

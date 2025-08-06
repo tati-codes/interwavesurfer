@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bc6dsir8ndyrw" path="res://Placeholder/Island/tex1_64x64_m_c33801a9425c7b7b_14_arb.png" id="2_qkkva"]
 
 [resource]
+resource_local_to_scene = true
 render_priority = 2
 shader = ExtResource("1_e2l56")
 shader_parameter/portal_texture = ExtResource("2_qkkva")

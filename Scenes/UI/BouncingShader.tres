@@ -6,7 +6,6 @@ operator = 2
 
 [sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_6rokg"]
 parameter_name = "Bouncing"
-qualifier = 2
 
 [sub_resource type="VisualShaderNodeSwitch" id="VisualShaderNodeSwitch_0r6bb"]
 default_input_values = [0, false, 1, Vector2(1, 1), 2, Vector2(0, 0)]
@@ -36,7 +35,7 @@ operator = 2
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
-instance uniform bool Bouncing;
+uniform bool Bouncing;
 
 
 
@@ -92,10 +91,9 @@ void vertex() {
 
 }
 "
-graph_offset = Vector2(-2.26697, -167.335)
 mode = 1
 flags/light_only = false
-nodes/vertex/0/position = Vector2(1200, 60)
+nodes/vertex/0/position = Vector2(940, -80)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_6rokg")
 nodes/vertex/2/position = Vector2(-260, 140)
 nodes/vertex/3/node = SubResource("VisualShaderNodeInput_0r6bb")
@@ -116,4 +114,4 @@ nodes/vertex/11/node = SubResource("VisualShaderNodeBooleanParameter_6rokg")
 nodes/vertex/11/position = Vector2(320, -160)
 nodes/vertex/12/node = SubResource("VisualShaderNodeSwitch_0r6bb")
 nodes/vertex/12/position = Vector2(640, -120)
-nodes/vertex/connections = PackedInt32Array(2, 0, 5, 0, 5, 1, 7, 1, 7, 0, 4, 1, 5, 0, 4, 0, 8, 0, 9, 0, 9, 0, 7, 0, 3, 0, 10, 0, 10, 0, 8, 0, 11, 0, 12, 0, 4, 0, 12, 1, 2, 0, 12, 2, 12, 0, 0, 0)
+nodes/vertex/connections = PackedInt32Array(2, 0, 5, 0, 5, 1, 7, 1, 7, 0, 4, 1, 5, 0, 4, 0, 8, 0, 9, 0, 9, 0, 7, 0, 3, 0, 10, 0, 10, 0, 8, 0, 11, 0, 12, 0, 2, 0, 12, 2, 4, 0, 12, 1, 12, 0, 0, 0)

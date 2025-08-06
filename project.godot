@@ -13,6 +13,7 @@ config_version=5
 config/name="InterWaveSurfer"
 run/main_scene="uid://w00y2i7ee6j8"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+boot_splash/show_image=false
 
 [autoload]
 
@@ -91,6 +92,8 @@ right_trigger={
 
 [rendering]
 
+rendering_device/driver.windows="d3d12"
+rendering_device/fallback_to_vulkan=false
 textures/lossless_compression/force_png=true
 
 [shader_globals]

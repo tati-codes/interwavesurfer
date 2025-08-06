@@ -208,7 +208,7 @@ void fragment(){
 	//}
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_72ih2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3aot3"]
 render_priority = 1
 shader = SubResource("Shader_yq77u")
 shader_parameter/height_scale = 7.0
@@ -222,7 +222,7 @@ shader_parameter/color1 = Color(1, 1, 1, 1)
 shader_parameter/color2 = Color(0.4, 0.68, 1, 0.988235)
 
 [sub_resource type="PrismMesh" id="PrismMesh_qd3p1"]
-material = SubResource("ShaderMaterial_72ih2")
+material = SubResource("ShaderMaterial_3aot3")
 left_to_right = -0.6
 size = Vector3(5, 4, 7)
 subdivide_width = 20
@@ -282,7 +282,6 @@ BoatMesh = NodePath("Boat")
 anim = NodePath("Boat/AnimationPlayer")
 
 [node name="Boat" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.98515, 0.1717, -0.000171268, -0.171278, 0.98266, -0.0710154, -0.012025, 0.06999, 0.997476, 0, 0, 0)
 mesh = SubResource("ArrayMesh_4b54o")
 skeleton = NodePath("")
 

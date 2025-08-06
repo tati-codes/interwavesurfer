@@ -1,59 +1,104 @@
-[gd_scene load_steps=6 format=3 uid="uid://foq24lg1yoqs"]
+[gd_scene load_steps=12 format=3 uid="uid://foq24lg1yoqs"]
 
 [ext_resource type="StyleBox" uid="uid://rotcv1hk41cb" path="res://Scenes/UI/DialogWithHeader.tres" id="1_2vns5"]
 [ext_resource type="Script" uid="uid://b18p3oblwwpti" path="res://Scenes/UI/DialogWithChoicesRoot.cs" id="2_nlocf"]
+[ext_resource type="FontFile" uid="uid://bc3h7ky5fm4yl" path="res://Assets/Fonts/Blazma/Blazma-Italic.otf" id="3_62vbf"]
 [ext_resource type="Script" uid="uid://dlfkekcv1fm8t" path="res://Scenes/UI/ChoiceDialogTextHolder.cs" id="3_npsas"]
+[ext_resource type="Shader" uid="uid://dcqeok85pe4vb" path="res://Scenes/UI/BouncingShader.tres" id="4_nlocf"]
+[ext_resource type="PackedScene" uid="uid://cio8w4gf7kgmk" path="res://Scenes/UI/AppearingLabel.tscn" id="4_qccb3"]
 [ext_resource type="Script" uid="uid://ocjk3rxk6iih" path="res://Scenes/UI/DialogChoicesContainer.cs" id="4_uwudd"]
 [ext_resource type="PackedScene" uid="uid://dy3gb5dyjen4r" path="res://Scenes/UI/DialogChoiceItem.tscn" id="5_2t21p"]
+[ext_resource type="Texture2D" uid="uid://cd3ar2iew7p13" path="res://Assets/UI/downArrow.png" id="7_2t21p"]
 
-[node name="DialogWithChoices" type="PanelContainer" node_paths=PackedStringArray("Name", "ContentContainer", "ChoiceContainer")]
-anchors_preset = 15
-anchor_right = 1.0
+[sub_resource type="LabelSettings" id="LabelSettings_e5ply"]
+font = ExtResource("3_62vbf")
+font_size = 48
+font_color = Color(1, 1, 1, 0.733333)
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qccb3"]
+shader = ExtResource("4_nlocf")
+shader_parameter/Bouncing = true
+
+[node name="DialogWithChoices" type="PanelContainer" node_paths=PackedStringArray("NameHolder", "ContentContainer", "ChoiceContainer")]
+custom_minimum_size = Vector2(908, 341)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 134.0
-offset_top = 306.0
-offset_right = -108.0
-offset_bottom = 3.0
+offset_left = -454.0
+offset_top = -414.0
+offset_right = 454.0
+offset_bottom = -73.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_styles/panel = ExtResource("1_2vns5")
 script = ExtResource("2_nlocf")
-Name = NodePath("VBoxContainer/Name")
+NameHolder = NodePath("VBoxContainer/Name")
 ContentContainer = NodePath("VBoxContainer/VScrollBar")
-ChoiceContainer = NodePath("VBoxContainer/ChoiceContainer")
+ChoiceContainer = NodePath("ArrowHolder/ChoiceContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 17
 
 [node name="Name" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 53)
 layout_mode = 2
+label_settings = SubResource("LabelSettings_e5ply")
 
-[node name="VScrollBar" type="ScrollContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(844.5, 140)
+[node name="VScrollBar" type="ScrollContainer" parent="VBoxContainer" node_paths=PackedStringArray("Container", "Arrow")]
+clip_contents = false
+custom_minimum_size = Vector2(845, 140)
 layout_mode = 2
+size_flags_vertical = 3
 follow_focus = true
+horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 script = ExtResource("3_npsas")
+Container = NodePath("VBoxContainer")
+Arrow = NodePath("../../ArrowHolder/Arrow")
+labelScene = ExtResource("4_qccb3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VScrollBar"]
 layout_mode = 2
 
-[node name="ChoiceContainer" type="HBoxContainer" parent="VBoxContainer" node_paths=PackedStringArray("First", "Second", "Third")]
-custom_minimum_size = Vector2(12, 52)
+[node name="ArrowHolder" type="Control" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 49
+
+[node name="ChoiceContainer" type="HBoxContainer" parent="ArrowHolder" node_paths=PackedStringArray("First", "Second", "Third")]
+visible = false
+layout_mode = 2
+offset_left = -8.0
+offset_top = 299.0
+offset_right = 840.0
+offset_bottom = 359.0
+size_flags_horizontal = 4
 script = ExtResource("4_uwudd")
 First = NodePath("FirstChoice")
 Second = NodePath("SecondChoice")
 Third = NodePath("ThirdChoice")
 
-[node name="FirstChoice" parent="VBoxContainer/ChoiceContainer" instance=ExtResource("5_2t21p")]
+[node name="FirstChoice" parent="ArrowHolder/ChoiceContainer" instance=ExtResource("5_2t21p")]
 layout_mode = 2
 
-[node name="SecondChoice" parent="VBoxContainer/ChoiceContainer" instance=ExtResource("5_2t21p")]
+[node name="SecondChoice" parent="ArrowHolder/ChoiceContainer" instance=ExtResource("5_2t21p")]
 layout_mode = 2
 
-[node name="ThirdChoice" parent="VBoxContainer/ChoiceContainer" instance=ExtResource("5_2t21p")]
+[node name="ThirdChoice" parent="ArrowHolder/ChoiceContainer" instance=ExtResource("5_2t21p")]
 layout_mode = 2
+
+[node name="Arrow" type="TextureRect" parent="ArrowHolder"]
+material = SubResource("ShaderMaterial_qccb3")
+layout_mode = 2
+offset_left = 319.0
+offset_top = 251.0
+offset_right = 1166.0
+offset_bottom = 534.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_2t21p")
+stretch_mode = 3

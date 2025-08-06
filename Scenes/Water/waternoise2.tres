@@ -2,7 +2,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0jdx3"]
 noise_type = 2
-frequency = 0.0236
+frequency = 0.0145
 fractal_type = 2
 
 [resource]

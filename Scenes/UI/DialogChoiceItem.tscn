@@ -1,38 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://dy3gb5dyjen4r"]
+[gd_scene load_steps=9 format=3 uid="uid://dy3gb5dyjen4r"]
 
-[ext_resource type="Shader" uid="uid://dcqeok85pe4vb" path="res://Scenes/UI/BouncingShader.tres" id="1_7d154"]
 [ext_resource type="Script" uid="uid://cfrg8xv3h1m5e" path="res://Scenes/UI/DialogChoiceItem.cs" id="1_murfr"]
-[ext_resource type="Texture2D" uid="uid://cd3ar2iew7p13" path="res://Assets/UI/downArrow.png" id="2_murfr"]
+[ext_resource type="Shader" uid="uid://bba04ies20fgg" path="res://Scenes/UI/BouncingSideways.tres" id="2_murfr"]
+[ext_resource type="Texture2D" uid="uid://iu1ui770dotv" path="res://Assets/UI/RIGHTaRROW.png" id="3_murfr"]
+[ext_resource type="FontFile" uid="uid://dbldyi3utk88y" path="res://Assets/Fonts/Blazma/Blazma-Regular.otf" id="4_01gh7"]
 
 [sub_resource type="Theme" id="Theme_2t21p"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlocf"]
-shader = ExtResource("1_7d154")
-shader_parameter/Bouncing = false
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_01gh7"]
+shader = ExtResource("2_murfr")
 
-[node name="ChoiceItem" type="Control" node_paths=PackedStringArray("Arrow", "ChoiceText")]
-custom_minimum_size = Vector2(231, 50)
-layout_mode = 3
-anchors_preset = 0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnx8y"]
+bg_color = Color(0.2079, 0.339057, 0.77, 0.25098)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_murfr"]
+
+[node name="ChoiceItem" type="Container" node_paths=PackedStringArray("Arrow", "ChoiceText")]
+custom_minimum_size = Vector2(285, 45)
+offset_right = 232.0
+offset_bottom = 50.0
 theme = SubResource("Theme_2t21p")
 script = ExtResource("1_murfr")
-Arrow = NodePath("TextureRect")
-ChoiceText = NodePath("Label")
+Arrow = NodePath("HBoxContainer/TextureRect")
+ChoiceText = NodePath("HBoxContainer/Button")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_nlocf")
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 5.0
-offset_top = 52.0
-offset_right = 232.0
-offset_bottom = 221.0
-rotation = -1.5708
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_murfr")
 
-[node name="Label" type="Label" parent="."]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+material = SubResource("ShaderMaterial_01gh7")
+instance_shader_parameters/sway = false
 layout_mode = 2
-offset_left = 4.0
-offset_top = 5.0
-offset_right = 279.0
-offset_bottom = 55.0
+texture = ExtResource("3_murfr")
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_01gh7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_lnx8y")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_murfr")
