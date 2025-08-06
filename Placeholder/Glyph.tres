@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://ds7w7fkv8jqbs"]
+
+[ext_resource type="Shader" uid="uid://cwtw2tkul3c2v" path="res://Scenes/UI/GlyphShader.gdshader" id="1_i6dyu"]
+[ext_resource type="Texture2D" uid="uid://c840of72u85fk" path="res://Placeholder/Portals/Glyph2.png" id="2_4wgeq"]
+[ext_resource type="Texture2D" uid="uid://csqdfovsxctsv" path="res://Scenes/Water/waternoise2.tres" id="3_4wgeq"]
+
+[resource]
+shader = ExtResource("1_i6dyu")
+shader_parameter/glyphs = ExtResource("2_4wgeq")
+shader_parameter/noise = ExtResource("3_4wgeq")
+shader_parameter/glyph_w = 13
+shader_parameter/glyph_h = 13
+shader_parameter/cells_w = 12.7
+shader_parameter/cells_h = 13.0
+shader_parameter/change_sec = 2.0

@@ -1,0 +1,64 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://csec1krjknhbj"]
+
+[sub_resource type="Shader" id="Shader_gq7yb"]
+code = "shader_type spatial;
+render_mode unshaded;
+
+/// some info about how this works:
+/// https://www.youtube.com/watch?v=NCXr8zrT5zs
+
+/** base color **/
+uniform vec4 color : source_color;
+//uniform vec4 second_color : source_color;
+
+/** how deep can we see behind the plane before objects are obscured with fog **/
+uniform float depth_fade_distance : hint_range(0.0, 33.0, 0.01) = 1.5;
+
+group_uniforms camera;
+/** fade out portal card as the camera gets closer to it **/
+uniform bool use_camera_fade = true;
+/** camera distance before the material starts to fade **/
+uniform float cam_fade_length : hint_range(0.0, 10.0, 0.01) = 5.0;
+
+/// vertical edge fade (softens edges)
+//uniform float fade_falloff_v : hint_range(0.0, 10.0, 0.01) = 0.5;
+/// upper edge fade (softens edges)
+//uniform float fade_falloff_u : hint_range(0.0, 10.0, 0.01) = 0.5;
+//uniform float depth_fade_falloff : hint_range(0.0, 33.0, 0.01) = 0.5;
+
+uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+void fragment() {
+	// represented as value from 0 - 1 
+	float depth = textureLod(DEPTH_TEXTURE, SCREEN_UV, 0.0).r;
+	// represented as value from -1 - 1
+	vec4 ndc = vec4(SCREEN_UV * 2.0 - 1.0, depth, 1.0);
+	
+	// slow way:
+	//vec4 view = INV_PROJECTION_MATRIX * ndc;
+	//view.z /= view.w;
+	//float linear_depth = view.z;
+	
+	// faster way to do the above
+	float linear_depth = 1.0 / (depth * INV_PROJECTION_MATRIX[2].w  + INV_PROJECTION_MATRIX[3].w); // 1.0 is negated like -view.z
+	// in view space, represents the objects distance past the plane
+	float cam_to_plane = linear_depth + VERTEX.z;
+	
+	// clamp distance to fade off after this point
+	float final = clamp(cam_to_plane / depth_fade_distance, 0, 1); // 3.0 being in meters behind the plane
+
+	float fadeout = clamp(smoothstep(0.0, cam_fade_length, length(VERTEX)), 0.0, 1.0);
+	
+	ALBEDO = vec3(final) * color.rgb;
+	ALPHA = final * fadeout;
+}
+"
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_gq7yb")
+shader_parameter/color = Color(0.7616, 0.8, 0.512, 1)
+shader_parameter/depth_fade_distance = 6.1
+shader_parameter/use_camera_fade = true
+shader_parameter/cam_fade_length = 0.6

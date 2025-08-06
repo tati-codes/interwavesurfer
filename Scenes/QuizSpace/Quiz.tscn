@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnvmqdjdrdmpr"]
+
+[ext_resource type="Script" uid="uid://5nrewynjqru2" path="res://Scenes/QuizSpace/QuizRoot.cs" id="1_8wswb"]
+[ext_resource type="Script" uid="uid://ckv85en18uucd" path="res://ink/Ink-Bridge/InkWrapper.cs" id="1_yphmk"]
+[ext_resource type="Resource" uid="uid://cearusog1b3do" path="res://ink/personality_quiz.ink" id="2_8wswb"]
+[ext_resource type="PackedScene" uid="uid://foq24lg1yoqs" path="res://Scenes/UI/dialog_with_choices.tscn" id="4_opdw4"]
+[ext_resource type="Script" uid="uid://bufcjjxrclfjs" path="res://Placeholder/Debug/DebugLabel.cs" id="5_5a8ha"]
+
+[node name="Quiz" type="Node3D" node_paths=PackedStringArray("story")]
+script = ExtResource("1_8wswb")
+story = NodePath("InkWrapper")
+
+[node name="InkWrapper" type="Node" parent="."]
+script = ExtResource("1_yphmk")
+story = ExtResource("2_8wswb")
+metadata/_custom_type_script = "uid://ckv85en18uucd"
+
+[node name="DialogWithChoices" parent="." instance=ExtResource("4_opdw4")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="Label" type="Label" parent="Camera3D"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("5_5a8ha")

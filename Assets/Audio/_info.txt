@@ -1,0 +1,70 @@
+music at -6db
+vfx test
+
+during the quiz:
+	play: "music\welcome.ogg"
+		fade in: 6.5 s
+		loop
+
+if in house
+	play: "music\home.ogg" 
+		loop
+	play: "music\home - perc only - no kick.ogg"
+		volume: -inf dB
+		loop
+	play: "room ambience.ogg"
+		loop
+
+if outside (but not sailing)
+	no music
+	play: "outside ambience.ogg"
+		loop
+
+if sailing:
+	play: "music\sail.ogg"
+		fade in: 60 ms
+		loop (no fade in when it loops)
+	play: "ship water.ogg"
+		loop
+		maybe leave this sound effect out.. im not sure it's needed. the music already takes up lots of space
+
+turning the ship
+	play: "ship creak.ogg"
+		fade out if the ship stops turning before the audio ends
+
+
+walking
+	play: "walk 2 cycles.ogg"
+		loop
+		consider not having a walking sound at all if it doesn't feel unnatural. or maybe only play it when walking outside
+running
+	play: "run 2 cycles.ogg"
+		loop
+		consider not having a running sound at all if it doesn't feel unnatural. or maybe only play it when walking outside
+
+interacting with the pc
+	play: "pc noise.ogg"
+		loop (offset: 1 s)
+	play: "pc start.ogg"
+	fade to -inf dB: "home.ogg" (~0.8 s) [fade out from bgm]
+	fade in (idk to what dB, probably 0. it should be quite faint): "home - perc only - no kick.ogg" (~0.8 s)
+	
+selecting an option on the pc:
+	play random from \typing
+	exception: selecting yes on 'connect to network?' prompt
+		do not play random from \typing
+		instead play: "pc connect.ogg"
+			then show 'connecting...'
+			after 12 s: 'failed to connect'
+shutting down the pc:
+	stop: "pc noise.ogg"
+	play: "pc shut.ogg"
+	fade to -inf dB: "home - perc only - no kick.ogg" (5 s)
+	fade in: "home.ogg" (5 s)
+
+picking up an object
+	play: "pick up.ogg"
+placing an object down
+	play: "place.ogg"
+rotating an object:
+	play: "rotate.ogg"

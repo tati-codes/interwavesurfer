@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnbak1qu3dodc"]
+
+[ext_resource type="Shader" uid="uid://ceg15hw8loutf" path="res://Placeholder/rain.tres" id="1_qfif4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uafvk"]
+render_priority = 0
+shader = ExtResource("1_qfif4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_y5xjv"]
+lightmap_size_hint = Vector2i(59, 246)
+material = SubResource("ShaderMaterial_uafvk")
+size = Vector3(10, 19, 0.1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_y5xjv")

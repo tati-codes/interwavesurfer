@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://lwqlb8d40qqg"]
+
+[ext_resource type="Shader" uid="uid://tipb3nanyby" path="res://Placeholder/ParallelRain.tres" id="1_xtylk"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xtylk")

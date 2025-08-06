@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://o716etls5eau"]
+
+[ext_resource type="Shader" uid="uid://dag2usuii2imj" path="res://Rain2.gdshader" id="1_pan06"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1jno8"]
+render_priority = 0
+shader = ExtResource("1_pan06")
+shader_parameter/rain_amount = 200.0
+shader_parameter/near_rain_length = 0.2
+shader_parameter/far_rain_length = 0.1
+shader_parameter/near_rain_width = 1.0
+shader_parameter/far_rain_width = 0.5
+shader_parameter/near_rain_transparency = 1.0
+shader_parameter/far_rain_transparency = 0.5
+shader_parameter/rain_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/base_rain_speed = 0.5
+shader_parameter/additional_rain_speed = 0.5
+shader_parameter/slant = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0fim"]
+next_pass = SubResource("ShaderMaterial_1jno8")
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 1, 1, 0.0235294)
+emission = Color(0.95, 0.95, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ugxpj"]
+material = SubResource("StandardMaterial3D_d0fim")
+size = Vector3(8, 3, 2)
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_ugxpj")
