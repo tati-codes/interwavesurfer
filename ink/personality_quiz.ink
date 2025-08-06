@@ -33,14 +33,14 @@ VAR saturnine = 0
 - -> DONE
 === intro_quiz
 LIST quizCategories = (navQ), (swthQ), (rdwkQ), (dolQ), (saltQ)
-From a Land of Sunken Ash.
+From a Land of Sunken Ash. #laur
 Only a mailed fist as firm as Duke Montelroy's could elevate the Digal house.
 From obscurity to infamy. Destitution to decadence. Despair to Digal.
 A transformation already becoming legend.
 Your father's legacy is unassailable.
 + [So he says.]
 - But never mind that for now.
-Before I can let you depart, I need to ask you a few questions.
+Before I can let you depart, I need to ask you a few questions. 
 I'd like you to answer earnestly.
 Ready? Let's begin.
 - (quiz_opts)
@@ -62,7 +62,7 @@ Ready? Let's begin.
 { answered_q < 6: -> quiz_opts }
 - (handedness_q)
 //<- stat_panel //just for debugging
-Are you left- or right-handed?
+Are you left- or right-handed?  #general
 + [sail_left: LEFT]
 ~ alter(portside, 150)
 + [sail_right: RIGHT]
@@ -82,7 +82,7 @@ That will do well enough for now.
 - true: ~ portside = 450
 - false: ~ starboard = 450
 }
-Oh yes. You. Not cast out, leaping of your own volition.
+Oh yes. You. Not cast out, leaping of your own volition. #laur
 Shorn of rotten ties. To seize the one bond that holds fast.
 What legacy awaits the crest of your wave?
 //<- stat_panel
@@ -98,37 +98,37 @@ What legacy awaits the crest of your wave?
 { progress == 5: -> laur5 }
 {progress == 6: -> laur6 }
 - (laur1)
-The lies of a child are shallow squabbles.
+The lies of a child are shallow squabbles. #laur
 A lie is merely an untruth. Lady Esselie is an artisan.
 She spins fabrications so intricate any truth pales in comparison. 
 Her unshakeable faith is a bulwark against untangling what was ever true.
 + [What was ever true?] -> answered_q
 - (laur2)
-Wings to turn wind. Breath to end battle. Belly to demand rubs.
+Wings to turn wind. Breath to end battle. Belly to demand rubs. #laur
 Triscuit Digal never returned.
 His mission so secret, even the lady truly knows it not.
 It must be of great import to leave the land devoid of dragon.
 + [Still wake up lonely.] -> answered_q
 - (laur3)
-The land has its share of ministers.
+The land has its share of ministers. #laur
 Miniscule men with petty affairs puppeted by the chancellor atop.
 Some claim that the whole capital dances for his grand machinations.
 Such claimants spend their last breath carelessly.
 + [Or carefully.] -> answered_q
 - (laur4)
-There once was the lodestar. Descended to us in pieces. Every part a treasure.
+There once was the lodestar. Descended to us in pieces. Every part a treasure. #laur
 To be of the stone itself is a sacred duty an unquestionable designation above reproach.
 True good transcends kind words and comforting gestures.
 It must be seized with stained hands.
 + [Don't seize, do.] -> answered_q
 - (laur5)
-Beware the nameless.
+Beware the nameless. #laur
 It is said that to be named is to anchor yourself to a home.
 The most fearsome of foes freely forsakes a name, without crime, without disgrace.
 What does it leave them with?
 + [Unmatched skill.] -> answered_q
 - (laur6)
-Ahhh, but let us not forget...
+Ahhh, but let us not forget... #laur
 The instigator. [X]. Renounced. Disowned. Excommunicated. Exiled. Struck.
 And yet, alive?
 + [Or so you hope.] -> answered_q
@@ -140,7 +140,7 @@ And yet, alive?
 - 3: -> lonely
 }
 - (lie_1)
-Do you often lie when there's no good reason to?
+Do you often lie when there's no good reason to? #general
 + [\(sail_left\): CONSTANTLY]
 ~ alter(navigation, 50)
 ~ alter(seaworthy, 50)
@@ -152,7 +152,7 @@ Do you often lie when there's no good reason to?
 { answered_q < 6: -> lie_2 }
 ->->
 - (lie_2) //followup to lie_1
-Your father suspects you're lying and threatens to punish you! What do you do?
+Your father suspects you're lying and threatens to punish you! What do you do? #general
 + [\(sail_left\): CONVINCE HIM IT WAS A MISTAKE]
 ~ alter(navigation, 100)
 + [\(sail_straight\): CONFESS BEFORE IT GETS WORSE]
@@ -164,7 +164,7 @@ Your father suspects you're lying and threatens to punish you! What do you do?
 - -> laur_talk ->
 ->->
 - (someone_else)
-Do you often imagine events in your life as if they were happening to someone else?
+Do you often imagine events in your life as if they were happening to someone else? #general
 + [\(sail_left\): YES]
 ~ alter(navigation, 50)
 ~ alter(doldrums, 50)
@@ -175,7 +175,7 @@ Do you often imagine events in your life as if they were happening to someone el
 - -> laur_talk ->
 ->->
 - (lonely)
-Can you spend all day on your own, without becoming bored or lonely?
+Can you spend all day on your own, without becoming bored or lonely? #general
 + [\(sail_left\): WHEN I'M HAPPY]
 ~ alter(navigation, 100)
 + [sail_straight: NOT AT ALL]
@@ -192,7 +192,7 @@ Can you spend all day on your own, without becoming bored or lonely?
 - 3: -> eye
 }
 - (sick)
-Have you ever been sick for so long you thought you might never recover?
+Have you ever been sick for so long you thought you might never recover? #general
 + [\(sail_left\): ONLY ONCE]
 ~ alter(seaworthy, 50)
 + [\(sail_straight\): MANY TIMES]
@@ -202,7 +202,7 @@ Have you ever been sick for so long you thought you might never recover?
 - -> laur_talk ->
 ->->
 - (omens)
-Do you believe in signs and lucky omens?
+Do you believe in signs and lucky omens? #general
 + [\(sail_left\): NO]
 ~ alter(salt, 50)
 + [sail_straight: YES]
@@ -213,7 +213,7 @@ Do you believe in signs and lucky omens?
 - -> laur_talk ->
 ->->
 - (eye)
-When you have to read something close to your face, which eye do you close?
+When you have to read something close to your face, which eye do you close? #general
 + [\(sail_left\): LEFT]
 ~ alter(starboard, 50)
 + [\(sail_straight\): RIGHT]
@@ -223,7 +223,7 @@ When you have to read something close to your face, which eye do you close?
 - -> laur_talk ->
 ->->
 - (help_fran2) //followup to (bluff) from help_fran1
-You get started on Fran's problem and have no idea what you're doing. What's your plan?
+You get started on Fran's problem and have no idea what you're doing. What's your plan? #general
 + [\(sail_left\): ASK TRISKIE]
 ~ alter(rudderwork, 50)
 + [\[sail_straight\): PRETEND TO FORGET]
@@ -240,7 +240,7 @@ You get started on Fran's problem and have no idea what you're doing. What's you
 - 3: -> help_fran1
 }
 - (accomplishment)
-Can you generally accomplish anything you decide to do?
+Can you generally accomplish anything you decide to do?  #general
 + [\(sail_left\): YES]
 ~ alter(navigation, 50)
 ~ alter(rudderwork, 50)
@@ -251,7 +251,7 @@ Can you generally accomplish anything you decide to do?
 - -> laur_talk ->
 ->->
 - (orders)
-Do you rudely order your father's servants and chancellors about?
+Do you rudely order your father's servants and chancellors about? #general
 + [\(sail_left\): IF I NEED SOMETHING]
 ~ alter(rudderwork, 50)
 + [\(sail_straight\): JUST FOR FUN]
@@ -262,7 +262,7 @@ Do you rudely order your father's servants and chancellors about?
 - -> laur_talk ->
 ->->
 - (help_fran1)
-Fran is asking for your help when you suddenly realize you weren't paying attention! What do you say?
+Fran is asking for your help when you suddenly realize you weren't paying attention! What do you say? #general
 + (bluff)[\(sail_left\): LEAVE IT TO ME!]
 ~ alter(seaworthy, 50)
 + [\[sail_straight\): YOU'VE GOT THIS!]
@@ -275,7 +275,7 @@ Fran is asking for your help when you suddenly realize you weren't paying attent
 { answered_q < 6: -> good_side -> }
 ->->
 - (good_side) //followup to 2/3 of help_fran1
-When a friend is angry with you, how do you get back on their good side?
+When a friend is angry with you, how do you get back on their good side? #general
 + [\(sail_left\): WRITE AN APOLOGY]
 ~ alter(rudderwork, 50)
 + [\[(sail_straight\): GIVE THEM A PRESENT]
@@ -293,7 +293,7 @@ When a friend is angry with you, how do you get back on their good side?
 - 4: -> accomplishments
 }
 - (hard_on_self)
-Do you tend to be quite hard on yourself, as if you can't do anything right?
+Do you tend to be quite hard on yourself, as if you can't do anything right? #general
 + [\(sail_left\): YES]
 ~ alter(doldrums, 100)
 + [\(sail_right\): NO]
@@ -302,7 +302,7 @@ Do you tend to be quite hard on yourself, as if you can't do anything right?
 - -> laur_talk ->
 ->->
 - (doorway)
-When passing someone in a crowded doorway, do you turn toward them or away from them?
+When passing someone in a crowded doorway, do you turn toward them or away from them? #general
 + [\(sail_left\): AWAY]
 ~ alter(doldrums, 100)
 ~ alter(portside, 50)
@@ -314,7 +314,7 @@ When passing someone in a crowded doorway, do you turn toward them or away from 
 - -> laur_talk ->
 ->->
 - (monologue)
-When you talk to yourself, are you more likely to call yourself "I", "you", or "we"?
+When you talk to yourself, are you more likely to call yourself "I", "you", or "we"? #general
 + ["I"]
 ~ alter(salt, 50)
 + ["YOU"]
@@ -325,7 +325,7 @@ When you talk to yourself, are you more likely to call yourself "I", "you", or "
 - -> laur_talk ->
 ->->
 - (accomplishments)
-Do you have a difficult time hearing about the accomplishments of someone else? Whose?
+Do you have a difficult time hearing about the accomplishments of someone else? Whose? #general
 + [\(sail_left\): THOSE I LIKE]
 ~ alter(doldrums, 100)
 + [sail_straight: THOSE I DISLIKE]
@@ -343,7 +343,7 @@ Do you have a difficult time hearing about the accomplishments of someone else? 
 - 4: -> favorite_food
 }
 - (servants)
-You overhear the servants laughing at you behind your back! What do you do?
+You overhear the servants laughing at you behind your back! What do you do? #general
 + [\(sail_left\): CONFRONT THEM]
 ~ alter(salt, 50)
 + [\(sail_straight\): INFORM YOUR FATHER]
@@ -354,7 +354,7 @@ You overhear the servants laughing at you behind your back! What do you do?
 - -> laur_talk ->
 ->->
 - (scolding)
-What do you think about when someone more important scolds you?
+What do you think about when someone more important scolds you? #general
 + [\(sail_left\): CORRECTING MYSELF]
 ~ alter(navigation, 50)
 + [\(sail_straight\): LOOKING SORRY ENOUGH]
@@ -365,7 +365,7 @@ What do you think about when someone more important scolds you?
 - -> laur_talk ->
 ->->
 - (lodestone)
-Have you ever lost your lodestone?
+Have you ever lost your lodestone? #general
 + [\(sail_left\): OF COURSE NOT!]
 ~ alter(navigation, 50)
 + [\(sail_right\): WHAT, AM I IN TROUBLE?]
@@ -374,7 +374,7 @@ Have you ever lost your lodestone?
 - -> laur_talk ->
 ->->
 - (favorite_food)
-What's your favorite food?
+What's your favorite food? #general
 + [\(sail_left\): ORANGES]
 ~ alter(seaworthy, 50)
 + [\(sail_straight\): PEANUT BUTTER]
