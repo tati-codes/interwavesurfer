@@ -1,6 +1,10 @@
 using OBus;
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using GodotInk;
+using InkBridge;
 using Interactables;
 using OBus;
 using UIEvents;
@@ -14,23 +18,33 @@ public partial class DialogWithChoicesRoot : PanelContainer {
 	public ChoiceDialogTextHolder ContentContainer {get; set;} 
 	[Export]
 	public DialogChoicesContainer ChoiceContainer {get; set;}
+  
 
 	public override void _Ready() {
 		bus = GetNode<Bus>("/root/bus");
 		global = GetNode<GlobalState>("/root/Global");
-		bus.Subscribe<IShowDialogChoices, ChoiceDialogArgs>(args => {
-				NameHolder.Text = args.title;		
-				ContentContainer.Append(args.content);
-				ChoiceContainer.Consume(args.choices);
+		bus.Subscribe<ChoiceSelected, IChoice>(args => {
+			ContentContainer.Append("[i][color=bbbc95]You: [b]" + args.escapedText + "[/b][/color] [/i]");
 		});
+		bus.Subscribe<IShowDialogChoices, ChoiceDialogArgs>(consume);
+	}
+	void consume(ChoiceDialogArgs args) {
+			NameHolder.Text = args.title;		
+			if (args.choices.Count == 0) ContentContainer.Maximize();
+			else {
+				ContentContainer.Minimize();
+				ContentContainer.Reset();
+			}
+			ContentContainer.Append(args.content);
+			ChoiceContainer.Consume(args.choices);
 	}
 }
 
 namespace UIEvents {
 	public class IShowDialogChoices: TEvent<ChoiceDialogArgs> {}
-	public class ChoiceDialogArgs(string _content, string[] _choices, string _title) : Args {
+	public class ChoiceDialogArgs(string _content,  List<InkChoice> _choices, string _title) : Args {
 		public string content { get; init; } = _content;
-		public string[] choices { get; init; } = _choices;
+		public List<InkChoice> choices { get; init; } = _choices;
 		public string title { get; init; } = _title;
 	}
 }

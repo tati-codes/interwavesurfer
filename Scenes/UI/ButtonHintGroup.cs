@@ -23,11 +23,16 @@ public partial class ButtonHintGroup : Control {
 				primaryZone.disappear();
 				break;
 			case UIState.IS_HOLDING:
+				//FIXME
+				primaryZone.show(PlayerInput.Buttons.A, "Fix this");
 				break;
 			case UIState.CAN_READ:
 				primaryZone.show(PlayerInput.Buttons.A, "Read");
 				break;
 			case UIState.DIALOG:
+				primaryZone.disappear();
+				break;
+			case UIState.FULLSCREEN_DIALOG:
 				break;
 			default:
 				throw new ArgumentOutOfRangeException(nameof(transition.to), nameof(transition.from), null);

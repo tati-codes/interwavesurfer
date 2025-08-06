@@ -17,10 +17,10 @@ public partial class FaceButtonZone : Control {
   public AnimationPlayer anim {get; set;}
 
   public Action batched = null;	
-  Bus bus;
+  // Bus bus;
 
   public override void _Ready() {
-    bus = GetNode<Bus>("/root/bus");
+    // bus = GetNode<Bus>("/root/bus");
     image.setButton(null);
     label.Text = "";
     // anim.AnimationFinished += args => {
@@ -37,12 +37,5 @@ public partial class FaceButtonZone : Control {
   }
   public void disappear() {
     anim.Play("GoAway");
-  }
-
-  public override void _Process(double delta) {
-    bus.IPub<TatiDebug.Debug,DebugVar>(new("alpha", this.SelfModulate));
-    bus.IPub<TatiDebug.Debug,DebugVar>(new("isPlaying", anim.IsPlaying()));
-    bus.IPub<TatiDebug.Debug,DebugVar>(new("anim", anim.AssignedAnimation));
-    bus.IPub<TatiDebug.Debug,DebugVar>(new("anim", anim.AssignedAnimation));
   }
 }
