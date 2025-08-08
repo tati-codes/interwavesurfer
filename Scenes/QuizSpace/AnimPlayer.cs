@@ -45,7 +45,7 @@ public partial class AnimPlayer : AnimationPlayer {
 				Play(next);
 			}
 		});
-		this.AnimationFinished += (name => {
+		this.AnimationFinished += (name => { // do we need one for anything else?
 			if (name == "WhiteOutFrom3DSpace") {
 				Play("BoatReset");
 			}
