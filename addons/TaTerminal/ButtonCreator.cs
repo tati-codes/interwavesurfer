@@ -4,37 +4,32 @@ using Godot;
 using System;
 using Taterminal;
 
-[Tool]
+[Tool][GlobalClass]
 public partial class ButtonCreator : VBoxContainer {
 	[Export]
 	public TagHolder tagHolder { get; set; }
 	[Export]
-	public PackedScene pathToThingButton { get; set; }
-	public override void _Ready() {
-		// rebuild();
-	}
+	public PackedScene tagButtonScene { get; set; }
+
 	public void rebuild(NArgs _ = default) {
-		// var children = GetChildren();
-		// children.RemoveAt(0);
-		// foreach (Node child in children) {
-		// 	TagButton temp = child as TagButton;
-		// 	if (temp != null) {
-    //     RemoveChild(child);
-		// 		child.QueueFree();
-		// 	}
-		// }
-    // foreach ((tag _tag, var tag_show) in tagHolder.registeredTags) {
-    //   var p = pathToThingButton.Instantiate<TagButton>();
-    //   p.Tag = _tag; 
-    //   p.Text = _tag.name;
-    //   p.SetPressedNoSignal(!tag_show);
-    //   var new_stylebox_normal = p.GetThemeStylebox("normal").Duplicate();
-    //   StyleBoxFlat style = (StyleBoxFlat)new_stylebox_normal;
-    //   style.BorderColor = new Color(_tag.bbcolor);
-    //   p.AddThemeStyleboxOverride("normal", style);
-    //   p.tagHolder = tagHolder;
-    //   AddChild(p);
-    // }
+		var children = GetChildren();
+		foreach (Node child in children) {
+			TagButton temp = child as TagButton;
+			if (temp != null) {
+        RemoveChild(child);
+				child.QueueFree();
+			}
+		}
+    foreach ((tag _tag, var tag_show) in tagHolder.registeredTags) {
+	    if (_tag == tag.count && tagHolder.beenCounting == false) {
+		    continue;
+	    };
+      var p = tagButtonScene.Instantiate<TagButton>();
+      p.setTag(_tag);
+      p.tagHolder = tagHolder;
+      p.SetPressedNoSignal(!tag_show);
+      AddChild(p);
+    }
 	}
 }
 

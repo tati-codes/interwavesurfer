@@ -10,6 +10,6 @@ public partial class _CLASS_ : _BASE_ {
   public GlobalState global;
   public override void _Ready()	{
     bus = GetNode<Bus>("/root/bus");
-    global = GetNode<GlobalState>("/root/global");
+    global = GetNode<GlobalState>("/root/Global");
   }
 }

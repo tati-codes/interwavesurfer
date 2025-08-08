@@ -9,7 +9,7 @@ public partial class Bus : Node {
   public void Log(string msg) => this.Publish<Log, Text>(new Text(msg));
   public void Warn(string msg) => this.Publish<Warn, Text>(Text.warn(msg));
   //FIXME this is not working; privated until fixed
-  private void LogAsTag(string msg, string tag) => this.Publish<TLog, DbgString>(new DbgString() { name = "", text = msg, tag = tag});
+  private void LogAsTag(string msg, tag tag) => this.Publish<TLog, DbgString>(new DbgString() { name = "", text = msg, tag = tag});
   public void Inspect(Object o) => this.Log(DbgString.InspectObject(o));
   public void Error(string msg) => this.Publish<OBus.Error, Text>(Text.error(msg));
   public void Subscribe<T>(Action<NArgs> action)
@@ -22,7 +22,7 @@ public partial class Bus : Node {
   public void Warn(params string[] strings) => this.Publish<Warn, Text>(Text.warn(String.Join(" ", strings)));
   public void Error(params string[] strings) => this.Publish<OBus.Error, Text>(Text.error(string.Join(" ", strings)));
   /// <summary>
-  /// Count any invocation of Bus.Count() with the same labell'
+  /// Count any invocation of Bus.Count() with the same label
   /// </summary>
   public void Count(string label) => Publish<Count, Text>(Text.count(label));
 

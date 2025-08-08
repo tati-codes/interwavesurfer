@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using Taterminal;
-
+[Tool]
 public partial class FilterBar : LineEdit
 {
   [Export]
@@ -9,9 +9,4 @@ public partial class FilterBar : LineEdit
 	public override void _Ready() {
     this.TextChanged += buffer.setFilter;
 	}
-
-}
-
-namespace Taterminal {
-  public class FilterStringChanged : TEvent<Text> {}
 }

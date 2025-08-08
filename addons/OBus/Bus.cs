@@ -11,7 +11,7 @@ public partial class Bus : Node {
   [Export]
   bool productionMode {get; set;} = false;
   public override void _Ready() {
-    instance = this;
+      instance = this;
     if (!productionMode) {
       busClient.subscribe(this);
       busClient.connect();

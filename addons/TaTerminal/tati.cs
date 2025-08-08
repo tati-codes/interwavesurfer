@@ -9,7 +9,6 @@ public partial class tati : EditorPlugin
     public override void _EnterTree()
     {
         _dock = GD.Load<PackedScene>("res://addons/TaTerminal/UI.tscn").Instantiate<Control>();
-        //TODO add tag dock 
         AddControlToBottomPanel(_dock, "TaTerminal");
     }
 

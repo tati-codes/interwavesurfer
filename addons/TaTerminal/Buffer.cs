@@ -11,6 +11,9 @@ public partial class Buffer : Node
     public TagHolder tagHolder;
     [Export]
     public Output label;
+
+    [Export] 
+    public bool debugMessages {get; set;} = false;
     public bool collapsed = false; 
     LOG_LEVEL overrideLogLevel { get; set; } = (LOG_LEVEL)1;
     int msgCount = 0;
@@ -33,17 +36,10 @@ public partial class Buffer : Node
       }
     }
     public override void _Ready() {
-        // bus.Subscribe<Log, Text>(consume);
-        // bus.Subscribe<Warn, Text>(consume);
-        // bus.Subscribe<Taterminal.Error, Text>(consume);
-        // bus.Subscribe<BgLog, DbgString>(consume);
-        // bus.Subscribe<TLog, DbgString>(consume);
-        // bus.Subscribe<ClearTerminal>((args) => Clear());
-        // bus.Subscribe<FilterStringChanged, Text>(setFilter);
-        // bus.Subscribe<ToggleGlobalCollapse>(args => collapsed = !collapsed);
-        // bus.Subscribe<Count, Text>(args => consume(Count.GetTerminalString(args)));
-        // bus.Subscribe<TagToggled>(args => publish());
-        consume(new Text("hi"));
+      consume(new Text("hi"));
+      if (debugMessages) {
+        pushDebugMessages();
+      }
     }
 
     public void toggleGlobalCollapse() { 
@@ -51,8 +47,13 @@ public partial class Buffer : Node
       publish();
     }
     public void consume(terminalString msg) => Add(msg);
-    public void consume(Text msg) => consume(new terminalString(msg, tagHolder.resolveTag(msg.tag)));
-    public void consume(DbgString msg) => consume(new terminalString(msg,  tagHolder.resolveTag(msg.tag)));
+    public void consume(Text msg) => consume(new terminalString(msg, msg.tag));
+    public void consume(DbgString msg) {
+      if (!tagHolder.tagNameExists(msg.tag.name)) {
+        tagHolder.registerTag(msg.tag);
+      }
+      consume(new terminalString(msg, msg.tag));
+    }
     public void publish() => label.Display(this);
     public void Add(terminalString tStr) {
       msgCount++;
@@ -69,6 +70,9 @@ public partial class Buffer : Node
       string oldFilter = filterStr;
       string newFilter = newFilterStr;
       if (oldFilter == newFilter) return;
+      if (newFilter == "tatiDebug") {
+        pushDebugMessages();
+      }
       if (newFilterStr.Length == 0) {
         filterStr = string.Empty;
       } else {
@@ -76,6 +80,17 @@ public partial class Buffer : Node
       }
       publish();
     }
+
+    private void pushDebugMessages() {
+      consume(Text.count("pollo"));
+      consume(Text.error("el error"));
+      consume(Text.evnt("evento"));
+      consume(Text.warn("warn"));
+      var p = new tag("fucked", "8e498a");
+      tagHolder.registerTag(p);
+      consume(new Text("fucked up") { tag = p});
+    }
+
     public void setOverride(LOG_LEVEL newLog) {
       if (newLog == overrideLogLevel) return;
       overrideLogLevel = newLog;

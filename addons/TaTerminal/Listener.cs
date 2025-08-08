@@ -30,8 +30,7 @@ public partial class Listener : Node
 		if (!server.IsListening())
 		{
 			return server.Listen(port, "127.0.0.1");
-		} else
-		{
+		} else {
 			buffer.consume(Text.error("Server already listening;"));
       return Godot.Error.AlreadyExists;
 		}
@@ -86,7 +85,8 @@ public partial class Listener : Node
         }
       }
     }
-  //TODO make this differentiate between dbgstring and Text etc
+  
+	//TODO make this differentiate between dbgstring and Text etc
   void interpret(string msg) {
     try {
       DbgString interpreted = DbgString.import(msg);
@@ -141,8 +141,7 @@ public partial class Listener : Node
 	}
 
   //FIXME merge this upstream
-  public override void _ExitTree()
-  {
+  public override void _ExitTree()  {
     stop();
   }
 }

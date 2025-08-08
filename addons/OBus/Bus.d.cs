@@ -5,17 +5,16 @@ using System.Reflection;
 
 namespace OBus {
   #region Logging
-    public class Text : Args
-    {
+    public class Text : Args {
         public string text { get; set; }
         public Text(string t) {
             text = t;
-            this.tag = OBus.tag.info.name;
+            this.tag = OBus.tag.info;
         }
-        public static Text error(string t) => new Text(t) { tag = OBus.tag.error.name};
-        public static Text warn(string t) => new Text(t) { tag = OBus.tag.warning.name};
-        public static Text evnt(string t) => new Text(t) { tag = OBus.tag.evnt.name};
-        public static Text count(string t) => new Text(t) { tag = OBus.tag.count.name};
+        public static Text error(string t) => new Text(t) { tag = OBus.tag.error};
+        public static Text warn(string t) => new Text(t) { tag = OBus.tag.warning};
+        public static Text evnt(string t) => new Text(t) { tag = OBus.tag.evnt};
+        public static Text count(string t) => new Text(t) { tag = OBus.tag.count};
         public static implicit operator string(Text text) => text.text;
     }
     public class Log : TEvent<Text> { }
@@ -55,13 +54,12 @@ namespace OBus {
     }
     public abstract class Args {
         public virtual LOG_LEVEL level { get; set; } = LOG_LEVEL.MINIMAL;
-        public virtual string tag {get; set;} = OBus.tag.evnt.name;
+        public virtual tag tag {get; set;} = OBus.tag.evnt;
         public string DebugStringify() {
             Type myClassType = this.GetType();
             PropertyInfo[] properties = myClassType.GetProperties();
             string result = "";
-            foreach (PropertyInfo property in properties)
-            {
+            foreach (PropertyInfo property in properties) {
                 if (property.Name == "level" || property.Name == "tag") continue;
                 result += property.Name + ": " + property.GetValue(this, null) + "\n";
             }
@@ -92,6 +90,7 @@ namespace OBus {
         else if (isMessage<T>(@event) && @event is Count && args is Text countargs) return createFromCount(countargs);
         else return createFromEvent<T, TArgs>(args);
       }
+      //This is the only difference with TerminalEvents, or should be anyway
       public static string InspectObject(object obj) {
         string InspectIEnumerable (IEnumerable obj) {
           string result = "";
@@ -147,7 +146,7 @@ namespace OBus {
         name = "count",
         text = textargs.text,
         level = LOG_LEVEL.MINIMAL,
-        tag = OBus.tag.count.name
+        tag = OBus.tag.count
       };
       public string name { get; set; }
       public string text { get; set; }
@@ -174,7 +173,7 @@ namespace OBus {
               name = name,
               text = text,
               level = Enum.Parse<LOG_LEVEL>(level),
-              tag = tag
+              tag = OBus.tag.fromString(tag)
           };
       }
     }

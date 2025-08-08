@@ -17,7 +17,7 @@ namespace Taterminal {
         details = msg.text;
         tag = _tag;
         logLevel = msg.level;
-        if (msg.name == "") { //TODO add to te tarminelahttp
+        if (msg.name == "") { 
           details = "";
           name = msg.text;
         }
