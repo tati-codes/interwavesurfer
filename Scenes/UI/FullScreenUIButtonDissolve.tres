@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ovggdyr7jrvo"]
+
+[ext_resource type="Texture2D" uid="uid://csqdfovsxctsv" path="res://Scenes/Water/waternoise2.tres" id="1_1nv7d"]
+
+[sub_resource type="Shader" id="Shader_hp1g4"]
+code = "shader_type canvas_item;
+
+uniform vec2 position;
+uniform float radius;
+uniform float borderWidth = 0.02;
+uniform float burnMult = 0.135;
+uniform sampler2D noiseTexture;
+uniform vec4 burnColor : source_color;
+
+void fragment() {
+	float dist = length(position - UV) + (texture(noiseTexture, UV).b) * burnMult;
+	COLOR.rgb = mix(COLOR.rgb, burnColor.rgb, float(dist<radius+borderWidth));
+	COLOR.a *= 1.0-(float(dist<radius));
+}"
+
+[resource]
+shader = SubResource("Shader_hp1g4")
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.009
+shader_parameter/burnMult = 0.5
+shader_parameter/noiseTexture = ExtResource("1_1nv7d")
+shader_parameter/burnColor = Color(0.62, 0.26133, 0.0682, 0.662745)

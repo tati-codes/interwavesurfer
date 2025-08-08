@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bgsddlpfxgwld"]
+
+[ext_resource type="Texture2D" uid="uid://cqp61g3j0f40c" path="res://Assets/UI/magician.png" id="1_7ager"]
+
+[resource]
+texture = ExtResource("1_7ager")
+texture_margin_left = 125.0
+texture_margin_top = 55.0
+texture_margin_right = 130.0
+texture_margin_bottom = 57.0
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0

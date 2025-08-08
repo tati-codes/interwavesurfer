@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dvmgyoebf6p4a"]
+
+[ext_resource type="FontFile" uid="uid://exo54yl0qrnr" path="res://Assets/Fonts/OSerif/OSerif.ttf" id="1_ktidr"]
+
+[resource]
+font = ExtResource("1_ktidr")
+font_size = 30

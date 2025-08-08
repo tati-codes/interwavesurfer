@@ -1,0 +1,193 @@
+[gd_scene load_steps=14 format=3 uid="uid://dnais2qlt7sht"]
+
+[ext_resource type="Shader" uid="uid://djcifos4pba4x" path="res://Placeholder/Portals/Fog.gdshader" id="1_ige4h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_esahd"]
+render_priority = -3
+shader = ExtResource("1_ige4h")
+shader_parameter/enable_fog = true
+shader_parameter/fog_color = Color(0, 0, 0, 1)
+shader_parameter/noise_color = Color(0, 0, 0, 1)
+shader_parameter/fog_distance = 100.0
+shader_parameter/fog_fade_range = 125.937
+shader_parameter/enable_noise = true
+shader_parameter/noise_time_fac = 4.0
+shader_parameter/enable_color_limitation = true
+shader_parameter/color_levels = 32
+shader_parameter/enable_dithering = true
+shader_parameter/dither_strength = 0.3
+
+[sub_resource type="QuadMesh" id="QuadMesh_ypqt0"]
+material = SubResource("ShaderMaterial_esahd")
+size = Vector2(2, 2)
+
+[sub_resource type="Shader" id="Shader_esahd"]
+code = "// Rain and Snow shader by Brian Smith (steampunkdemon.itch.io)
+// MIT licence
+
+shader_type spatial;
+
+uniform float rain_amount = 200.0;
+uniform float near_rain_length : hint_range(0.01, 1.0) = 0.2;
+uniform float far_rain_length : hint_range(0.01, 1.0) = 0.1;
+uniform float near_rain_width : hint_range(0.1, 1.0) = 1.0;
+uniform float far_rain_width : hint_range(0.1, 1.0) = 0.5;
+uniform float near_rain_transparency : hint_range(0.1, 1.0) = 1.0;
+uniform float far_rain_transparency : hint_range(0.1, 1.0) = 0.5;
+// Replace the below reference to source_color with hint_color if you are using a version of Godot before 4.
+uniform vec4 rain_color : source_color = vec4(0.8, 0.8, 0.8, 1.0);
+uniform float base_rain_speed : hint_range(0.1, 1.0) = 0.5;
+uniform float additional_rain_speed : hint_range(0.1, 1.0) = 0.5;
+uniform float slant : hint_range(-1.0, 1.0) = 0.2;
+
+void fragment() {
+// To control the rainfall from your program comment out the below line and add a new uniform above as:
+// uniform float time = 10000.0;
+// Then update the time uniform from your _physics_process function by adding delta. You can then pause the rainfall by not changing the time uniform.
+	float time = 10000.0 + TIME;
+
+// Uncomment the following line if you are applying the shader to a TextureRect and using a version of Godot before 4.
+//	COLOR = texture(TEXTURE,UV);
+
+	vec2 uv = vec2(0.0);
+	float remainder = mod(UV.x - UV.y * slant, 1.0 / rain_amount);
+	uv.x = (UV.x - UV.y * slant) - remainder;
+	float rn = fract(sin(uv.x * rain_amount));
+	uv.y = fract((UV.y + rn));
+
+// Blurred trail. Works well for rain:
+	vec4 result = mix(COLOR, rain_color, smoothstep(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), 1.0, fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+
+// No trail. Works well for snow:
+	if (result == COLOR) {
+		ALPHA = 0.0;
+	}
+ 	//vec4 result = mix(COLOR, rain_color, step(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+	ALBEDO = result.rgb;
+	}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ljpyg"]
+render_priority = 0
+shader = SubResource("Shader_esahd")
+shader_parameter/rain_amount = 770.0
+shader_parameter/near_rain_length = 0.033
+shader_parameter/far_rain_length = 0.036
+shader_parameter/near_rain_width = 0.264
+shader_parameter/far_rain_width = 0.108
+shader_parameter/near_rain_transparency = 0.805
+shader_parameter/far_rain_transparency = 0.5
+shader_parameter/rain_color = Color(0.232, 0, 0.29, 0.996078)
+shader_parameter/base_rain_speed = 0.687
+shader_parameter/additional_rain_speed = 0.687
+shader_parameter/slant = 0.148
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5nlxh"]
+next_pass = SubResource("ShaderMaterial_ljpyg")
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 1, 1, 0.0235294)
+emission = Color(0.95, 0.95, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cdiwf"]
+material = SubResource("StandardMaterial3D_5nlxh")
+size = Vector3(7, 3, 2)
+
+[sub_resource type="Shader" id="Shader_ljpyg"]
+code = "// Rain and Snow shader by Brian Smith (steampunkdemon.itch.io)
+// MIT licence
+
+shader_type spatial;
+
+uniform float rain_amount = 200.0;
+uniform float near_rain_length : hint_range(0.01, 1.0) = 0.2;
+uniform float far_rain_length : hint_range(0.01, 1.0) = 0.1;
+uniform float near_rain_width : hint_range(0.1, 1.0) = 1.0;
+uniform float far_rain_width : hint_range(0.1, 1.0) = 0.5;
+uniform float near_rain_transparency : hint_range(0.1, 1.0) = 1.0;
+uniform float far_rain_transparency : hint_range(0.1, 1.0) = 0.5;
+// Replace the below reference to source_color with hint_color if you are using a version of Godot before 4.
+uniform vec4 rain_color : source_color = vec4(0.8, 0.8, 0.8, 1.0);
+uniform float base_rain_speed : hint_range(0.1, 1.0) = 0.5;
+uniform float additional_rain_speed : hint_range(0.1, 1.0) = 0.5;
+uniform float slant : hint_range(-1.0, 1.0) = 0.2;
+
+void fragment() {
+// To control the rainfall from your program comment out the below line and add a new uniform above as:
+// uniform float time = 10000.0;
+// Then update the time uniform from your _physics_process function by adding delta. You can then pause the rainfall by not changing the time uniform.
+	float time = 10000.0 + TIME;
+
+// Uncomment the following line if you are applying the shader to a TextureRect and using a version of Godot before 4.
+//	COLOR = texture(TEXTURE,UV);
+
+	vec2 uv = vec2(0.0);
+	float remainder = mod(UV.x - UV.y * slant, 1.0 / rain_amount);
+	uv.x = (UV.x - UV.y * slant) - remainder;
+	float rn = fract(sin(uv.x * rain_amount));
+	uv.y = fract((UV.y + rn));
+
+// Blurred trail. Works well for rain:
+	vec4 result = mix(COLOR, rain_color, smoothstep(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), 1.0, fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+
+// No trail. Works well for snow:
+	if (result == COLOR) {
+		ALPHA = 0.0;
+	}
+ 	//vec4 result = mix(COLOR, rain_color, step(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+	ALBEDO = result.rgb;
+	}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5nlxh"]
+render_priority = 0
+shader = SubResource("Shader_ljpyg")
+shader_parameter/rain_amount = 770.0
+shader_parameter/near_rain_length = 0.033
+shader_parameter/far_rain_length = 0.036
+shader_parameter/near_rain_width = 0.264
+shader_parameter/far_rain_width = 0.108
+shader_parameter/near_rain_transparency = 0.805
+shader_parameter/far_rain_transparency = 0.5
+shader_parameter/rain_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/base_rain_speed = 0.237
+shader_parameter/additional_rain_speed = 0.687
+shader_parameter/slant = 0.122
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdiwf"]
+next_pass = SubResource("ShaderMaterial_5nlxh")
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 1, 1, 0.0235294)
+emission = Color(0.95, 0.95, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v00k5"]
+material = SubResource("StandardMaterial3D_cdiwf")
+size = Vector3(7, 3, 2)
+
+[sub_resource type="Animation" id="Animation_e268q"]
+resource_name = "WhiteOut"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ige4h"]
+_data = {
+&"WhiteOut": SubResource("Animation_e268q")
+}
+
+[node name="QuizCamera" type="Camera3D"]
+current = true
+far = 171.44
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113554, 0.53615, -1.83102)
+mesh = SubResource("QuadMesh_ypqt0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.64293)
+mesh = SubResource("BoxMesh_cdiwf")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.93764)
+mesh = SubResource("BoxMesh_v00k5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ige4h")
+}
