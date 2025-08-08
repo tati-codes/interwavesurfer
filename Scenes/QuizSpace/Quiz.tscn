@@ -1,25 +1,1689 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnvmqdjdrdmpr"]
+[gd_scene load_steps=97 format=4 uid="uid://bnvmqdjdrdmpr"]
 
 [ext_resource type="Script" uid="uid://5nrewynjqru2" path="res://Scenes/QuizSpace/QuizRoot.cs" id="1_8wswb"]
 [ext_resource type="Script" uid="uid://ckv85en18uucd" path="res://ink/Ink-Bridge/InkWrapper.cs" id="1_yphmk"]
 [ext_resource type="Resource" uid="uid://cearusog1b3do" path="res://ink/personality_quiz.ink" id="2_8wswb"]
-[ext_resource type="PackedScene" uid="uid://foq24lg1yoqs" path="res://Scenes/UI/dialog_with_choices.tscn" id="4_opdw4"]
-[ext_resource type="Script" uid="uid://bufcjjxrclfjs" path="res://Placeholder/Debug/DebugLabel.cs" id="5_5a8ha"]
+[ext_resource type="PackedScene" uid="uid://d1e2d8fkln2tc" path="res://Scenes/Audio/audio_root.tscn" id="2_30ryk"]
+[ext_resource type="Shader" uid="uid://djcifos4pba4x" path="res://Placeholder/Portals/Fog.gdshader" id="7_mu41k"]
+[ext_resource type="PackedScene" uid="uid://cj4v283cikvra" path="res://Scenes/Boiat/boat2.tscn" id="13_7uih7"]
+[ext_resource type="Script" uid="uid://rmu1h4gar72e" path="res://Scenes/QuizSpace/AnimPlayer.cs" id="13_e4syr"]
+[ext_resource type="Script" uid="uid://d27wlsxo5mmyq" path="res://Scenes/UI/FullScreenText.cs" id="14_7uih7"]
+[ext_resource type="Material" uid="uid://ovggdyr7jrvo" path="res://Scenes/UI/FullScreenUIButtonDissolve.tres" id="15_aaodx"]
+[ext_resource type="Texture2D" uid="uid://cwxhsetxdr2ie" path="res://Scenes/Water/ValueCubicWaterNoise.tres" id="16_iwxwl"]
+[ext_resource type="Texture2D" uid="uid://ci8mponna6t5r" path="res://Assets/UI/decoration.png" id="16_lf4kn"]
+[ext_resource type="Script" uid="uid://dvbblsydihfpr" path="res://Scenes/UI/FullScreenTextHolder.cs" id="17_bux3m"]
+[ext_resource type="BoxMesh" uid="uid://bp0qhuew53eqw" path="res://Placeholder/Portals/PortalOcclusion.tres" id="17_cr5lj"]
+[ext_resource type="LabelSettings" uid="uid://dvmgyoebf6p4a" path="res://Scenes/UI/FullScreenUILabelSettings.tres" id="18_7p2c2"]
+[ext_resource type="Material" uid="uid://cnorubfbdwfa3" path="res://Placeholder/Glyph3D.tres" id="18_ikq8u"]
+[ext_resource type="StyleBox" uid="uid://bgsddlpfxgwld" path="res://Assets/UI/MagiciaBox.tres" id="19_4vj7q"]
+[ext_resource type="StyleBox" uid="uid://rotcv1hk41cb" path="res://Scenes/UI/DialogWithHeader.tres" id="20_l5k4x"]
+[ext_resource type="FontFile" uid="uid://0yqkj5fmx3kl" path="res://Assets/Fonts/Angel-Sealing Glyphs/Angel-sealingGlyphs-Regular.woff" id="20_mitk8"]
+[ext_resource type="Script" uid="uid://b18p3oblwwpti" path="res://Scenes/UI/DialogWithChoicesRoot.cs" id="21_dvcf5"]
+[ext_resource type="FontFile" uid="uid://bc3h7ky5fm4yl" path="res://Assets/Fonts/Blazma/Blazma-Italic.otf" id="22_ub3rv"]
+[ext_resource type="Script" uid="uid://dlfkekcv1fm8t" path="res://Scenes/UI/ChoiceDialogTextHolder.cs" id="23_6u8of"]
+[ext_resource type="PackedScene" uid="uid://cio8w4gf7kgmk" path="res://Scenes/UI/AppearingLabel.tscn" id="24_8dn4c"]
+[ext_resource type="Script" uid="uid://d32inaker5chd" path="res://Scenes/QuizSpace/ObeliskChoices.cs" id="25_8se6g"]
+[ext_resource type="Script" uid="uid://ocjk3rxk6iih" path="res://Scenes/UI/DialogChoicesContainer.cs" id="25_thmgn"]
+[ext_resource type="PackedScene" uid="uid://dy3gb5dyjen4r" path="res://Scenes/UI/DialogChoiceItem.tscn" id="26_k8slp"]
+[ext_resource type="Script" uid="uid://b4kkyljdwrea6" path="res://Scenes/QuizSpace/ObeliskChoice.cs" id="26_l5k4x"]
+[ext_resource type="Shader" uid="uid://dcqeok85pe4vb" path="res://Scenes/UI/BouncingShader.tres" id="27_ucpkq"]
+[ext_resource type="Texture2D" uid="uid://cd3ar2iew7p13" path="res://Assets/UI/downArrow.png" id="28_42q83"]
+
+[sub_resource type="Animation" id="Animation_cr5lj"]
+resource_name = "CenterChoice"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../boat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.1, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-3.02419, 2.12432, 26.1042), Vector3(-0.371, 2.124, -46.199)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("../boat:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0.999999, 1), Vector3(0.1, 0.1, 0.1)]
+}
+
+[sub_resource type="Animation" id="Animation_30ryk"]
+resource_name = "DissolveFromFullscreen"
+length = 2.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../FullScreenUI/ColorRect:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.46667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../DialogWithChoices:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5, 2.03333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../ArrowHolder:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.46, 2.03333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7uih7"]
+resource_name = "LeftChoice"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../boat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.83333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-3.02419, 2.12432, 26.1042), Vector3(-68.024, 2.124, -30.896)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../boat:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.46667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0278263, 5.02373e-05, 0.187885), Vector3(-0.0279253, 0.925025, -0.10821)]
+}
+
+[sub_resource type="Animation" id="Animation_lcwy7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/rain_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [770.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/near_rain_length")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.033]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/far_rain_length")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.036]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/near_rain_width")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.264]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/far_rain_width")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.108]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/rain_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.996078)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RainClose:mesh:material:emission_enabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RainClose:mesh:material:emission_energy_multiplier")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RainClose:mesh:material:albedo_color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../boat:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-3.02419, 2.12432, 26.1042)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../boat:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0.999999, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../boat:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0261799, 0, 0.188496)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../FullScreenUI/ColorRect:material:shader_parameter/radius")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("../FullScreenUI:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("../DialogWithChoices:modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("../DialogWithChoices:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("../FullScreenUI:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("../ArrowHolder:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("../FullScreenUI/TopDecor:modulate")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("../FullScreenUI/LabelHolder:modulate")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("../FullScreenUI/VBoxContainer:modulate")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("../FullScreenUI/ColorRect:color")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ikq8u"]
+resource_name = "RightChoice"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../boat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-3.02419, 2.12432, 26.1042), Vector3(67.976, 2.124, -22.796)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../boat:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0278263, 5.02373e-05, 0.187885), Vector3(-0.0279253, -0.925025, 0.0488692)]
+}
+
+[sub_resource type="Animation" id="Animation_aaodx"]
+resource_name = "SelectLeft"
+
+[sub_resource type="Animation" id="Animation_e268q"]
+resource_name = "WhiteOutFrom3DSpace"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/rain_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667, 1.73333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [770.0, 1785.0, 770.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/near_rain_length")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.73333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.033, 1.0, 0.033]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/far_rain_length")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.72),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.036, 1.0, 0.036]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/near_rain_width")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.73333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.264, 1.0, 0.264]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/far_rain_width")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 1.73333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.108, 1.0, 0.108]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RainClose:mesh:material:next_pass:shader_parameter/rain_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.996078)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RainClose:mesh:material:emission_enabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.0666667, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RainClose:mesh:material:emission_energy_multiplier")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.2, 0.733333, 1.53333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 6.75, 6.75, 0.4]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RainClose:mesh:material:emission")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.466667, 1.62),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.95, 0.95, 0.95, 1), Color(0, 0, 0, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("RainClose:mesh:material:albedo_color")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.833333, 1.83333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../FullScreenUI:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../FullScreenUI:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.133333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../FullScreenUI/ColorRect:material:shader_parameter/radius")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(1.03333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("../DialogWithChoices:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("../DialogWithChoices:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.966667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("../ArrowHolder:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("../FullScreenUI/TopDecor:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(1.3, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("../FullScreenUI/LabelHolder:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(1.3, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("../FullScreenUI/VBoxContainer:modulate")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(1.3, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("../FullScreenUI/ColorRect:color")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0.99),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_l5k4x"]
+resource_name = "BoatReset"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../boat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.785012),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-3.02419, 2.12432, 26.1042), Vector3(-3.023, 2.124, 26.104)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ige4h"]
+_data = {
+&"BoatReset": SubResource("Animation_l5k4x"),
+&"CenterChoice": SubResource("Animation_cr5lj"),
+&"DissolveFromFullscreen": SubResource("Animation_30ryk"),
+&"LeftChoice": SubResource("Animation_7uih7"),
+&"RESET": SubResource("Animation_lcwy7"),
+&"RightChoice": SubResource("Animation_ikq8u"),
+&"SelectLeft": SubResource("Animation_aaodx"),
+&"WhiteOutFrom3DSpace": SubResource("Animation_e268q")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_06r04"]
+font = ExtResource("20_mitk8")
+font_size = 50
+
+[sub_resource type="Environment" id="Environment_7uih7"]
+background_energy_multiplier = 0.0
+fog_light_color = Color(0.475, 0.484583, 0.5, 1)
+fog_light_energy = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_albedo = Color(0.120525, 0.406771, 0.609912, 1)
+volumetric_fog_emission = Color(0.0550629, 0.287657, 0.385036, 1)
+volumetric_fog_emission_energy = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_esahd"]
+render_priority = -3
+shader = ExtResource("7_mu41k")
+shader_parameter/enable_fog = true
+shader_parameter/fog_color = Color(0, 0, 0, 1)
+shader_parameter/noise_color = Color(0, 0, 0, 1)
+shader_parameter/fog_distance = 429.615
+shader_parameter/fog_fade_range = 125.937
+shader_parameter/enable_noise = true
+shader_parameter/noise_time_fac = 4.0
+shader_parameter/enable_color_limitation = true
+shader_parameter/color_levels = 32
+shader_parameter/enable_dithering = true
+shader_parameter/dither_strength = 0.3
+
+[sub_resource type="QuadMesh" id="QuadMesh_ypqt0"]
+material = SubResource("ShaderMaterial_esahd")
+size = Vector2(2, 2)
+
+[sub_resource type="Shader" id="Shader_ljpyg"]
+code = "// Rain and Snow shader by Brian Smith (steampunkdemon.itch.io)
+// MIT licence
+
+shader_type spatial;
+
+uniform float rain_amount = 200.0;
+uniform float near_rain_length : hint_range(0.01, 1.0) = 0.2;
+uniform float far_rain_length : hint_range(0.01, 1.0) = 0.1;
+uniform float near_rain_width : hint_range(0.1, 1.0) = 1.0;
+uniform float far_rain_width : hint_range(0.1, 1.0) = 0.5;
+uniform float near_rain_transparency : hint_range(0.1, 1.0) = 1.0;
+uniform float far_rain_transparency : hint_range(0.1, 1.0) = 0.5;
+// Replace the below reference to source_color with hint_color if you are using a version of Godot before 4.
+uniform vec4 rain_color : source_color = vec4(0.8, 0.8, 0.8, 1.0);
+uniform float base_rain_speed : hint_range(0.1, 1.0) = 0.5;
+uniform float additional_rain_speed : hint_range(0.1, 1.0) = 0.5;
+uniform float slant : hint_range(-1.0, 1.0) = 0.2;
+
+void fragment() {
+// To control the rainfall from your program comment out the below line and add a new uniform above as:
+// uniform float time = 10000.0;
+// Then update the time uniform from your _physics_process function by adding delta. You can then pause the rainfall by not changing the time uniform.
+	float time = 10000.0 + TIME;
+
+// Uncomment the following line if you are applying the shader to a TextureRect and using a version of Godot before 4.
+//	COLOR = texture(TEXTURE,UV);
+
+	vec2 uv = vec2(0.0);
+	float remainder = mod(UV.x - UV.y * slant, 1.0 / rain_amount);
+	uv.x = (UV.x - UV.y * slant) - remainder;
+	float rn = fract(sin(uv.x * rain_amount));
+	uv.y = fract((UV.y + rn));
+
+// Blurred trail. Works well for rain:
+	vec4 result = mix(COLOR, rain_color, smoothstep(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), 1.0, fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+
+// No trail. Works well for snow:
+	if (result == COLOR) {
+		ALPHA = 0.0;
+	}
+ 	//vec4 result = mix(COLOR, rain_color, step(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+	ALBEDO = result.rgb;
+	}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5nlxh"]
+render_priority = 0
+shader = SubResource("Shader_ljpyg")
+shader_parameter/rain_amount = 770.0
+shader_parameter/near_rain_length = 0.033
+shader_parameter/far_rain_length = 0.036
+shader_parameter/near_rain_width = 0.264
+shader_parameter/far_rain_width = 0.108
+shader_parameter/near_rain_transparency = 0.805
+shader_parameter/far_rain_transparency = 0.5
+shader_parameter/rain_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/base_rain_speed = 0.237
+shader_parameter/additional_rain_speed = 0.687
+shader_parameter/slant = 0.122
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdiwf"]
+next_pass = SubResource("ShaderMaterial_5nlxh")
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 1, 1, 0.0235294)
+emission = Color(0.95, 0.95, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v00k5"]
+material = SubResource("StandardMaterial3D_cdiwf")
+size = Vector3(7, 3, 2)
+
+[sub_resource type="Shader" id="Shader_e4syr"]
+code = "// Rain and Snow shader by Brian Smith (steampunkdemon.itch.io)
+// MIT licence
+
+shader_type spatial;
+
+uniform float rain_amount = 200.0;
+uniform float near_rain_length : hint_range(0.01, 1.0) = 0.2;
+uniform float far_rain_length : hint_range(0.01, 1.0) = 0.1;
+uniform float near_rain_width : hint_range(0.1, 1.0) = 1.0;
+uniform float far_rain_width : hint_range(0.1, 1.0) = 0.5;
+uniform float near_rain_transparency : hint_range(0.1, 1.0) = 1.0;
+uniform float far_rain_transparency : hint_range(0.1, 1.0) = 0.5;
+// Replace the below reference to source_color with hint_color if you are using a version of Godot before 4.
+uniform vec4 rain_color : source_color = vec4(0.8, 0.8, 0.8, 1.0);
+uniform float base_rain_speed : hint_range(0.1, 1.0) = 0.5;
+uniform float additional_rain_speed : hint_range(0.1, 1.0) = 0.5;
+uniform float slant : hint_range(-1.0, 1.0) = 0.2;
+
+void fragment() {
+// To control the rainfall from your program comment out the below line and add a new uniform above as:
+// uniform float time = 10000.0;
+// Then update the time uniform from your _physics_process function by adding delta. You can then pause the rainfall by not changing the time uniform.
+	float time = 10000.0 + TIME;
+
+// Uncomment the following line if you are applying the shader to a TextureRect and using a version of Godot before 4.
+//	COLOR = texture(TEXTURE,UV);
+
+	vec2 uv = vec2(0.0);
+	float remainder = mod(UV.x - UV.y * slant, 1.0 / rain_amount);
+	uv.x = (UV.x - UV.y * slant) - remainder;
+	float rn = fract(sin(uv.x * rain_amount));
+	uv.y = fract((UV.y + rn));
+
+// Blurred trail. Works well for rain:
+	vec4 result = mix(COLOR, rain_color, smoothstep(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), 1.0, fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+
+// No trail. Works well for snow:
+	if (result == COLOR) {
+		ALPHA = 0.0;
+	}
+ 	//vec4 result = mix(COLOR, rain_color, step(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+	ALBEDO = result.rgb;
+	}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_30ryk"]
+render_priority = 0
+shader = SubResource("Shader_e4syr")
+shader_parameter/rain_amount = 770.0
+shader_parameter/near_rain_length = 0.033
+shader_parameter/far_rain_length = 0.036
+shader_parameter/near_rain_width = 0.264
+shader_parameter/far_rain_width = 0.108
+shader_parameter/near_rain_transparency = 0.805
+shader_parameter/far_rain_transparency = 0.5
+shader_parameter/rain_color = Color(1, 1, 1, 0.996078)
+shader_parameter/base_rain_speed = 0.687
+shader_parameter/additional_rain_speed = 0.687
+shader_parameter/slant = 0.148
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwxwl"]
+next_pass = SubResource("ShaderMaterial_30ryk")
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 1, 1, 0)
+emission = Color(0.95, 0.95, 0.95, 1)
+emission_energy_multiplier = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_cdiwf"]
+material = SubResource("StandardMaterial3D_iwxwl")
+size = Vector3(7, 3, 2)
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_jj1mi"]
+output_port_for_preview = 4
+default_input_values = [0, Quaternion(1.1, 1.1, 1.1, 1.1), 1, Quaternion(1.8, 1.21, 1.25, 1.5)]
+expanded_output_ports = [0]
+linked_parent_graph_frame = 16
+op_type = 2
+operator = 5
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_cr5lj"]
+default_input_values = [0, Vector4(0, 0, 0, 0), 1, Vector4(1, 1, 1, 1), 2, Vector4(0, 0, 0, 0)]
+linked_parent_graph_frame = 16
+op_type = 3
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_ikq8u"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+linked_parent_graph_frame = 16
+op_type = 2
+
+[sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_7uih7"]
+default_input_values = [0, 3.0]
+linked_parent_graph_frame = 26
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_aaodx"]
+linked_parent_graph_frame = 26
+function = 31
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_lf4kn"]
+size = Vector2(1744, 865)
+title = "Water"
+attached_nodes = PackedInt32Array(6, 2, 13, 12, 11, 9, 8, 7, 5, 3, 34, 27, 28)
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_bux3m"]
+linked_parent_graph_frame = 26
+function = 0
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_7p2c2"]
+linked_parent_graph_frame = 26
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_4vj7q"]
+linked_parent_graph_frame = 26
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_mitk8"]
+linked_parent_graph_frame = 16
+parameter_name = "ColorParameter"
+default_value_enabled = true
+default_value = Color(0.231373, 0.768627, 0.870588, 1)
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_8se6g"]
+linked_parent_graph_frame = 26
+function = 12
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_l5k4x"]
+linked_parent_graph_frame = 26
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_dvcf5"]
+default_input_values = [0, 0.0, 1, 50.0]
+linked_parent_graph_frame = 26
+operator = 5
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ub3rv"]
+linked_parent_graph_frame = 26
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_6u8of"]
+default_input_values = [0, 0.0, 1, 1.5, 2, 10.0]
+linked_parent_graph_frame = 26
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_8dn4c"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(2, 2, 2), 2, Vector3(0.5, 0.5, 0.5)]
+expanded_output_ports = [0]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_thmgn"]
+size = Vector2(1684, 545)
+title = "Mask"
+attached_nodes = PackedInt32Array(18, 14, 23, 19, 15, 22, 20, 24, 21, 17)
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_6u8of"]
+default_input_values = [0, 0.0, 1, 4.0]
+linked_parent_graph_frame = 16
+operator = 3
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_8dn4c"]
+default_input_values = [0, 0.0, 1, 4.0]
+linked_parent_graph_frame = 16
+operator = 3
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_k8slp"]
+linked_parent_graph_frame = 16
+texture = ExtResource("16_iwxwl")
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_ucpkq"]
+default_input_values = [1, Vector2(0.09, 0.05), 2, Vector2(0.1, 0.1)]
+linked_parent_graph_frame = 16
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_42q83"]
+linked_parent_graph_frame = 16
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_7h75s"]
+linked_parent_graph_frame = 16
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_d8ofd"]
+default_input_values = [1, Vector2(-0.1, -0.03), 2, Vector2(-0.1, -0.1)]
+linked_parent_graph_frame = 16
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_lwnqu"]
+expanded_output_ports = [0]
+linked_parent_graph_frame = 16
+texture = ExtResource("16_iwxwl")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_k1et5"]
+input_name = "albedo"
+
+[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_q8dq8"]
+function = 1
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_h6j80"]
+output_port_for_preview = 0
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0, 0, 0)]
+expanded_output_ports = [0]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_2pspc"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_ib3bb"]
+default_input_values = [1, Vector2(0.01, 0.06), 2, Vector2(0.5, 0.5)]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_25oax"]
+texture = ExtResource("16_iwxwl")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_1g7bj"]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_v8pfm"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_ygyvj"]
+default_input_values = [0, Vector3(1, 1, 1), 1, Vector3(0, 5, 0)]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_fvmfu"]
+function = 19
+
+[sub_resource type="VisualShader" id="VisualShader_mjdkp"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_vtx_5;
+uniform vec4 ColorParameter : source_color = vec4(0.231373, 0.768627, 0.870588, 1.000000);
+uniform sampler2D tex_frg_3;
+uniform sampler2D tex_frg_9;
+uniform sampler2D depth_tex_frg_14 : hint_depth_texture;
+
+
+
+void vertex() {
+// Input:3
+	float n_out3p0 = TIME;
+
+
+// FloatFunc:9
+	float n_out9p0 = -(n_out3p0);
+
+
+// UVFunc:4
+	vec2 n_in4p1 = vec2(0.01000, 0.06000);
+	vec2 n_out4p0 = vec2(n_out9p0) * n_in4p1 + UV;
+
+
+// Texture2D:5
+	vec4 n_out5p0 = texture(tex_vtx_5, n_out4p0);
+
+
+// VectorOp:8
+	vec3 n_in8p0 = vec3(1.00000, 1.00000, 1.00000);
+	vec3 n_in8p1 = vec3(0.00000, 5.00000, 0.00000);
+	vec3 n_out8p0 = n_in8p0 * n_in8p1;
+
+
+// Input:6
+	vec3 n_out6p0 = VERTEX;
+
+
+// MultiplyAdd:2
+	vec3 n_out2p0 = fma(vec3(n_out5p0.xyz), n_out8p0, n_out6p0);
+
+
+// Output:0
+	VERTEX = n_out2p0;
+
+
+}
+
+void fragment() {
+// ColorParameter:2
+	vec4 n_out2p0 = ColorParameter;
+
+
+// Input:6
+	float n_out6p0 = TIME;
+
+
+// FloatOp:27
+	float n_in27p1 = 4.00000;
+	float n_out27p0 = n_out6p0 / n_in27p1;
+
+
+// UVFunc:5
+	vec2 n_in5p1 = vec2(0.09000, 0.05000);
+	vec2 n_out5p0 = vec2(n_out27p0) * n_in5p1 + UV;
+
+
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, n_out5p0);
+
+
+// Input:7
+	float n_out7p0 = TIME;
+
+
+// FloatOp:28
+	float n_in28p1 = 4.00000;
+	float n_out28p0 = n_out7p0 / n_in28p1;
+
+
+// UVFunc:8
+	vec2 n_in8p1 = vec2(-0.10000, -0.03000);
+	vec2 n_out8p0 = vec2(n_out28p0) * n_in8p1 + UV;
+
+
+// Texture2D:9
+	vec4 n_out9p0 = texture(tex_frg_9, n_out8p0);
+
+
+// MultiplyAdd:12
+	vec4 n_in12p2 = vec4(0.00000, 0.00000, 0.00000, 0.00000);
+	vec4 n_out12p0 = fma(n_out3p0, n_out9p0, n_in12p2);
+
+
+// VectorOp:11
+	vec4 n_in11p1 = vec4(1.80000, 1.21000, 1.25000, 1.50000);
+	vec4 n_out11p0 = pow(n_out12p0, n_in11p1);
+
+
+// VectorOp:13
+	vec4 n_out13p0 = n_out2p0 + n_out11p0;
+
+
+	float n_out14p0;
+// ProximityFade:14
+	float n_in14p0 = 3.00000;
+	{
+		float __depth_tex = texture(depth_tex_frg_14, SCREEN_UV).r;
+		vec4 __depth_world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, __depth_tex, 1.0);
+		__depth_world_pos.xyz /= __depth_world_pos.w;
+		n_out14p0 = clamp(1.0 - smoothstep(__depth_world_pos.z + n_in14p0, __depth_world_pos.z, VERTEX.z), 0.0, 1.0);
+	}
+
+
+// FloatFunc:15
+	float n_out15p0 = 1.0 - n_out14p0;
+
+
+// FloatOp:22
+	float n_in22p1 = 50.00000;
+	float n_out22p0 = pow(n_out15p0, n_in22p1);
+
+
+// Input:18
+	float n_out18p0 = TIME;
+
+
+// MultiplyAdd:24
+	float n_in24p1 = 1.50000;
+	float n_in24p2 = 10.00000;
+	float n_out24p0 = fma(n_out18p0, n_in24p1, n_in24p2);
+
+
+// FloatOp:19
+	float n_out19p0 = n_out15p0 + n_out24p0;
+
+
+// FloatFunc:17
+	float n_out17p0 = sin(n_out19p0);
+
+
+// FloatFunc:20
+	float n_out20p0 = abs(n_out17p0);
+
+
+// FloatOp:21
+	float n_out21p0 = n_out15p0 * n_out20p0;
+
+
+// FloatOp:23
+	float n_out23p0 = n_out22p0 + n_out21p0;
+
+
+// Mix:25
+	vec3 n_in25p1 = vec3(2.00000, 2.00000, 2.00000);
+	vec3 n_out25p0 = mix(vec3(n_out13p0.xyz), n_in25p1, vec3(n_out23p0));
+
+
+// Output:0
+	ALBEDO = n_out25p0;
+
+
+}
+"
+nodes/vertex/0/position = Vector2(760, 500)
+nodes/vertex/2/node = SubResource("VisualShaderNodeMultiplyAdd_h6j80")
+nodes/vertex/2/position = Vector2(160, 480)
+nodes/vertex/3/node = SubResource("VisualShaderNodeInput_2pspc")
+nodes/vertex/3/position = Vector2(-1220, 500)
+nodes/vertex/4/node = SubResource("VisualShaderNodeUVFunc_ib3bb")
+nodes/vertex/4/position = Vector2(-680, 420)
+nodes/vertex/5/node = SubResource("VisualShaderNodeTexture_25oax")
+nodes/vertex/5/position = Vector2(-360, 320)
+nodes/vertex/6/node = SubResource("VisualShaderNodeInput_1g7bj")
+nodes/vertex/6/position = Vector2(-400, 920)
+nodes/vertex/7/node = SubResource("VisualShaderNodeInput_v8pfm")
+nodes/vertex/7/position = Vector2(-580, 680)
+nodes/vertex/8/node = SubResource("VisualShaderNodeVectorOp_ygyvj")
+nodes/vertex/8/position = Vector2(-400, 700)
+nodes/vertex/9/node = SubResource("VisualShaderNodeFloatFunc_fvmfu")
+nodes/vertex/9/position = Vector2(-900, 560)
+nodes/vertex/connections = PackedInt32Array(4, 0, 5, 0, 5, 0, 2, 0, 8, 0, 2, 1, 6, 0, 2, 2, 2, 0, 0, 0, 3, 0, 9, 0, 9, 0, 4, 2)
+nodes/fragment/0/position = Vector2(600, -940)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_mitk8")
+nodes/fragment/2/position = Vector2(-1840, -1120)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_k8slp")
+nodes/fragment/3/position = Vector2(-1140, -1020)
+nodes/fragment/5/node = SubResource("VisualShaderNodeUVFunc_ucpkq")
+nodes/fragment/5/position = Vector2(-1460, -900)
+nodes/fragment/6/node = SubResource("VisualShaderNodeInput_42q83")
+nodes/fragment/6/position = Vector2(-1840, -800)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_7h75s")
+nodes/fragment/7/position = Vector2(-1840, -1520)
+nodes/fragment/8/node = SubResource("VisualShaderNodeUVFunc_d8ofd")
+nodes/fragment/8/position = Vector2(-1460, -1420)
+nodes/fragment/9/node = SubResource("VisualShaderNodeTexture_lwnqu")
+nodes/fragment/9/position = Vector2(-1140, -1540)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorOp_jj1mi")
+nodes/fragment/11/position = Vector2(-540, -1500)
+nodes/fragment/12/node = SubResource("VisualShaderNodeMultiplyAdd_cr5lj")
+nodes/fragment/12/position = Vector2(-820, -1460)
+nodes/fragment/13/node = SubResource("VisualShaderNodeVectorOp_ikq8u")
+nodes/fragment/13/position = Vector2(-340, -1060)
+nodes/fragment/14/node = SubResource("VisualShaderNodeProximityFade_7uih7")
+nodes/fragment/14/position = Vector2(-1680, -440)
+nodes/fragment/15/node = SubResource("VisualShaderNodeFloatFunc_aaodx")
+nodes/fragment/15/position = Vector2(-1440, -420)
+nodes/fragment/16/node = SubResource("VisualShaderNodeFrame_lf4kn")
+nodes/fragment/16/position = Vector2(-1880, -1580)
+nodes/fragment/17/node = SubResource("VisualShaderNodeFloatFunc_bux3m")
+nodes/fragment/17/position = Vector2(-960, -160)
+nodes/fragment/18/node = SubResource("VisualShaderNodeInput_7p2c2")
+nodes/fragment/18/position = Vector2(-1720, -180)
+nodes/fragment/19/node = SubResource("VisualShaderNodeFloatOp_4vj7q")
+nodes/fragment/19/position = Vector2(-1180, -260)
+nodes/fragment/20/node = SubResource("VisualShaderNodeFloatFunc_8se6g")
+nodes/fragment/20/position = Vector2(-720, -60)
+nodes/fragment/21/node = SubResource("VisualShaderNodeFloatOp_l5k4x")
+nodes/fragment/21/position = Vector2(-520, -240)
+nodes/fragment/22/node = SubResource("VisualShaderNodeFloatOp_dvcf5")
+nodes/fragment/22/position = Vector2(-1000, -480)
+nodes/fragment/23/node = SubResource("VisualShaderNodeFloatOp_ub3rv")
+nodes/fragment/23/position = Vector2(-280, -440)
+nodes/fragment/24/node = SubResource("VisualShaderNodeMultiplyAdd_6u8of")
+nodes/fragment/24/position = Vector2(-1380, -200)
+nodes/fragment/25/node = SubResource("VisualShaderNodeMix_8dn4c")
+nodes/fragment/25/position = Vector2(200, -800)
+nodes/fragment/26/node = SubResource("VisualShaderNodeFrame_thmgn")
+nodes/fragment/26/position = Vector2(-1760, -521)
+nodes/fragment/27/node = SubResource("VisualShaderNodeFloatOp_6u8of")
+nodes/fragment/27/position = Vector2(-1640, -860)
+nodes/fragment/28/node = SubResource("VisualShaderNodeFloatOp_8dn4c")
+nodes/fragment/28/position = Vector2(-1560, -1400)
+nodes/fragment/connections = PackedInt32Array(5, 0, 3, 0, 11, 0, 13, 1, 2, 0, 13, 0, 12, 0, 11, 0, 19, 0, 17, 0, 24, 0, 19, 1, 15, 0, 19, 0, 15, 0, 22, 0, 17, 0, 20, 0, 22, 0, 23, 0, 21, 0, 23, 1, 20, 0, 21, 1, 15, 0, 21, 0, 14, 0, 15, 0, 23, 0, 25, 2, 25, 0, 0, 0, 3, 0, 12, 0, 9, 0, 12, 1, 13, 0, 25, 0, 18, 0, 24, 0, 8, 0, 9, 0, 6, 0, 27, 0, 27, 0, 5, 2, 7, 0, 28, 0, 28, 0, 8, 2)
+nodes/light/0/position = Vector2(380, 140)
+nodes/light/6/node = SubResource("VisualShaderNodeInput_k1et5")
+nodes/light/6/position = Vector2(-300, 140)
+nodes/light/7/node = SubResource("VisualShaderNodeVectorFunc_q8dq8")
+nodes/light/7/position = Vector2(64.6063, 182.25)
+nodes/light/connections = PackedInt32Array(6, 0, 7, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k52qs"]
+render_priority = 0
+shader = SubResource("VisualShader_mjdkp")
+shader_parameter/ColorParameter = Color(0.6298, 0.094, 0.94, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qx71b"]
+material = SubResource("ShaderMaterial_k52qs")
+size = Vector2(455, 100)
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_puea6"]
+data = PackedVector3Array(50, 0, 50, 45.2381, 0, 50, 50, 0, 45.2381, 45.2381, 0, 50, 45.2381, 0, 45.2381, 50, 0, 45.2381, 45.2381, 0, 50, 40.4762, 0, 50, 45.2381, 0, 45.2381, 40.4762, 0, 50, 40.4762, 0, 45.2381, 45.2381, 0, 45.2381, 40.4762, 0, 50, 35.7143, 0, 50, 40.4762, 0, 45.2381, 35.7143, 0, 50, 35.7143, 0, 45.2381, 40.4762, 0, 45.2381, 35.7143, 0, 50, 30.9524, 0, 50, 35.7143, 0, 45.2381, 30.9524, 0, 50, 30.9524, 0, 45.2381, 35.7143, 0, 45.2381, 30.9524, 0, 50, 26.1905, 0, 50, 30.9524, 0, 45.2381, 26.1905, 0, 50, 26.1905, 0, 45.2381, 30.9524, 0, 45.2381, 26.1905, 0, 50, 21.4286, 0, 50, 26.1905, 0, 45.2381, 21.4286, 0, 50, 21.4286, 0, 45.2381, 26.1905, 0, 45.2381, 21.4286, 0, 50, 16.6667, 0, 50, 21.4286, 0, 45.2381, 16.6667, 0, 50, 16.6667, 0, 45.2381, 21.4286, 0, 45.2381, 16.6667, 0, 50, 11.9048, 0, 50, 16.6667, 0, 45.2381, 11.9048, 0, 50, 11.9048, 0, 45.2381, 16.6667, 0, 45.2381, 11.9048, 0, 50, 7.1429, 0, 50, 11.9048, 0, 45.2381, 7.1429, 0, 50, 7.1429, 0, 45.2381, 11.9048, 0, 45.2381, 7.1429, 0, 50, 2.3809, 0, 50, 7.1429, 0, 45.2381, 2.3809, 0, 50, 2.3809, 0, 45.2381, 7.1429, 0, 45.2381, 2.3809, 0, 50, -2.381, 0, 50, 2.3809, 0, 45.2381, -2.381, 0, 50, -2.381, 0, 45.2381, 2.3809, 0, 45.2381, -2.381, 0, 50, -7.1429, 0, 50, -2.381, 0, 45.2381, -7.1429, 0, 50, -7.1429, 0, 45.2381, -2.381, 0, 45.2381, -7.1429, 0, 50, -11.9048, 0, 50, -7.1429, 0, 45.2381, -11.9048, 0, 50, -11.9048, 0, 45.2381, -7.1429, 0, 45.2381, -11.9048, 0, 50, -16.6667, 0, 50, -11.9048, 0, 45.2381, -16.6667, 0, 50, -16.6667, 0, 45.2381, -11.9048, 0, 45.2381, -16.6667, 0, 50, -21.4286, 0, 50, -16.6667, 0, 45.2381, -21.4286, 0, 50, -21.4286, 0, 45.2381, -16.6667, 0, 45.2381, -21.4286, 0, 50, -26.1905, 0, 50, -21.4286, 0, 45.2381, -26.1905, 0, 50, -26.1905, 0, 45.2381, -21.4286, 0, 45.2381, -26.1905, 0, 50, -30.9524, 0, 50, -26.1905, 0, 45.2381, -30.9524, 0, 50, -30.9524, 0, 45.2381, -26.1905, 0, 45.2381, -30.9524, 0, 50, -35.7143, 0, 50, -30.9524, 0, 45.2381, -35.7143, 0, 50, -35.7143, 0, 45.2381, -30.9524, 0, 45.2381, -35.7143, 0, 50, -40.4762, 0, 50, -35.7143, 0, 45.2381, -40.4762, 0, 50, -40.4762, 0, 45.2381, -35.7143, 0, 45.2381, -40.4762, 0, 50, -45.2381, 0, 50, -40.4762, 0, 45.2381, -45.2381, 0, 50, -45.2381, 0, 45.2381, -40.4762, 0, 45.2381, -45.2381, 0, 50, -50, 0, 50, -45.2381, 0, 45.2381, -50, 0, 50, -50, 0, 45.2381, -45.2381, 0, 45.2381, 50, 0, 45.2381, 45.2381, 0, 45.2381, 50, 0, 40.4762, 45.2381, 0, 45.2381, 45.2381, 0, 40.4762, 50, 0, 40.4762, 45.2381, 0, 45.2381, 40.4762, 0, 45.2381, 45.2381, 0, 40.4762, 40.4762, 0, 45.2381, 40.4762, 0, 40.4762, 45.2381, 0, 40.4762, 40.4762, 0, 45.2381, 35.7143, 0, 45.2381, 40.4762, 0, 40.4762, 35.7143, 0, 45.2381, 35.7143, 0, 40.4762, 40.4762, 0, 40.4762, 35.7143, 0, 45.2381, 30.9524, 0, 45.2381, 35.7143, 0, 40.4762, 30.9524, 0, 45.2381, 30.9524, 0, 40.4762, 35.7143, 0, 40.4762, 30.9524, 0, 45.2381, 26.1905, 0, 45.2381, 30.9524, 0, 40.4762, 26.1905, 0, 45.2381, 26.1905, 0, 40.4762, 30.9524, 0, 40.4762, 26.1905, 0, 45.2381, 21.4286, 0, 45.2381, 26.1905, 0, 40.4762, 21.4286, 0, 45.2381, 21.4286, 0, 40.4762, 26.1905, 0, 40.4762, 21.4286, 0, 45.2381, 16.6667, 0, 45.2381, 21.4286, 0, 40.4762, 16.6667, 0, 45.2381, 16.6667, 0, 40.4762, 21.4286, 0, 40.4762, 16.6667, 0, 45.2381, 11.9048, 0, 45.2381, 16.6667, 0, 40.4762, 11.9048, 0, 45.2381, 11.9048, 0, 40.4762, 16.6667, 0, 40.4762, 11.9048, 0, 45.2381, 7.1429, 0, 45.2381, 11.9048, 0, 40.4762, 7.1429, 0, 45.2381, 7.1429, 0, 40.4762, 11.9048, 0, 40.4762, 7.1429, 0, 45.2381, 2.3809, 0, 45.2381, 7.1429, 0, 40.4762, 2.3809, 0, 45.2381, 2.3809, 0, 40.4762, 7.1429, 0, 40.4762, 2.3809, 0, 45.2381, -2.381, 0, 45.2381, 2.3809, 0, 40.4762, -2.381, 0, 45.2381, -2.381, 0, 40.4762, 2.3809, 0, 40.4762, -2.381, 0, 45.2381, -7.1429, 0, 45.2381, -2.381, 0, 40.4762, -7.1429, 0, 45.2381, -7.1429, 0, 40.4762, -2.381, 0, 40.4762, -7.1429, 0, 45.2381, -11.9048, 0, 45.2381, -7.1429, 0, 40.4762, -11.9048, 0, 45.2381, -11.9048, 0, 40.4762, -7.1429, 0, 40.4762, -11.9048, 0, 45.2381, -16.6667, 0, 45.2381, -11.9048, 0, 40.4762, -16.6667, 0, 45.2381, -16.6667, 0, 40.4762, -11.9048, 0, 40.4762, -16.6667, 0, 45.2381, -21.4286, 0, 45.2381, -16.6667, 0, 40.4762, -21.4286, 0, 45.2381, -21.4286, 0, 40.4762, -16.6667, 0, 40.4762, -21.4286, 0, 45.2381, -26.1905, 0, 45.2381, -21.4286, 0, 40.4762, -26.1905, 0, 45.2381, -26.1905, 0, 40.4762, -21.4286, 0, 40.4762, -26.1905, 0, 45.2381, -30.9524, 0, 45.2381, -26.1905, 0, 40.4762, -30.9524, 0, 45.2381, -30.9524, 0, 40.4762, -26.1905, 0, 40.4762, -30.9524, 0, 45.2381, -35.7143, 0, 45.2381, -30.9524, 0, 40.4762, -35.7143, 0, 45.2381, -35.7143, 0, 40.4762, -30.9524, 0, 40.4762, -35.7143, 0, 45.2381, -40.4762, 0, 45.2381, -35.7143, 0, 40.4762, -40.4762, 0, 45.2381, -40.4762, 0, 40.4762, -35.7143, 0, 40.4762, -40.4762, 0, 45.2381, -45.2381, 0, 45.2381, -40.4762, 0, 40.4762, -45.2381, 0, 45.2381, -45.2381, 0, 40.4762, -40.4762, 0, 40.4762, -45.2381, 0, 45.2381, -50, 0, 45.2381, -45.2381, 0, 40.4762, -50, 0, 45.2381, -50, 0, 40.4762, -45.2381, 0, 40.4762, 50, 0, 40.4762, 45.2381, 0, 40.4762, 50, 0, 35.7143, 45.2381, 0, 40.4762, 45.2381, 0, 35.7143, 50, 0, 35.7143, 45.2381, 0, 40.4762, 40.4762, 0, 40.4762, 45.2381, 0, 35.7143, 40.4762, 0, 40.4762, 40.4762, 0, 35.7143, 45.2381, 0, 35.7143, 40.4762, 0, 40.4762, 35.7143, 0, 40.4762, 40.4762, 0, 35.7143, 35.7143, 0, 40.4762, 35.7143, 0, 35.7143, 40.4762, 0, 35.7143, 35.7143, 0, 40.4762, 30.9524, 0, 40.4762, 35.7143, 0, 35.7143, 30.9524, 0, 40.4762, 30.9524, 0, 35.7143, 35.7143, 0, 35.7143, 30.9524, 0, 40.4762, 26.1905, 0, 40.4762, 30.9524, 0, 35.7143, 26.1905, 0, 40.4762, 26.1905, 0, 35.7143, 30.9524, 0, 35.7143, 26.1905, 0, 40.4762, 21.4286, 0, 40.4762, 26.1905, 0, 35.7143, 21.4286, 0, 40.4762, 21.4286, 0, 35.7143, 26.1905, 0, 35.7143, 21.4286, 0, 40.4762, 16.6667, 0, 40.4762, 21.4286, 0, 35.7143, 16.6667, 0, 40.4762, 16.6667, 0, 35.7143, 21.4286, 0, 35.7143, 16.6667, 0, 40.4762, 11.9048, 0, 40.4762, 16.6667, 0, 35.7143, 11.9048, 0, 40.4762, 11.9048, 0, 35.7143, 16.6667, 0, 35.7143, 11.9048, 0, 40.4762, 7.1429, 0, 40.4762, 11.9048, 0, 35.7143, 7.1429, 0, 40.4762, 7.1429, 0, 35.7143, 11.9048, 0, 35.7143, 7.1429, 0, 40.4762, 2.3809, 0, 40.4762, 7.1429, 0, 35.7143, 2.3809, 0, 40.4762, 2.3809, 0, 35.7143, 7.1429, 0, 35.7143, 2.3809, 0, 40.4762, -2.381, 0, 40.4762, 2.3809, 0, 35.7143, -2.381, 0, 40.4762, -2.381, 0, 35.7143, 2.3809, 0, 35.7143, -2.381, 0, 40.4762, -7.1429, 0, 40.4762, -2.381, 0, 35.7143, -7.1429, 0, 40.4762, -7.1429, 0, 35.7143, -2.381, 0, 35.7143, -7.1429, 0, 40.4762, -11.9048, 0, 40.4762, -7.1429, 0, 35.7143, -11.9048, 0, 40.4762, -11.9048, 0, 35.7143, -7.1429, 0, 35.7143, -11.9048, 0, 40.4762, -16.6667, 0, 40.4762, -11.9048, 0, 35.7143, -16.6667, 0, 40.4762, -16.6667, 0, 35.7143, -11.9048, 0, 35.7143, -16.6667, 0, 40.4762, -21.4286, 0, 40.4762, -16.6667, 0, 35.7143, -21.4286, 0, 40.4762, -21.4286, 0, 35.7143, -16.6667, 0, 35.7143, -21.4286, 0, 40.4762, -26.1905, 0, 40.4762, -21.4286, 0, 35.7143, -26.1905, 0, 40.4762, -26.1905, 0, 35.7143, -21.4286, 0, 35.7143, -26.1905, 0, 40.4762, -30.9524, 0, 40.4762, -26.1905, 0, 35.7143, -30.9524, 0, 40.4762, -30.9524, 0, 35.7143, -26.1905, 0, 35.7143, -30.9524, 0, 40.4762, -35.7143, 0, 40.4762, -30.9524, 0, 35.7143, -35.7143, 0, 40.4762, -35.7143, 0, 35.7143, -30.9524, 0, 35.7143, -35.7143, 0, 40.4762, -40.4762, 0, 40.4762, -35.7143, 0, 35.7143, -40.4762, 0, 40.4762, -40.4762, 0, 35.7143, -35.7143, 0, 35.7143, -40.4762, 0, 40.4762, -45.2381, 0, 40.4762, -40.4762, 0, 35.7143, -45.2381, 0, 40.4762, -45.2381, 0, 35.7143, -40.4762, 0, 35.7143, -45.2381, 0, 40.4762, -50, 0, 40.4762, -45.2381, 0, 35.7143, -50, 0, 40.4762, -50, 0, 35.7143, -45.2381, 0, 35.7143, 50, 0, 35.7143, 45.2381, 0, 35.7143, 50, 0, 30.9524, 45.2381, 0, 35.7143, 45.2381, 0, 30.9524, 50, 0, 30.9524, 45.2381, 0, 35.7143, 40.4762, 0, 35.7143, 45.2381, 0, 30.9524, 40.4762, 0, 35.7143, 40.4762, 0, 30.9524, 45.2381, 0, 30.9524, 40.4762, 0, 35.7143, 35.7143, 0, 35.7143, 40.4762, 0, 30.9524, 35.7143, 0, 35.7143, 35.7143, 0, 30.9524, 40.4762, 0, 30.9524, 35.7143, 0, 35.7143, 30.9524, 0, 35.7143, 35.7143, 0, 30.9524, 30.9524, 0, 35.7143, 30.9524, 0, 30.9524, 35.7143, 0, 30.9524, 30.9524, 0, 35.7143, 26.1905, 0, 35.7143, 30.9524, 0, 30.9524, 26.1905, 0, 35.7143, 26.1905, 0, 30.9524, 30.9524, 0, 30.9524, 26.1905, 0, 35.7143, 21.4286, 0, 35.7143, 26.1905, 0, 30.9524, 21.4286, 0, 35.7143, 21.4286, 0, 30.9524, 26.1905, 0, 30.9524, 21.4286, 0, 35.7143, 16.6667, 0, 35.7143, 21.4286, 0, 30.9524, 16.6667, 0, 35.7143, 16.6667, 0, 30.9524, 21.4286, 0, 30.9524, 16.6667, 0, 35.7143, 11.9048, 0, 35.7143, 16.6667, 0, 30.9524, 11.9048, 0, 35.7143, 11.9048, 0, 30.9524, 16.6667, 0, 30.9524, 11.9048, 0, 35.7143, 7.1429, 0, 35.7143, 11.9048, 0, 30.9524, 7.1429, 0, 35.7143, 7.1429, 0, 30.9524, 11.9048, 0, 30.9524, 7.1429, 0, 35.7143, 2.3809, 0, 35.7143, 7.1429, 0, 30.9524, 2.3809, 0, 35.7143, 2.3809, 0, 30.9524, 7.1429, 0, 30.9524, 2.3809, 0, 35.7143, -2.381, 0, 35.7143, 2.3809, 0, 30.9524, -2.381, 0, 35.7143, -2.381, 0, 30.9524, 2.3809, 0, 30.9524, -2.381, 0, 35.7143, -7.1429, 0, 35.7143, -2.381, 0, 30.9524, -7.1429, 0, 35.7143, -7.1429, 0, 30.9524, -2.381, 0, 30.9524, -7.1429, 0, 35.7143, -11.9048, 0, 35.7143, -7.1429, 0, 30.9524, -11.9048, 0, 35.7143, -11.9048, 0, 30.9524, -7.1429, 0, 30.9524, -11.9048, 0, 35.7143, -16.6667, 0, 35.7143, -11.9048, 0, 30.9524, -16.6667, 0, 35.7143, -16.6667, 0, 30.9524, -11.9048, 0, 30.9524, -16.6667, 0, 35.7143, -21.4286, 0, 35.7143, -16.6667, 0, 30.9524, -21.4286, 0, 35.7143, -21.4286, 0, 30.9524, -16.6667, 0, 30.9524, -21.4286, 0, 35.7143, -26.1905, 0, 35.7143, -21.4286, 0, 30.9524, -26.1905, 0, 35.7143, -26.1905, 0, 30.9524, -21.4286, 0, 30.9524, -26.1905, 0, 35.7143, -30.9524, 0, 35.7143, -26.1905, 0, 30.9524, -30.9524, 0, 35.7143, -30.9524, 0, 30.9524, -26.1905, 0, 30.9524, -30.9524, 0, 35.7143, -35.7143, 0, 35.7143, -30.9524, 0, 30.9524, -35.7143, 0, 35.7143, -35.7143, 0, 30.9524, -30.9524, 0, 30.9524, -35.7143, 0, 35.7143, -40.4762, 0, 35.7143, -35.7143, 0, 30.9524, -40.4762, 0, 35.7143, -40.4762, 0, 30.9524, -35.7143, 0, 30.9524, -40.4762, 0, 35.7143, -45.2381, 0, 35.7143, -40.4762, 0, 30.9524, -45.2381, 0, 35.7143, -45.2381, 0, 30.9524, -40.4762, 0, 30.9524, -45.2381, 0, 35.7143, -50, 0, 35.7143, -45.2381, 0, 30.9524, -50, 0, 35.7143, -50, 0, 30.9524, -45.2381, 0, 30.9524, 50, 0, 30.9524, 45.2381, 0, 30.9524, 50, 0, 26.1905, 45.2381, 0, 30.9524, 45.2381, 0, 26.1905, 50, 0, 26.1905, 45.2381, 0, 30.9524, 40.4762, 0, 30.9524, 45.2381, 0, 26.1905, 40.4762, 0, 30.9524, 40.4762, 0, 26.1905, 45.2381, 0, 26.1905, 40.4762, 0, 30.9524, 35.7143, 0, 30.9524, 40.4762, 0, 26.1905, 35.7143, 0, 30.9524, 35.7143, 0, 26.1905, 40.4762, 0, 26.1905, 35.7143, 0, 30.9524, 30.9524, 0, 30.9524, 35.7143, 0, 26.1905, 30.9524, 0, 30.9524, 30.9524, 0, 26.1905, 35.7143, 0, 26.1905, 30.9524, 0, 30.9524, 26.1905, 0, 30.9524, 30.9524, 0, 26.1905, 26.1905, 0, 30.9524, 26.1905, 0, 26.1905, 30.9524, 0, 26.1905, 26.1905, 0, 30.9524, 21.4286, 0, 30.9524, 26.1905, 0, 26.1905, 21.4286, 0, 30.9524, 21.4286, 0, 26.1905, 26.1905, 0, 26.1905, 21.4286, 0, 30.9524, 16.6667, 0, 30.9524, 21.4286, 0, 26.1905, 16.6667, 0, 30.9524, 16.6667, 0, 26.1905, 21.4286, 0, 26.1905, 16.6667, 0, 30.9524, 11.9048, 0, 30.9524, 16.6667, 0, 26.1905, 11.9048, 0, 30.9524, 11.9048, 0, 26.1905, 16.6667, 0, 26.1905, 11.9048, 0, 30.9524, 7.1429, 0, 30.9524, 11.9048, 0, 26.1905, 7.1429, 0, 30.9524, 7.1429, 0, 26.1905, 11.9048, 0, 26.1905, 7.1429, 0, 30.9524, 2.3809, 0, 30.9524, 7.1429, 0, 26.1905, 2.3809, 0, 30.9524, 2.3809, 0, 26.1905, 7.1429, 0, 26.1905, 2.3809, 0, 30.9524, -2.381, 0, 30.9524, 2.3809, 0, 26.1905, -2.381, 0, 30.9524, -2.381, 0, 26.1905, 2.3809, 0, 26.1905, -2.381, 0, 30.9524, -7.1429, 0, 30.9524, -2.381, 0, 26.1905, -7.1429, 0, 30.9524, -7.1429, 0, 26.1905, -2.381, 0, 26.1905, -7.1429, 0, 30.9524, -11.9048, 0, 30.9524, -7.1429, 0, 26.1905, -11.9048, 0, 30.9524, -11.9048, 0, 26.1905, -7.1429, 0, 26.1905, -11.9048, 0, 30.9524, -16.6667, 0, 30.9524, -11.9048, 0, 26.1905, -16.6667, 0, 30.9524, -16.6667, 0, 26.1905, -11.9048, 0, 26.1905, -16.6667, 0, 30.9524, -21.4286, 0, 30.9524, -16.6667, 0, 26.1905, -21.4286, 0, 30.9524, -21.4286, 0, 26.1905, -16.6667, 0, 26.1905, -21.4286, 0, 30.9524, -26.1905, 0, 30.9524, -21.4286, 0, 26.1905, -26.1905, 0, 30.9524, -26.1905, 0, 26.1905, -21.4286, 0, 26.1905, -26.1905, 0, 30.9524, -30.9524, 0, 30.9524, -26.1905, 0, 26.1905, -30.9524, 0, 30.9524, -30.9524, 0, 26.1905, -26.1905, 0, 26.1905, -30.9524, 0, 30.9524, -35.7143, 0, 30.9524, -30.9524, 0, 26.1905, -35.7143, 0, 30.9524, -35.7143, 0, 26.1905, -30.9524, 0, 26.1905, -35.7143, 0, 30.9524, -40.4762, 0, 30.9524, -35.7143, 0, 26.1905, -40.4762, 0, 30.9524, -40.4762, 0, 26.1905, -35.7143, 0, 26.1905, -40.4762, 0, 30.9524, -45.2381, 0, 30.9524, -40.4762, 0, 26.1905, -45.2381, 0, 30.9524, -45.2381, 0, 26.1905, -40.4762, 0, 26.1905, -45.2381, 0, 30.9524, -50, 0, 30.9524, -45.2381, 0, 26.1905, -50, 0, 30.9524, -50, 0, 26.1905, -45.2381, 0, 26.1905, 50, 0, 26.1905, 45.2381, 0, 26.1905, 50, 0, 21.4286, 45.2381, 0, 26.1905, 45.2381, 0, 21.4286, 50, 0, 21.4286, 45.2381, 0, 26.1905, 40.4762, 0, 26.1905, 45.2381, 0, 21.4286, 40.4762, 0, 26.1905, 40.4762, 0, 21.4286, 45.2381, 0, 21.4286, 40.4762, 0, 26.1905, 35.7143, 0, 26.1905, 40.4762, 0, 21.4286, 35.7143, 0, 26.1905, 35.7143, 0, 21.4286, 40.4762, 0, 21.4286, 35.7143, 0, 26.1905, 30.9524, 0, 26.1905, 35.7143, 0, 21.4286, 30.9524, 0, 26.1905, 30.9524, 0, 21.4286, 35.7143, 0, 21.4286, 30.9524, 0, 26.1905, 26.1905, 0, 26.1905, 30.9524, 0, 21.4286, 26.1905, 0, 26.1905, 26.1905, 0, 21.4286, 30.9524, 0, 21.4286, 26.1905, 0, 26.1905, 21.4286, 0, 26.1905, 26.1905, 0, 21.4286, 21.4286, 0, 26.1905, 21.4286, 0, 21.4286, 26.1905, 0, 21.4286, 21.4286, 0, 26.1905, 16.6667, 0, 26.1905, 21.4286, 0, 21.4286, 16.6667, 0, 26.1905, 16.6667, 0, 21.4286, 21.4286, 0, 21.4286, 16.6667, 0, 26.1905, 11.9048, 0, 26.1905, 16.6667, 0, 21.4286, 11.9048, 0, 26.1905, 11.9048, 0, 21.4286, 16.6667, 0, 21.4286, 11.9048, 0, 26.1905, 7.1429, 0, 26.1905, 11.9048, 0, 21.4286, 7.1429, 0, 26.1905, 7.1429, 0, 21.4286, 11.9048, 0, 21.4286, 7.1429, 0, 26.1905, 2.3809, 0, 26.1905, 7.1429, 0, 21.4286, 2.3809, 0, 26.1905, 2.3809, 0, 21.4286, 7.1429, 0, 21.4286, 2.3809, 0, 26.1905, -2.381, 0, 26.1905, 2.3809, 0, 21.4286, -2.381, 0, 26.1905, -2.381, 0, 21.4286, 2.3809, 0, 21.4286, -2.381, 0, 26.1905, -7.1429, 0, 26.1905, -2.381, 0, 21.4286, -7.1429, 0, 26.1905, -7.1429, 0, 21.4286, -2.381, 0, 21.4286, -7.1429, 0, 26.1905, -11.9048, 0, 26.1905, -7.1429, 0, 21.4286, -11.9048, 0, 26.1905, -11.9048, 0, 21.4286, -7.1429, 0, 21.4286, -11.9048, 0, 26.1905, -16.6667, 0, 26.1905, -11.9048, 0, 21.4286, -16.6667, 0, 26.1905, -16.6667, 0, 21.4286, -11.9048, 0, 21.4286, -16.6667, 0, 26.1905, -21.4286, 0, 26.1905, -16.6667, 0, 21.4286, -21.4286, 0, 26.1905, -21.4286, 0, 21.4286, -16.6667, 0, 21.4286, -21.4286, 0, 26.1905, -26.1905, 0, 26.1905, -21.4286, 0, 21.4286, -26.1905, 0, 26.1905, -26.1905, 0, 21.4286, -21.4286, 0, 21.4286, -26.1905, 0, 26.1905, -30.9524, 0, 26.1905, -26.1905, 0, 21.4286, -30.9524, 0, 26.1905, -30.9524, 0, 21.4286, -26.1905, 0, 21.4286, -30.9524, 0, 26.1905, -35.7143, 0, 26.1905, -30.9524, 0, 21.4286, -35.7143, 0, 26.1905, -35.7143, 0, 21.4286, -30.9524, 0, 21.4286, -35.7143, 0, 26.1905, -40.4762, 0, 26.1905, -35.7143, 0, 21.4286, -40.4762, 0, 26.1905, -40.4762, 0, 21.4286, -35.7143, 0, 21.4286, -40.4762, 0, 26.1905, -45.2381, 0, 26.1905, -40.4762, 0, 21.4286, -45.2381, 0, 26.1905, -45.2381, 0, 21.4286, -40.4762, 0, 21.4286, -45.2381, 0, 26.1905, -50, 0, 26.1905, -45.2381, 0, 21.4286, -50, 0, 26.1905, -50, 0, 21.4286, -45.2381, 0, 21.4286, 50, 0, 21.4286, 45.2381, 0, 21.4286, 50, 0, 16.6667, 45.2381, 0, 21.4286, 45.2381, 0, 16.6667, 50, 0, 16.6667, 45.2381, 0, 21.4286, 40.4762, 0, 21.4286, 45.2381, 0, 16.6667, 40.4762, 0, 21.4286, 40.4762, 0, 16.6667, 45.2381, 0, 16.6667, 40.4762, 0, 21.4286, 35.7143, 0, 21.4286, 40.4762, 0, 16.6667, 35.7143, 0, 21.4286, 35.7143, 0, 16.6667, 40.4762, 0, 16.6667, 35.7143, 0, 21.4286, 30.9524, 0, 21.4286, 35.7143, 0, 16.6667, 30.9524, 0, 21.4286, 30.9524, 0, 16.6667, 35.7143, 0, 16.6667, 30.9524, 0, 21.4286, 26.1905, 0, 21.4286, 30.9524, 0, 16.6667, 26.1905, 0, 21.4286, 26.1905, 0, 16.6667, 30.9524, 0, 16.6667, 26.1905, 0, 21.4286, 21.4286, 0, 21.4286, 26.1905, 0, 16.6667, 21.4286, 0, 21.4286, 21.4286, 0, 16.6667, 26.1905, 0, 16.6667, 21.4286, 0, 21.4286, 16.6667, 0, 21.4286, 21.4286, 0, 16.6667, 16.6667, 0, 21.4286, 16.6667, 0, 16.6667, 21.4286, 0, 16.6667, 16.6667, 0, 21.4286, 11.9048, 0, 21.4286, 16.6667, 0, 16.6667, 11.9048, 0, 21.4286, 11.9048, 0, 16.6667, 16.6667, 0, 16.6667, 11.9048, 0, 21.4286, 7.1429, 0, 21.4286, 11.9048, 0, 16.6667, 7.1429, 0, 21.4286, 7.1429, 0, 16.6667, 11.9048, 0, 16.6667, 7.1429, 0, 21.4286, 2.3809, 0, 21.4286, 7.1429, 0, 16.6667, 2.3809, 0, 21.4286, 2.3809, 0, 16.6667, 7.1429, 0, 16.6667, 2.3809, 0, 21.4286, -2.381, 0, 21.4286, 2.3809, 0, 16.6667, -2.381, 0, 21.4286, -2.381, 0, 16.6667, 2.3809, 0, 16.6667, -2.381, 0, 21.4286, -7.1429, 0, 21.4286, -2.381, 0, 16.6667, -7.1429, 0, 21.4286, -7.1429, 0, 16.6667, -2.381, 0, 16.6667, -7.1429, 0, 21.4286, -11.9048, 0, 21.4286, -7.1429, 0, 16.6667, -11.9048, 0, 21.4286, -11.9048, 0, 16.6667, -7.1429, 0, 16.6667, -11.9048, 0, 21.4286, -16.6667, 0, 21.4286, -11.9048, 0, 16.6667, -16.6667, 0, 21.4286, -16.6667, 0, 16.6667, -11.9048, 0, 16.6667, -16.6667, 0, 21.4286, -21.4286, 0, 21.4286, -16.6667, 0, 16.6667, -21.4286, 0, 21.4286, -21.4286, 0, 16.6667, -16.6667, 0, 16.6667, -21.4286, 0, 21.4286, -26.1905, 0, 21.4286, -21.4286, 0, 16.6667, -26.1905, 0, 21.4286, -26.1905, 0, 16.6667, -21.4286, 0, 16.6667, -26.1905, 0, 21.4286, -30.9524, 0, 21.4286, -26.1905, 0, 16.6667, -30.9524, 0, 21.4286, -30.9524, 0, 16.6667, -26.1905, 0, 16.6667, -30.9524, 0, 21.4286, -35.7143, 0, 21.4286, -30.9524, 0, 16.6667, -35.7143, 0, 21.4286, -35.7143, 0, 16.6667, -30.9524, 0, 16.6667, -35.7143, 0, 21.4286, -40.4762, 0, 21.4286, -35.7143, 0, 16.6667, -40.4762, 0, 21.4286, -40.4762, 0, 16.6667, -35.7143, 0, 16.6667, -40.4762, 0, 21.4286, -45.2381, 0, 21.4286, -40.4762, 0, 16.6667, -45.2381, 0, 21.4286, -45.2381, 0, 16.6667, -40.4762, 0, 16.6667, -45.2381, 0, 21.4286, -50, 0, 21.4286, -45.2381, 0, 16.6667, -50, 0, 21.4286, -50, 0, 16.6667, -45.2381, 0, 16.6667, 50, 0, 16.6667, 45.2381, 0, 16.6667, 50, 0, 11.9048, 45.2381, 0, 16.6667, 45.2381, 0, 11.9048, 50, 0, 11.9048, 45.2381, 0, 16.6667, 40.4762, 0, 16.6667, 45.2381, 0, 11.9048, 40.4762, 0, 16.6667, 40.4762, 0, 11.9048, 45.2381, 0, 11.9048, 40.4762, 0, 16.6667, 35.7143, 0, 16.6667, 40.4762, 0, 11.9048, 35.7143, 0, 16.6667, 35.7143, 0, 11.9048, 40.4762, 0, 11.9048, 35.7143, 0, 16.6667, 30.9524, 0, 16.6667, 35.7143, 0, 11.9048, 30.9524, 0, 16.6667, 30.9524, 0, 11.9048, 35.7143, 0, 11.9048, 30.9524, 0, 16.6667, 26.1905, 0, 16.6667, 30.9524, 0, 11.9048, 26.1905, 0, 16.6667, 26.1905, 0, 11.9048, 30.9524, 0, 11.9048, 26.1905, 0, 16.6667, 21.4286, 0, 16.6667, 26.1905, 0, 11.9048, 21.4286, 0, 16.6667, 21.4286, 0, 11.9048, 26.1905, 0, 11.9048, 21.4286, 0, 16.6667, 16.6667, 0, 16.6667, 21.4286, 0, 11.9048, 16.6667, 0, 16.6667, 16.6667, 0, 11.9048, 21.4286, 0, 11.9048, 16.6667, 0, 16.6667, 11.9048, 0, 16.6667, 16.6667, 0, 11.9048, 11.9048, 0, 16.6667, 11.9048, 0, 11.9048, 16.6667, 0, 11.9048, 11.9048, 0, 16.6667, 7.1429, 0, 16.6667, 11.9048, 0, 11.9048, 7.1429, 0, 16.6667, 7.1429, 0, 11.9048, 11.9048, 0, 11.9048, 7.1429, 0, 16.6667, 2.3809, 0, 16.6667, 7.1429, 0, 11.9048, 2.3809, 0, 16.6667, 2.3809, 0, 11.9048, 7.1429, 0, 11.9048, 2.3809, 0, 16.6667, -2.381, 0, 16.6667, 2.3809, 0, 11.9048, -2.381, 0, 16.6667, -2.381, 0, 11.9048, 2.3809, 0, 11.9048, -2.381, 0, 16.6667, -7.1429, 0, 16.6667, -2.381, 0, 11.9048, -7.1429, 0, 16.6667, -7.1429, 0, 11.9048, -2.381, 0, 11.9048, -7.1429, 0, 16.6667, -11.9048, 0, 16.6667, -7.1429, 0, 11.9048, -11.9048, 0, 16.6667, -11.9048, 0, 11.9048, -7.1429, 0, 11.9048, -11.9048, 0, 16.6667, -16.6667, 0, 16.6667, -11.9048, 0, 11.9048, -16.6667, 0, 16.6667, -16.6667, 0, 11.9048, -11.9048, 0, 11.9048, -16.6667, 0, 16.6667, -21.4286, 0, 16.6667, -16.6667, 0, 11.9048, -21.4286, 0, 16.6667, -21.4286, 0, 11.9048, -16.6667, 0, 11.9048, -21.4286, 0, 16.6667, -26.1905, 0, 16.6667, -21.4286, 0, 11.9048, -26.1905, 0, 16.6667, -26.1905, 0, 11.9048, -21.4286, 0, 11.9048, -26.1905, 0, 16.6667, -30.9524, 0, 16.6667, -26.1905, 0, 11.9048, -30.9524, 0, 16.6667, -30.9524, 0, 11.9048, -26.1905, 0, 11.9048, -30.9524, 0, 16.6667, -35.7143, 0, 16.6667, -30.9524, 0, 11.9048, -35.7143, 0, 16.6667, -35.7143, 0, 11.9048, -30.9524, 0, 11.9048, -35.7143, 0, 16.6667, -40.4762, 0, 16.6667, -35.7143, 0, 11.9048, -40.4762, 0, 16.6667, -40.4762, 0, 11.9048, -35.7143, 0, 11.9048, -40.4762, 0, 16.6667, -45.2381, 0, 16.6667, -40.4762, 0, 11.9048, -45.2381, 0, 16.6667, -45.2381, 0, 11.9048, -40.4762, 0, 11.9048, -45.2381, 0, 16.6667, -50, 0, 16.6667, -45.2381, 0, 11.9048, -50, 0, 16.6667, -50, 0, 11.9048, -45.2381, 0, 11.9048, 50, 0, 11.9048, 45.2381, 0, 11.9048, 50, 0, 7.1429, 45.2381, 0, 11.9048, 45.2381, 0, 7.1429, 50, 0, 7.1429, 45.2381, 0, 11.9048, 40.4762, 0, 11.9048, 45.2381, 0, 7.1429, 40.4762, 0, 11.9048, 40.4762, 0, 7.1429, 45.2381, 0, 7.1429, 40.4762, 0, 11.9048, 35.7143, 0, 11.9048, 40.4762, 0, 7.1429, 35.7143, 0, 11.9048, 35.7143, 0, 7.1429, 40.4762, 0, 7.1429, 35.7143, 0, 11.9048, 30.9524, 0, 11.9048, 35.7143, 0, 7.1429, 30.9524, 0, 11.9048, 30.9524, 0, 7.1429, 35.7143, 0, 7.1429, 30.9524, 0, 11.9048, 26.1905, 0, 11.9048, 30.9524, 0, 7.1429, 26.1905, 0, 11.9048, 26.1905, 0, 7.1429, 30.9524, 0, 7.1429, 26.1905, 0, 11.9048, 21.4286, 0, 11.9048, 26.1905, 0, 7.1429, 21.4286, 0, 11.9048, 21.4286, 0, 7.1429, 26.1905, 0, 7.1429, 21.4286, 0, 11.9048, 16.6667, 0, 11.9048, 21.4286, 0, 7.1429, 16.6667, 0, 11.9048, 16.6667, 0, 7.1429, 21.4286, 0, 7.1429, 16.6667, 0, 11.9048, 11.9048, 0, 11.9048, 16.6667, 0, 7.1429, 11.9048, 0, 11.9048, 11.9048, 0, 7.1429, 16.6667, 0, 7.1429, 11.9048, 0, 11.9048, 7.1429, 0, 11.9048, 11.9048, 0, 7.1429, 7.1429, 0, 11.9048, 7.1429, 0, 7.1429, 11.9048, 0, 7.1429, 7.1429, 0, 11.9048, 2.3809, 0, 11.9048, 7.1429, 0, 7.1429, 2.3809, 0, 11.9048, 2.3809, 0, 7.1429, 7.1429, 0, 7.1429, 2.3809, 0, 11.9048, -2.381, 0, 11.9048, 2.3809, 0, 7.1429, -2.381, 0, 11.9048, -2.381, 0, 7.1429, 2.3809, 0, 7.1429, -2.381, 0, 11.9048, -7.1429, 0, 11.9048, -2.381, 0, 7.1429, -7.1429, 0, 11.9048, -7.1429, 0, 7.1429, -2.381, 0, 7.1429, -7.1429, 0, 11.9048, -11.9048, 0, 11.9048, -7.1429, 0, 7.1429, -11.9048, 0, 11.9048, -11.9048, 0, 7.1429, -7.1429, 0, 7.1429, -11.9048, 0, 11.9048, -16.6667, 0, 11.9048, -11.9048, 0, 7.1429, -16.6667, 0, 11.9048, -16.6667, 0, 7.1429, -11.9048, 0, 7.1429, -16.6667, 0, 11.9048, -21.4286, 0, 11.9048, -16.6667, 0, 7.1429, -21.4286, 0, 11.9048, -21.4286, 0, 7.1429, -16.6667, 0, 7.1429, -21.4286, 0, 11.9048, -26.1905, 0, 11.9048, -21.4286, 0, 7.1429, -26.1905, 0, 11.9048, -26.1905, 0, 7.1429, -21.4286, 0, 7.1429, -26.1905, 0, 11.9048, -30.9524, 0, 11.9048, -26.1905, 0, 7.1429, -30.9524, 0, 11.9048, -30.9524, 0, 7.1429, -26.1905, 0, 7.1429, -30.9524, 0, 11.9048, -35.7143, 0, 11.9048, -30.9524, 0, 7.1429, -35.7143, 0, 11.9048, -35.7143, 0, 7.1429, -30.9524, 0, 7.1429, -35.7143, 0, 11.9048, -40.4762, 0, 11.9048, -35.7143, 0, 7.1429, -40.4762, 0, 11.9048, -40.4762, 0, 7.1429, -35.7143, 0, 7.1429, -40.4762, 0, 11.9048, -45.2381, 0, 11.9048, -40.4762, 0, 7.1429, -45.2381, 0, 11.9048, -45.2381, 0, 7.1429, -40.4762, 0, 7.1429, -45.2381, 0, 11.9048, -50, 0, 11.9048, -45.2381, 0, 7.1429, -50, 0, 11.9048, -50, 0, 7.1429, -45.2381, 0, 7.1429, 50, 0, 7.1429, 45.2381, 0, 7.1429, 50, 0, 2.3809, 45.2381, 0, 7.1429, 45.2381, 0, 2.3809, 50, 0, 2.3809, 45.2381, 0, 7.1429, 40.4762, 0, 7.1429, 45.2381, 0, 2.3809, 40.4762, 0, 7.1429, 40.4762, 0, 2.3809, 45.2381, 0, 2.3809, 40.4762, 0, 7.1429, 35.7143, 0, 7.1429, 40.4762, 0, 2.3809, 35.7143, 0, 7.1429, 35.7143, 0, 2.3809, 40.4762, 0, 2.3809, 35.7143, 0, 7.1429, 30.9524, 0, 7.1429, 35.7143, 0, 2.3809, 30.9524, 0, 7.1429, 30.9524, 0, 2.3809, 35.7143, 0, 2.3809, 30.9524, 0, 7.1429, 26.1905, 0, 7.1429, 30.9524, 0, 2.3809, 26.1905, 0, 7.1429, 26.1905, 0, 2.3809, 30.9524, 0, 2.3809, 26.1905, 0, 7.1429, 21.4286, 0, 7.1429, 26.1905, 0, 2.3809, 21.4286, 0, 7.1429, 21.4286, 0, 2.3809, 26.1905, 0, 2.3809, 21.4286, 0, 7.1429, 16.6667, 0, 7.1429, 21.4286, 0, 2.3809, 16.6667, 0, 7.1429, 16.6667, 0, 2.3809, 21.4286, 0, 2.3809, 16.6667, 0, 7.1429, 11.9048, 0, 7.1429, 16.6667, 0, 2.3809, 11.9048, 0, 7.1429, 11.9048, 0, 2.3809, 16.6667, 0, 2.3809, 11.9048, 0, 7.1429, 7.1429, 0, 7.1429, 11.9048, 0, 2.3809, 7.1429, 0, 7.1429, 7.1429, 0, 2.3809, 11.9048, 0, 2.3809, 7.1429, 0, 7.1429, 2.3809, 0, 7.1429, 7.1429, 0, 2.3809, 2.3809, 0, 7.1429, 2.3809, 0, 2.3809, 7.1429, 0, 2.3809, 2.3809, 0, 7.1429, -2.381, 0, 7.1429, 2.3809, 0, 2.3809, -2.381, 0, 7.1429, -2.381, 0, 2.3809, 2.3809, 0, 2.3809, -2.381, 0, 7.1429, -7.1429, 0, 7.1429, -2.381, 0, 2.3809, -7.1429, 0, 7.1429, -7.1429, 0, 2.3809, -2.381, 0, 2.3809, -7.1429, 0, 7.1429, -11.9048, 0, 7.1429, -7.1429, 0, 2.3809, -11.9048, 0, 7.1429, -11.9048, 0, 2.3809, -7.1429, 0, 2.3809, -11.9048, 0, 7.1429, -16.6667, 0, 7.1429, -11.9048, 0, 2.3809, -16.6667, 0, 7.1429, -16.6667, 0, 2.3809, -11.9048, 0, 2.3809, -16.6667, 0, 7.1429, -21.4286, 0, 7.1429, -16.6667, 0, 2.3809, -21.4286, 0, 7.1429, -21.4286, 0, 2.3809, -16.6667, 0, 2.3809, -21.4286, 0, 7.1429, -26.1905, 0, 7.1429, -21.4286, 0, 2.3809, -26.1905, 0, 7.1429, -26.1905, 0, 2.3809, -21.4286, 0, 2.3809, -26.1905, 0, 7.1429, -30.9524, 0, 7.1429, -26.1905, 0, 2.3809, -30.9524, 0, 7.1429, -30.9524, 0, 2.3809, -26.1905, 0, 2.3809, -30.9524, 0, 7.1429, -35.7143, 0, 7.1429, -30.9524, 0, 2.3809, -35.7143, 0, 7.1429, -35.7143, 0, 2.3809, -30.9524, 0, 2.3809, -35.7143, 0, 7.1429, -40.4762, 0, 7.1429, -35.7143, 0, 2.3809, -40.4762, 0, 7.1429, -40.4762, 0, 2.3809, -35.7143, 0, 2.3809, -40.4762, 0, 7.1429, -45.2381, 0, 7.1429, -40.4762, 0, 2.3809, -45.2381, 0, 7.1429, -45.2381, 0, 2.3809, -40.4762, 0, 2.3809, -45.2381, 0, 7.1429, -50, 0, 7.1429, -45.2381, 0, 2.3809, -50, 0, 7.1429, -50, 0, 2.3809, -45.2381, 0, 2.3809, 50, 0, 2.3809, 45.2381, 0, 2.3809, 50, 0, -2.381, 45.2381, 0, 2.3809, 45.2381, 0, -2.381, 50, 0, -2.381, 45.2381, 0, 2.3809, 40.4762, 0, 2.3809, 45.2381, 0, -2.381, 40.4762, 0, 2.3809, 40.4762, 0, -2.381, 45.2381, 0, -2.381, 40.4762, 0, 2.3809, 35.7143, 0, 2.3809, 40.4762, 0, -2.381, 35.7143, 0, 2.3809, 35.7143, 0, -2.381, 40.4762, 0, -2.381, 35.7143, 0, 2.3809, 30.9524, 0, 2.3809, 35.7143, 0, -2.381, 30.9524, 0, 2.3809, 30.9524, 0, -2.381, 35.7143, 0, -2.381, 30.9524, 0, 2.3809, 26.1905, 0, 2.3809, 30.9524, 0, -2.381, 26.1905, 0, 2.3809, 26.1905, 0, -2.381, 30.9524, 0, -2.381, 26.1905, 0, 2.3809, 21.4286, 0, 2.3809, 26.1905, 0, -2.381, 21.4286, 0, 2.3809, 21.4286, 0, -2.381, 26.1905, 0, -2.381, 21.4286, 0, 2.3809, 16.6667, 0, 2.3809, 21.4286, 0, -2.381, 16.6667, 0, 2.3809, 16.6667, 0, -2.381, 21.4286, 0, -2.381, 16.6667, 0, 2.3809, 11.9048, 0, 2.3809, 16.6667, 0, -2.381, 11.9048, 0, 2.3809, 11.9048, 0, -2.381, 16.6667, 0, -2.381, 11.9048, 0, 2.3809, 7.1429, 0, 2.3809, 11.9048, 0, -2.381, 7.1429, 0, 2.3809, 7.1429, 0, -2.381, 11.9048, 0, -2.381, 7.1429, 0, 2.3809, 2.3809, 0, 2.3809, 7.1429, 0, -2.381, 2.3809, 0, 2.3809, 2.3809, 0, -2.381, 7.1429, 0, -2.381, 2.3809, 0, 2.3809, -2.381, 0, 2.3809, 2.3809, 0, -2.381, -2.381, 0, 2.3809, -2.381, 0, -2.381, 2.3809, 0, -2.381, -2.381, 0, 2.3809, -7.1429, 0, 2.3809, -2.381, 0, -2.381, -7.1429, 0, 2.3809, -7.1429, 0, -2.381, -2.381, 0, -2.381, -7.1429, 0, 2.3809, -11.9048, 0, 2.3809, -7.1429, 0, -2.381, -11.9048, 0, 2.3809, -11.9048, 0, -2.381, -7.1429, 0, -2.381, -11.9048, 0, 2.3809, -16.6667, 0, 2.3809, -11.9048, 0, -2.381, -16.6667, 0, 2.3809, -16.6667, 0, -2.381, -11.9048, 0, -2.381, -16.6667, 0, 2.3809, -21.4286, 0, 2.3809, -16.6667, 0, -2.381, -21.4286, 0, 2.3809, -21.4286, 0, -2.381, -16.6667, 0, -2.381, -21.4286, 0, 2.3809, -26.1905, 0, 2.3809, -21.4286, 0, -2.381, -26.1905, 0, 2.3809, -26.1905, 0, -2.381, -21.4286, 0, -2.381, -26.1905, 0, 2.3809, -30.9524, 0, 2.3809, -26.1905, 0, -2.381, -30.9524, 0, 2.3809, -30.9524, 0, -2.381, -26.1905, 0, -2.381, -30.9524, 0, 2.3809, -35.7143, 0, 2.3809, -30.9524, 0, -2.381, -35.7143, 0, 2.3809, -35.7143, 0, -2.381, -30.9524, 0, -2.381, -35.7143, 0, 2.3809, -40.4762, 0, 2.3809, -35.7143, 0, -2.381, -40.4762, 0, 2.3809, -40.4762, 0, -2.381, -35.7143, 0, -2.381, -40.4762, 0, 2.3809, -45.2381, 0, 2.3809, -40.4762, 0, -2.381, -45.2381, 0, 2.3809, -45.2381, 0, -2.381, -40.4762, 0, -2.381, -45.2381, 0, 2.3809, -50, 0, 2.3809, -45.2381, 0, -2.381, -50, 0, 2.3809, -50, 0, -2.381, -45.2381, 0, -2.381, 50, 0, -2.381, 45.2381, 0, -2.381, 50, 0, -7.1429, 45.2381, 0, -2.381, 45.2381, 0, -7.1429, 50, 0, -7.1429, 45.2381, 0, -2.381, 40.4762, 0, -2.381, 45.2381, 0, -7.1429, 40.4762, 0, -2.381, 40.4762, 0, -7.1429, 45.2381, 0, -7.1429, 40.4762, 0, -2.381, 35.7143, 0, -2.381, 40.4762, 0, -7.1429, 35.7143, 0, -2.381, 35.7143, 0, -7.1429, 40.4762, 0, -7.1429, 35.7143, 0, -2.381, 30.9524, 0, -2.381, 35.7143, 0, -7.1429, 30.9524, 0, -2.381, 30.9524, 0, -7.1429, 35.7143, 0, -7.1429, 30.9524, 0, -2.381, 26.1905, 0, -2.381, 30.9524, 0, -7.1429, 26.1905, 0, -2.381, 26.1905, 0, -7.1429, 30.9524, 0, -7.1429, 26.1905, 0, -2.381, 21.4286, 0, -2.381, 26.1905, 0, -7.1429, 21.4286, 0, -2.381, 21.4286, 0, -7.1429, 26.1905, 0, -7.1429, 21.4286, 0, -2.381, 16.6667, 0, -2.381, 21.4286, 0, -7.1429, 16.6667, 0, -2.381, 16.6667, 0, -7.1429, 21.4286, 0, -7.1429, 16.6667, 0, -2.381, 11.9048, 0, -2.381, 16.6667, 0, -7.1429, 11.9048, 0, -2.381, 11.9048, 0, -7.1429, 16.6667, 0, -7.1429, 11.9048, 0, -2.381, 7.1429, 0, -2.381, 11.9048, 0, -7.1429, 7.1429, 0, -2.381, 7.1429, 0, -7.1429, 11.9048, 0, -7.1429, 7.1429, 0, -2.381, 2.3809, 0, -2.381, 7.1429, 0, -7.1429, 2.3809, 0, -2.381, 2.3809, 0, -7.1429, 7.1429, 0, -7.1429, 2.3809, 0, -2.381, -2.381, 0, -2.381, 2.3809, 0, -7.1429, -2.381, 0, -2.381, -2.381, 0, -7.1429, 2.3809, 0, -7.1429, -2.381, 0, -2.381, -7.1429, 0, -2.381, -2.381, 0, -7.1429, -7.1429, 0, -2.381, -7.1429, 0, -7.1429, -2.381, 0, -7.1429, -7.1429, 0, -2.381, -11.9048, 0, -2.381, -7.1429, 0, -7.1429, -11.9048, 0, -2.381, -11.9048, 0, -7.1429, -7.1429, 0, -7.1429, -11.9048, 0, -2.381, -16.6667, 0, -2.381, -11.9048, 0, -7.1429, -16.6667, 0, -2.381, -16.6667, 0, -7.1429, -11.9048, 0, -7.1429, -16.6667, 0, -2.381, -21.4286, 0, -2.381, -16.6667, 0, -7.1429, -21.4286, 0, -2.381, -21.4286, 0, -7.1429, -16.6667, 0, -7.1429, -21.4286, 0, -2.381, -26.1905, 0, -2.381, -21.4286, 0, -7.1429, -26.1905, 0, -2.381, -26.1905, 0, -7.1429, -21.4286, 0, -7.1429, -26.1905, 0, -2.381, -30.9524, 0, -2.381, -26.1905, 0, -7.1429, -30.9524, 0, -2.381, -30.9524, 0, -7.1429, -26.1905, 0, -7.1429, -30.9524, 0, -2.381, -35.7143, 0, -2.381, -30.9524, 0, -7.1429, -35.7143, 0, -2.381, -35.7143, 0, -7.1429, -30.9524, 0, -7.1429, -35.7143, 0, -2.381, -40.4762, 0, -2.381, -35.7143, 0, -7.1429, -40.4762, 0, -2.381, -40.4762, 0, -7.1429, -35.7143, 0, -7.1429, -40.4762, 0, -2.381, -45.2381, 0, -2.381, -40.4762, 0, -7.1429, -45.2381, 0, -2.381, -45.2381, 0, -7.1429, -40.4762, 0, -7.1429, -45.2381, 0, -2.381, -50, 0, -2.381, -45.2381, 0, -7.1429, -50, 0, -2.381, -50, 0, -7.1429, -45.2381, 0, -7.1429, 50, 0, -7.1429, 45.2381, 0, -7.1429, 50, 0, -11.9048, 45.2381, 0, -7.1429, 45.2381, 0, -11.9048, 50, 0, -11.9048, 45.2381, 0, -7.1429, 40.4762, 0, -7.1429, 45.2381, 0, -11.9048, 40.4762, 0, -7.1429, 40.4762, 0, -11.9048, 45.2381, 0, -11.9048, 40.4762, 0, -7.1429, 35.7143, 0, -7.1429, 40.4762, 0, -11.9048, 35.7143, 0, -7.1429, 35.7143, 0, -11.9048, 40.4762, 0, -11.9048, 35.7143, 0, -7.1429, 30.9524, 0, -7.1429, 35.7143, 0, -11.9048, 30.9524, 0, -7.1429, 30.9524, 0, -11.9048, 35.7143, 0, -11.9048, 30.9524, 0, -7.1429, 26.1905, 0, -7.1429, 30.9524, 0, -11.9048, 26.1905, 0, -7.1429, 26.1905, 0, -11.9048, 30.9524, 0, -11.9048, 26.1905, 0, -7.1429, 21.4286, 0, -7.1429, 26.1905, 0, -11.9048, 21.4286, 0, -7.1429, 21.4286, 0, -11.9048, 26.1905, 0, -11.9048, 21.4286, 0, -7.1429, 16.6667, 0, -7.1429, 21.4286, 0, -11.9048, 16.6667, 0, -7.1429, 16.6667, 0, -11.9048, 21.4286, 0, -11.9048, 16.6667, 0, -7.1429, 11.9048, 0, -7.1429, 16.6667, 0, -11.9048, 11.9048, 0, -7.1429, 11.9048, 0, -11.9048, 16.6667, 0, -11.9048, 11.9048, 0, -7.1429, 7.1429, 0, -7.1429, 11.9048, 0, -11.9048, 7.1429, 0, -7.1429, 7.1429, 0, -11.9048, 11.9048, 0, -11.9048, 7.1429, 0, -7.1429, 2.3809, 0, -7.1429, 7.1429, 0, -11.9048, 2.3809, 0, -7.1429, 2.3809, 0, -11.9048, 7.1429, 0, -11.9048, 2.3809, 0, -7.1429, -2.381, 0, -7.1429, 2.3809, 0, -11.9048, -2.381, 0, -7.1429, -2.381, 0, -11.9048, 2.3809, 0, -11.9048, -2.381, 0, -7.1429, -7.1429, 0, -7.1429, -2.381, 0, -11.9048, -7.1429, 0, -7.1429, -7.1429, 0, -11.9048, -2.381, 0, -11.9048, -7.1429, 0, -7.1429, -11.9048, 0, -7.1429, -7.1429, 0, -11.9048, -11.9048, 0, -7.1429, -11.9048, 0, -11.9048, -7.1429, 0, -11.9048, -11.9048, 0, -7.1429, -16.6667, 0, -7.1429, -11.9048, 0, -11.9048, -16.6667, 0, -7.1429, -16.6667, 0, -11.9048, -11.9048, 0, -11.9048, -16.6667, 0, -7.1429, -21.4286, 0, -7.1429, -16.6667, 0, -11.9048, -21.4286, 0, -7.1429, -21.4286, 0, -11.9048, -16.6667, 0, -11.9048, -21.4286, 0, -7.1429, -26.1905, 0, -7.1429, -21.4286, 0, -11.9048, -26.1905, 0, -7.1429, -26.1905, 0, -11.9048, -21.4286, 0, -11.9048, -26.1905, 0, -7.1429, -30.9524, 0, -7.1429, -26.1905, 0, -11.9048, -30.9524, 0, -7.1429, -30.9524, 0, -11.9048, -26.1905, 0, -11.9048, -30.9524, 0, -7.1429, -35.7143, 0, -7.1429, -30.9524, 0, -11.9048, -35.7143, 0, -7.1429, -35.7143, 0, -11.9048, -30.9524, 0, -11.9048, -35.7143, 0, -7.1429, -40.4762, 0, -7.1429, -35.7143, 0, -11.9048, -40.4762, 0, -7.1429, -40.4762, 0, -11.9048, -35.7143, 0, -11.9048, -40.4762, 0, -7.1429, -45.2381, 0, -7.1429, -40.4762, 0, -11.9048, -45.2381, 0, -7.1429, -45.2381, 0, -11.9048, -40.4762, 0, -11.9048, -45.2381, 0, -7.1429, -50, 0, -7.1429, -45.2381, 0, -11.9048, -50, 0, -7.1429, -50, 0, -11.9048, -45.2381, 0, -11.9048, 50, 0, -11.9048, 45.2381, 0, -11.9048, 50, 0, -16.6667, 45.2381, 0, -11.9048, 45.2381, 0, -16.6667, 50, 0, -16.6667, 45.2381, 0, -11.9048, 40.4762, 0, -11.9048, 45.2381, 0, -16.6667, 40.4762, 0, -11.9048, 40.4762, 0, -16.6667, 45.2381, 0, -16.6667, 40.4762, 0, -11.9048, 35.7143, 0, -11.9048, 40.4762, 0, -16.6667, 35.7143, 0, -11.9048, 35.7143, 0, -16.6667, 40.4762, 0, -16.6667, 35.7143, 0, -11.9048, 30.9524, 0, -11.9048, 35.7143, 0, -16.6667, 30.9524, 0, -11.9048, 30.9524, 0, -16.6667, 35.7143, 0, -16.6667, 30.9524, 0, -11.9048, 26.1905, 0, -11.9048, 30.9524, 0, -16.6667, 26.1905, 0, -11.9048, 26.1905, 0, -16.6667, 30.9524, 0, -16.6667, 26.1905, 0, -11.9048, 21.4286, 0, -11.9048, 26.1905, 0, -16.6667, 21.4286, 0, -11.9048, 21.4286, 0, -16.6667, 26.1905, 0, -16.6667, 21.4286, 0, -11.9048, 16.6667, 0, -11.9048, 21.4286, 0, -16.6667, 16.6667, 0, -11.9048, 16.6667, 0, -16.6667, 21.4286, 0, -16.6667, 16.6667, 0, -11.9048, 11.9048, 0, -11.9048, 16.6667, 0, -16.6667, 11.9048, 0, -11.9048, 11.9048, 0, -16.6667, 16.6667, 0, -16.6667, 11.9048, 0, -11.9048, 7.1429, 0, -11.9048, 11.9048, 0, -16.6667, 7.1429, 0, -11.9048, 7.1429, 0, -16.6667, 11.9048, 0, -16.6667, 7.1429, 0, -11.9048, 2.3809, 0, -11.9048, 7.1429, 0, -16.6667, 2.3809, 0, -11.9048, 2.3809, 0, -16.6667, 7.1429, 0, -16.6667, 2.3809, 0, -11.9048, -2.381, 0, -11.9048, 2.3809, 0, -16.6667, -2.381, 0, -11.9048, -2.381, 0, -16.6667, 2.3809, 0, -16.6667, -2.381, 0, -11.9048, -7.1429, 0, -11.9048, -2.381, 0, -16.6667, -7.1429, 0, -11.9048, -7.1429, 0, -16.6667, -2.381, 0, -16.6667, -7.1429, 0, -11.9048, -11.9048, 0, -11.9048, -7.1429, 0, -16.6667, -11.9048, 0, -11.9048, -11.9048, 0, -16.6667, -7.1429, 0, -16.6667, -11.9048, 0, -11.9048, -16.6667, 0, -11.9048, -11.9048, 0, -16.6667, -16.6667, 0, -11.9048, -16.6667, 0, -16.6667, -11.9048, 0, -16.6667, -16.6667, 0, -11.9048, -21.4286, 0, -11.9048, -16.6667, 0, -16.6667, -21.4286, 0, -11.9048, -21.4286, 0, -16.6667, -16.6667, 0, -16.6667, -21.4286, 0, -11.9048, -26.1905, 0, -11.9048, -21.4286, 0, -16.6667, -26.1905, 0, -11.9048, -26.1905, 0, -16.6667, -21.4286, 0, -16.6667, -26.1905, 0, -11.9048, -30.9524, 0, -11.9048, -26.1905, 0, -16.6667, -30.9524, 0, -11.9048, -30.9524, 0, -16.6667, -26.1905, 0, -16.6667, -30.9524, 0, -11.9048, -35.7143, 0, -11.9048, -30.9524, 0, -16.6667, -35.7143, 0, -11.9048, -35.7143, 0, -16.6667, -30.9524, 0, -16.6667, -35.7143, 0, -11.9048, -40.4762, 0, -11.9048, -35.7143, 0, -16.6667, -40.4762, 0, -11.9048, -40.4762, 0, -16.6667, -35.7143, 0, -16.6667, -40.4762, 0, -11.9048, -45.2381, 0, -11.9048, -40.4762, 0, -16.6667, -45.2381, 0, -11.9048, -45.2381, 0, -16.6667, -40.4762, 0, -16.6667, -45.2381, 0, -11.9048, -50, 0, -11.9048, -45.2381, 0, -16.6667, -50, 0, -11.9048, -50, 0, -16.6667, -45.2381, 0, -16.6667, 50, 0, -16.6667, 45.2381, 0, -16.6667, 50, 0, -21.4286, 45.2381, 0, -16.6667, 45.2381, 0, -21.4286, 50, 0, -21.4286, 45.2381, 0, -16.6667, 40.4762, 0, -16.6667, 45.2381, 0, -21.4286, 40.4762, 0, -16.6667, 40.4762, 0, -21.4286, 45.2381, 0, -21.4286, 40.4762, 0, -16.6667, 35.7143, 0, -16.6667, 40.4762, 0, -21.4286, 35.7143, 0, -16.6667, 35.7143, 0, -21.4286, 40.4762, 0, -21.4286, 35.7143, 0, -16.6667, 30.9524, 0, -16.6667, 35.7143, 0, -21.4286, 30.9524, 0, -16.6667, 30.9524, 0, -21.4286, 35.7143, 0, -21.4286, 30.9524, 0, -16.6667, 26.1905, 0, -16.6667, 30.9524, 0, -21.4286, 26.1905, 0, -16.6667, 26.1905, 0, -21.4286, 30.9524, 0, -21.4286, 26.1905, 0, -16.6667, 21.4286, 0, -16.6667, 26.1905, 0, -21.4286, 21.4286, 0, -16.6667, 21.4286, 0, -21.4286, 26.1905, 0, -21.4286, 21.4286, 0, -16.6667, 16.6667, 0, -16.6667, 21.4286, 0, -21.4286, 16.6667, 0, -16.6667, 16.6667, 0, -21.4286, 21.4286, 0, -21.4286, 16.6667, 0, -16.6667, 11.9048, 0, -16.6667, 16.6667, 0, -21.4286, 11.9048, 0, -16.6667, 11.9048, 0, -21.4286, 16.6667, 0, -21.4286, 11.9048, 0, -16.6667, 7.1429, 0, -16.6667, 11.9048, 0, -21.4286, 7.1429, 0, -16.6667, 7.1429, 0, -21.4286, 11.9048, 0, -21.4286, 7.1429, 0, -16.6667, 2.3809, 0, -16.6667, 7.1429, 0, -21.4286, 2.3809, 0, -16.6667, 2.3809, 0, -21.4286, 7.1429, 0, -21.4286, 2.3809, 0, -16.6667, -2.381, 0, -16.6667, 2.3809, 0, -21.4286, -2.381, 0, -16.6667, -2.381, 0, -21.4286, 2.3809, 0, -21.4286, -2.381, 0, -16.6667, -7.1429, 0, -16.6667, -2.381, 0, -21.4286, -7.1429, 0, -16.6667, -7.1429, 0, -21.4286, -2.381, 0, -21.4286, -7.1429, 0, -16.6667, -11.9048, 0, -16.6667, -7.1429, 0, -21.4286, -11.9048, 0, -16.6667, -11.9048, 0, -21.4286, -7.1429, 0, -21.4286, -11.9048, 0, -16.6667, -16.6667, 0, -16.6667, -11.9048, 0, -21.4286, -16.6667, 0, -16.6667, -16.6667, 0, -21.4286, -11.9048, 0, -21.4286, -16.6667, 0, -16.6667, -21.4286, 0, -16.6667, -16.6667, 0, -21.4286, -21.4286, 0, -16.6667, -21.4286, 0, -21.4286, -16.6667, 0, -21.4286, -21.4286, 0, -16.6667, -26.1905, 0, -16.6667, -21.4286, 0, -21.4286, -26.1905, 0, -16.6667, -26.1905, 0, -21.4286, -21.4286, 0, -21.4286, -26.1905, 0, -16.6667, -30.9524, 0, -16.6667, -26.1905, 0, -21.4286, -30.9524, 0, -16.6667, -30.9524, 0, -21.4286, -26.1905, 0, -21.4286, -30.9524, 0, -16.6667, -35.7143, 0, -16.6667, -30.9524, 0, -21.4286, -35.7143, 0, -16.6667, -35.7143, 0, -21.4286, -30.9524, 0, -21.4286, -35.7143, 0, -16.6667, -40.4762, 0, -16.6667, -35.7143, 0, -21.4286, -40.4762, 0, -16.6667, -40.4762, 0, -21.4286, -35.7143, 0, -21.4286, -40.4762, 0, -16.6667, -45.2381, 0, -16.6667, -40.4762, 0, -21.4286, -45.2381, 0, -16.6667, -45.2381, 0, -21.4286, -40.4762, 0, -21.4286, -45.2381, 0, -16.6667, -50, 0, -16.6667, -45.2381, 0, -21.4286, -50, 0, -16.6667, -50, 0, -21.4286, -45.2381, 0, -21.4286, 50, 0, -21.4286, 45.2381, 0, -21.4286, 50, 0, -26.1905, 45.2381, 0, -21.4286, 45.2381, 0, -26.1905, 50, 0, -26.1905, 45.2381, 0, -21.4286, 40.4762, 0, -21.4286, 45.2381, 0, -26.1905, 40.4762, 0, -21.4286, 40.4762, 0, -26.1905, 45.2381, 0, -26.1905, 40.4762, 0, -21.4286, 35.7143, 0, -21.4286, 40.4762, 0, -26.1905, 35.7143, 0, -21.4286, 35.7143, 0, -26.1905, 40.4762, 0, -26.1905, 35.7143, 0, -21.4286, 30.9524, 0, -21.4286, 35.7143, 0, -26.1905, 30.9524, 0, -21.4286, 30.9524, 0, -26.1905, 35.7143, 0, -26.1905, 30.9524, 0, -21.4286, 26.1905, 0, -21.4286, 30.9524, 0, -26.1905, 26.1905, 0, -21.4286, 26.1905, 0, -26.1905, 30.9524, 0, -26.1905, 26.1905, 0, -21.4286, 21.4286, 0, -21.4286, 26.1905, 0, -26.1905, 21.4286, 0, -21.4286, 21.4286, 0, -26.1905, 26.1905, 0, -26.1905, 21.4286, 0, -21.4286, 16.6667, 0, -21.4286, 21.4286, 0, -26.1905, 16.6667, 0, -21.4286, 16.6667, 0, -26.1905, 21.4286, 0, -26.1905, 16.6667, 0, -21.4286, 11.9048, 0, -21.4286, 16.6667, 0, -26.1905, 11.9048, 0, -21.4286, 11.9048, 0, -26.1905, 16.6667, 0, -26.1905, 11.9048, 0, -21.4286, 7.1429, 0, -21.4286, 11.9048, 0, -26.1905, 7.1429, 0, -21.4286, 7.1429, 0, -26.1905, 11.9048, 0, -26.1905, 7.1429, 0, -21.4286, 2.3809, 0, -21.4286, 7.1429, 0, -26.1905, 2.3809, 0, -21.4286, 2.3809, 0, -26.1905, 7.1429, 0, -26.1905, 2.3809, 0, -21.4286, -2.381, 0, -21.4286, 2.3809, 0, -26.1905, -2.381, 0, -21.4286, -2.381, 0, -26.1905, 2.3809, 0, -26.1905, -2.381, 0, -21.4286, -7.1429, 0, -21.4286, -2.381, 0, -26.1905, -7.1429, 0, -21.4286, -7.1429, 0, -26.1905, -2.381, 0, -26.1905, -7.1429, 0, -21.4286, -11.9048, 0, -21.4286, -7.1429, 0, -26.1905, -11.9048, 0, -21.4286, -11.9048, 0, -26.1905, -7.1429, 0, -26.1905, -11.9048, 0, -21.4286, -16.6667, 0, -21.4286, -11.9048, 0, -26.1905, -16.6667, 0, -21.4286, -16.6667, 0, -26.1905, -11.9048, 0, -26.1905, -16.6667, 0, -21.4286, -21.4286, 0, -21.4286, -16.6667, 0, -26.1905, -21.4286, 0, -21.4286, -21.4286, 0, -26.1905, -16.6667, 0, -26.1905, -21.4286, 0, -21.4286, -26.1905, 0, -21.4286, -21.4286, 0, -26.1905, -26.1905, 0, -21.4286, -26.1905, 0, -26.1905, -21.4286, 0, -26.1905, -26.1905, 0, -21.4286, -30.9524, 0, -21.4286, -26.1905, 0, -26.1905, -30.9524, 0, -21.4286, -30.9524, 0, -26.1905, -26.1905, 0, -26.1905, -30.9524, 0, -21.4286, -35.7143, 0, -21.4286, -30.9524, 0, -26.1905, -35.7143, 0, -21.4286, -35.7143, 0, -26.1905, -30.9524, 0, -26.1905, -35.7143, 0, -21.4286, -40.4762, 0, -21.4286, -35.7143, 0, -26.1905, -40.4762, 0, -21.4286, -40.4762, 0, -26.1905, -35.7143, 0, -26.1905, -40.4762, 0, -21.4286, -45.2381, 0, -21.4286, -40.4762, 0, -26.1905, -45.2381, 0, -21.4286, -45.2381, 0, -26.1905, -40.4762, 0, -26.1905, -45.2381, 0, -21.4286, -50, 0, -21.4286, -45.2381, 0, -26.1905, -50, 0, -21.4286, -50, 0, -26.1905, -45.2381, 0, -26.1905, 50, 0, -26.1905, 45.2381, 0, -26.1905, 50, 0, -30.9524, 45.2381, 0, -26.1905, 45.2381, 0, -30.9524, 50, 0, -30.9524, 45.2381, 0, -26.1905, 40.4762, 0, -26.1905, 45.2381, 0, -30.9524, 40.4762, 0, -26.1905, 40.4762, 0, -30.9524, 45.2381, 0, -30.9524, 40.4762, 0, -26.1905, 35.7143, 0, -26.1905, 40.4762, 0, -30.9524, 35.7143, 0, -26.1905, 35.7143, 0, -30.9524, 40.4762, 0, -30.9524, 35.7143, 0, -26.1905, 30.9524, 0, -26.1905, 35.7143, 0, -30.9524, 30.9524, 0, -26.1905, 30.9524, 0, -30.9524, 35.7143, 0, -30.9524, 30.9524, 0, -26.1905, 26.1905, 0, -26.1905, 30.9524, 0, -30.9524, 26.1905, 0, -26.1905, 26.1905, 0, -30.9524, 30.9524, 0, -30.9524, 26.1905, 0, -26.1905, 21.4286, 0, -26.1905, 26.1905, 0, -30.9524, 21.4286, 0, -26.1905, 21.4286, 0, -30.9524, 26.1905, 0, -30.9524, 21.4286, 0, -26.1905, 16.6667, 0, -26.1905, 21.4286, 0, -30.9524, 16.6667, 0, -26.1905, 16.6667, 0, -30.9524, 21.4286, 0, -30.9524, 16.6667, 0, -26.1905, 11.9048, 0, -26.1905, 16.6667, 0, -30.9524, 11.9048, 0, -26.1905, 11.9048, 0, -30.9524, 16.6667, 0, -30.9524, 11.9048, 0, -26.1905, 7.1429, 0, -26.1905, 11.9048, 0, -30.9524, 7.1429, 0, -26.1905, 7.1429, 0, -30.9524, 11.9048, 0, -30.9524, 7.1429, 0, -26.1905, 2.3809, 0, -26.1905, 7.1429, 0, -30.9524, 2.3809, 0, -26.1905, 2.3809, 0, -30.9524, 7.1429, 0, -30.9524, 2.3809, 0, -26.1905, -2.381, 0, -26.1905, 2.3809, 0, -30.9524, -2.381, 0, -26.1905, -2.381, 0, -30.9524, 2.3809, 0, -30.9524, -2.381, 0, -26.1905, -7.1429, 0, -26.1905, -2.381, 0, -30.9524, -7.1429, 0, -26.1905, -7.1429, 0, -30.9524, -2.381, 0, -30.9524, -7.1429, 0, -26.1905, -11.9048, 0, -26.1905, -7.1429, 0, -30.9524, -11.9048, 0, -26.1905, -11.9048, 0, -30.9524, -7.1429, 0, -30.9524, -11.9048, 0, -26.1905, -16.6667, 0, -26.1905, -11.9048, 0, -30.9524, -16.6667, 0, -26.1905, -16.6667, 0, -30.9524, -11.9048, 0, -30.9524, -16.6667, 0, -26.1905, -21.4286, 0, -26.1905, -16.6667, 0, -30.9524, -21.4286, 0, -26.1905, -21.4286, 0, -30.9524, -16.6667, 0, -30.9524, -21.4286, 0, -26.1905, -26.1905, 0, -26.1905, -21.4286, 0, -30.9524, -26.1905, 0, -26.1905, -26.1905, 0, -30.9524, -21.4286, 0, -30.9524, -26.1905, 0, -26.1905, -30.9524, 0, -26.1905, -26.1905, 0, -30.9524, -30.9524, 0, -26.1905, -30.9524, 0, -30.9524, -26.1905, 0, -30.9524, -30.9524, 0, -26.1905, -35.7143, 0, -26.1905, -30.9524, 0, -30.9524, -35.7143, 0, -26.1905, -35.7143, 0, -30.9524, -30.9524, 0, -30.9524, -35.7143, 0, -26.1905, -40.4762, 0, -26.1905, -35.7143, 0, -30.9524, -40.4762, 0, -26.1905, -40.4762, 0, -30.9524, -35.7143, 0, -30.9524, -40.4762, 0, -26.1905, -45.2381, 0, -26.1905, -40.4762, 0, -30.9524, -45.2381, 0, -26.1905, -45.2381, 0, -30.9524, -40.4762, 0, -30.9524, -45.2381, 0, -26.1905, -50, 0, -26.1905, -45.2381, 0, -30.9524, -50, 0, -26.1905, -50, 0, -30.9524, -45.2381, 0, -30.9524, 50, 0, -30.9524, 45.2381, 0, -30.9524, 50, 0, -35.7143, 45.2381, 0, -30.9524, 45.2381, 0, -35.7143, 50, 0, -35.7143, 45.2381, 0, -30.9524, 40.4762, 0, -30.9524, 45.2381, 0, -35.7143, 40.4762, 0, -30.9524, 40.4762, 0, -35.7143, 45.2381, 0, -35.7143, 40.4762, 0, -30.9524, 35.7143, 0, -30.9524, 40.4762, 0, -35.7143, 35.7143, 0, -30.9524, 35.7143, 0, -35.7143, 40.4762, 0, -35.7143, 35.7143, 0, -30.9524, 30.9524, 0, -30.9524, 35.7143, 0, -35.7143, 30.9524, 0, -30.9524, 30.9524, 0, -35.7143, 35.7143, 0, -35.7143, 30.9524, 0, -30.9524, 26.1905, 0, -30.9524, 30.9524, 0, -35.7143, 26.1905, 0, -30.9524, 26.1905, 0, -35.7143, 30.9524, 0, -35.7143, 26.1905, 0, -30.9524, 21.4286, 0, -30.9524, 26.1905, 0, -35.7143, 21.4286, 0, -30.9524, 21.4286, 0, -35.7143, 26.1905, 0, -35.7143, 21.4286, 0, -30.9524, 16.6667, 0, -30.9524, 21.4286, 0, -35.7143, 16.6667, 0, -30.9524, 16.6667, 0, -35.7143, 21.4286, 0, -35.7143, 16.6667, 0, -30.9524, 11.9048, 0, -30.9524, 16.6667, 0, -35.7143, 11.9048, 0, -30.9524, 11.9048, 0, -35.7143, 16.6667, 0, -35.7143, 11.9048, 0, -30.9524, 7.1429, 0, -30.9524, 11.9048, 0, -35.7143, 7.1429, 0, -30.9524, 7.1429, 0, -35.7143, 11.9048, 0, -35.7143, 7.1429, 0, -30.9524, 2.3809, 0, -30.9524, 7.1429, 0, -35.7143, 2.3809, 0, -30.9524, 2.3809, 0, -35.7143, 7.1429, 0, -35.7143, 2.3809, 0, -30.9524, -2.381, 0, -30.9524, 2.3809, 0, -35.7143, -2.381, 0, -30.9524, -2.381, 0, -35.7143, 2.3809, 0, -35.7143, -2.381, 0, -30.9524, -7.1429, 0, -30.9524, -2.381, 0, -35.7143, -7.1429, 0, -30.9524, -7.1429, 0, -35.7143, -2.381, 0, -35.7143, -7.1429, 0, -30.9524, -11.9048, 0, -30.9524, -7.1429, 0, -35.7143, -11.9048, 0, -30.9524, -11.9048, 0, -35.7143, -7.1429, 0, -35.7143, -11.9048, 0, -30.9524, -16.6667, 0, -30.9524, -11.9048, 0, -35.7143, -16.6667, 0, -30.9524, -16.6667, 0, -35.7143, -11.9048, 0, -35.7143, -16.6667, 0, -30.9524, -21.4286, 0, -30.9524, -16.6667, 0, -35.7143, -21.4286, 0, -30.9524, -21.4286, 0, -35.7143, -16.6667, 0, -35.7143, -21.4286, 0, -30.9524, -26.1905, 0, -30.9524, -21.4286, 0, -35.7143, -26.1905, 0, -30.9524, -26.1905, 0, -35.7143, -21.4286, 0, -35.7143, -26.1905, 0, -30.9524, -30.9524, 0, -30.9524, -26.1905, 0, -35.7143, -30.9524, 0, -30.9524, -30.9524, 0, -35.7143, -26.1905, 0, -35.7143, -30.9524, 0, -30.9524, -35.7143, 0, -30.9524, -30.9524, 0, -35.7143, -35.7143, 0, -30.9524, -35.7143, 0, -35.7143, -30.9524, 0, -35.7143, -35.7143, 0, -30.9524, -40.4762, 0, -30.9524, -35.7143, 0, -35.7143, -40.4762, 0, -30.9524, -40.4762, 0, -35.7143, -35.7143, 0, -35.7143, -40.4762, 0, -30.9524, -45.2381, 0, -30.9524, -40.4762, 0, -35.7143, -45.2381, 0, -30.9524, -45.2381, 0, -35.7143, -40.4762, 0, -35.7143, -45.2381, 0, -30.9524, -50, 0, -30.9524, -45.2381, 0, -35.7143, -50, 0, -30.9524, -50, 0, -35.7143, -45.2381, 0, -35.7143, 50, 0, -35.7143, 45.2381, 0, -35.7143, 50, 0, -40.4762, 45.2381, 0, -35.7143, 45.2381, 0, -40.4762, 50, 0, -40.4762, 45.2381, 0, -35.7143, 40.4762, 0, -35.7143, 45.2381, 0, -40.4762, 40.4762, 0, -35.7143, 40.4762, 0, -40.4762, 45.2381, 0, -40.4762, 40.4762, 0, -35.7143, 35.7143, 0, -35.7143, 40.4762, 0, -40.4762, 35.7143, 0, -35.7143, 35.7143, 0, -40.4762, 40.4762, 0, -40.4762, 35.7143, 0, -35.7143, 30.9524, 0, -35.7143, 35.7143, 0, -40.4762, 30.9524, 0, -35.7143, 30.9524, 0, -40.4762, 35.7143, 0, -40.4762, 30.9524, 0, -35.7143, 26.1905, 0, -35.7143, 30.9524, 0, -40.4762, 26.1905, 0, -35.7143, 26.1905, 0, -40.4762, 30.9524, 0, -40.4762, 26.1905, 0, -35.7143, 21.4286, 0, -35.7143, 26.1905, 0, -40.4762, 21.4286, 0, -35.7143, 21.4286, 0, -40.4762, 26.1905, 0, -40.4762, 21.4286, 0, -35.7143, 16.6667, 0, -35.7143, 21.4286, 0, -40.4762, 16.6667, 0, -35.7143, 16.6667, 0, -40.4762, 21.4286, 0, -40.4762, 16.6667, 0, -35.7143, 11.9048, 0, -35.7143, 16.6667, 0, -40.4762, 11.9048, 0, -35.7143, 11.9048, 0, -40.4762, 16.6667, 0, -40.4762, 11.9048, 0, -35.7143, 7.1429, 0, -35.7143, 11.9048, 0, -40.4762, 7.1429, 0, -35.7143, 7.1429, 0, -40.4762, 11.9048, 0, -40.4762, 7.1429, 0, -35.7143, 2.3809, 0, -35.7143, 7.1429, 0, -40.4762, 2.3809, 0, -35.7143, 2.3809, 0, -40.4762, 7.1429, 0, -40.4762, 2.3809, 0, -35.7143, -2.381, 0, -35.7143, 2.3809, 0, -40.4762, -2.381, 0, -35.7143, -2.381, 0, -40.4762, 2.3809, 0, -40.4762, -2.381, 0, -35.7143, -7.1429, 0, -35.7143, -2.381, 0, -40.4762, -7.1429, 0, -35.7143, -7.1429, 0, -40.4762, -2.381, 0, -40.4762, -7.1429, 0, -35.7143, -11.9048, 0, -35.7143, -7.1429, 0, -40.4762, -11.9048, 0, -35.7143, -11.9048, 0, -40.4762, -7.1429, 0, -40.4762, -11.9048, 0, -35.7143, -16.6667, 0, -35.7143, -11.9048, 0, -40.4762, -16.6667, 0, -35.7143, -16.6667, 0, -40.4762, -11.9048, 0, -40.4762, -16.6667, 0, -35.7143, -21.4286, 0, -35.7143, -16.6667, 0, -40.4762, -21.4286, 0, -35.7143, -21.4286, 0, -40.4762, -16.6667, 0, -40.4762, -21.4286, 0, -35.7143, -26.1905, 0, -35.7143, -21.4286, 0, -40.4762, -26.1905, 0, -35.7143, -26.1905, 0, -40.4762, -21.4286, 0, -40.4762, -26.1905, 0, -35.7143, -30.9524, 0, -35.7143, -26.1905, 0, -40.4762, -30.9524, 0, -35.7143, -30.9524, 0, -40.4762, -26.1905, 0, -40.4762, -30.9524, 0, -35.7143, -35.7143, 0, -35.7143, -30.9524, 0, -40.4762, -35.7143, 0, -35.7143, -35.7143, 0, -40.4762, -30.9524, 0, -40.4762, -35.7143, 0, -35.7143, -40.4762, 0, -35.7143, -35.7143, 0, -40.4762, -40.4762, 0, -35.7143, -40.4762, 0, -40.4762, -35.7143, 0, -40.4762, -40.4762, 0, -35.7143, -45.2381, 0, -35.7143, -40.4762, 0, -40.4762, -45.2381, 0, -35.7143, -45.2381, 0, -40.4762, -40.4762, 0, -40.4762, -45.2381, 0, -35.7143, -50, 0, -35.7143, -45.2381, 0, -40.4762, -50, 0, -35.7143, -50, 0, -40.4762, -45.2381, 0, -40.4762, 50, 0, -40.4762, 45.2381, 0, -40.4762, 50, 0, -45.2381, 45.2381, 0, -40.4762, 45.2381, 0, -45.2381, 50, 0, -45.2381, 45.2381, 0, -40.4762, 40.4762, 0, -40.4762, 45.2381, 0, -45.2381, 40.4762, 0, -40.4762, 40.4762, 0, -45.2381, 45.2381, 0, -45.2381, 40.4762, 0, -40.4762, 35.7143, 0, -40.4762, 40.4762, 0, -45.2381, 35.7143, 0, -40.4762, 35.7143, 0, -45.2381, 40.4762, 0, -45.2381, 35.7143, 0, -40.4762, 30.9524, 0, -40.4762, 35.7143, 0, -45.2381, 30.9524, 0, -40.4762, 30.9524, 0, -45.2381, 35.7143, 0, -45.2381, 30.9524, 0, -40.4762, 26.1905, 0, -40.4762, 30.9524, 0, -45.2381, 26.1905, 0, -40.4762, 26.1905, 0, -45.2381, 30.9524, 0, -45.2381, 26.1905, 0, -40.4762, 21.4286, 0, -40.4762, 26.1905, 0, -45.2381, 21.4286, 0, -40.4762, 21.4286, 0, -45.2381, 26.1905, 0, -45.2381, 21.4286, 0, -40.4762, 16.6667, 0, -40.4762, 21.4286, 0, -45.2381, 16.6667, 0, -40.4762, 16.6667, 0, -45.2381, 21.4286, 0, -45.2381, 16.6667, 0, -40.4762, 11.9048, 0, -40.4762, 16.6667, 0, -45.2381, 11.9048, 0, -40.4762, 11.9048, 0, -45.2381, 16.6667, 0, -45.2381, 11.9048, 0, -40.4762, 7.1429, 0, -40.4762, 11.9048, 0, -45.2381, 7.1429, 0, -40.4762, 7.1429, 0, -45.2381, 11.9048, 0, -45.2381, 7.1429, 0, -40.4762, 2.3809, 0, -40.4762, 7.1429, 0, -45.2381, 2.3809, 0, -40.4762, 2.3809, 0, -45.2381, 7.1429, 0, -45.2381, 2.3809, 0, -40.4762, -2.381, 0, -40.4762, 2.3809, 0, -45.2381, -2.381, 0, -40.4762, -2.381, 0, -45.2381, 2.3809, 0, -45.2381, -2.381, 0, -40.4762, -7.1429, 0, -40.4762, -2.381, 0, -45.2381, -7.1429, 0, -40.4762, -7.1429, 0, -45.2381, -2.381, 0, -45.2381, -7.1429, 0, -40.4762, -11.9048, 0, -40.4762, -7.1429, 0, -45.2381, -11.9048, 0, -40.4762, -11.9048, 0, -45.2381, -7.1429, 0, -45.2381, -11.9048, 0, -40.4762, -16.6667, 0, -40.4762, -11.9048, 0, -45.2381, -16.6667, 0, -40.4762, -16.6667, 0, -45.2381, -11.9048, 0, -45.2381, -16.6667, 0, -40.4762, -21.4286, 0, -40.4762, -16.6667, 0, -45.2381, -21.4286, 0, -40.4762, -21.4286, 0, -45.2381, -16.6667, 0, -45.2381, -21.4286, 0, -40.4762, -26.1905, 0, -40.4762, -21.4286, 0, -45.2381, -26.1905, 0, -40.4762, -26.1905, 0, -45.2381, -21.4286, 0, -45.2381, -26.1905, 0, -40.4762, -30.9524, 0, -40.4762, -26.1905, 0, -45.2381, -30.9524, 0, -40.4762, -30.9524, 0, -45.2381, -26.1905, 0, -45.2381, -30.9524, 0, -40.4762, -35.7143, 0, -40.4762, -30.9524, 0, -45.2381, -35.7143, 0, -40.4762, -35.7143, 0, -45.2381, -30.9524, 0, -45.2381, -35.7143, 0, -40.4762, -40.4762, 0, -40.4762, -35.7143, 0, -45.2381, -40.4762, 0, -40.4762, -40.4762, 0, -45.2381, -35.7143, 0, -45.2381, -40.4762, 0, -40.4762, -45.2381, 0, -40.4762, -40.4762, 0, -45.2381, -45.2381, 0, -40.4762, -45.2381, 0, -45.2381, -40.4762, 0, -45.2381, -45.2381, 0, -40.4762, -50, 0, -40.4762, -45.2381, 0, -45.2381, -50, 0, -40.4762, -50, 0, -45.2381, -45.2381, 0, -45.2381, 50, 0, -45.2381, 45.2381, 0, -45.2381, 50, 0, -50, 45.2381, 0, -45.2381, 45.2381, 0, -50, 50, 0, -50, 45.2381, 0, -45.2381, 40.4762, 0, -45.2381, 45.2381, 0, -50, 40.4762, 0, -45.2381, 40.4762, 0, -50, 45.2381, 0, -50, 40.4762, 0, -45.2381, 35.7143, 0, -45.2381, 40.4762, 0, -50, 35.7143, 0, -45.2381, 35.7143, 0, -50, 40.4762, 0, -50, 35.7143, 0, -45.2381, 30.9524, 0, -45.2381, 35.7143, 0, -50, 30.9524, 0, -45.2381, 30.9524, 0, -50, 35.7143, 0, -50, 30.9524, 0, -45.2381, 26.1905, 0, -45.2381, 30.9524, 0, -50, 26.1905, 0, -45.2381, 26.1905, 0, -50, 30.9524, 0, -50, 26.1905, 0, -45.2381, 21.4286, 0, -45.2381, 26.1905, 0, -50, 21.4286, 0, -45.2381, 21.4286, 0, -50, 26.1905, 0, -50, 21.4286, 0, -45.2381, 16.6667, 0, -45.2381, 21.4286, 0, -50, 16.6667, 0, -45.2381, 16.6667, 0, -50, 21.4286, 0, -50, 16.6667, 0, -45.2381, 11.9048, 0, -45.2381, 16.6667, 0, -50, 11.9048, 0, -45.2381, 11.9048, 0, -50, 16.6667, 0, -50, 11.9048, 0, -45.2381, 7.1429, 0, -45.2381, 11.9048, 0, -50, 7.1429, 0, -45.2381, 7.1429, 0, -50, 11.9048, 0, -50, 7.1429, 0, -45.2381, 2.3809, 0, -45.2381, 7.1429, 0, -50, 2.3809, 0, -45.2381, 2.3809, 0, -50, 7.1429, 0, -50, 2.3809, 0, -45.2381, -2.381, 0, -45.2381, 2.3809, 0, -50, -2.381, 0, -45.2381, -2.381, 0, -50, 2.3809, 0, -50, -2.381, 0, -45.2381, -7.1429, 0, -45.2381, -2.381, 0, -50, -7.1429, 0, -45.2381, -7.1429, 0, -50, -2.381, 0, -50, -7.1429, 0, -45.2381, -11.9048, 0, -45.2381, -7.1429, 0, -50, -11.9048, 0, -45.2381, -11.9048, 0, -50, -7.1429, 0, -50, -11.9048, 0, -45.2381, -16.6667, 0, -45.2381, -11.9048, 0, -50, -16.6667, 0, -45.2381, -16.6667, 0, -50, -11.9048, 0, -50, -16.6667, 0, -45.2381, -21.4286, 0, -45.2381, -16.6667, 0, -50, -21.4286, 0, -45.2381, -21.4286, 0, -50, -16.6667, 0, -50, -21.4286, 0, -45.2381, -26.1905, 0, -45.2381, -21.4286, 0, -50, -26.1905, 0, -45.2381, -26.1905, 0, -50, -21.4286, 0, -50, -26.1905, 0, -45.2381, -30.9524, 0, -45.2381, -26.1905, 0, -50, -30.9524, 0, -45.2381, -30.9524, 0, -50, -26.1905, 0, -50, -30.9524, 0, -45.2381, -35.7143, 0, -45.2381, -30.9524, 0, -50, -35.7143, 0, -45.2381, -35.7143, 0, -50, -30.9524, 0, -50, -35.7143, 0, -45.2381, -40.4762, 0, -45.2381, -35.7143, 0, -50, -40.4762, 0, -45.2381, -40.4762, 0, -50, -35.7143, 0, -50, -40.4762, 0, -45.2381, -45.2381, 0, -45.2381, -40.4762, 0, -50, -45.2381, 0, -45.2381, -45.2381, 0, -50, -40.4762, 0, -50, -45.2381, 0, -45.2381, -50, 0, -45.2381, -45.2381, 0, -50, -50, 0, -45.2381, -50, 0, -50, -45.2381, 0, -50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cr5lj"]
+render_priority = -1
+transparency = 1
+blend_mode = 1
+cull_mode = 1
+depth_draw_mode = 2
+no_depth_test = true
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.37, 0.200725, 0.1443, 1)
+emission_energy_multiplier = 8.93
+backlight = Color(0.835576, 0, 0.343349, 1)
+refraction_scale = -1.0
+proximity_fade_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ikq8u"]
+lightmap_size_hint = Vector2i(34, 131)
+material = SubResource("StandardMaterial3D_cr5lj")
+size = Vector3(7.5, 14.5, 2.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_esahd"]
+render_priority = -1
+next_pass = ExtResource("18_ikq8u")
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 17.95
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7uih7"]
+_surfaces = [{
+"aabb": AABB(-7.196, -4.86217, -0.976028, 14.7422, 19, 1),
+"attribute_data": PackedByteArray("AACAPwAAgD8Ab2w/AACAPwAAgD8AAAA/rIiDPjnj5T2rqqo+AAAAAKyIgz4AAAA/q6qqPgAAAACrqio/AAAAAKuqqj4AAAA/rIiDPjnj5T14v7s7AAAAAKuqqj4AAAAAq6qqPgAAgD+rqqo+AAAAPywzKT8AAAA/q6oqPwAAAACrOz4/OePlPauqKj8AAAA/qzs+Pznj5T2rqio/AAAAAPh3aT854+U9rIiDPgAAAD+rqqo+AAAAAKuqqj4AAAA/AG9sPwAAgD8Ab2w/AAAAPwAAgD8AAAA/q6qqPgAAAD+rqio/AAAAAKuqKj8AAAA/qzs+PwAAAD+rqio/AAAAP6s7Pj854+U9KiIsPwAAgD+zMkE/AAAAP7MyQT8AAIA/QkC0PTnj5T14v7s7AAAAAKyIgz454+U9QkC0PTnj5T14v7s7AAAAP3i/uzsAAAAALDMpPwAAAD8sMyk/AACAP6uqqj4AAIA/+HdpPznj5T2rqio/AAAAAIGIfj8AAAAA+HdpPznj5T2BiH4/AAAAAPh3aT8AAAA/QkC0PQAAAD94v7s7AAAAP0JAtD054+U9szJBPwAAAD8qIiw/AACAPyoiLD8AAAA/gYh+PwAAAD/4d2k/AAAAP4GIfj8AAAAA"),
+"format": 34359738391,
+"material": SubResource("StandardMaterial3D_esahd"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 60,
+"vertex_data": PackedByteArray("NHrxQNyWm8AA3Xm/lmqDQNyWm8AA3Xm/NHrxQNyWm8AAYMQ8lmqDQB31HUEAYMQ8NHrxQJI0YkEAYMQ8lmqDQNyWm8AAYMQ8NHrxQJI0YkEAYMQ8NHrxQJI0YkEA3Xm/NHrxQNyWm8AAYMQ8lmqDQB31HUEAYMQ8okXmwJI0YkEAYMQ8NHrxQJI0YkEAYMQ8NHrxQJI0YkEA3Xm/NHrxQJI0YkEAYMQ8okXmwJI0YkEAYMQ8NHrxQJI0YkEA3Xm/lmqDQB31HUEA3Xm/NHrxQNyWm8AA3Xm/lmqDQB31HUEA3Xm/NHrxQJI0YkEA3Xm/O5FfwB31HUEA3Xm/lmqDQNyWm8AAYMQ8NHrxQJI0YkEAYMQ8NHrxQNyWm8AAYMQ8lmqDQNyWm8AA3Xm/lmqDQNyWm8AAYMQ8NHrxQNyWm8AAYMQ8NHrxQNyWm8AAYMQ8NHrxQJI0YkEA3Xm/NHrxQNyWm8AA3Xm/lmqDQNyWm8AA3Xm/NHrxQNyWm8AA3Xm/lmqDQB31HUEA3Xm/okXmwNyWm8AA3Xm/O5FfwNyWm8AAYMQ8O5FfwNyWm8AA3Xm/O5FfwB31HUEAYMQ8okXmwJI0YkEAYMQ8lmqDQB31HUEAYMQ8O5FfwB31HUEAYMQ8okXmwNyWm8AAYMQ8okXmwJI0YkEAYMQ8okXmwJI0YkEAYMQ8okXmwJI0YkEA3Xm/NHrxQJI0YkEA3Xm/O5FfwB31HUEA3Xm/NHrxQJI0YkEA3Xm/okXmwJI0YkEA3Xm/O5FfwB31HUEA3Xm/okXmwJI0YkEA3Xm/O5FfwNyWm8AA3Xm/O5FfwNyWm8AAYMQ8okXmwNyWm8AAYMQ8O5FfwB31HUEAYMQ8O5FfwNyWm8AAYMQ8okXmwNyWm8AA3Xm/okXmwNyWm8AAYMQ8okXmwNyWm8AA3Xm/O5FfwNyWm8AA3Xm/okXmwJI0YkEA3Xm//38AAP///7//fwAA////v/9/AAD///+//3//f////7//f/9/////v/9//3////+/////f/////////9//////////3///////3//f////7//f/9/////v/9//3////+//3///wAA/7//f///AAD/v/9///8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//3//f////7//f/9/////v/9//3////+//38AAP///7//fwAA////v/9/AAD///+/////f/////////9//////////3///////////wAA/7//////AAD/v/////8AAP+//38AAP///7//fwAA////v/9/AAD///+//3//f////7//f/9/////v/9//3////+//3//f////7//f/9/////v/9//3////+//3///wAA/7//f///AAD/v/9///8AAP+//////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+//3//f////7//f/9/////v/9//3////+//38AAP///7//fwAA////v/9/AAD///+//////wAA/7//////AAD/v/////8AAP+/")
+}, {
+"aabb": AABB(-3.49324, -4.86217, -0.976028, 7.6, 14.7345, 1),
+"attribute_data": PackedByteArray("q6oqPxjVJz+rqqo+GNUnP6uqKj8Y1Wc/EI4aPwAAAADLxt8+ts35PhCOGj+2zfk+1uSAPdvmfD8WHWs+AAAAP9bkgD0AAAA/q6qqPhjVZz+rqio/GNVnP6uqqj4Y1Sc/Fh1rPgAAAD/W5IA92+Z8PxYdaz7b5nw/y8bfPgAAAADLxt8+ts35PhCOGj8AAAAA"),
+"format": 34359738391,
+"material": ExtResource("18_ikq8u"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("O5FfwB31HUEAYMQ8lmqDQB31HUEAYMQ8O5FfwB31HUEA3Xm/lmqDQB31HUEA3Xm/lmqDQNyWm8AAYMQ8lmqDQNyWm8AA3Xm/O5FfwNyWm8AA3Xm/O5FfwB31HUEAYMQ8O5FfwB31HUEA3Xm/lmqDQB31HUEA3Xm/O5FfwB31HUEA3Xm/lmqDQB31HUEAYMQ8O5FfwB31HUEAYMQ8O5FfwNyWm8AA3Xm/O5FfwNyWm8AAYMQ8lmqDQB31HUEAYMQ8lmqDQNyWm8AAYMQ8lmqDQB31HUEA3Xm//38AAAAA/z//fwAAAAD/P/9/AAAAAP8/AAD/f///AAAAAP9///8AAAAA/3///wAA////f/9//z////9//3//P////3//f/8//38AAAAA/z//fwAAAAD/P/9/AAAAAP8/////f/9//z////9//3//P////3//f/8/AAD/f///AAAAAP9///8AAAAA/3///wAA")
+}, {
+"aabb": AABB(-7.196, -4.86217, -0.976028, 1e-05, 19, 1),
+"attribute_data": PackedByteArray("2icpP0zXwTxqPLc76chuP2o8tztM18E82icpP0zXwTzaJyk/6chuP2o8tzvpyG4/"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("okXmwNyWm8AAYMQ8okXmwJI0YkEA3Xm/okXmwJI0YkEAYMQ8okXmwNyWm8AAYMQ8okXmwNyWm8AA3Xm/okXmwJI0YkEA3Xm/AAD/f/9/AIAAAP9//38AgAAA/3//fwCAAAD/f/9/AIAAAP9//38AgAAA/3//fwCA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7uih7"]
+render_priority = -1
+transparency = 1
+blend_mode = 1
+cull_mode = 1
+depth_draw_mode = 2
+no_depth_test = true
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.0747442, 0.180171, 0.212016, 1)
+emission_energy_multiplier = 8.74
+backlight = Color(0.835576, 0, 0.343349, 1)
+refraction_scale = -1.0
+proximity_fade_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_aaodx"]
+lightmap_size_hint = Vector2i(34, 131)
+material = SubResource("StandardMaterial3D_7uih7")
+size = Vector3(7.5, 14.5, 2.9)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5ply"]
+font = ExtResource("22_ub3rv")
+font_size = 48
+font_color = Color(1, 1, 1, 0.733333)
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qccb3"]
+shader = ExtResource("27_ucpkq")
+shader_parameter/Bouncing = true
 
 [node name="Quiz" type="Node3D" node_paths=PackedStringArray("story")]
 script = ExtResource("1_8wswb")
 story = NodePath("InkWrapper")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Camera")
+libraries = {
+&"": SubResource("AnimationLibrary_ige4h")
+}
+script = ExtResource("13_e4syr")
+
+[node name="AudioRoot" parent="." instance=ExtResource("2_30ryk")]
 
 [node name="InkWrapper" type="Node" parent="."]
 script = ExtResource("1_yphmk")
 story = ExtResource("2_8wswb")
 metadata/_custom_type_script = "uid://ckv85en18uucd"
 
-[node name="DialogWithChoices" parent="." instance=ExtResource("4_opdw4")]
+[node name="FullScreenUI" type="Control" parent="." node_paths=PackedStringArray("LabelContainer", "ChoiceLabel")]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_7uih7")
+LabelContainer = NodePath("LabelHolder")
+ChoiceLabel = NodePath("VBoxContainer/ChoiceContainer/ChoiceLabel")
+metadata/_edit_horizontal_guides_ = [-616.0]
+metadata/_edit_vertical_guides_ = [556.0]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="ColorRect" type="ColorRect" parent="FullScreenUI"]
+clip_children = 2
+material = ExtResource("15_aaodx")
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 655.0
+color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="Camera3D"]
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("5_5a8ha")
+[node name="TopDecor" type="TextureRect" parent="FullScreenUI"]
+material = ExtResource("15_aaodx")
+layout_mode = 0
+offset_left = 356.0
+offset_top = 27.0
+offset_right = 1379.0
+offset_bottom = 402.0
+scale = Vector2(0.746864, 0.746864)
+texture = ExtResource("16_lf4kn")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LabelHolder" type="VBoxContainer" parent="FullScreenUI"]
+material = ExtResource("15_aaodx")
+layout_mode = 0
+offset_left = 65.0
+offset_top = 176.0
+offset_right = 1092.0
+offset_bottom = 496.0
+alignment = 1
+script = ExtResource("17_bux3m")
+mainText = ExtResource("18_7p2c2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FullScreenUI"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 470.0
+offset_right = 1149.0
+offset_bottom = 653.0
+alignment = 1
+
+[node name="ChoiceContainer" type="PanelContainer" parent="FullScreenUI/VBoxContainer"]
+material = ExtResource("15_aaodx")
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("19_4vj7q")
+
+[node name="ChoiceLabel" type="Label" parent="FullScreenUI/VBoxContainer/ChoiceContainer"]
+material = ExtResource("15_aaodx")
+layout_mode = 2
+text = "ok?"
+label_settings = SubResource("LabelSettings_06r04")
+horizontal_alignment = 1
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.989689, 0.143234, 0, -0.143234, 0.989689, -4.20429, 25.6334, 59.3407)
+environment = SubResource("Environment_7uih7")
+current = true
+fov = 74.1
+near = 0.036
+far = 166.59
+
+[node name="Dithering" type="MeshInstance3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113554, 0.53615, -1.83102)
+mesh = SubResource("QuadMesh_ypqt0")
+
+[node name="RainFar" type="MeshInstance3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.93764)
+visible = false
+mesh = SubResource("BoxMesh_v00k5")
+
+[node name="RainClose" type="MeshInstance3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.64293)
+mesh = SubResource("BoxMesh_cdiwf")
+
+[node name="Light" type="SpotLight3D" parent="Camera"]
+transform = Transform3D(-0.573518, 0.703289, 0.420074, 0.159649, -0.407001, 0.899368, 0.803486, 0.582868, 0.121143, 3.37113, 46.5439, 7.16988)
+light_color = Color(0.378423, 0.502986, 0.59972, 1)
+light_energy = 9.655
+light_indirect_energy = 1.88
+light_volumetric_fog_energy = 0.0
+spot_range = 57.67
+spot_attenuation = -0.32
+
+[node name="boat" parent="." instance=ExtResource("13_7uih7")]
+transform = Transform3D(0.982287, -0.187381, 0, 0.187317, 0.98195, 0.0261769, -0.00490507, -0.0257133, 0.999657, -3.02419, 2.12432, 26.1042)
+
+[node name="Boat Light" type="SpotLight3D" parent="boat"]
+transform = Transform3D(0.982401, 0.1511, 0.109803, -0.186783, 0.794566, 0.577736, 5.02193e-05, -0.588077, 0.808804, -1.65561, 1.49945, 1.89585)
+light_color = Color(0.189806, 0.628564, 0.809073, 1)
+light_energy = 16.0
+spot_range = 81.372
+spot_attenuation = 0.63
+spot_angle = 180.0
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.999677, 0, -0.0254093, 0, 1, 0, 0.0254093, 0, -0.999677, -1.14232, -5.24317, -5.31747)
+mesh = SubResource("PlaneMesh_qx71b")
+skeleton = NodePath(".")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Water"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_puea6")
+debug_color = Color(0.894636, 0.0577513, 0.760974, 0.42)
+
+[node name="Water" type="MeshInstance3D" parent="Water"]
+transform = Transform3D(-0.999556, 0.0107014, -0.0277697, 0.021396, 0.906985, -0.420619, 0.0206855, -0.421026, -0.906812, 30.1392, -9.50842, 88.7618)
+mesh = SubResource("PlaneMesh_qx71b")
+skeleton = NodePath(".")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Water/Water"]
+
+[node name="Choices" type="Node3D" parent="." node_paths=PackedStringArray("Lights")]
+script = ExtResource("25_8se6g")
+Lights = []
+
+[node name="Obelisk3" type="Node3D" parent="Choices" node_paths=PackedStringArray("light")]
+transform = Transform3D(1.65816, -0.389902, -1.19577, 0.166079, 2.49123, -0.301121, 1.29097, 0.180314, 1.57463, 56.8203, -3.44153, -10.741)
+script = ExtResource("26_l5k4x")
+light = NodePath("Light")
+idx = 1
+
+[node name="Entry2" type="MeshInstance3D" parent="Choices/Obelisk3"]
+transform = Transform3D(-0.985928, 0, 0.0239328, 0, 0.916424, 0, 0.0250598, 0, 0.941588, 0.336744, 4.52149, -1.19499)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_ikq8u")
+skeleton = NodePath("")
+
+[node name="Frame" type="MeshInstance3D" parent="Choices/Obelisk3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45892, 0.0793743)
+mesh = SubResource("ArrayMesh_7uih7")
+
+[node name="Light" type="SpotLight3D" parent="Choices/Obelisk3"]
+transform = Transform3D(-0.262678, 0.323486, 0.226706, 0.182161, -0.08995, 0.339415, 0.346889, 0.347595, -0.094054, 3.37113, 19.6062, 3.2713)
+light_color = Color(0.537771, 0.496076, 0, 1)
+light_energy = 16.0
+light_indirect_energy = 2.432
+light_volumetric_fog_energy = 3.505
+spot_range = 57.67
+spot_attenuation = -0.32
+
+[node name="Obelisk2" type="Node3D" parent="Choices" node_paths=PackedStringArray("light")]
+transform = Transform3D(1.76835, 0.167944, 1.08051, -0.166419, 2.52011, -1.39924e-11, -1.1353, -0.107822, 1.683, -57.4842, -2.08831, -17.4201)
+script = ExtResource("26_l5k4x")
+light = NodePath("Light3")
+
+[node name="Entr" type="MeshInstance3D" parent="Choices/Obelisk2"]
+transform = Transform3D(-0.985976, 0.00294859, 0.021853, 0.00324155, 0.916415, 0.00277727, 0.0228725, -0.0027713, 0.941634, 0.336746, 4.52149, -1.19499)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_aaodx")
+skeleton = NodePath("")
+
+[node name="Frame" type="MeshInstance3D" parent="Choices/Obelisk2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45892, 0.0793743)
+mesh = SubResource("ArrayMesh_7uih7")
+
+[node name="Light3" type="SpotLight3D" parent="Choices/Obelisk2"]
+transform = Transform3D(0.101278, 0.249933, 0.390277, 0.129803, -0.329061, 0.177046, 0.460094, 0.0872042, -0.175242, 14.294, 13.1443, 1.48965)
+light_color = Color(0.00759999, 0.64714, 0.76, 1)
+light_energy = 16.0
+light_indirect_energy = 2.432
+light_volumetric_fog_energy = 3.505
+spot_range = 57.67
+spot_attenuation = -0.32
+
+[node name="Obelisk1" type="Node3D" parent="Choices" node_paths=PackedStringArray("light")]
+transform = Transform3D(2.10735, 0, -0.0498066, 0, 2.528, 0, 0.0524961, 0, 1.99938, -1.19646, -0.333423, -21.7641)
+script = ExtResource("26_l5k4x")
+light = NodePath("SpotLight3D")
+idx = 2
+
+[node name="Entry" type="MeshInstance3D" parent="Choices/Obelisk1"]
+transform = Transform3D(-0.985928, 0, 0.0239328, 0, 0.916424, 0, 0.0250598, 0, 0.941588, 0.336744, 4.52149, -1.19499)
+cast_shadow = 0
+mesh = ExtResource("17_cr5lj")
+skeleton = NodePath("")
+
+[node name="Fram" type="MeshInstance3D" parent="Choices/Obelisk1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45892, 0.0793743)
+mesh = SubResource("ArrayMesh_7uih7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Choices/Obelisk1"]
+transform = Transform3D(0.474012, -0.015097, -0.0110965, 0.0142495, 0.194405, 0.344208, -0.00809814, -0.43516, 0.24611, 0.685328, 20.5636, 0.902411)
+light_color = Color(0.945098, 0.27451, 0.647059, 1)
+light_energy = 0.9
+spot_range = 58.569
+spot_attenuation = -1.68
+spot_angle = 55.86
+
+[node name="ArrowHolder" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 186.0
+offset_top = -79.0
+offset_right = 1031.0
+offset_bottom = 79.0
+
+[node name="ChoiceContainer" type="Control" parent="ArrowHolder" node_paths=PackedStringArray("First", "Second", "Third")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_top = 181.0
+offset_right = 875.0
+offset_bottom = 241.0
+size_flags_horizontal = 4
+script = ExtResource("25_thmgn")
+First = NodePath("FirstChoice")
+Second = NodePath("SecondChoice")
+Third = NodePath("ThirdChoice")
+
+[node name="FirstChoice" parent="ArrowHolder/ChoiceContainer" instance=ExtResource("26_k8slp")]
+layout_mode = 2
+offset_left = -38.0
+offset_top = 3.0
+offset_right = 247.0
+offset_bottom = 63.0
+
+[node name="SecondChoice" parent="ArrowHolder/ChoiceContainer" instance=ExtResource("26_k8slp")]
+layout_mode = 2
+offset_left = 622.0
+offset_top = 23.0
+offset_right = 907.0
+offset_bottom = 83.0
+
+[node name="ThirdChoice" parent="ArrowHolder/ChoiceContainer" instance=ExtResource("26_k8slp")]
+layout_mode = 2
+offset_left = 278.0
+offset_top = 25.0
+offset_right = 563.0
+offset_bottom = 85.0
+
+[node name="DialogWithChoices" type="PanelContainer" parent="." node_paths=PackedStringArray("NameHolder", "ContentContainer", "ChoiceContainer")]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -561.0
+offset_top = -417.0
+offset_right = 347.0
+offset_bottom = -197.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("20_l5k4x")
+script = ExtResource("21_dvcf5")
+NameHolder = NodePath("VBoxContainer/Name")
+ContentContainer = NodePath("VBoxContainer/VScrollBar")
+ChoiceContainer = NodePath("../ArrowHolder/ChoiceContainer")
+
+[node name="VBoxContainer" type="Control" parent="DialogWithChoices"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Name" type="Label" parent="DialogWithChoices/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 53)
+layout_mode = 2
+offset_right = 845.0
+offset_bottom = 55.0
+label_settings = SubResource("LabelSettings_e5ply")
+
+[node name="VScrollBar" type="ScrollContainer" parent="DialogWithChoices/VBoxContainer" node_paths=PackedStringArray("Container", "Arrow")]
+clip_contents = false
+custom_minimum_size = Vector2(845, 86)
+layout_mode = 2
+offset_left = -333.0
+offset_top = -334.0
+offset_right = 512.0
+offset_bottom = -248.0
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("23_6u8of")
+Container = NodePath("VBoxContainer")
+Arrow = NodePath("../Arrow")
+labelScene = ExtResource("24_8dn4c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogWithChoices/VBoxContainer/VScrollBar"]
+layout_mode = 2
+
+[node name="Arrow" type="TextureRect" parent="DialogWithChoices/VBoxContainer"]
+material = SubResource("ShaderMaterial_qccb3")
+layout_mode = 2
+offset_left = 427.0
+offset_top = -204.0
+offset_right = 1274.0
+offset_bottom = 79.0
+rotation = -1.57079
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("28_42q83")
+stretch_mode = 3

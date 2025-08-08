@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using GodotInk;
 using QuizSpace;
 
-public partial class DialogChoicesContainer : HBoxContainer {
+public partial class DialogChoicesContainer : Control {
   [Export]
   public DialogChoiceItem First {get; set;} 
   [Export]
@@ -31,9 +31,11 @@ public partial class DialogChoicesContainer : HBoxContainer {
         Second.setChoice(choices[0], true);
         break; 
       case 2:
-        Second.Off();
+        // Second.Off();
         First.setChoice(choices[0], true);
-        Third.setChoice(choices[1]);
+        // Third.setChoice(choices[1]);
+        Third.Off();
+        Second.setChoice(choices[1]);
         break;
       case 3:
         First.setChoice(choices[0], true);

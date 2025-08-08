@@ -23,14 +23,19 @@ public partial class GlobalState : Node {
 	public override void _Ready() {
 		bus = GetNode<Bus>("/root/bus");
 		QuizState = new(bus);
+		subscribeToQuizEvents();
 		bus.Subscribe<PickupItem, PickupableItem>(args => PlayerIsHoldingItem = true);
 		bus.Subscribe<DropItem, DropItemArgs>(args => PlayerIsHoldingItem = false);
 		bus.Subscribe<LookingAt<ReadableItem>,ReadableItem>(args => InteractionTarget = args);
 		bus.Subscribe<LookingAt<PickupableItem>, PickupableItem>(args => InteractionTarget = args);
 		bus.Subscribe<StoppedLookingAt, NodeRef>(args => InteractionTarget = null);
+	}
+
+	public void subscribeToQuizEvents() {
 		bus.Subscribe<StoryUpdated, StoryText>(QuizState.update);
 		bus.Subscribe<ChoiceRequired, InkChoices>(QuizState.update);
 		bus.Subscribe<UIItemHighlighted, SelectionIdx>(QuizState.update);
+		bus.Subscribe<InkTagUpdated, InkTag>(QuizState.update);
 	}
 	public string getStringByObjectID(string objectID) => "NotImplemented";
 }
@@ -38,6 +43,8 @@ public partial class GlobalState : Node {
 namespace State {
 	public class Quiz {
 		public string currentText = "";
+		public string currentTag = "laur";
+		// public string currentTag = string.Empty;
 		public List<InkChoice> currentChoices = new List<InkChoice>();
 		public InkChoice? selectedChoice = null;
 		public Bus bus;
@@ -64,6 +71,10 @@ namespace State {
 			this.currentText = args.line;
 			this.selectedChoice = args.choices[0];
 			broadcastDebug();
+		}
+
+		public void update(InkTag args) {
+			this.currentTag = args.newTag;
 		}
 		public override string ToString() {
 			return $"Quiz.CurrentText: {currentText}\n Quiz.CurrentChoices: {string.Join(" ,", currentChoices.Select(choice => $"{choice.Text} / {choice.Index}"))}\n Quiz.SelectedChoice: {selectedChoice?.Text + "/" + selectedChoice?.Index}";

@@ -21,6 +21,7 @@ public partial class QuizRoot : Node3D {
 		bus.Subscribe<ChoiceRequired, InkChoices>(args => 
 			bus.Publish<IShowDialogChoices, ChoiceDialogArgs>(new(args.line, args.choices, "???"))
 		);
+		
 	}
 	
 	public override void _Input(InputEvent @event) {
@@ -43,7 +44,7 @@ public partial class QuizRoot : Node3D {
 		    global.QuizState.currentChoices.Count > 1) {
 			int UISelectedIndex = global.QuizState.selectedChoice.Index; 
 			int UIMaxIdx = global.QuizState.currentChoices.Count;
-			if (next) { //we do it this way because visually the array is laid as 021. dont worry about it
+			if (!next) { //we do it this way because visually the array is laid as 021. dont worry about it
 				UISelectedIndex++;
 				if (UISelectedIndex >= UIMaxIdx) UISelectedIndex = 0;
 			} else {

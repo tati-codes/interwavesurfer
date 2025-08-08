@@ -8,7 +8,7 @@ public partial class ChoiceDialogTextHolder : ScrollContainer {
 	public TextureRect Arrow {get; set;} 
 	[Export]
 	public PackedScene labelScene {get; set;} 
-	private Godot.Vector2 small = new(845, 140);
+	private Godot.Vector2 small = new(845, 100);
 	private Godot.Vector2 big = new(845, 200);
 
 	public void Append(string text) {
@@ -34,4 +34,6 @@ public partial class ChoiceDialogTextHolder : ScrollContainer {
 		// CustomMinimumSize = small;
 		Arrow.Hide();
 	}
+	
+	public int Count {get => Container.GetChildren().Count;}
 }

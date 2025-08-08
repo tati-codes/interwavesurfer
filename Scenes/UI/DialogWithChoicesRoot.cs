@@ -19,16 +19,26 @@ public partial class DialogWithChoicesRoot : PanelContainer {
 	[Export]
 	public DialogChoicesContainer ChoiceContainer {get; set;}
   
+	private const string ACTIVE_TAG = "general";
+	bool active => global.QuizState.currentTag == ACTIVE_TAG;
 
 	public override void _Ready() {
+		this.Hide();
 		bus = GetNode<Bus>("/root/bus");
 		global = GetNode<GlobalState>("/root/Global");
 		bus.Subscribe<ChoiceSelected, IChoice>(args => {
 			ContentContainer.Append("[i][color=bbbc95]You: [b]" + args.escapedText + "[/b][/color] [/i]");
 		});
 		bus.Subscribe<IShowDialogChoices, ChoiceDialogArgs>(consume);
+		bus.Subscribe<InkTagUpdated, InkTag>(args => {
+			if (args.newTag == "general") {
+				this.Show();
+				ContentContainer.Reset();
+			}
+		});
 	}
 	void consume(ChoiceDialogArgs args) {
+			if (!active) return;
 			NameHolder.Text = args.title;		
 			if (args.choices.Count == 0) ContentContainer.Maximize();
 			else {

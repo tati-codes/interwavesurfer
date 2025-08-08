@@ -6,6 +6,8 @@ using System.Linq;
 using Ink.Runtime;
 using InkBridge;
 using OBus;
+using Tag = Ink.Parsed.Tag;
+
 [GlobalClass]
 public partial class     InkWrapper : Node {
 	[Export]
@@ -18,7 +20,13 @@ public partial class     InkWrapper : Node {
 			story.Continue();
 		});
 		story.Continued += () => {
-			if (!story.CanContinue) bus.Publish<ChoiceRequired, InkChoices>(new(story.CurrentChoices, story.CurrentText) {level = LOG_LEVEL.DETAILED});
+			//FIXME story can stop being able to continue due to being over
+			trackTag();
+			if (!story.CanContinue && story.CurrentChoices.Count > 0) bus.Publish<ChoiceRequired, InkChoices>(new(story.CurrentChoices, story.CurrentText) {level = LOG_LEVEL.DETAILED});
+			else if (!story.CanContinue && story.CurrentChoices.Count == 0) {
+				bus.Publish<StoryUpdated, StoryText>(new (story.CurrentText));
+				bus.Error("Story over//Implement this");
+			}
 			else if (story.CurrentText.Length < 2) {
 				story.Continue();
 			} else {
@@ -29,6 +37,22 @@ public partial class     InkWrapper : Node {
 		//TODO reset quiz implementation
 		story.MadeChoice += (InkChoice choice) => bus.Publish<ChoiceSelected, IChoice>( new(choice));
 	}
+
+	private void trackTag() {
+		if (story.CurrentTags.Count == 0) return;
+		if (story.CurrentTags.Count > 1) {
+			bus.Inspect(story.CurrentTags);
+			throw new Exception("Unexpected amount of tags in ink story.");
+		}
+		string newTag =  story.CurrentTags[0];
+		if (this.tag == newTag) return;
+		else if (this.tag != newTag) {
+			this.tag = newTag;
+			bus.Publish<InkTagUpdated, InkTag>(new(this.tag));
+		}
+	}
+
+	public string tag = string.Empty;
 	public string currentText => story.CurrentText;
 	public bool canContinue => story.CanContinue;
 	public IReadOnlyList<InkChoice> CurrentChoices => story.CurrentChoices;
@@ -37,6 +61,10 @@ public partial class     InkWrapper : Node {
 }
 
 namespace InkBridge {
+	public class InkTagUpdated : TEvent<InkTag> { }
+	public class InkTag(string tag) : Args {
+		public string newTag { get; init; } = tag;
+	}
 	public class ChoiceSelected : TEvent<IChoice> { }
 	public class PlayerContinued : TEvent<NArgs> {}
 	public class StoryUpdated : TEvent<StoryText> {}

@@ -1,73 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://dv00ni0ralxfl"]
+[gd_scene load_steps=12 format=3 uid="uid://dv00ni0ralxfl"]
 
-[ext_resource type="Texture2D" uid="uid://csqdfovsxctsv" path="res://Scenes/Water/waternoise2.tres" id="2_sf2qm"]
-[ext_resource type="FontFile" uid="uid://exo54yl0qrnr" path="res://Assets/Fonts/OSerif/OSerif.ttf" id="3_hp1g4"]
-[ext_resource type="Material" uid="uid://dam3oqq3g5iir" path="res://Scenes/UI/Burning.tres" id="3_sf2qm"]
+[ext_resource type="Script" uid="uid://d27wlsxo5mmyq" path="res://Scenes/UI/FullScreenText.cs" id="1_sf2qm"]
+[ext_resource type="Material" uid="uid://ovggdyr7jrvo" path="res://Scenes/UI/FullScreenUIButtonDissolve.tres" id="2_hp1g4"]
+[ext_resource type="Script" uid="uid://dvbblsydihfpr" path="res://Scenes/UI/FullScreenTextHolder.cs" id="4_r56iw"]
+[ext_resource type="LabelSettings" uid="uid://dvmgyoebf6p4a" path="res://Scenes/UI/FullScreenUILabelSettings.tres" id="5_74k30"]
 [ext_resource type="Texture2D" uid="uid://ci8mponna6t5r" path="res://Assets/UI/decoration.png" id="5_r56iw"]
-[ext_resource type="Texture2D" uid="uid://cqp61g3j0f40c" path="res://Assets/UI/magician.png" id="6_xoaim"]
-
-[sub_resource type="Shader" id="Shader_hp1g4"]
-code = "shader_type canvas_item;
-
-uniform vec2 position;
-uniform float radius;
-uniform float borderWidth = 0.02;
-uniform float burnMult = 0.135;
-uniform sampler2D noiseTexture;
-uniform vec4 burnColor : source_color;
-
-void fragment() {
-	float dist = length(position - UV) + (texture(noiseTexture, UV).b) * burnMult;
-	COLOR.rgb = mix(COLOR.rgb, burnColor.rgb, float(dist<radius+borderWidth));
-	COLOR.a *= 1.0-(float(dist<radius));
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xoaim"]
-shader = SubResource("Shader_hp1g4")
-shader_parameter/position = Vector2(0.5, 0.5)
-shader_parameter/radius = 0.0
-shader_parameter/borderWidth = 0.009
-shader_parameter/burnMult = 0.5
-shader_parameter/noiseTexture = ExtResource("2_sf2qm")
-shader_parameter/burnColor = Color(0.62, 0.26133, 0.0682, 0.662745)
-
-[sub_resource type="Shader" id="Shader_r56iw"]
-code = "shader_type canvas_item;
-
-uniform vec2 position;
-uniform float radius;
-uniform float borderWidth = 0.02;
-uniform float burnMult = 0.135;
-uniform sampler2D noiseTexture;
-uniform vec4 burnColor : source_color;
-
-void fragment() {
-	float dist = length(position - UV) + (texture(noiseTexture, UV).b) * burnMult;
-	COLOR.rgb = mix(COLOR.rgb, burnColor.rgb, float(dist<radius+borderWidth));
-	COLOR.a *= 1.0-(float(dist<radius));
-}"
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xoaim"]
-noise_type = 2
-frequency = 0.0145
-fractal_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_74k30"]
-seamless = true
-noise = SubResource("FastNoiseLite_xoaim")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjalk"]
-shader = SubResource("Shader_r56iw")
-shader_parameter/position = Vector2(0.5, 0.5)
-shader_parameter/radius = 0.6
-shader_parameter/borderWidth = 0.009
-shader_parameter/burnMult = 0.5
-shader_parameter/noiseTexture = SubResource("NoiseTexture2D_74k30")
-shader_parameter/burnColor = Color(0.62, 0.26133, 0.0682, 0.662745)
-
-[sub_resource type="LabelSettings" id="LabelSettings_74k30"]
-font = ExtResource("3_hp1g4")
-font_size = 93
+[ext_resource type="StyleBox" uid="uid://bgsddlpfxgwld" path="res://Assets/UI/MagiciaBox.tres" id="5_xoaim"]
+[ext_resource type="FontFile" uid="uid://0yqkj5fmx3kl" path="res://Assets/Fonts/Angel-Sealing Glyphs/Angel-sealingGlyphs-Regular.woff" id="7_hjalk"]
 
 [sub_resource type="Animation" id="Animation_hjalk"]
 resource_name = "Dissolve"
@@ -79,22 +18,10 @@ tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.66667),
+"times": PackedFloat32Array(0, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect/Label:material:shader_parameter/radius")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.26667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.6, 1.0]
 }
 
 [sub_resource type="Animation" id="Animation_06r04"]
@@ -111,18 +38,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect/Label:material:shader_parameter/radius")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.6]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_esmcw"]
 _data = {
@@ -130,51 +45,33 @@ _data = {
 &"RESET": SubResource("Animation_06r04")
 }
 
-[node name="Control" type="Control"]
+[sub_resource type="LabelSettings" id="LabelSettings_06r04"]
+font = ExtResource("7_hjalk")
+font_size = 50
+
+[node name="FullScreenUI" type="Control" node_paths=PackedStringArray("LabelContainer", "ChoiceLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_sf2qm")
+LabelContainer = NodePath("LabelHolder")
+ChoiceLabel = NodePath("VBoxContainer/ChoiceContainer/ChoiceLabel")
 metadata/_edit_horizontal_guides_ = [-616.0]
 metadata/_edit_vertical_guides_ = [556.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 clip_children = 2
-material = SubResource("ShaderMaterial_xoaim")
+material = ExtResource("2_hp1g4")
 layout_mode = 0
 offset_right = 1147.0
 offset_bottom = 644.0
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="ColorRect"]
-material = SubResource("ShaderMaterial_hjalk")
-layout_mode = 0
-offset_left = 131.0
-offset_top = 159.0
-offset_right = 1183.0
-offset_bottom = 550.0
-text = "Where we're from, 
-the birds sing a
- pretty song"
-label_settings = SubResource("LabelSettings_74k30")
-
-[node name="ColorRect" type="ColorRect" parent="ColorRect"]
-material = ExtResource("3_sf2qm")
-layout_mode = 0
-offset_right = 1149.0
-offset_bottom = 641.0
-color = Color(0, 0, 0, 1)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_esmcw")
-}
-autoplay = "Dissolve"
-
-[node name="TextureRect" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_xoaim")
+[node name="TopDecor" type="TextureRect" parent="."]
+material = ExtResource("2_hp1g4")
 layout_mode = 0
 offset_left = 329.0
 offset_top = 17.0
@@ -184,17 +81,38 @@ scale = Vector2(0.746864, 0.746864)
 texture = ExtResource("5_r56iw")
 stretch_mode = 4
 
-[node name="Magician" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_xoaim")
-position = Vector2(571, 551)
-scale = Vector2(0.439999, 0.439999)
-texture = ExtResource("6_xoaim")
+[node name="LabelHolder" type="VBoxContainer" parent="."]
+material = ExtResource("2_hp1g4")
+layout_mode = 0
+offset_left = 86.0
+offset_top = 154.0
+offset_right = 1113.0
+offset_bottom = 474.0
+alignment = 1
+script = ExtResource("4_r56iw")
+mainText = ExtResource("5_74k30")
 
-[node name="Label" type="Label" parent="Magician"]
-material = SubResource("ShaderMaterial_xoaim")
-offset_left = -88.6366
-offset_top = -54.5456
-offset_right = 963.363
-offset_bottom = 336.454
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_esmcw")
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 470.0
+offset_right = 747.0
+offset_bottom = 630.0
+alignment = 1
+
+[node name="ChoiceContainer" type="PanelContainer" parent="VBoxContainer"]
+material = ExtResource("2_hp1g4")
+layout_mode = 2
+theme_override_styles/panel = ExtResource("5_xoaim")
+
+[node name="ChoiceLabel" type="Label" parent="VBoxContainer/ChoiceContainer"]
+material = ExtResource("2_hp1g4")
+layout_mode = 2
 text = "ok?"
-label_settings = SubResource("LabelSettings_74k30")
+label_settings = SubResource("LabelSettings_06r04")
+horizontal_alignment = 1

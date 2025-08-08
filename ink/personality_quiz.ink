@@ -39,7 +39,7 @@ From obscurity to infamy. Destitution to decadence. Despair to Digal.
 A transformation already becoming legend.
 Your father's legacy is unassailable.
 + [So he says.]
-- But never mind that for now.
+- But never mind that for now. #general
 Before I can let you depart, I need to ask you a few questions. 
 I'd like you to answer earnestly.
 Ready? Let's begin.
@@ -72,7 +72,7 @@ Are you left- or right-handed?  #general
 I see...in that case...
 -> quiz_results ->
 That will do well enough for now.
-+ [This seems pointless.]
++ [This seems pointless.] 
 - ~ navigation = 300
 ~ seaworthy = 200
 ~ rudderwork = 50

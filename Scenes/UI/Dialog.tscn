@@ -29,8 +29,8 @@ _data = {
 material = ExtResource("1_y7w4a")
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 651.0
-offset_bottom = 235.0
+offset_right = 462.0
+offset_bottom = 203.0
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("2_y7w4a")
 script = ExtResource("2_7ia2c")
@@ -61,10 +61,10 @@ layout_mode = 2
 [node name="Arrow" type="TextureRect" parent="Dialog"]
 material = SubResource("ShaderMaterial_d1mbi")
 layout_mode = 2
-offset_left = 262.0
-offset_top = 173.0
-offset_right = 320.0
-offset_bottom = 216.0
+offset_left = 161.0
+offset_top = 132.0
+offset_right = 219.0
+offset_bottom = 175.0
 texture = ExtResource("3_d1mbi")
 expand_mode = 1
 
