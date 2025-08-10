@@ -19,6 +19,18 @@ public partial class     InkWrapper : Node {
 			story.ChooseChoiceIndex(args.choice.Index);
 			story.Continue();
 		});
+		bus.Subscribe<SuperSelect, IChoice>(args => {
+			story.ChooseChoiceIndex(args.choice.Index);
+			if (story.CanContinue) {
+				story.Continue();
+			}
+			if (story.CanContinue) {
+				story.Continue();
+			}
+		});
+
+		bus.Subscribe<PlayerContinuedStory>(args => story.Continue());
+		bus.Subscribe<SuperContinue>(args => story.ContinueMaximally());
 		story.Continued += () => {
 			//FIXME story can stop being able to continue due to being over
 			trackTag();
@@ -66,9 +78,12 @@ namespace InkBridge {
 		public string newTag { get; init; } = tag;
 	}
 	public class ChoiceSelected : TEvent<IChoice> { }
-	public class PlayerContinued : TEvent<NArgs> {}
+	// public class PlayerContinued : TEvent<NArgs> {}
 	public class StoryUpdated : TEvent<StoryText> {}
+	public class SuperContinue : TEvent<NArgs> {}
 	public class SelectChoice : TEvent<IChoice> {}
+	public class SuperSelect : TEvent<IChoice> {}
+
 	public class StoryText(string text) : Args {
 		public string Text { get; init; } = text;
 	}
@@ -77,6 +92,8 @@ namespace InkBridge {
 		public List<InkChoice> choices { get; init; } = choices;
 		public InkChoices(IReadOnlyList<InkChoice> choices, string _line) : this(choices.ToList(), _line) { }
 	}
+
+	public class PlayerContinuedStory : TEvent<NArgs> { }
 
 	public class IChoice(InkChoice choice) : Args {
 		public InkChoice choice { get; init; } = choice;
