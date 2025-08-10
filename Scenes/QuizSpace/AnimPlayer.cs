@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using AnimationEvents;
 using InkBridge;
 using OBus;
 using QuizSpace;
@@ -50,6 +51,7 @@ public partial class AnimPlayer : AnimationPlayer {
 				Play("BoatReset");
 			}
 		});
+		this.AnimationFinished += (name) => bus.Publish<AnimationFinished, AnimationName>(new(name));
 	}
 	void batchPlay(string anim) {
 		if (!IsPlaying()) Play(anim);
@@ -57,6 +59,11 @@ public partial class AnimPlayer : AnimationPlayer {
 			waitinglist.Add(anim);
 		}
 	}
-	
-	
+}
+
+namespace AnimationEvents {
+public class AnimationFinished : TEvent<AnimationName> { }
+public class AnimationName(string name) : Args {
+	public string name { get; init; } = name;
+}
 }

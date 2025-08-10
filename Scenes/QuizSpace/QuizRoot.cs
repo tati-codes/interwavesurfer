@@ -11,6 +11,10 @@ public partial class QuizRoot : Node3D {
 	private Bus bus;
 	[Export]
 	public InkWrapper story {get; set;} 
+	[Export]
+	public AnimationPlayer anim {get; set;} 
+	 
+  
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
 		global = GetNode<GlobalState>("/root/Global");
@@ -25,11 +29,12 @@ public partial class QuizRoot : Node3D {
 	}
 	
 	public override void _Input(InputEvent @event) {
+		if (anim.CurrentAnimation == "WhiteOutFrom3DSpace" || anim.CurrentAnimation == "DissolveFromFullscreen") return;
 		if (@event.IsActionReleased("primary")) handlePrimary();
 		else if (@event.IsActionReleased("move_left") || @event.IsActionReleased("move_right")) handleDirections(@event);
 	}
 	void handlePrimary() {
-		if (story.canContinue) story.Continue();
+		if (story.canContinue) bus.Publish<PlayerContinuedStory>();
 		else bus.Publish<SelectChoice, IChoice>(new IChoice(global.QuizState.selectedChoice));
 	}
 	void handleDirections(InputEvent @event) {

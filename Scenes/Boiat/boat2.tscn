@@ -992,24 +992,34 @@ subdivide_depth = 20
 
 [sub_resource type="Animation" id="Animation_gfbhl"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("boat:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_yyc8v"]
 resource_name = "Sway"
 loop_mode = 2
-tracks/0/type = "rotation_3d"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 2
+tracks/0/path = NodePath("boat:rotation")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.035, 0, 0, 0.999, 0.6, 1, -0.035, 0, 0, 0.999, 1, 1, 0.044, 0, 0, 0.999)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0.001, 0, -0.087, 0.996, 0.6, 1, 0, 0, 0.087, 0.996, 1, 1, 0.001, 0, 0.087, 0.996)
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0), Vector3(-1.48353, 0, -0.0872665), Vector3(-1.5708, 0, 0), Vector3(-1.67552, 0, 0.0872665)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xba0g"]
 _data = {
@@ -1018,10 +1028,10 @@ _data = {
 }
 
 [node name="boat" type="Node3D"]
-transform = Transform3D(0.984855, 0.173375, -0.000174133, -0.172938, 0.982298, -0.0719724, -0.0123072, 0.0709124, 0.997407, -14.1326, 0, 14.6651)
+transform = Transform3D(0.999999, 0, 0, 0, 0.997573, 0.0696117, 0, -0.0696115, 0.997575, -14.1326, 0, 14.6651)
 
 [node name="boat" type="MeshInstance3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 0)
 mesh = SubResource("ArrayMesh_4ox6x")
 skeleton = NodePath("")
 
