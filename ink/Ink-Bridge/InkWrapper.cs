@@ -36,6 +36,7 @@ public partial class     InkWrapper : Node {
 			trackTag();
 			if (!story.CanContinue && story.CurrentChoices.Count > 0) bus.Publish<ChoiceRequired, InkChoices>(new(story.CurrentChoices, story.CurrentText) {level = LOG_LEVEL.DETAILED});
 			else if (!story.CanContinue && story.CurrentChoices.Count == 0) {
+				GD.Print(story.CurrentText);
 				bus.Publish<StoryUpdated, StoryText>(new (story.CurrentText));
 				bus.Error("Story over//Implement this");
 			}

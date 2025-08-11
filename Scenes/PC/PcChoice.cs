@@ -32,7 +32,10 @@ public partial class PcChoice : HBoxContainer {
 		else this.arrow.Modulate = hidden;
 	}
 
-	public void transparentize() => this.Modulate = hidden;
+	public void transparentize() {
+		this.Modulate = hidden;
+		this.ChoiceLabel.setText("");
+	}
 	public void opaquen() => this.Modulate = visible;
 	private async Task<bool> onChoicesEvent(InkChoices args) {
 		if (args.choices.All(choice => choice.Index != this.idx)) {

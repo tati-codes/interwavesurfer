@@ -10,8 +10,8 @@ What would you like today?
     And when I've asked people have given... conflicting details.
     But if YOU remember any details, please go to the thread and comment with what you know.
     Please don't spread misinformation though. People are already questioning what's true ;_;
-    + + Open thread
-        https://komments.cloud/38284834ace41232f94dca
+    + + Open thread #open
+        OPENING... #title
     + + Return #title
 + IslaNode™ Drift Patterns #title
     Prevailing winds come from {~N|NE|E|SE|S|SW|W|NW}. #rest
@@ -49,5 +49,5 @@ What would you like today?
     It's healthy to go outdoors. #rest
     Breathe some sea air! o_o7
     -> DONE
-- I'm so helpful! ^_^
+- I'm so helpful! ^_^ #rest
 -> computer

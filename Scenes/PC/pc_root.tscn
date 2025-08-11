@@ -1,21 +1,17 @@
-[gd_scene load_steps=19 format=4 uid="uid://qs7ykbprhwy0"]
+[gd_scene load_steps=22 format=4 uid="uid://qs7ykbprhwy0"]
 
 [ext_resource type="Script" uid="uid://ban3dy7nl5u6g" path="res://PcRoot.cs" id="1_c5iun"]
 [ext_resource type="PackedScene" uid="uid://blir68qowcva2" path="res://Scenes/PC/PCAppearingLabel.tscn" id="2_6d807"]
 [ext_resource type="Script" uid="uid://ckv85en18uucd" path="res://ink/Ink-Bridge/InkWrapper.cs" id="2_y5kc4"]
+[ext_resource type="Shader" uid="uid://yuneb7nswleu" path="res://Scenes/PC/CRT.gdshader" id="3_6n5c3"]
 [ext_resource type="Resource" uid="uid://pwiax2hmf68o" path="res://ink/computer.ink" id="3_amb10"]
-[ext_resource type="Texture2D" uid="uid://b2fe780ymuoqj" path="res://Assets/UI/Separate/panelpc.png" id="5_6d807"]
 [ext_resource type="Script" uid="uid://bymcgxxdcixkr" path="res://Scenes/PC/ChoiceContainer.cs" id="5_amb10"]
+[ext_resource type="StyleBox" uid="uid://bbavaj6rnx6al" path="res://Scenes/PC/pc_panel.tres" id="5_cjo32"]
 [ext_resource type="PackedScene" uid="uid://bsv28jxaheo0s" path="res://Scenes/PC/PCChoice.tscn" id="5_y5kc4"]
 [ext_resource type="Script" uid="uid://bosh7cdcxgw5i" path="res://Scenes/UI/PCAppearingLabel.cs" id="6_qcwjj"]
 [ext_resource type="Shader" uid="uid://c0tefbquhih4o" path="res://Scenes/PC/PCChoice.tres" id="7_6d807"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qcwjj"]
-texture = ExtResource("5_6d807")
-texture_margin_left = 22.0
-texture_margin_top = 22.0
-texture_margin_right = 22.0
-texture_margin_bottom = 22.0
+[ext_resource type="Texture2D" uid="uid://60ivmi82iuwd" path="res://Assets/Audio/ace.png" id="10_cjo32"]
+[ext_resource type="Script" uid="uid://tr26bksnkj6r" path="res://Scenes/PC/url_opener.gd" id="12_7us0d"]
 
 [sub_resource type="Image" id="Image_2esu4"]
 data = {
@@ -230,6 +226,14 @@ shader = ExtResource("7_6d807")
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uhd3t"]
 load_path = "res://.godot/imported/arrowpc.png-5ec7e9065add0dcf300bf0064e2c71dd.ctex"
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cjo32"]
+shader = ExtResource("3_6n5c3")
+shader_parameter/crt_brightness = 1.0
+shader_parameter/crt_ghost = 1.5
+shader_parameter/crt_grid = 0.4
+shader_parameter/crt_white_noicen = 0.1
+shader_parameter/crt_curve = 0.1
+
 [node name="PC Root" type="Control" node_paths=PackedStringArray("story", "LabelContainer", "TitleLabel", "choiceContainer", "continuer", "continuer_arrow")]
 layout_mode = 3
 anchors_preset = 15
@@ -245,13 +249,6 @@ TitleLabel = NodePath("VBoxContainer/PanelContainer/Title")
 choiceContainer = NodePath("Choices")
 continuer = NodePath("Continue/Label")
 continuer_arrow = NodePath("Continue/TextureRect")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_top = 1.0
-offset_right = 1152.0
-offset_bottom = 650.0
-color = Color(0, 0, 0, 1)
 
 [node name="InkWrapper" type="Node" parent="."]
 script = ExtResource("2_y5kc4")
@@ -269,7 +266,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxTexture_qcwjj")
+theme_override_styles/panel = ExtResource("5_cjo32")
 
 [node name="Title" type="Label" parent="VBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(0, 27)
@@ -282,17 +279,18 @@ visible_ratio = 0.0
 script = ExtResource("6_qcwjj")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(800, 450)
+custom_minimum_size = Vector2(800, 300)
 layout_mode = 0
-offset_left = 177.0
-offset_top = 23.0
-offset_right = 977.0
-offset_bottom = 473.0
+offset_left = 185.0
+offset_top = 81.0
+offset_right = 1029.0
+offset_bottom = 425.0
+theme_override_styles/panel = ExtResource("5_cjo32")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 0
 
 [node name="LabelContainer" type="VBoxContainer" parent="ScrollContainer"]
-custom_minimum_size = Vector2(800, 450)
+custom_minimum_size = Vector2(800, 300)
 layout_mode = 2
 size_flags_vertical = 10
 alignment = 2
@@ -300,10 +298,10 @@ alignment = 2
 [node name="Choices" type="VBoxContainer" parent="." node_paths=PackedStringArray("choices")]
 visible = false
 layout_mode = 0
-offset_left = 179.0
-offset_top = 503.0
-offset_right = 979.0
-offset_bottom = 601.0
+offset_left = 181.0
+offset_top = 435.0
+offset_right = 981.0
+offset_bottom = 587.0
 alignment = 1
 script = ExtResource("5_amb10")
 choices = [NodePath("HBoxContainer"), NodePath("HBoxContainer2"), NodePath("HBoxContainer3")]
@@ -322,10 +320,10 @@ idx = 2
 
 [node name="Continue" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 506.0
-offset_top = 555.0
-offset_right = 532.0
-offset_bottom = 603.0
+offset_left = 512.0
+offset_top = 512.0
+offset_right = 538.0
+offset_bottom = 560.0
 size_flags_horizontal = 6
 alignment = 1
 
@@ -347,3 +345,30 @@ label_settings = SubResource("LabelSettings_07iwg")
 visible_characters = 0
 visible_ratio = 0.0
 script = ExtResource("6_qcwjj")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_cjo32")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+modulate = Color(1, 1, 1, 0.0745098)
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -78.5
+offset_bottom = 78.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_cjo32")
+
+[node name="UrlOpener" type="Node" parent="."]
+script = ExtResource("12_7us0d")
+
+[connection signal="OpenUrl" from="." to="UrlOpener" method="go"]

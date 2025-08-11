@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using GodotInk;
 using InkBridge;
 using QuizSpace;
-
+[GlobalClass]
 public partial class ChoiceContainer : VBoxContainer {
 	public Bus bus;
 	
@@ -13,10 +13,10 @@ public partial class ChoiceContainer : VBoxContainer {
 	public Godot.Collections.Array<PcChoice> choices { get; set; }
 	public override async void _Ready() {
 		bus = GetNode<Bus>("/root/bus");
-		bus.Subscribe<ChoiceRequired, InkChoices>(async args => await onChoicesEvent(args));
+		// bus.Subscribe<ChoiceRequired, InkChoices>(async args => await onChoicesEvent(args));
 	}
 
-	private async Task<bool> onChoicesEvent(InkChoices args) {
+	public async Task<bool> onChoicesEvent(InkChoices args) {
 		// if (choices.All(choice => choice.Index != this.idx)) {
 		// 	// bus.Log($"No choice with ID: {this.idx} found. Hiding.");
 		// 	transparentize();
@@ -35,5 +35,11 @@ public partial class ChoiceContainer : VBoxContainer {
 		return true;
 	}
 
+	public async Task<bool> reset() {
+		foreach (var choix in choices) {
+				choix.transparentize();
+		}
+		return true;
+	}
 
 }

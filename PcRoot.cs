@@ -17,17 +17,19 @@ public partial class PcRoot : Control {
 	[Export]
   public PCAppearingLabel TitleLabel { get; set; }
 	[Export]
-	public Control choiceContainer {get; set;} 
+	public ChoiceContainer choiceContainer {get; set;} 
 	[Export]
 	public PCAppearingLabel continuer {get; set;} 
 	[Export]
 	public Control continuer_arrow {get; set;}
+	[Signal]
+	public delegate void OpenUrlEventHandler();
 
 	private bool animationLock = false;
   
-  
 	public override async void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
+
 		global = GetNode<GlobalState>("/root/Global");
 		bus.Subscribe<StoryUpdated, StoryText>(async args => {
 			if (story.tag == "title") {
@@ -43,8 +45,10 @@ public partial class PcRoot : Control {
 			// Output.ScrollToLine(1000);
 		});
 		bus.Subscribe<ChoiceRequired, InkChoices>(async args => {
-				 await showChoices();
+				 // animationLock = true;
+				 await showChoices(args);
 				 await appendTerminalText(args.line);
+				 // animationLock = false;
 			// Output.AppendText(args.line);
 				// Output.Clear();
 			}
@@ -56,6 +60,11 @@ public partial class PcRoot : Control {
 				childr.QueueFree();
 			}
 		});
+		bus.Subscribe<InkTagUpdated, InkTag>(args => {
+			if (args.newTag == "open") {
+				EmitSignal(SignalName.OpenUrl);
+			}
+		});
 		await TitleLabel.setText("Home", 0.5f);
 		story.Continue();
 	}
@@ -64,20 +73,20 @@ public partial class PcRoot : Control {
 		animationLock = true;
 		var newLabel = pcText.Instantiate<PCAppearingLabel>();
 		LabelContainer.AddChild(newLabel);
-		if (LabelContainer.GetChildren().Count > 4) LabelContainer.GetChild(0).QueueFree();
+		if (LabelContainer.GetChildren().Count > 3) LabelContainer.GetChild(0).QueueFree();
 		await newLabel.setText(text, 2.0f);
 		animationLock = false;
 		return newLabel;
 	}
 
-	public async Task showChoices() {
+	public async Task showChoices(InkChoices args) {
 		bus.Log("CHO "+story.CurrentChoices.Count.ToString());
 		if (!story.canContinue) {
-			choiceContainer.Show();
 			continuer.Hide();
 			continuer_arrow.Hide();
+			choiceContainer.Show();
+			await choiceContainer.onChoicesEvent(args);
 			await continuer.setText("");
-			bus.Log("IS Arrow Visble " + continuer_arrow.Visible);
 			if (continuer_arrow.Visible) {
 				continuer_arrow.Hide();
 			}
@@ -88,6 +97,7 @@ public partial class PcRoot : Control {
 		bus.Log("CONT " + story.CurrentChoices.Count.ToString());
 		if (story.canContinue) {
 			choiceContainer.Hide();
+			choiceContainer.reset();
 			continuer.Show();
 			await continuer.setText("Continue...");
 			continuer_arrow.Show();
