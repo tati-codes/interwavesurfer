@@ -1,0 +1,45 @@
+Project name: 
+InterWave™ (remake)
+
+Pseudonyms: 
+break_up_micro$oft: programming
+george w kush - writing
+se_tare: music and sfx
+Starly: art
+x_Realta_Nua_x: design and additional writing
+
+Tagline:
+Sail the InterWave, relive an idiosyncratic classic and please help me finish it ;_;
+
+Is this project 18+?
+No
+
+Downloadable, HTML embed, or both?
+Downloadable
+
+Description/details (typos intentional):
+🚀 This is a fan remake of the old shareware game (i think it used to be dreamcast). Like a life sim MMO. Kinda Dark Souls meets Animal Crossing? It's hard to say tbh, I spent a lot of the time just decorating my house... XD
+
+BUT come see what I built! Found and old CD and did my best to decomple it
+
+If you have bug reports, notes, memories of the game or any concrete info (plz I_I) then Id love some of your input in the ongong thread:
+https://komments.cloud/38284834ace41232f94dca
+
+id love to make the whole game. I know it's a big undetakin but it was one of my favourites as a kid and I never got to meet fran but she sounds SO cool. If you have any info on Fran I've gotta hear it <.<
+
+Genre:
+Adventure
+
+Tags:
+Singleplayer, Short, 3D, No AI, Fantasy, Cute
+
+Metadata: 
+
+Brief synopsis:
+Fan remkae of the classic early internet MMO with obtuse mechanics, where you play a cat sailing the open ocean.
+
+Page theme 
+BG: #002eba
+BG2: #16d9ff
+Text: #a60085
+Link: #ff1145
