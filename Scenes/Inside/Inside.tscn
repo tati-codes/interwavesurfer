@@ -1,0 +1,131 @@
+[gd_scene load_steps=12 format=3 uid="uid://bodo0yi0mq6jo"]
+
+[ext_resource type="Script" uid="uid://b00h0121int14" path="res://Scenes/Inside/InsideRoot.cs" id="1_x0q3o"]
+[ext_resource type="Shader" uid="uid://djcifos4pba4x" path="res://Placeholder/Portals/Fog.gdshader" id="2_bly3t"]
+[ext_resource type="Script" uid="uid://bc002dd1rg7mw" path="res://BaseClasses/Interactable/NonInteractable.cs" id="2_ikmsr"]
+[ext_resource type="PackedScene" uid="uid://1h4ndhncf6wa" path="res://BaseClasses/Player/Player.tscn" id="3_21l3c"]
+[ext_resource type="PackedScene" uid="uid://dmls62j51gx7i" path="res://Scenes/Inside/InsideWithCollision.tscn" id="3_ikmsr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_esahd"]
+render_priority = -3
+shader = ExtResource("2_bly3t")
+shader_parameter/enable_fog = true
+shader_parameter/fog_color = Color(0, 0, 0, 1)
+shader_parameter/noise_color = Color(0, 0, 0, 1)
+shader_parameter/fog_distance = 429.615
+shader_parameter/fog_fade_range = 125.937
+shader_parameter/enable_noise = true
+shader_parameter/noise_time_fac = 4.0
+shader_parameter/enable_color_limitation = true
+shader_parameter/color_levels = 32
+shader_parameter/enable_dithering = true
+shader_parameter/dither_strength = 0.3
+
+[sub_resource type="QuadMesh" id="QuadMesh_ipmmy"]
+material = SubResource("ShaderMaterial_esahd")
+size = Vector2(8, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ut0v4"]
+size = Vector3(6, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x0q3o"]
+size = Vector3(4, 1, 3.419)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_21l3c"]
+size = Vector3(3, 1, 2)
+
+[sub_resource type="Environment" id="Environment_w860a"]
+background_mode = 1
+background_color = Color(0.77, 0.77, 0.77, 1)
+fog_light_energy = 1.59
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0592
+volumetric_fog_emission = Color(0, 0.20818, 0.369051, 1)
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("LivingRoomCam", "BathCam", "TowerCam", "Towerzone", "Bathzone", "Livingzone", "player")]
+script = ExtResource("1_x0q3o")
+LivingRoomCam = NodePath("LivingRoom")
+BathCam = NodePath("Bathrrom")
+TowerCam = NodePath("Tower")
+Towerzone = NodePath("tower")
+Bathzone = NodePath("bathroom")
+Livingzone = NodePath("LivingRoomCollider")
+player = NodePath("Player")
+
+[node name="LivingRoom" type="Camera3D" parent="."]
+transform = Transform3D(-0.00206037, 0.879441, -0.476004, 0.0038066, 0.476008, 0.879433, 0.999991, 6.38866e-11, -0.00432843, -2.11091, 5.04414, -0.218894)
+fov = 63.5
+
+[node name="Dithering" type="MeshInstance3D" parent="LivingRoom"]
+transform = Transform3D(-0.00205339, 0.00381037, 0.999991, 0.880312, 0.474395, -4.65661e-10, -0.474391, 0.880304, -0.00432843, -1.63556, 0.551504, -5.41108)
+mesh = SubResource("QuadMesh_ipmmy")
+skeleton = NodePath("../..")
+
+[node name="Tower" type="Camera3D" parent="."]
+transform = Transform3D(0.187909, 0.851042, -0.490324, 0.0682951, 0.486687, 0.870903, 0.979809, -0.197137, 0.033331, -0.595238, 3.64986, 5.31102)
+
+[node name="Dithering" type="MeshInstance3D" parent="Tower"]
+transform = Transform3D(-0.00205339, 0.00381037, 0.999991, 0.880312, 0.474395, -4.65661e-10, -0.474391, 0.880304, -0.00432843, -1.63556, 0.551504, -5.41108)
+mesh = SubResource("QuadMesh_ipmmy")
+skeleton = NodePath("../..")
+
+[node name="Bathrrom" type="Camera3D" parent="."]
+transform = Transform3D(0.940946, 0.216558, -0.260237, -0.0432986, 0.839328, 0.541898, 0.335777, -0.498629, 0.799139, -0.295901, 2.81434, -1.24946)
+cull_mask = 1048573
+fov = 67.1
+
+[node name="Dithering" type="MeshInstance3D" parent="Bathrrom"]
+transform = Transform3D(-0.00205339, 0.00381037, 0.999991, 0.880312, 0.474395, -4.65661e-10, -0.474391, 0.880304, -0.00432843, -1.63556, 0.551504, -5.41108)
+mesh = SubResource("QuadMesh_ipmmy")
+skeleton = NodePath("../..")
+
+[node name="LivingRoomCollider" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LivingRoomCollider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.370034)
+shape = SubResource("BoxShape3D_ut0v4")
+
+[node name="NonInteractable" type="Node" parent="LivingRoomCollider/CollisionShape3D" node_paths=PackedStringArray("NonInteractableItem")]
+script = ExtResource("2_ikmsr")
+NonInteractableItem = NodePath("../..")
+metadata/_custom_type_script = "uid://bc002dd1rg7mw"
+
+[node name="tower" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76837e-07, 0.0415654, 4.56811)
+shape = SubResource("BoxShape3D_x0q3o")
+debug_color = Color(4.01892e-06, 0.651152, 0.0292527, 0.42)
+
+[node name="NonInteractable" type="Node" parent="tower" node_paths=PackedStringArray("NonInteractableItem")]
+script = ExtResource("2_ikmsr")
+NonInteractableItem = NodePath("..")
+metadata/_custom_type_script = "uid://bc002dd1rg7mw"
+
+[node name="bathroom" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.0804)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bathroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46673, 0, 1.09366)
+shape = SubResource("BoxShape3D_21l3c")
+debug_color = Color(0.833759, 0.343387, 0.487985, 0.42)
+
+[node name="NonInteractable" type="Node" parent="bathroom" node_paths=PackedStringArray("NonInteractableItem")]
+script = ExtResource("2_ikmsr")
+NonInteractableItem = NodePath("..")
+metadata/_custom_type_script = "uid://bc002dd1rg7mw"
+
+[node name="Player" parent="." node_paths=PackedStringArray("cam") instance=ExtResource("3_21l3c")]
+transform = Transform3D(-0.418216, 0, -0.430227, 0, 0.6, 0, 0.430227, 0, -0.418216, 2.07235, 0.6951, -0.982635)
+cam = NodePath("../LivingRoom")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1.2499, -0.0107506, -0.0115336, 0.0107506, -0.0877832, 1.24687, -0.0115336, -1.24687, -0.0876837, 0.0105181, 0.284176, 0.00194168)
+light_negative = true
+spot_range = 1.022
+
+[node name="island_inside(3)" parent="." instance=ExtResource("3_ikmsr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.961795)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w860a")
