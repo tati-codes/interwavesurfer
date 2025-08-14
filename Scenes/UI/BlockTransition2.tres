@@ -21,5 +21,5 @@ shader_parameter/edges = 6
 shader_parameter/shape_feather = 0.1
 shader_parameter/sectors = 64
 shader_parameter/clock_feather = 0.608
-shader_parameter/progress = -10.0
+shader_parameter/progress = 11.0
 shader_parameter/progress_bias = Vector2(-4, -7.5)

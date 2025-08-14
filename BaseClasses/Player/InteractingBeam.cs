@@ -19,14 +19,24 @@ public partial class InteractingBeam : ShapeCast3D {
       lookingAt(value);
     }
   }}
+  private SubscriptionHolder subscriptions = new();
+
   public override void _Ready() {
     bus = GetNode<Bus>("/root/bus");
     global = GetNode<GlobalState>("/root/Global");
-    bus.Subscribe<RegisterNonInteractable, NodeRef>(args => AddExceptionRid(args.reference));
-    bus.Subscribe<DropItem, DropItemArgs>(args => {
+    subscriptions.Add(
+      bus.Subscribe<RegisterNonInteractable, NodeRef>(args => AddExceptionRid(args.reference)),
+      bus.Subscribe<DropItem, DropItemArgs>(args => {
       if (target == args.reference) target = default;
-    });
+     })
+    );
     if (!debug) Hide();
+  }
+
+
+  public override void _ExitTree() {
+    subscriptions.Dispose();
+    base._ExitTree();
   }
   void lookingAt(Rid id) {
     if (id == default) return;
