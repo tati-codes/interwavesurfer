@@ -12,12 +12,21 @@ public partial class Interactable : Node {
   [Export] public MeshInstance3D meshHolder { get; set; }
   public Material black;
   public Material white;
+  private SubscriptionHolder subscriptions = new();
+
+
+  public override void _ExitTree() {
+	  subscriptions.Dispose();
+	  base._ExitTree();
+  }
 	public override void _Ready() {
     white = GD.Load<Material>("res://Assets/Shaders/White.tres");
     black = GD.Load<Material>("res://Assets/Shaders/BlackOutlinerMaterial.tres");
     bus = GetNode<Bus>("/root/bus");
-    bus.Subscribe<StoppedLookingAt, NodeRef>(args => refersToMe(args.reference, unhandleGaze));
-    bus.Subscribe<LookingAt<NodeRef>, NodeRef>(args => refersToMe(args.reference, handleGaze));
+    subscriptions.Add(
+    bus.Subscribe<StoppedLookingAt, NodeRef>(args => refersToMe(args.reference, unhandleGaze)),
+    bus.Subscribe<LookingAt<NodeRef>, NodeRef>(args => refersToMe(args.reference, handleGaze))
+	    );
     overlaySetter.MaterialOverlay = black;
 	}
   protected void refersToMe(Rid rid, Action callback) {

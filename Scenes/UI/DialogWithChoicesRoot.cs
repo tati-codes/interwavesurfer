@@ -22,21 +22,22 @@ public partial class DialogWithChoicesRoot : PanelContainer {
   
 	private const string ACTIVE_TAG = "general";
 	bool active => global.QuizState.currentTag == ACTIVE_TAG || global.QuizState.currentTag == "calculate";
-
+	private SubscriptionHolder subscriptions = new();
 	public override void _Ready() {
 		this.Hide();
 		bus = GetNode<Bus>("/root/bus");
 		global = GetNode<GlobalState>("/root/Global");
-		bus.Subscribe<ChoiceSelected, IChoice>(args => {
+		var choiceSelSub = bus.Subscribe<ChoiceSelected, IChoice>(args => {
 			ContentContainer.Append("[i][color=bbbc95]You: [b]" + args.escapedText + "[/b][/color] [/i]");
 		});
-		bus.Subscribe<IShowDialogChoices, ChoiceDialogArgs>(consume);
-		bus.Subscribe<InkTagUpdated, InkTag>(args => {
+		var showDialogSub = bus.Subscribe<IShowDialogChoices, ChoiceDialogArgs>(consume);
+		var inkTagSub =bus.Subscribe<InkTagUpdated, InkTag>(args => {
 			if (args.newTag == "general") {
 				this.Show();
 				ContentContainer.Reset();
 			}
 		});
+		subscriptions.Add(choiceSelSub, showDialogSub, inkTagSub);
 	}
 
 	public void consume(ChoiceDialogArgs args) {
@@ -59,6 +60,10 @@ public partial class DialogWithChoicesRoot : PanelContainer {
 		}
 		ContentContainer.Append(args.content);
 		ChoiceContainer.Consume(args.choices);
+	}
+	public override void _ExitTree() {
+		subscriptions.Dispose();
+		base._ExitTree();
 	}
 }
 

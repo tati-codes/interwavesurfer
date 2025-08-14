@@ -14,7 +14,8 @@ public partial class FullScreenText : Control {
 	public Label ChoiceLabel {get; set;}
 	[Export]
 	public PanelContainer ChoiceContainer {get; set;}
-	
+	private SubscriptionHolder subscriptions = new();
+
 	private const string INACTIVE_TAG = "general";
 	private const string FULLSCREEN_ACTIVE_TAG = "laur";
 	private Color default_modulate; 
@@ -23,7 +24,7 @@ public partial class FullScreenText : Control {
 		bus = GetNode<Bus>("/root/bus");
 		global = GetNode<GlobalState>("/root/Global");
 		default_modulate = ChoiceContainer.Modulate;
-		bus.Subscribe<IShowDialogChoices, ChoiceDialogArgs>(args => {
+		var dialogSub = bus.Subscribe<IShowDialogChoices, ChoiceDialogArgs>(args => {
 			if (!active) return;
 			LabelContainer.Append(args.content);
 			if (args.choices.Count > 0) {
@@ -32,20 +33,24 @@ public partial class FullScreenText : Control {
 				ChoiceLabel.Text = ">";
 			}
 		});
-		bus.Subscribe<InkTagUpdated, InkTag>(args => {
+		var inkSub = bus.Subscribe<InkTagUpdated, InkTag>(args => {
 			if (args.newTag == FULLSCREEN_ACTIVE_TAG) {
 				LabelContainer.Reset();
 			}
 		});
-		bus.Subscribe<AnimationFinished, AnimationName>(arg => {
+		var animSub = bus.Subscribe<AnimationFinished, AnimationName>(arg => {
 			if (arg.name == "WhiteOutFrom3DSpace") {
 				animate_button_in();
 			} else if (arg.name == "DissolveFromFullscreen") {
 				animate_button_out();
 			}
 		});
+		subscriptions.Add(dialogSub, inkSub, animSub);
 	}
-
+	public override void _ExitTree() {
+		subscriptions.Dispose();
+		base._ExitTree();
+	}
 	void animate_button_in() => animate_button(new Color("ffffff"));
 	void animate_button_out() => animate_button(new Color("ffffff00"));
 	void animate_button(Color color) {

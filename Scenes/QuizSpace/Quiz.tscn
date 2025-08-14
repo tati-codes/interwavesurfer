@@ -259,6 +259,18 @@ tracks/17/keys = {
 "update": 0,
 "values": [false]
 }
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("../boat:rotation")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.808445),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0261799, -4.65821e-10, 0.188496), Vector3(-0.0244346, 0, 0.188496)]
+}
 
 [sub_resource type="Animation" id="Animation_cr5lj"]
 resource_name = "CenterChoice"
@@ -1150,7 +1162,7 @@ volumetric_fog_albedo = Color(0.120525, 0.406771, 0.609912, 1)
 volumetric_fog_emission = Color(0.0550629, 0.287657, 0.385036, 1)
 volumetric_fog_emission_energy = 0.5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_esahd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h6j80"]
 render_priority = -3
 shader = ExtResource("7_mu41k")
 shader_parameter/enable_fog = true
@@ -1166,7 +1178,7 @@ shader_parameter/enable_dithering = true
 shader_parameter/dither_strength = 0.3
 
 [sub_resource type="QuadMesh" id="QuadMesh_ypqt0"]
-material = SubResource("ShaderMaterial_esahd")
+material = SubResource("ShaderMaterial_h6j80")
 size = Vector2(2, 2)
 
 [sub_resource type="Shader" id="Shader_lwnqu"]
@@ -2645,13 +2657,13 @@ nodes/light/7/node = SubResource("VisualShaderNodeVectorFunc_q8dq8")
 nodes/light/7/position = Vector2(64.6063, 182.25)
 nodes/light/connections = PackedInt32Array(6, 0, 7, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k52qs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q8dq8"]
 render_priority = 0
 shader = SubResource("VisualShader_mjdkp")
 shader_parameter/ColorParameter = Color(0.6298, 0.094, 0.94, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qx71b"]
-material = SubResource("ShaderMaterial_k52qs")
+material = SubResource("ShaderMaterial_q8dq8")
 size = Vector2(455, 100)
 subdivide_width = 50
 subdivide_depth = 50

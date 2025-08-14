@@ -13,13 +13,16 @@ public partial class     InkWrapper : Node {
 	[Export]
 	public InkStory story;
 	private Bus bus;
+	private SubscriptionHolder subscriptions = new();
+	public bool isOver = false;
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
-		bus.Subscribe<SelectChoice, IChoice>(args => {
+		// story.LoadStateFile("res://debugSave.json");
+		var selsub = bus.Subscribe<SelectChoice, IChoice>(args => {
 			story.ChooseChoiceIndex(args.choice.Index);
 			story.Continue();
 		});
-		bus.Subscribe<SuperSelect, IChoice>(args => {
+		var supersub = bus.Subscribe<SuperSelect, IChoice>(args => {
 			story.ChooseChoiceIndex(args.choice.Index);
 			if (story.CanContinue) {
 				story.Continue();
@@ -28,9 +31,8 @@ public partial class     InkWrapper : Node {
 				story.Continue();
 			}
 		});
-
-		bus.Subscribe<PlayerContinuedStory>(args => story.Continue());
-		bus.Subscribe<SuperContinue>(args => story.ContinueMaximally());
+		var contsub = bus.Subscribe<PlayerContinuedStory>(args => story.Continue());
+		var superconsub = bus.Subscribe<SuperContinue>(args => story.ContinueMaximally());
 		story.Continued += () => {
 			//FIXME story can stop being able to continue due to being over
 			trackTag();
@@ -38,7 +40,8 @@ public partial class     InkWrapper : Node {
 			else if (!story.CanContinue && story.CurrentChoices.Count == 0) {
 				GD.Print(story.CurrentText);
 				bus.Publish<StoryUpdated, StoryText>(new (story.CurrentText));
-				bus.Error("Story over//Implement this");
+				// bus.Publish<StoryOver>();
+				isOver = true;
 			}
 			else if (story.CurrentText.Length < 2) {
 				story.Continue();
@@ -46,11 +49,9 @@ public partial class     InkWrapper : Node {
 				bus.Publish<StoryUpdated, StoryText>(new(story.CurrentText));
 			}
 		};
-		//TODO "reset quiz" event 
-		//TODO reset quiz implementation
 		story.MadeChoice += (InkChoice choice) => bus.Publish<ChoiceSelected, IChoice>( new(choice));
+		subscriptions.Add(selsub, supersub, contsub, superconsub);
 	}
-
 	private void trackTag() {
 		if (story.CurrentTags.Count == 0) return;
 		if (story.CurrentTags.Count > 1) {
@@ -64,13 +65,11 @@ public partial class     InkWrapper : Node {
 			bus.Publish<InkTagUpdated, InkTag>(new(this.tag));
 		}
 	}
-
 	public string tag = string.Empty;
 	public string currentText => story.CurrentText;
 	public bool canContinue => story.CanContinue;
 	public IReadOnlyList<InkChoice> CurrentChoices => story.CurrentChoices;
 	public void Continue() => story.Continue();
-
 	public void getQuizVariables() {
 		int navigation = story.FetchVariable<int>("navigation");
 		int seaworthy = story.FetchVariable<int>("seaworthy");
@@ -85,7 +84,12 @@ public partial class     InkWrapper : Node {
 		story.StoreVariable<int>("lowest_stat", sorted.Min());
 		int high = story.FetchVariable<int>("highest_stat");
 		int low = story.FetchVariable<int>("lowest_stat");
+		// story.SaveStateFile("res://debugSave.json");
 		bus.Log($"High: {high}, Low: {low}");
+	}
+	public override void _ExitTree() {
+		subscriptions.Dispose();
+		base._ExitTree();
 	}
 }
 

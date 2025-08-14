@@ -12,7 +12,7 @@ public partial class Bus : Node {
   private void LogAsTag(string msg, tag tag) => this.Publish<TLog, DbgString>(new DbgString() { name = "", text = msg, tag = tag});
   public void Inspect(Object o) => this.Log(DbgString.InspectObject(o));
   public void Error(string msg) => this.Publish<OBus.Error, Text>(Text.error(msg));
-  public void Subscribe<T>(Action<NArgs> action)
+  public Subscription Subscribe<T>(Action<NArgs> action)
       where T : TEvent<NArgs>, new() => Subscribe<T, NArgs>(action);
   public void Publish<T, TArgs>() where T : TEvent<TArgs>, new() 
     where TArgs : Args, new() => Publish<T, TArgs>(new TArgs());

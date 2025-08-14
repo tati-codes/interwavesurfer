@@ -17,15 +17,23 @@ public partial class DialogRoot : PanelContainer {
 	public TextureRect Arrow {get; set;} 
 	[Export]
 	public AnimationPlayer anim {get; set;}
-
+	private SubscriptionHolder subscriptions = new();
+	private bool visible = false;
+	public override void _ExitTree() {
+		subscriptions.Dispose();
+		base._ExitTree();
+	}
 	public override void _Ready() {
 		bus = GetNode<Bus>("/root/bus");
 		global = GetNode<GlobalState>("/root/Global");
-		bus.Subscribe<ReadItem, ReadableItem>(args => {
-			setDialog("???", global.getStringByObjectID(args.text_id), true);
-		});
-		bus.Subscribe<IShowDialog, DialogText>(setDialog);
-		bus.Subscribe<UITransitionEv, UITransition>(handleUITransition);
+		subscriptions.Add(
+			bus.Subscribe<IShowDialog, DialogText>(setDialog),
+			bus.Subscribe<ReadItem, ReadableItem>(args => {
+				if (!visible) setDialog("P. Digal", args.text_id, true);
+				else reset();
+			}),
+			bus.Subscribe<UITransitionEv, UITransition>(handleUITransition)
+		);
 		Resized += repositionArrow;
 	}
 	void handleUITransition(UITransition args) {
@@ -38,11 +46,20 @@ public partial class DialogRoot : PanelContainer {
 		Arrow.Position = new Vector2(sizeY, halfWay);
 	}
 	public void setDialog(string name, string content, bool isLast) {
+		visible = true;
+		anim.Play("show");
 		Name.Text = name;
 		Content.Text = content;
 		Arrow.SetInstanceShaderParameter("Bouncing", true);
 	}
 	public void setDialog(DialogText dialogText) => setDialog(dialogText.name, dialogText.content, dialogText.isLast);
-	void reset() => setDialog("", "", false);	
+
+	void reset() {
+		if (!visible) return;
+		visible = false;
+		anim.PlayBackwards("show");
+		Name.Text = "";
+		Content.Text = "";
+	} 
 }
 

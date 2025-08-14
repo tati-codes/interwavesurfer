@@ -13,11 +13,13 @@ public partial class AnimPlayer : AnimationPlayer {
 	private const string toD2 = "laur";
 	private string lastTag = "";
 	private List<string> waitinglist = new();
+	private SubscriptionHolder subscriptions = new();
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
 		global = GetNode<GlobalState>("/root/Global");
-		bus.Subscribe<ChoiceSelected, IChoice>(args => {
-			if (global.QuizState.currentTag == "laur") return;
+		var choiceSelSub = bus.Subscribe<ChoiceSelected, IChoice>(args => {
+			if (global.QuizState.currentTag is "laur" or "skip") return;
+			bus.Log("Choice: " + args.choice.Text + "\n Tag: " + global.QuizState.currentTag);
  			switch (args.choice.Index) {
 				case 0:
 					batchPlay("LeftChoice");
@@ -32,7 +34,7 @@ public partial class AnimPlayer : AnimationPlayer {
 					break;
 			}
 		});
-		bus.Subscribe<InkTagUpdated, InkTag>(args => {
+		var inkTagSub = bus.Subscribe<InkTagUpdated, InkTag>(args => {
 			if (lastTag == "calculate" && args.newTag != lastTag) {
 				lastTag = args.newTag;
 				return;	
@@ -58,12 +60,17 @@ public partial class AnimPlayer : AnimationPlayer {
 			}
 		});
 		this.AnimationFinished += (name) => bus.Publish<AnimationFinished, AnimationName>(new(name));
+		subscriptions.Add(choiceSelSub, inkTagSub);
 	}
 	void batchPlay(string anim) {
 		if (!IsPlaying()) Play(anim);
 		else {
 			waitinglist.Add(anim);
 		}
+	}
+	public override void _ExitTree() {
+		subscriptions.Dispose();
+		base._ExitTree();
 	}
 }
 

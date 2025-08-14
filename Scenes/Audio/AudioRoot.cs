@@ -10,11 +10,13 @@ public partial class AudioRoot : Node {
 	public AnimationPlayer anim {get; set;} 
 	[Export]
 	public AudioStreamPlayer audio {get; set;}
-  
+	private SubscriptionHolder subscriptions = new();
+
+
 	public override void _Ready()	{
 		global = GetNode<GlobalState>("/root/Global");
 		bus = GetNode<Bus>("/root/bus");
-		bus.Subscribe<PlayerContinuedStory>(_ => {
+		var laurPageSub = bus.Subscribe<PlayerContinuedStory>(_ => {
 			if (global.QuizState.currentTag == "laur") {
 				audio.PitchScale = new RandomNumberGenerator().RandfRange(0.8f, 1.5f);
 				anim.Play("book-page");
@@ -26,6 +28,11 @@ public partial class AudioRoot : Node {
 				audio.PitchScale = 1.0f;
 			}
 		};
+		subscriptions.Add(laurPageSub);
+	}
+	public override void _ExitTree() {
+		subscriptions.Dispose();
+		base._ExitTree();
 	}
 
 }

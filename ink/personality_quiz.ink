@@ -71,7 +71,7 @@ Are you left- or right-handed?  #general
 - (ending_quiz)
 I see...in that case...
 -> quiz_results ->
-That will do well enough for now.
+That will do well enough for now. #skip 
 + [This seems pointless.] 
 - ~ navigation = 300
 ~ seaworthy = 200

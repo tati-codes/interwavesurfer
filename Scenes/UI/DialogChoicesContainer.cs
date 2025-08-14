@@ -13,10 +13,7 @@ public partial class DialogChoicesContainer : Control {
   public DialogChoiceItem Third {get; set;}
 
   DialogChoiceItem[] choices = new DialogChoiceItem[3];
-  private Bus bus;
-  private GlobalState globalState;
   public override void _Ready() {
-    bus = GetNode<Bus>("/root/bus");
   }
 
   public void Consume(List<InkChoice> choices) {

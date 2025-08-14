@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cta0lhtnp7lle"]
+[gd_scene load_steps=14 format=3 uid="uid://cta0lhtnp7lle"]
 
 [ext_resource type="Material" uid="uid://bdn0qj32pvhyc" path="res://Scenes/UI/BlockTransition2.tres" id="1_y7w4a"]
 [ext_resource type="Script" uid="uid://dkuurqruratau" path="res://Scenes/UI/DialogRoot.cs" id="2_7ia2c"]
 [ext_resource type="StyleBox" uid="uid://rotcv1hk41cb" path="res://Scenes/UI/DialogWithHeader.tres" id="2_y7w4a"]
 [ext_resource type="Shader" uid="uid://dcqeok85pe4vb" path="res://Scenes/UI/BouncingShader.tres" id="3_7ia2c"]
 [ext_resource type="Texture2D" uid="uid://cd3ar2iew7p13" path="res://Assets/UI/downArrow.png" id="3_d1mbi"]
+[ext_resource type="FontFile" uid="uid://bc3h7ky5fm4yl" path="res://Assets/Fonts/Blazma/Blazma-Italic.otf" id="4_d1mbi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pyyx4"]
 line_spacing = -23.0
@@ -13,6 +14,13 @@ shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.658824)
 shadow_offset = Vector2(3, 3)
 
+[sub_resource type="LabelSettings" id="LabelSettings_x8u7b"]
+font = ExtResource("4_d1mbi")
+font_size = 48
+font_color = Color(1, 1, 1, 0.733333)
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d1mbi"]
 shader = ExtResource("3_7ia2c")
 shader_parameter/Bouncing = true
@@ -20,9 +28,66 @@ shader_parameter/Bouncing = true
 [sub_resource type="Animation" id="Animation_kmfli"]
 resource_name = "Arrow-Bounce"
 
+[sub_resource type="Animation" id="Animation_d1mbi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [11.0]
+}
+
+[sub_resource type="Animation" id="Animation_y7w4a"]
+resource_name = "show"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.433514),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [11.0, -10.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ucgpx"]
 _data = {
-&"Arrow-Bounce": SubResource("Animation_kmfli")
+&"Arrow-Bounce": SubResource("Animation_kmfli"),
+&"RESET": SubResource("Animation_d1mbi"),
+&"show": SubResource("Animation_y7w4a")
 }
 
 [node name="Panel" type="PanelContainer" node_paths=PackedStringArray("Name", "Content", "Arrow", "anim")]
@@ -44,6 +109,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Name" type="Label" parent="Container"]
+material = ExtResource("1_y7w4a")
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 text = "name
@@ -53,12 +119,14 @@ autowrap_mode = 2
 
 [node name="Content" type="Label" parent="Container"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_x8u7b")
 autowrap_mode = 3
 
 [node name="Dialog" type="Control" parent="."]
 layout_mode = 2
 
 [node name="Arrow" type="TextureRect" parent="Dialog"]
+visible = false
 material = SubResource("ShaderMaterial_d1mbi")
 layout_mode = 2
 offset_left = 161.0

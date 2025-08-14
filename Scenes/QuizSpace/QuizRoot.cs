@@ -3,6 +3,7 @@ using System;
 using InkBridge;
 using OBus;
 using QuizSpace;
+using State;
 using TatiDebug;
 using UIEvents;
 
@@ -13,24 +14,26 @@ public partial class QuizRoot : Node3D {
 	public InkWrapper story {get; set;} 
 	[Export]
 	public AnimationPlayer anim {get; set;} 
-	 
+	private SubscriptionHolder subscriptions = new();
+
   
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
 		global = GetNode<GlobalState>("/root/Global");
 		// bus.Subscribe<ChoiceSelected>(playerChoiceReceived);
-		bus.Subscribe<StoryUpdated, StoryText>(args => {
+		var storyUpdatedSub = bus.Subscribe<StoryUpdated, StoryText>(args => {
 			bus.Publish<IShowDialogChoices, ChoiceDialogArgs>(new(args.Text, new(), "???"));
 		});
-		bus.Subscribe<ChoiceRequired, InkChoices>(args => 
+		var choiceRequiredSub = bus.Subscribe<ChoiceRequired, InkChoices>(args => 
 			bus.Publish<IShowDialogChoices, ChoiceDialogArgs>(new(args.line, args.choices, "???"))
 		);
-		bus.Subscribe<InkTagUpdated, InkTag>(args => {
+		var inkTagSub = bus.Subscribe<InkTagUpdated, InkTag>(args => {
 			if (args.newTag == "calculate") {
 				story.getQuizVariables();
 			}
 		});
 		story.getQuizVariables();
+		subscriptions.Add(storyUpdatedSub,choiceRequiredSub,inkTagSub);
 	}
 	
 	public override void _Input(InputEvent @event) {
@@ -40,6 +43,7 @@ public partial class QuizRoot : Node3D {
 	}
 	void handlePrimary() {
 		if (story.canContinue) bus.Publish<PlayerContinuedStory>();
+		else if (story.isOver) bus.Publish<GoToScene, SceneArgs>(new(sceneEnum.ISLAND)); 
 		else bus.Publish<SelectChoice, IChoice>(new IChoice(global.QuizState.selectedChoice));
 	}
 	void handleDirections(InputEvent @event) {
@@ -63,5 +67,9 @@ public partial class QuizRoot : Node3D {
 			}
 			bus.Publish<UIItemHighlighted, SelectionIdx>(new(UISelectedIndex));
 		}
+	}
+	public override void _ExitTree() {
+		subscriptions.Dispose();
+		base._ExitTree();
 	}
 }

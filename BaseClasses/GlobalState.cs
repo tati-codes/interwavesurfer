@@ -34,6 +34,7 @@ public partial class GlobalState : Node {
 		bus.Subscribe<DropItem, DropItemArgs>(args => PlayerIsHoldingItem = false);
 		bus.Subscribe<LookingAt<ReadableItem>,ReadableItem>(args => InteractionTarget = args);
 		bus.Subscribe<LookingAt<PickupableItem>, PickupableItem>(args => InteractionTarget = args);
+		bus.Subscribe<LookingAt<MoverItem>, MoverItem>(args => InteractionTarget = args);
 		bus.Subscribe<StoppedLookingAt, NodeRef>(args => InteractionTarget = null);
 		bus.Subscribe<GoToScene, SceneArgs>(sceneSwitch);
 	}
@@ -89,7 +90,6 @@ namespace State {
 			bus.Subscribe<ChoiceRequired, InkChoices>(update);
 			bus.Subscribe<UIItemHighlighted, SelectionIdx>(update);
 			bus.Subscribe<InkTagUpdated, InkTag>(update);
-
 		}
 	}
 	public class PC : InkState {

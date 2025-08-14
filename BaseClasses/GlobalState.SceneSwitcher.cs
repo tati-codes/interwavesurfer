@@ -17,6 +17,7 @@ public partial class GlobalState : Node {
   public Node CurrentScene { get; set; }
 	public sceneEnum currentScene = sceneEnum.PC;
   public Dictionary<sceneEnum, string> scenes = new Dictionary<sceneEnum, string>() {
+    [sceneEnum.ISLAND] = "res://Scenes/Boiat/Outside.tscn",
     [sceneEnum.QUIZ] = "res://Scenes/QuizSpace/Quiz.tscn",
     [sceneEnum.PC] = "res://Scenes/PC/pc_root.tscn",
     [sceneEnum.MAIN_MENU] = "res://Scenes/Menu/MainMenu.tscn",

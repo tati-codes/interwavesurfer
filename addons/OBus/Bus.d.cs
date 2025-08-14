@@ -189,6 +189,7 @@ namespace OBus {
   public class SubscriptionHolder {
     List<Subscription> subscriptions  = new();
     public void Add(Subscription sub) => subscriptions.Add(sub);
+    public void Add(params Subscription[] sub) => subscriptions.AddRange(sub);
     public void Dispose() {
       foreach (var subscription in subscriptions) {
         subscription.Dispose();

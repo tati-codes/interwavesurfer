@@ -325,7 +325,7 @@ _data = {
 &"ShowUp": SubResource("Animation_10hmv")
 }
 
-[node name="ButtonZone" type="Control" node_paths=PackedStringArray("image", "label", "Frame", "anim")]
+[node name="ButtonZone" type="Control" node_paths=PackedStringArray("image", "label", "Frame", "anim", "timer")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 981.0
@@ -337,6 +337,7 @@ image = NodePath("FaceButton")
 label = NodePath("Label")
 Frame = NodePath("Frame")
 anim = NodePath("AnimationPlayer")
+timer = NodePath("Timer")
 
 [node name="FaceButton" parent="." instance=ExtResource("2_qsggt")]
 material = SubResource("ShaderMaterial_imcbq")
@@ -385,3 +386,6 @@ libraries = {
 }
 autoplay = "RESET"
 speed_scale = 2.043
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0

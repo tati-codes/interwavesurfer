@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using TatiDebug;
+[GlobalClass]
 public partial class Player : CharacterBody3D {
 	public Bus bus = null;
   [Export]
@@ -28,6 +29,11 @@ public partial class Player : CharacterBody3D {
     rotationContainer.RotateY(-cam.Rotation.Y); 
     // beam.Rotation = new(beam.Rotation.X, -cam.Rotation.Y, beam.Rotation.Z);
 	}
+
+  public void setCamera(Camera3D cam) {
+    // this.cam = cam;
+    // rotationContainer.RotateY(-cam.Rotation.Y);
+  }
   void processMoveInput(double delta) {
     float preserve_Y = Velocity.Y;
     Velocity = Vector3.Zero;
@@ -58,6 +64,9 @@ public partial class Player : CharacterBody3D {
     if (IsOnFloor()) {
       animations.PlaybackDefaultBlendTime = 1;
       animations.SpeedScale = 1;
+    }
+    if (Position.Y < -6.3) {
+      GetTree().Quit();
     }
     MoveAndSlide();
     RenderingServer.GlobalShaderParameterSet("player_position", Position);    // ProjectSettings.

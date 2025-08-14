@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Interactables;
+using State;
 using static PlayerInput;
 public partial class PlayerInputHandler : Node {
 	public Bus bus;
@@ -49,6 +50,7 @@ public partial class PlayerInputHandler : Node {
 		if (global.PlayerIsHoldingItem && global.InteractionTarget is PickupableItem droppable) bus.Publish<DropItem, DropItemArgs>(new(droppable.reference, holdingZone.GlobalPosition));
 		else if (global.InteractionTarget is PickupableItem pickupable) bus.Publish<PickupItem, PickupableItem>(pickupable);
 		else if (global.InteractionTarget is ReadableItem readable) bus.Publish<ReadItem, ReadableItem>(readable);
+		else if (global.InteractionTarget is MoverItem mover) bus.Publish<GoToScene, SceneArgs>(new(mover.nextScene));
 		//TODO
 		//bus.Publish<DisplayTextFrom, ReadableItem>(new(beam.target));
 	}
