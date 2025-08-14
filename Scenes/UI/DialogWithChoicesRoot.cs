@@ -8,6 +8,7 @@ using InkBridge;
 using Interactables;
 using OBus;
 using UIEvents;
+[GlobalClass]
 public partial class DialogWithChoicesRoot : PanelContainer {
 	public Bus bus;
 	public GlobalState global;
@@ -20,7 +21,7 @@ public partial class DialogWithChoicesRoot : PanelContainer {
 	public DialogChoicesContainer ChoiceContainer {get; set;}
   
 	private const string ACTIVE_TAG = "general";
-	bool active => global.QuizState.currentTag == ACTIVE_TAG;
+	bool active => global.QuizState.currentTag == ACTIVE_TAG || global.QuizState.currentTag == "calculate";
 
 	public override void _Ready() {
 		this.Hide();
@@ -37,7 +38,8 @@ public partial class DialogWithChoicesRoot : PanelContainer {
 			}
 		});
 	}
-	void consume(ChoiceDialogArgs args) {
+
+	public void consume(ChoiceDialogArgs args) {
 			if (!active) return;
 			NameHolder.Text = args.title;		
 			if (args.choices.Count == 0) ContentContainer.Maximize();
@@ -47,6 +49,16 @@ public partial class DialogWithChoicesRoot : PanelContainer {
 			}
 			ContentContainer.Append(args.content);
 			ChoiceContainer.Consume(args.choices);
+	}
+	public void force(ChoiceDialogArgs args) {
+		NameHolder.Text = args.title;		
+		if (args.choices.Count == 0) ContentContainer.Maximize();
+		else {
+			ContentContainer.Minimize();
+			ContentContainer.Reset();
+		}
+		ContentContainer.Append(args.content);
+		ChoiceContainer.Consume(args.choices);
 	}
 }
 

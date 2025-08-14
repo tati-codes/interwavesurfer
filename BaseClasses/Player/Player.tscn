@@ -3774,6 +3774,7 @@ script = ExtResource("5_lm2xe")
 
 [node name="InteractingBeam" parent="Player1/Player/Skeleton3D" instance=ExtResource("2_87x7f")]
 transform = Transform3D(0.00999999, -8.35186e-25, -1.16167e-32, 9.86076e-32, 0.00999999, 1.39091e-10, 0, -1.39091e-10, 0.00999999, 3.35781e-09, -0.0699997, 0.00999999)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player1"]
 libraries = {

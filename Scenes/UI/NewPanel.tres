@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dsk8e0dmirocg"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bbuwt"]
+load_path = "res://.godot/imported/dialog2.png-e46d848dc2261be06921da3aa9e6a861.ctex"
+
+[resource]
+texture = SubResource("CompressedTexture2D_bbuwt")
+texture_margin_left = 33.0
+texture_margin_top = 29.0
+texture_margin_right = 30.0
+texture_margin_bottom = 33.0
+expand_margin_left = 9.0
+expand_margin_right = 9.0

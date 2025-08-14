@@ -392,8 +392,8 @@ What's your favorite food? #general
 //<- stat_panel //just for debugging
 VAR highest_stat = ""
 VAR lowest_stat = ""
->>> CUTSCENE: out of the var navigation, seaworthy, rudderwork, doldrums, salt, find the one with the HIGHEST numerical value (breaking ties randomly) + set the var highest_stat to a string [name of the lowest stat]
->>> CUTSCENE: out of the var navigation, seaworthy, rudderwork, doldrums, salt, find the one with the LOWEST numerical value (breaking ties randomly) + set the var lowest_stat to a string [name of the lowest stat]
+The sea does not judge. #calculate
+Well, maybe just this once... #general
 ~ temp resulting_stat = -> honor_result
 {
 - (highest_stat == "navigation" && lowest_stat == "seaworthy") || (highest_stat == "rudderwork" && lowest_stat == "doldrums"):

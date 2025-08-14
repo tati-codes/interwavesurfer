@@ -11,6 +11,7 @@ public partial class AnimPlayer : AnimationPlayer {
 	public GlobalState global;
 	private const string toD3 = "general";
 	private const string toD2 = "laur";
+	private string lastTag = "";
 	private List<string> waitinglist = new();
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
@@ -32,11 +33,16 @@ public partial class AnimPlayer : AnimationPlayer {
 			}
 		});
 		bus.Subscribe<InkTagUpdated, InkTag>(args => {
+			if (lastTag == "calculate" && args.newTag != lastTag) {
+				lastTag = args.newTag;
+				return;	
+			} 
 			if (args.newTag == toD3) {
 				Play("DissolveFromFullscreen");
 			} else if (args.newTag == toD2) {
 				batchPlay("WhiteOutFrom3DSpace");
 			}
+			lastTag = args.newTag;
 		});
 		this.AnimationFinished += (name => {
 			if (waitinglist.Count > 0) {

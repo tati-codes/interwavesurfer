@@ -15,7 +15,7 @@ shadow_offset = Vector2(3, 3)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d1mbi"]
 shader = ExtResource("3_7ia2c")
-shader_parameter/Bouncing = false
+shader_parameter/Bouncing = true
 
 [sub_resource type="Animation" id="Animation_kmfli"]
 resource_name = "Arrow-Bounce"

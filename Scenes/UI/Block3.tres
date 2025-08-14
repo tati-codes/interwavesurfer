@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dyir248a2g1bc"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://csqnsphbw1dfk"]
 
-[sub_resource type="Shader" id="Shader_6nucv"]
+[sub_resource type="Shader" id="Shader_wbcxm"]
 code = "shader_type canvas_item;
 
 uniform bool use_sprite_alpha = true;
@@ -171,23 +171,23 @@ void fragment() {
 }"
 
 [resource]
-shader = SubResource("Shader_6nucv")
+shader = SubResource("Shader_wbcxm")
 shader_parameter/use_sprite_alpha = true
 shader_parameter/use_transition_texture = false
-shader_parameter/transition_type = 0
+shader_parameter/transition_type = 3
 shader_parameter/position = Vector2(0, 0)
 shader_parameter/invert = true
-shader_parameter/grid_size = Vector2(25, 24)
-shader_parameter/rotation_angle = 0.0
-shader_parameter/stagger = Vector2(0, 20)
+shader_parameter/grid_size = Vector2(22, 9)
+shader_parameter/rotation_angle = 180.0
+shader_parameter/stagger = Vector2(-10, 10)
 shader_parameter/stagger_frequency = Vector2i(2, 2)
-shader_parameter/flip_frequency = Vector2i(1, 1)
-shader_parameter/basic_feather = 3.0
+shader_parameter/flip_frequency = Vector2i(0, 0)
+shader_parameter/basic_feather = 3.4
 shader_parameter/use_mask_size = false
-shader_parameter/mask_size = Vector2(10, 10)
+shader_parameter/mask_size = Vector2(100, 100)
 shader_parameter/edges = 6
 shader_parameter/shape_feather = 0.1
-shader_parameter/sectors = 1
-shader_parameter/clock_feather = 0.0
-shader_parameter/progress = 1.0
-shader_parameter/progress_bias = Vector2(-1, -2)
+shader_parameter/sectors = 64
+shader_parameter/clock_feather = 0.608
+shader_parameter/progress = 10.0
+shader_parameter/progress_bias = Vector2(-4, -7.5)

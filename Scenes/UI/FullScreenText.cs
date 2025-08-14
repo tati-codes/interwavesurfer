@@ -50,6 +50,6 @@ public partial class FullScreenText : Control {
 	void animate_button_out() => animate_button(new Color("ffffff00"));
 	void animate_button(Color color) {
 		Tween tween = GetTree().CreateTween();
-		tween.TweenProperty(ChoiceContainer, "modulate", color, 1.0f);
+		tween.TweenProperty(ChoiceContainer, "modulate", color, 0.5f);
 	}
 }

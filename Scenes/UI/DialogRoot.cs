@@ -3,7 +3,7 @@ using System;
 using Interactables;
 using OBus;
 using UIEvents;
-
+[GlobalClass]
 public partial class DialogRoot : PanelContainer {
 	public Bus bus;
 	public GlobalState global;

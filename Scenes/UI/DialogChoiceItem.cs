@@ -13,10 +13,11 @@ public partial class DialogChoiceItem : Control {
 	public bool isOn = true;
 	public InkChoice currentChoice;
 	private Bus bus;
+	private SubscriptionHolder subscriptions = new();
 	public override void _Ready() {
 		bus = GetNode<Bus>("/root/bus");
 		ChoiceText.SizeFlagsVertical = SizeFlags.ShrinkCenter;
-		bus.Subscribe<UIItemHighlighted, SelectionIdx>(args => {
+		var UIItemSub = bus.Subscribe<UIItemHighlighted, SelectionIdx>(args => {
 			if (currentChoice == null) return;
 			bus.Log("Dialog Choice Item: " + currentChoice.Text + " " + currentChoice.Index + " this is on: " + isOn.ToString());
 			if (args.index == currentChoice.Index && this.isOn) {
@@ -25,6 +26,7 @@ public partial class DialogChoiceItem : Control {
 				this.Deselect();
 			}
 		});
+		subscriptions.Add(UIItemSub);
 	}
 
 	bool refersToMe(InkChoice other) {
@@ -63,6 +65,9 @@ public partial class DialogChoiceItem : Control {
 		ChoiceText.ReleaseFocus();
 	}
 
-
+	public override void _ExitTree() {
+		subscriptions.Dispose();
+		base._ExitTree();
+	}
 }
 

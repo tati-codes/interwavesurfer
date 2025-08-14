@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace OBus {
@@ -110,13 +111,18 @@ namespace OBus {
         }
         PropertyInfo[] properties = objType.GetProperties();
         string result = $"{objType.Name}:\n";
+        if (obj is IEnumerable outer_enumerable and not string) {
+          result += $"{objType.Name}: [\n";
+          result += InspectIEnumerable(outer_enumerable);
+          return result;
+        }
         foreach (PropertyInfo property in properties)
         {
           try  {
             object value = property.GetValue(obj, null);
-            if (value is IEnumerable enumerable && !(value is string)) {
+            if (value is IEnumerable inner_enumerable && !(value is string)) {
               result += $"  {property.Name}: [\n";
-              result += InspectIEnumerable(enumerable);
+              result += InspectIEnumerable(inner_enumerable);
             } else {
               string valueStr = value?.ToString() ?? "null";
               result += $"  {property.Name}: {valueStr}\n";
@@ -179,4 +185,14 @@ namespace OBus {
     }
     public class BgLog : TEvent<DbgString> { }
   #endregion
+
+  public class SubscriptionHolder {
+    List<Subscription> subscriptions  = new();
+    public void Add(Subscription sub) => subscriptions.Add(sub);
+    public void Dispose() {
+      foreach (var subscription in subscriptions) {
+        subscription.Dispose();
+      }
+    }
+  }
 }

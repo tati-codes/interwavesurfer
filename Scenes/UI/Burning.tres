@@ -1,25 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dam3oqq3g5iir"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dam3oqq3g5iir"]
 
-[ext_resource type="Shader" uid="uid://oc4v374mpq6l" path="res://Scenes/UI/UniversalTrasitionShade.gdshader" id="1_sxstx"]
+[ext_resource type="Shader" uid="uid://d01asfor45my2" path="res://Scenes/UI/FullscreenDissolve.gdshader" id="1_ey0mi"]
+[ext_resource type="Texture2D" uid="uid://cecln73wpppk1" path="res://Scenes/Water/flatnoise.tres" id="2_ekxpe"]
 
 [resource]
-shader = ExtResource("1_sxstx")
-shader_parameter/use_sprite_alpha = true
-shader_parameter/use_transition_texture = false
-shader_parameter/transition_type = 0
-shader_parameter/position = Vector2(0, 0)
-shader_parameter/invert = false
-shader_parameter/grid_size = Vector2(256, 256)
-shader_parameter/rotation_angle = 0.0
-shader_parameter/stagger = Vector2(10, 20)
-shader_parameter/stagger_frequency = Vector2i(2, 2)
-shader_parameter/flip_frequency = Vector2i(1, 1)
-shader_parameter/basic_feather = 1.0
-shader_parameter/use_mask_size = false
-shader_parameter/mask_size = Vector2(100, 100)
-shader_parameter/edges = 6
-shader_parameter/shape_feather = 0.1
-shader_parameter/sectors = 10
-shader_parameter/clock_feather = 2.0
-shader_parameter/progress = 103.9
-shader_parameter/progress_bias = Vector2(4, 0)
+shader = ExtResource("1_ey0mi")
+shader_parameter/position = Vector2(0.4, 0.6)
+shader_parameter/radius = 0.961765
+shader_parameter/borderWidth = 0.01
+shader_parameter/burnMult = 0.1
+shader_parameter/noiseTexture = ExtResource("2_ekxpe")
+shader_parameter/burnColor = Color(1, 0.283333, 0.14, 1)

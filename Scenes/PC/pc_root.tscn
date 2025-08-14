@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://qs7ykbprhwy0"]
+[gd_scene load_steps=24 format=4 uid="uid://qs7ykbprhwy0"]
 
 [ext_resource type="Script" uid="uid://ban3dy7nl5u6g" path="res://PcRoot.cs" id="1_c5iun"]
 [ext_resource type="PackedScene" uid="uid://blir68qowcva2" path="res://Scenes/PC/PCAppearingLabel.tscn" id="2_6d807"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bosh7cdcxgw5i" path="res://Scenes/UI/PCAppearingLabel.cs" id="6_qcwjj"]
 [ext_resource type="Shader" uid="uid://c0tefbquhih4o" path="res://Scenes/PC/PCChoice.tres" id="7_6d807"]
 [ext_resource type="Texture2D" uid="uid://60ivmi82iuwd" path="res://Assets/Audio/ace.png" id="10_cjo32"]
+[ext_resource type="Shader" uid="uid://cqhl8wcfhbrp6" path="res://Scenes/PC/Mask.gdshader" id="11_n0582"]
 [ext_resource type="Script" uid="uid://tr26bksnkj6r" path="res://Scenes/PC/url_opener.gd" id="12_7us0d"]
 
 [sub_resource type="Image" id="Image_2esu4"]
@@ -232,7 +233,11 @@ shader_parameter/crt_brightness = 1.0
 shader_parameter/crt_ghost = 1.5
 shader_parameter/crt_grid = 0.4
 shader_parameter/crt_white_noicen = 0.1
-shader_parameter/crt_curve = 0.1
+shader_parameter/crt_curve = 0.071
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7mmx"]
+shader = ExtResource("11_n0582")
+shader_parameter/crt_curve = 0.0
 
 [node name="PC Root" type="Control" node_paths=PackedStringArray("story", "LabelContainer", "TitleLabel", "choiceContainer", "continuer", "continuer_arrow")]
 layout_mode = 3
@@ -258,8 +263,9 @@ metadata/_custom_type_script = "uid://ckv85en18uucd"
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(1147.4, 0)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = 13.0
+offset_right = 1147.4
+offset_bottom = 84.0
 alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
@@ -347,6 +353,7 @@ visible_ratio = 0.0
 script = ExtResource("6_qcwjj")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+clip_children = 2
 material = SubResource("ShaderMaterial_cjo32")
 layout_mode = 1
 anchors_preset = 15
@@ -356,17 +363,17 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect"]
-modulate = Color(1, 1, 1, 0.0745098)
+modulate = Color(1, 1, 1, 0.0313726)
 z_index = -1
+material = SubResource("ShaderMaterial_l7mmx")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -78.5
-offset_bottom = 78.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("10_cjo32")
+expand_mode = 3
 
 [node name="UrlOpener" type="Node" parent="."]
 script = ExtResource("12_7us0d")

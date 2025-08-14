@@ -25,7 +25,12 @@ public partial class QuizRoot : Node3D {
 		bus.Subscribe<ChoiceRequired, InkChoices>(args => 
 			bus.Publish<IShowDialogChoices, ChoiceDialogArgs>(new(args.line, args.choices, "???"))
 		);
-		
+		bus.Subscribe<InkTagUpdated, InkTag>(args => {
+			if (args.newTag == "calculate") {
+				story.getQuizVariables();
+			}
+		});
+		story.getQuizVariables();
 	}
 	
 	public override void _Input(InputEvent @event) {

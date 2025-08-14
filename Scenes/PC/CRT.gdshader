@@ -24,8 +24,7 @@ void fragment() {
 	float crt_mask = 0.0;
 	if (uv.x >= 0.0 && uv.x <= 1.0 && uv.y >= 0.0 && uv.y <= 1.0) {
 		crt_mask = 1.0;
-	}
-	
+	} 
 	vec3 color = texture(SCREEN_TEXTURE, screen_uv).rgb * (1.0 - crt_brightness * 0.5);
 	color += texture(SCREEN_TEXTURE, screen_uv - vec2(SCREEN_PIXEL_SIZE.x * crt_ghost, 0.0)).rgb;
 	color += texture(SCREEN_TEXTURE, screen_uv + vec2(SCREEN_PIXEL_SIZE.x * crt_ghost, 0.0)).rgb;
@@ -40,7 +39,11 @@ void fragment() {
 	crt_grid_color.g = clamp(1.0 - abs(1.0 - crt_grid_uv), 0.0, 1.0);
 	crt_grid_color.b = 1.0 - crt_grid_color.r - crt_grid_color.g;
 	color *= clamp(normalize(clamp(crt_grid_color, crt_grid, 1.0)), vec3(0.0), vec3(1.0));
-	COLOR = vec4(color, 1.0);
+	if (crt_mask > 0.0) {
+		COLOR = vec4(color, 1.0);
+	} else {
+		COLOR = vec4(0.0,0.0,0.0,1.0);
+	}
 	// Called for every pixel the material is visible on.
 }
 

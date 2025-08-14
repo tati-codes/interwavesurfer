@@ -46,8 +46,8 @@ public partial class PcRoot : Control {
 		});
 		bus.Subscribe<ChoiceRequired, InkChoices>(async args => {
 				 // animationLock = true;
-				 await showChoices(args);
 				 await appendTerminalText(args.line);
+				 await showChoices(args);
 				 // animationLock = false;
 			// Output.AppendText(args.line);
 				// Output.Clear();
@@ -74,7 +74,7 @@ public partial class PcRoot : Control {
 		var newLabel = pcText.Instantiate<PCAppearingLabel>();
 		LabelContainer.AddChild(newLabel);
 		if (LabelContainer.GetChildren().Count > 3) LabelContainer.GetChild(0).QueueFree();
-		await newLabel.setText(text, 2.0f);
+		await newLabel.setText(text, 1.5f);
 		animationLock = false;
 		return newLabel;
 	}

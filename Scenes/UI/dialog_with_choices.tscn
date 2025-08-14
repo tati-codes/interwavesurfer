@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://foq24lg1yoqs"]
+[gd_scene load_steps=11 format=3 uid="uid://foq24lg1yoqs"]
 
 [ext_resource type="StyleBox" uid="uid://rotcv1hk41cb" path="res://Scenes/UI/DialogWithHeader.tres" id="1_2vns5"]
 [ext_resource type="Script" uid="uid://b18p3oblwwpti" path="res://Scenes/UI/DialogWithChoicesRoot.cs" id="2_nlocf"]
 [ext_resource type="FontFile" uid="uid://bc3h7ky5fm4yl" path="res://Assets/Fonts/Blazma/Blazma-Italic.otf" id="3_62vbf"]
 [ext_resource type="Script" uid="uid://dlfkekcv1fm8t" path="res://Scenes/UI/ChoiceDialogTextHolder.cs" id="3_npsas"]
-[ext_resource type="Shader" uid="uid://dcqeok85pe4vb" path="res://Scenes/UI/BouncingShader.tres" id="4_nlocf"]
 [ext_resource type="PackedScene" uid="uid://cio8w4gf7kgmk" path="res://Scenes/UI/AppearingLabel.tscn" id="4_qccb3"]
 [ext_resource type="Script" uid="uid://ocjk3rxk6iih" path="res://Scenes/UI/DialogChoicesContainer.cs" id="4_uwudd"]
 [ext_resource type="PackedScene" uid="uid://dy3gb5dyjen4r" path="res://Scenes/UI/DialogChoiceItem.tscn" id="5_2t21p"]
@@ -18,8 +17,6 @@ outline_size = 11
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qccb3"]
-shader = ExtResource("4_nlocf")
-shader_parameter/Bouncing = true
 
 [node name="DialogWithChoices" type="PanelContainer" node_paths=PackedStringArray("NameHolder", "ContentContainer", "ChoiceContainer")]
 anchors_preset = 7

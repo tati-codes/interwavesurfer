@@ -70,7 +70,23 @@ public partial class     InkWrapper : Node {
 	public bool canContinue => story.CanContinue;
 	public IReadOnlyList<InkChoice> CurrentChoices => story.CurrentChoices;
 	public void Continue() => story.Continue();
-	
+
+	public void getQuizVariables() {
+		int navigation = story.FetchVariable<int>("navigation");
+		int seaworthy = story.FetchVariable<int>("seaworthy");
+		int rudderwork = story.FetchVariable<int>("rudderwork");
+		int doldrums = story.FetchVariable<int>("doldrums");
+		int starboard = story.FetchVariable<int>("starboard");
+		int portside = story.FetchVariable<int>("portside");
+		int salt = story.FetchVariable<int>("salt");
+		List<int> vars = new List<int>() {navigation, rudderwork, doldrums, starboard, portside, salt, seaworthy};
+		var sorted = vars.OrderByDescending(x => x).ToList();
+		story.StoreVariable<int>("highest_stat", sorted.Max());
+		story.StoreVariable<int>("lowest_stat", sorted.Min());
+		int high = story.FetchVariable<int>("highest_stat");
+		int low = story.FetchVariable<int>("lowest_stat");
+		bus.Log($"High: {high}, Low: {low}");
+	}
 }
 
 namespace InkBridge {

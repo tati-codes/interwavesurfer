@@ -1,3 +1,8 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://ovggdyr7jrvo"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ovggdyr7jrvo"]
+
+[ext_resource type="Shader" uid="uid://c326gcvcwtr10" path="res://Scenes/QuizSpace/Draft/TransitionShader.gdshader" id="1_1nv7d"]
 
 [resource]
+render_priority = 0
+shader = ExtResource("1_1nv7d")
+shader_parameter/transform_ratio = 1.0
