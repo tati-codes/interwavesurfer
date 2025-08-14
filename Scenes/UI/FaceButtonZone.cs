@@ -42,7 +42,7 @@ public partial class FaceButtonZone : Control {
   }
   public void disappear() {
     anim.Play("GoAway");
-    locked = true;
+    // locked = true;
     timer.Start();
   }
 }

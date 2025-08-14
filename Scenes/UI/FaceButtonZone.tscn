@@ -388,4 +388,3 @@ autoplay = "RESET"
 speed_scale = 2.043
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0

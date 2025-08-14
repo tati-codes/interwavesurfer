@@ -40,7 +40,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -127,6 +127,7 @@ layout_mode = 2
 
 [node name="Arrow" type="TextureRect" parent="Dialog"]
 visible = false
+modulate = Color(1, 1, 1, 0)
 material = SubResource("ShaderMaterial_d1mbi")
 layout_mode = 2
 offset_left = 161.0

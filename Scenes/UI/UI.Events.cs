@@ -10,7 +10,7 @@ namespace UIEvents {
     IDLE,
     CAN_PICK_UP,
     CAN_READ, 
-    //CAN_INTERACT
+    CAN_MOVE,
     IS_HOLDING,
     DIALOG,
     FULLSCREEN_DIALOG,

@@ -21,6 +21,7 @@ public partial class GlobalState : Node {
     [sceneEnum.QUIZ] = "res://Scenes/QuizSpace/Quiz.tscn",
     [sceneEnum.PC] = "res://Scenes/PC/pc_root.tscn",
     [sceneEnum.MAIN_MENU] = "res://Scenes/Menu/MainMenu.tscn",
+    [sceneEnum.HOUSE] = "res://Scenes/Inside/Inside.tscn"
   };
   void sceneSwitch(SceneArgs args) {
     Viewport root = GetTree().Root;
@@ -33,6 +34,7 @@ public partial class GlobalState : Node {
     CurrentScene = nextScene.Instantiate();
     GetTree().Root.AddChild(CurrentScene);
     GetTree().CurrentScene = CurrentScene;
+    InteractionTarget = null;
   }
 }
 

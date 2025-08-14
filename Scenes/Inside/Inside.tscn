@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bodo0yi0mq6jo"]
+[gd_scene load_steps=13 format=3 uid="uid://bodo0yi0mq6jo"]
 
 [ext_resource type="Script" uid="uid://b00h0121int14" path="res://Scenes/Inside/InsideRoot.cs" id="1_x0q3o"]
 [ext_resource type="Shader" uid="uid://djcifos4pba4x" path="res://Placeholder/Portals/Fog.gdshader" id="2_bly3t"]
 [ext_resource type="Script" uid="uid://bc002dd1rg7mw" path="res://BaseClasses/Interactable/NonInteractable.cs" id="2_ikmsr"]
 [ext_resource type="PackedScene" uid="uid://1h4ndhncf6wa" path="res://BaseClasses/Player/Player.tscn" id="3_21l3c"]
 [ext_resource type="PackedScene" uid="uid://dmls62j51gx7i" path="res://Scenes/Inside/InsideWithCollision.tscn" id="3_ikmsr"]
+[ext_resource type="PackedScene" uid="uid://42yp8pb3eoog" path="res://Scenes/UI/ui_root.tscn" id="6_ipmmy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_esahd"]
 render_priority = -3
@@ -75,7 +76,7 @@ cull_mask = 1048573
 fov = 67.1
 
 [node name="Dithering" type="MeshInstance3D" parent="Bathrrom"]
-transform = Transform3D(-0.00205339, 0.00381037, 0.999991, 0.880312, 0.474395, -4.65661e-10, -0.474391, 0.880304, -0.00432843, -1.63556, 0.551504, -5.41108)
+transform = Transform3D(-0.00205341, 0.00381042, 0.999991, 0.880312, 0.474396, 0, -0.474391, 0.880304, -0.00432843, -1.63556, 0.551503, -5.41108)
 mesh = SubResource("QuadMesh_ipmmy")
 skeleton = NodePath("../..")
 
@@ -116,7 +117,7 @@ NonInteractableItem = NodePath("..")
 metadata/_custom_type_script = "uid://bc002dd1rg7mw"
 
 [node name="Player" parent="." node_paths=PackedStringArray("cam") instance=ExtResource("3_21l3c")]
-transform = Transform3D(-0.418216, 0, -0.430227, 0, 0.6, 0, 0.430227, 0, -0.418216, 2.07235, 0.6951, -0.982635)
+transform = Transform3D(-0.418216, 0, -0.430227, 0, 0.6, 0, 0.430227, 0, -0.418216, 1.47231, 0.6951, -0.982635)
 cam = NodePath("../LivingRoom")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player"]
@@ -129,3 +130,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.961795)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w860a")
+
+[node name="UI Root" parent="." instance=ExtResource("6_ipmmy")]

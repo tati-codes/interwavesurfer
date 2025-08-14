@@ -29,12 +29,13 @@ public partial class UiRoot : Control {
 		bus = GetNode<Bus>("/root/bus");
 		var pickupsub = bus.Subscribe<LookingAt<PickupableItem>, PickupableItem>((args) => switchTo(UIState.CAN_PICK_UP));
 		var readsub = bus.Subscribe<LookingAt<ReadableItem>, ReadableItem>((args) => switchTo(UIState.CAN_READ));
+		var movesub = bus.Subscribe<LookingAt<MoverItem>, MoverItem>((args) => switchTo(UIState.CAN_MOVE));
 		var stopsub = bus.Subscribe<StoppedLookingAt, NodeRef>(args => switchTo(UIState.IDLE));
 		var readada = bus.Subscribe<ReadItem, ReadableItem>(args => switchTo(UIState.DIALOG));
 		var dialog = bus.Subscribe<IShowDialog, DialogText>(args => switchTo(UIState.DIALOG));
 		var full = bus.Subscribe<FullscreenIShowDialog, DialogText>(args => switchTo(UIState.FULLSCREEN_DIALOG));
 		// bus.Subscribe<>
-		subscriptions.Add(pickupsub, readsub, stopsub, readada, dialog, full);
+		subscriptions.Add(pickupsub, readsub, stopsub, readada, dialog, full, movesub);
 	}
 	public void switchTo(UIState nextState) {
 		if (nextState == currentState) return;

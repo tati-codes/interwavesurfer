@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using InkBridge;
 using OBus;
 using QuizSpace;
+using State;
 
 public partial class PcRoot : Control {
 	public Bus bus;
@@ -29,7 +30,6 @@ public partial class PcRoot : Control {
   
 	public override async void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
-
 		global = GetNode<GlobalState>("/root/Global");
 		bus.Subscribe<StoryUpdated, StoryText>(async args => {
 			if (story.tag == "title") {
@@ -107,16 +107,18 @@ public partial class PcRoot : Control {
 
 	public override void _Input(InputEvent @event) {
 		if (@event.IsActionReleased("primary")) handlePrimary();
-		else if (@event.IsActionReleased("move_left") || @event.IsActionReleased("move_right")) handleDirections(@event);
+		else if (@event.IsActionReleased("move_forwards") || @event.IsActionReleased("move_backwards")) handleDirections(@event);
 	}
 	void handlePrimary() {
 		if (animationLock) return;
 		if (story.canContinue) bus.Publish<PlayerContinuedStory>();
+		else if (story.isOver) bus.Publish<GoToScene, SceneArgs>(new(sceneEnum.HOUSE));
 		else bus.Publish<SuperSelect, IChoice>(new IChoice(global.QuizState.selectedChoice));
 	}
 	void handleDirections(InputEvent @event) {
-		bool eventIsRight = @event.IsActionReleased("move_right");
-		bool eventIsLeft = @event.IsActionReleased("move_left");
+		bool eventIsRight = @event.IsActionReleased("move_forwards");
+		bool eventIsLeft = @event.IsActionReleased("move_backwards");
+		bus.Log(eventIsLeft.ToString(), eventIsRight.ToString());
 		// if (global.QuizState.currentChoices.Count <= 0) return;
 		if (eventIsLeft) handleUISelect(next: false);
 		else if (eventIsRight) handleUISelect(next: true);

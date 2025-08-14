@@ -1408,6 +1408,8 @@ shape = SubResource("ConcavePolygonShape3D_88efu")
 
 [node name="Mover" type="Node" parent="boat/boat/door" node_paths=PackedStringArray("collider", "overlaySetter", "meshHolder")]
 script = ExtResource("15_oylwi")
+scene = 4
+text = "Go inside"
 collider = NodePath("../StaticBody3D2")
 overlaySetter = NodePath("..")
 meshHolder = NodePath("..")

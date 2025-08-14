@@ -10,6 +10,7 @@ public partial class ButtonHintGroup : Control {
 	public FaceButtonZone primaryZone {get; set;} 
 	private SubscriptionHolder subscriptions = new();
 
+	public GlobalState global;
 
 	public override void _ExitTree() {
 		subscriptions.Dispose();
@@ -17,6 +18,7 @@ public partial class ButtonHintGroup : Control {
 	}
 	public override void _Ready()	{
 		bus = GetNode<Bus>("/root/bus");
+		global = GetNode<GlobalState>("/root/Global");
 		subscriptions.Add(
 			bus.Subscribe<UITransitionEv, UITransition>(displayScene)
 			);
@@ -43,6 +45,13 @@ public partial class ButtonHintGroup : Control {
 				primaryZone.disappear();
 				break;
 			case UIState.FULLSCREEN_DIALOG:
+				break;
+			case UIState.CAN_MOVE:
+				if (global.InteractionTarget is MoverItem mover) {
+					primaryZone.show(PlayerInput.Buttons.A, mover.text);
+				} else {
+					bus.Error("Global target is not a MoverItem: " + global.InteractionTarget);
+				}
 				break;
 			default:
 				throw new ArgumentOutOfRangeException(nameof(transition.to), nameof(transition.from), null);
